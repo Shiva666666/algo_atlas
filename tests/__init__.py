@@ -1,0 +1,1 @@
+"""Algo Atlas test suite."""
