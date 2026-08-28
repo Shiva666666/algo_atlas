@@ -263,6 +263,27 @@ LEARNING_PACK_CODE: dict[str, str] = {
                 return result
         '''
     ),
+    "generate-all-possible-parentheses": _code(
+        '''
+        class Solution:
+            def generateParentheses(self, n: int) -> list[str]:
+                res = []
+
+                def backtrack(parentheses, opened, closed):
+                    if closed > opened or len(parentheses) > n:
+                        return
+
+                    if len(parentheses) == n and opened == closed:
+                        res.append(parentheses)
+                        return
+
+                    backtrack(parentheses + "(", opened + 1, closed)
+                    backtrack(parentheses + ")", opened, closed + 1)
+
+                backtrack("(", 1, 0)
+                return res
+        '''
+    ),
     "longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit": _code(
         '''
         from collections import deque

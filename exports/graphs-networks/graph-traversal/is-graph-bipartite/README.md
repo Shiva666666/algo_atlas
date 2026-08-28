@@ -7,7 +7,7 @@ slug: is-graph-bipartite
 title: Is Graph Bipartite?
 url: https://leetcode.com/problems/is-graph-bipartite/
 difficulty: Medium
-status: Understood
+status: Resolved
 primary_subtag_id: 08c05564-cd65-5b72-a179-d15e2e39edbe
 primary_path:
 - graphs-networks
@@ -18,7 +18,7 @@ taxonomy_ids:
 time_complexity: O(V + E)
 space_complexity: O(V)
 created_at: '2026-08-27T19:49:12.706342Z'
-updated_at: '2026-08-28T01:03:48.528614Z'
+updated_at: '2026-08-28T01:47:14.867179Z'
 mistake_events:
 - id: 552be431-11f7-42ba-a16f-704e519052b7
   occurred_at: '2026-08-27T19:49:12.706675Z'

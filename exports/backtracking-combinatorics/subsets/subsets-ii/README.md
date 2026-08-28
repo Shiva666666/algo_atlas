@@ -7,7 +7,7 @@ slug: subsets-ii
 title: Subsets II
 url: https://leetcode.com/problems/subsets-ii/
 difficulty: Medium
-status: Understood
+status: Resolved
 primary_subtag_id: 1efc727e-a024-5b08-bb5c-1ac9d1c864be
 primary_path:
 - backtracking-combinatorics
@@ -18,7 +18,7 @@ taxonomy_ids:
 time_complexity: O(n log n + n × unique subsets)
 space_complexity: O(n) auxiliary + output
 created_at: '2026-08-27T19:49:12.715623Z'
-updated_at: '2026-08-28T01:03:48.534506Z'
+updated_at: '2026-08-28T01:46:45.972324Z'
 mistake_events:
 - id: 0e8e4473-d8cf-4978-b4ae-915bb8c17d3f
   occurred_at: '2026-08-27T19:49:12.715949Z'
