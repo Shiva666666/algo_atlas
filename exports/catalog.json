@@ -1,7 +1,7 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 10,
+  "record_count": 9,
   "records": [
     {
       "id": "751b821a-431c-423c-8a80-02b4224d8e15",
@@ -65,13 +65,6 @@
       "path": "backtracking-combinatorics/subsets/subsets-ii",
       "solution_sha256": "70f60384fa7de8e2c5c834d37656685446270bf36c403a99751ae03e9175ab7e",
       "title": "Subsets II"
-    },
-    {
-      "id": "d71c6612-135e-496b-b881-8e1d12e2f7b1",
-      "markdown_sha256": "8b5281d1593eaffc7173ca384898f48b588987c71d273bf95662183d8f67c37e",
-      "path": "dynamic-programming/tree-dp/ticket-to-ride",
-      "solution_sha256": "111cc9fe616d366e56c740f822ecdaecf3ed9301504483c16bcfaa60fb850c54",
-      "title": "Ticket to Ride"
     }
   ],
   "taxonomy": [
