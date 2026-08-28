@@ -1,44 +1,165 @@
 # Algo Atlas
 
-Algo Atlas is a local-first visual knowledge system for the coding problems you get wrong. It stores the authoritative catalog in SQLite, indexes titles, notes, tags, and Python code with FTS5, and produces deterministic Markdown/Python exports for a reviewed daily GitHub push.
+**A local-first learning system for turning coding mistakes into reusable algorithm intuition.**
 
-## Start on Windows
+Algo Atlas keeps each problem's code, classification, failure reason, recognition signals, invariants, edge cases, and repeat-mistake history in one place. It turns those records into a searchable library, an interactive knowledge map, visual learning labs, and diagnostics that reveal recurring weaknesses.
 
-Double-click `Start-AlgoAtlas.cmd`. The first run creates the Python environment and frontend build, then opens <http://127.0.0.1:8000/>. Later launches reuse the installed environment. Use `Stop-AlgoAtlas.ps1` when you want to stop the background server.
+![Algo Atlas knowledge constellation](docs/images/atlas.png)
 
-Prerequisites: Python 3.11+, Node.js 22+, npm, and Git.
+## Why it exists
 
-## GitHub setup
+Most problem trackers remember whether a problem was solved. Algo Atlas remembers **why it was missed**, **what clue should trigger the right technique next time**, and **which mistakes keep repeating**.
 
-1. Create an empty **private** repository on GitHub.
-2. Open **Settings & Sync** in Algo Atlas.
-3. Paste the GitHub remote URL and enter the Git name, email, and target branch.
-4. Choose **Preview changes** to review the allowlisted export diff.
-5. Choose **Commit & push**. Algo Atlas stages only `exports/`; it never stages the SQLite database, local backups, configuration, or unrelated source files.
+- Record a problem with its URL, difficulty, status, complexity, domain, and techniques.
+- Keep the full Python solution beside concise intuition notes.
+- Track repeat mistakes without duplicating the problem.
+- Explore Graph, DP, backtracking, binary-search, heap, and monotonic-deque ideas step by step.
+- Diagnose weak domains and failure patterns from your own history.
+- Keep the live SQLite database private while syncing readable exports to GitHub.
 
-Git authentication is delegated to your normal Git Credential Manager or SSH configuration. Credentials are never accepted or stored by Algo Atlas.
+## Product tour
+
+### Searchable problem library
+
+Search across titles, code, notes, techniques, and classifications. Filter by domain, difficulty, or learning status to decide what to revisit next.
+
+![Searchable Algo Atlas problem library](docs/images/library.jpg)
+
+### Problem workspace
+
+Every problem has one focused workspace for source information, taxonomy, complexity, Python code, precision notes, and mistake history. The code is stored for review and is never executed by the app.
+
+![Problem editor with Python code and precision notes](docs/images/problem-editor.jpg)
+
+The notes are intentionally structured around learning:
+
+- **Why I missed it** — the exact reasoning failure.
+- **Recognition signals** — clues that should trigger the pattern.
+- **Core insight** — the shortest correct mental model.
+- **Approach** — ordered reasoning steps.
+- **Invariants** — facts that must remain true.
+- **Edge cases** and **follow-up** — what to test or optimize next.
+
+Use **Wrong Again** to append a new mistake event while preserving the same problem and its history.
+
+### Interactive algorithm visualizers
+
+Visualizers connect the state, base condition, choice, transition, invariant, and final result. They include multiple presets, step controls, playback speed, a trace timeline, and code-token-to-visual mappings.
+
+![Minimum Steiner Tree graph and bitmask DP visualizer](docs/images/steiner-visualizer.png)
+
+The visualizer framework is reusable across Graph and DP problems, with specialized adapters for topics such as Steiner Tree DP, monotonic queues, subsets, binary search, IPO, falling paths, and graph traversal.
+
+### Pattern diagnostics
+
+The dashboard summarizes the problem universe, repeated signals, domain distribution, recent activity, the weakness matrix, and the flow from algorithm domains to failure reasons.
+
+![Pattern diagnostics dashboard](docs/images/dashboard.png)
+
+### Knowledge constellation
+
+The Atlas view turns stored problems and taxonomy relationships into an explorable graph. It provides a quick visual answer to: *Where are my mistakes clustering?*
+
+![Interactive algorithm knowledge constellation](docs/images/atlas.png)
+
+### Stable taxonomy with cross-cutting signals
+
+Each problem receives one stable primary domain/sub-tag path and can also carry multiple cross-cutting techniques. Personal tags can be added without changing the curated hierarchy.
+
+![Algorithm taxonomy and pattern layer](docs/images/taxonomy.png)
+
+### Reviewed GitHub sync
+
+The database remains local. The sync workflow creates a backup, produces deterministic Markdown/Python exports, previews the Git diff, and only then commits and pushes the readable files.
+
+![Reviewed SQLite to GitHub publishing flow](docs/images/settings-sync.png)
+
+## Quick start on Windows
+
+Requirements: **Python 3.11+**, **Node.js 22+**, **npm**, and **Git**.
+
+```powershell
+cd C:\Users\skibbidy\Desktop\AlgoAtlas
+.\Start-AlgoAtlas.cmd
+```
+
+The launcher is the easiest command because it performs the complete local startup flow:
+
+1. Creates `.venv` and installs the Python package when needed.
+2. Installs npm dependencies when needed.
+3. Builds the frontend when `dist/` is missing.
+4. Applies database migrations.
+5. Starts FastAPI at <http://127.0.0.1:8000/>.
+6. Opens Algo Atlas in your browser.
+
+Stop the background server with:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Stop-AlgoAtlas.ps1
+```
 
 ## Development
 
+Run the backend and Vite frontend separately when changing the source:
+
 ```powershell
+cd C:\Users\skibbidy\Desktop\AlgoAtlas
 npm install
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 .\.venv\Scripts\python.exe -m uvicorn algo_atlas.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+In a second PowerShell window:
+
+```powershell
+cd C:\Users\skibbidy\Desktop\AlgoAtlas
 npm run dev
 ```
 
-The Vite development UI runs at <http://127.0.0.1:5173/> and proxies `/api` to FastAPI. Production uses a single FastAPI origin at port 8000.
+Vite runs at <http://127.0.0.1:5173/> and proxies `/api` to FastAPI.
 
-## Storage and recovery
+## Data, GitHub, and recovery
 
-- `.local/algo_atlas.db` is the ignored SQLite source of truth.
-- `.local/backups/` retains the latest 14 pre-export or pre-restore snapshots.
-- `exports/<main>/<sub>/<slug>/README.md` stores metadata and structured notes.
+```text
+.local/algo_atlas.db
+        │
+        ├── live local data, ignored by Git
+        ├── FTS5 search index
+        └── rolling local backups
+                 │
+                 ▼
+exports/catalog.json + per-problem README.md + solution.py
+                 │
+                 └── reviewed, Git-tracked recovery format
+```
+
+- `.local/algo_atlas.db` is the local SQLite source of truth and is intentionally not stored on GitHub.
+- `.local/backups/` keeps the latest 14 pre-export or pre-restore snapshots.
+- `exports/catalog.json` stores stable IDs, taxonomy definitions, schema information, and content hashes.
+- `exports/<domain>/<sub-tag>/<problem>/README.md` stores readable metadata and structured notes.
 - Each exported problem includes a standalone `solution.py`.
-- `exports/catalog.json` contains stable IDs, taxonomy definitions, schema version, and content hashes.
 
-The restore action is previewed before it writes and creates a database backup first. The taxonomy uses stable deterministic IDs, so an export can rebuild a fresh database without reclassification.
+On a fresh machine, importing the tracked export reconstructs the database. Restore is previewed before writing and creates a database backup first, so the JSON and per-problem files act as the portable recovery layer.
+
+## GitHub setup
+
+1. Create an empty private GitHub repository.
+2. Open **Settings & Sync** in Algo Atlas.
+3. Enter the remote URL, branch, Git name, and Git email.
+4. Select **Export + Backup**.
+5. Select **Preview Changes** and review the allowlisted export diff.
+6. Select **Commit & Push**.
+
+Algo Atlas stages only `exports/` from the in-app sync flow. Credentials are delegated to Git Credential Manager or SSH and are never stored by the application.
+
+## Architecture
+
+- **Frontend:** React 19, TypeScript, Vite, Monaco Editor, ECharts, Three.js.
+- **Backend:** FastAPI, SQLAlchemy, Alembic, Pydantic.
+- **Storage:** SQLite with WAL, foreign keys, and FTS5 search.
+- **Exports:** deterministic JSON, Markdown, and Python files.
+- **Privacy:** local origin, no accounts, no cloud database, no solution execution.
 
 ## Quality checks
 
@@ -47,4 +168,13 @@ npm run build
 .\.venv\Scripts\python.exe -m pytest
 ```
 
-The application intentionally does not include accounts, cloud storage, Python execution, test harnesses, spaced repetition, browser extensions, or scheduled pushes.
+## Repository layout
+
+```text
+backend/            FastAPI application, database, import/export, migrations
+src/                React application and reusable visualizer system
+tests/              Backend and workflow tests
+exports/            Git-friendly catalog and per-problem learning records
+docs/images/        Screenshots used by this README
+Start-AlgoAtlas.cmd One-command Windows launcher
+```
