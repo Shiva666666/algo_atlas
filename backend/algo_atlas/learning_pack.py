@@ -129,6 +129,29 @@ LEARNING_PACK: list[dict[str, Any]] = [
     },
     {
         "source": "leetcode",
+        "source_key": "maximal-square",
+        "title": "Maximal Square",
+        "url": "https://leetcode.com/problems/maximal-square/",
+        "difficulty": "Medium",
+        "status": "Resolved",
+        "primary_subtag": "2d-and-grid-dp",
+        "taxonomy": ["matrices-and-grids", "tabulation"],
+        "failure_reasons": ["failure-boundary-or-indexing-error", "failure-incorrect-state-transition"],
+        "time_complexity": "O(m × n)",
+        "space_complexity": "O(m × n)",
+        "observation": "Accepted, then simplified by letting min() handle zero neighbors and initializing the skipped boundaries directly.",
+        "notes": {
+            "why_missed": ["The first row and first column were skipped by the recurrence loop, so they needed explicit initialization.", "Added a redundant condition requiring all three neighbors to be nonzero before applying the recurrence."],
+            "recognition_signals": ["The largest square ending at a cell depends only on its top, left, and top-left neighbors."],
+            "core_insight": ["For a 1-cell, its largest square side is 1 plus the minimum neighboring side; a zero neighbor naturally reduces it to a 1×1 square."],
+            "approach": ["Convert the string matrix to integer DP values.", "Initialize the maximum from the first row and first column because the interior loop skips them.", "For each interior 1-cell, apply 1 + min(diagonal, top, left).", "Track the maximum side and return its square as the area."],
+            "invariants": ["dp[i][j] is the side length of the largest all-1 square whose bottom-right corner is (i, j)."],
+            "edge_cases": ["A single-cell matrix.", "All zeros.", "The only 1 lies in the first row or first column.", "A zero neighbor limits the current square to side length one."],
+            "follow_up": ["Compress the DP to one row while preserving the previous diagonal value."],
+        },
+    },
+    {
+        "source": "leetcode",
         "source_key": "is-graph-bipartite",
         "title": "Is Graph Bipartite?",
         "url": "https://leetcode.com/problems/is-graph-bipartite/",
@@ -245,7 +268,7 @@ LEARNING_PACK: list[dict[str, Any]] = [
 ]
 
 
-def install_learning_pack(target_engine: Engine = engine) -> dict[str, int]:
+def install_learning_pack(target_engine: Engine = engine, source_keys: set[str] | None = None) -> dict[str, int]:
     """Install missing records and backfill only blank learning-pack code."""
     init_db(target_engine)
     created = 0
@@ -254,6 +277,8 @@ def install_learning_pack(target_engine: Engine = engine) -> dict[str, int]:
     with Session(target_engine) as session:
         taxonomy = {node.slug: node for node in session.scalars(select(TaxonomyNode)).all()}
         for item in LEARNING_PACK:
+            if source_keys is not None and item["source_key"] not in source_keys:
+                continue
             existing = session.scalar(
                 select(Problem).where(
                     Problem.source == item["source"],

@@ -1,7 +1,7 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 10,
+  "record_count": 11,
   "records": [
     {
       "id": "b7d3a194-15ab-4578-b37a-b196a8a7e8f0",
@@ -37,6 +37,13 @@
       "path": "linear-structures/queues-and-deques/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit",
       "solution_sha256": "6f49bed4e4249a70a88b2dfbed6cfa44ebeb9b1c9b10b0b357da078d55be9029",
       "title": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
+    },
+    {
+      "id": "588a7d5b-acff-4fb7-ba4e-6908f0af23dd",
+      "markdown_sha256": "06ae567ecf463c71c509ddb9b71492bcb5a24c29bb81bcc1c00fbfd37501ddc9",
+      "path": "dynamic-programming/2d-and-grid-dp/maximal-square",
+      "solution_sha256": "def529609d13c470f88ae087d896ffad19bdc9f878b8e2224cd403e8bc90867e",
+      "title": "Maximal Square"
     },
     {
       "id": "b6b055cb-2349-473f-bf0e-5cc80879048e",
