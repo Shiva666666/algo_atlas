@@ -1,14 +1,77 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 1,
+  "record_count": 10,
   "records": [
+    {
+      "id": "751b821a-431c-423c-8a80-02b4224d8e15",
+      "markdown_sha256": "b03cd0a230651f3c2324fdb3544c5861cfd88bd571ff0a32b1da9fa269574914",
+      "path": "trees-ordered/heaps/ipo",
+      "solution_sha256": "10493dcd7cbdda4c7cd97f81f289f5a925be13a6f358fea304cca25bc4398148",
+      "title": "IPO"
+    },
+    {
+      "id": "e2f9972d-8f97-478b-80cc-2ce9f928cecb",
+      "markdown_sha256": "0d21f1ed1313ff557797a9a180571f6d8f80e899751a053abebcf40906565999",
+      "path": "graphs-networks/graph-traversal/is-graph-bipartite",
+      "solution_sha256": "2112013595489da50993b9fbdb9fff0cb0a9d677755439e3ac8af22545818c64",
+      "title": "Is Graph Bipartite?"
+    },
+    {
+      "id": "940ddbe1-a81b-4bcb-8b14-754e989792cf",
+      "markdown_sha256": "373b7821dad243eca55c4696b4c6be1acbd293006604ffb7c0366e6e0f235cf7",
+      "path": "search-ordering/binary-search/koko-eating-bananas",
+      "solution_sha256": "b5249dc341c687c69eeb9b768f3c73af2fef0379b04b1458d3e70117d7f832d1",
+      "title": "Koko Eating Bananas"
+    },
+    {
+      "id": "5071447f-ae98-4516-a042-75dd156636fa",
+      "markdown_sha256": "baa2f7c82130f24c99abb7f539997ffcf4a0d3b9bc6708aa75e4ce7e62f84652",
+      "path": "linear-structures/queues-and-deques/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit",
+      "solution_sha256": "6f49bed4e4249a70a88b2dfbed6cfa44ebeb9b1c9b10b0b357da078d55be9029",
+      "title": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
+    },
+    {
+      "id": "b6b055cb-2349-473f-bf0e-5cc80879048e",
+      "markdown_sha256": "527fe8636347a436eef9b595579fd6614475dc73b8380ab5810ebf67c66616bf",
+      "path": "dynamic-programming/2d-and-grid-dp/minimum-falling-path-sum",
+      "solution_sha256": "4cc9cae84b4ddfa8fce2f8edc406924badd3947d0b113415245c53a8a604133c",
+      "title": "Minimum Falling Path Sum"
+    },
+    {
+      "id": "c3fb0812-2501-45f7-a7b5-751d5ad451d8",
+      "markdown_sha256": "0e2b87e237448f539842c52bdd87ebc05b18ffe46aea90c4a7c32b5e068e60b4",
+      "path": "dynamic-programming/bitmask-dp/abc395-g",
+      "solution_sha256": "e81930e1792080d6e0d5cd1260b51df1e5b4dd15c5724f246acb360ef45b03a2",
+      "title": "Minimum Steiner Tree 2"
+    },
     {
       "id": "6284537b-823e-4ed5-ad6f-a28129c54f1f",
       "markdown_sha256": "9905f1e31cdbef43d915f7fa457bfc75306637f7e2e3515942faff1c952608cc",
       "path": "dynamic-programming/1d-dp/palindrome-partitioning-ii",
       "solution_sha256": "b9c297ae915762ea49ca4308a219c86e7e1404499452dd5a16241faff47ab950",
       "title": "Palindrome Partitioning II"
+    },
+    {
+      "id": "589f3150-d3cb-4218-8475-ce24f7f9e168",
+      "markdown_sha256": "67657cf5dbf0955639d8fa492842a1632e9fdecd0a1c00c59f2e8abbc55ae466",
+      "path": "search-ordering/binary-search/special-array-with-x-elements-greater-than-or-equal-x",
+      "solution_sha256": "571853819d64f2b9b68c6faba0d4fa0fa044dd1c60bff02dd484f9a029a5f8f3",
+      "title": "Special Array With X Elements Greater Than or Equal X"
+    },
+    {
+      "id": "2dbad318-797a-4996-a5ba-26f236e1dfd0",
+      "markdown_sha256": "a035adbb494b5519f156ee664177492d8e719c0f9f5927441f929bdd4021c452",
+      "path": "backtracking-combinatorics/subsets/subsets-ii",
+      "solution_sha256": "70f60384fa7de8e2c5c834d37656685446270bf36c403a99751ae03e9175ab7e",
+      "title": "Subsets II"
+    },
+    {
+      "id": "d71c6612-135e-496b-b881-8e1d12e2f7b1",
+      "markdown_sha256": "8b5281d1593eaffc7173ca384898f48b588987c71d273bf95662183d8f67c37e",
+      "path": "dynamic-programming/tree-dp/ticket-to-ride",
+      "solution_sha256": "111cc9fe616d366e56c740f822ecdaecf3ed9301504483c16bcfaa60fb850c54",
+      "title": "Ticket to Ride"
     }
   ],
   "taxonomy": [

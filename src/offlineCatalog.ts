@@ -1,4 +1,14 @@
 import type {Analytics,AtlasGraphData,Problem,TaxonomyKind,TaxonomyNode,TaxonomyResponse} from './types';
+import subsetsCode from '../exports/backtracking-combinatorics/subsets/subsets-ii/solution.py?raw';
+import palindromeCode from '../exports/dynamic-programming/1d-dp/palindrome-partitioning-ii/solution.py?raw';
+import fallingPathCode from '../exports/dynamic-programming/2d-and-grid-dp/minimum-falling-path-sum/solution.py?raw';
+import steinerCode from '../exports/dynamic-programming/bitmask-dp/abc395-g/solution.py?raw';
+import ticketCode from '../exports/dynamic-programming/tree-dp/ticket-to-ride/solution.py?raw';
+import bipartiteCode from '../exports/graphs-networks/graph-traversal/is-graph-bipartite/solution.py?raw';
+import longestSubarrayCode from '../exports/linear-structures/queues-and-deques/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/solution.py?raw';
+import kokoCode from '../exports/search-ordering/binary-search/koko-eating-bananas/solution.py?raw';
+import specialArrayCode from '../exports/search-ordering/binary-search/special-array-with-x-elements-greater-than-or-equal-x/solution.py?raw';
+import ipoCode from '../exports/trees-ordered/heaps/ipo/solution.py?raw';
 
 const updated='2026-08-28T00:00:00Z';
 const main=(slug:string,name:string,color:string):TaxonomyNode=>({id:slug,name,slug,kind:'main',parent_id:null,aliases:[],color,protected:true,sort_order:0});
@@ -22,8 +32,20 @@ const subtags={
 const patterns=[pattern('sliding-window','Sliding Window'),pattern('monotonic-queue','Monotonic Queue'),pattern('bfs','BFS'),pattern('dfs','DFS'),pattern('memoization','Memoization'),pattern('tabulation','Tabulation'),pattern('sorting','Sorting')];
 const taxonomyNodes=[...Object.values(families),...Object.values(subtags),...patterns];
 const bySlug=new Map(taxonomyNodes.map(node=>[node.slug,node]));
+const codeBySourceKey:Record<string,string>={
+  'ticket-to-ride':ticketCode,
+  'abc395-g':steinerCode,
+  'koko-eating-bananas':kokoCode,
+  'special-array-with-x-elements-greater-than-or-equal-x':specialArrayCode,
+  'minimum-falling-path-sum':fallingPathCode,
+  'is-graph-bipartite':bipartiteCode,
+  'subsets-ii':subsetsCode,
+  'longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit':longestSubarrayCode,
+  'ipo':ipoCode,
+  'palindrome-partitioning-ii':palindromeCode,
+};
 
-function problem(source:string,sourceKey:string,title:string,url:string,difficulty:Problem['difficulty'],status:Problem['status'],primary:TaxonomyNode,tags:string[],notes:Problem['notes'],time:string,space:string):Problem{return {id:sourceKey,source,source_key:sourceKey,slug:sourceKey,title,url,difficulty,status,primary_subtag:primary,primary_main:Object.values(families).find(item=>item.id===primary.parent_id)!,taxonomy:tags.map(tag=>bySlug.get(tag)).filter((node):node is TaxonomyNode=>!!node),time_complexity:time,space_complexity:space,mistake_count:1,created_at:updated,updated_at:updated,python_code:'',notes,mistake_events:[]}}
+function problem(source:string,sourceKey:string,title:string,url:string,difficulty:Problem['difficulty'],status:Problem['status'],primary:TaxonomyNode,tags:string[],notes:Problem['notes'],time:string,space:string):Problem{return {id:sourceKey,source,source_key:sourceKey,slug:sourceKey,title,url,difficulty,status,primary_subtag:primary,primary_main:Object.values(families).find(item=>item.id===primary.parent_id)!,taxonomy:tags.map(tag=>bySlug.get(tag)).filter((node):node is TaxonomyNode=>!!node),time_complexity:time,space_complexity:space,mistake_count:1,created_at:updated,updated_at:updated,python_code:codeBySourceKey[sourceKey]??'',notes,mistake_events:[]}}
 
 const intuition=(state:string,base:string,choice:string,invariant:string,edges:string[]):Problem['notes']=>({core_insight:[state],approach:[base,choice],invariants:[invariant],edge_cases:edges,recognition_signals:[],why_missed:[],follow_up:[]});
 

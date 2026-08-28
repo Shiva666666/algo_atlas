@@ -7,6 +7,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
 from .db import engine, init_db, slugify, sync_problem_search
+from .learning_pack_code import LEARNING_PACK_CODE
 from .models import MistakeEvent, MistakeEventReason, NoteBullet, Problem, ProblemTaxonomy, TaxonomyNode
 
 
@@ -222,20 +223,26 @@ LEARNING_PACK: list[dict[str, Any]] = [
 
 
 def install_learning_pack(target_engine: Engine = engine) -> dict[str, int]:
-    """Install only missing records; never overwrite an existing problem."""
+    """Install missing records and backfill only blank learning-pack code."""
     init_db(target_engine)
     created = 0
     skipped = 0
+    code_restored = 0
     with Session(target_engine) as session:
         taxonomy = {node.slug: node for node in session.scalars(select(TaxonomyNode)).all()}
         for item in LEARNING_PACK:
             existing = session.scalar(
-                select(Problem.id).where(
+                select(Problem).where(
                     Problem.source == item["source"],
                     Problem.source_key == item["source_key"],
                 )
             )
             if existing:
+                recovered_code = LEARNING_PACK_CODE.get(item["source_key"], "")
+                if not existing.python_code.strip() and recovered_code:
+                    existing.python_code = recovered_code
+                    sync_problem_search(session, existing)
+                    code_restored += 1
                 skipped += 1
                 continue
 
@@ -249,7 +256,7 @@ def install_learning_pack(target_engine: Engine = engine) -> dict[str, int]:
                 difficulty=item["difficulty"],
                 status=item["status"],
                 primary_subtag_id=primary.id,
-                python_code="",
+                python_code=LEARNING_PACK_CODE.get(item["source_key"], ""),
                 time_complexity=item["time_complexity"],
                 space_complexity=item["space_complexity"],
             )
@@ -269,9 +276,14 @@ def install_learning_pack(target_engine: Engine = engine) -> dict[str, int]:
             sync_problem_search(session, problem)
             created += 1
         session.commit()
-    return {"created": created, "skipped": skipped}
+    return {"created": created, "skipped": skipped, "code_restored": code_restored}
 
 
 if __name__ == "__main__":
     result = install_learning_pack()
-    print(f"Learning pack ready: {result['created']} created, {result['skipped']} already present.")
+    print(
+        "Learning pack ready: "
+        f"{result['created']} created, "
+        f"{result['skipped']} already present, "
+        f"{result['code_restored']} code fields restored."
+    )
