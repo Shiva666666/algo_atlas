@@ -3,10 +3,11 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
 import sqlite3
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from uuid import uuid4
 
 import yaml
@@ -28,11 +29,88 @@ SECTION_LABELS = {
     "follow_up": "Follow-up",
 }
 
+EXPORT_SCHEMA_VERSION = 1
+
+
+class ExportValidationError(ValueError):
+    """Raised when a tracked export cannot be restored safely."""
+
 
 def _sha(path: Path) -> str:
     digest = hashlib.sha256()
     digest.update(path.read_bytes())
     return digest.hexdigest()
+
+
+def _record_directory(record: dict) -> Path:
+    raw_path = record.get("path")
+    if not isinstance(raw_path, str) or not raw_path or "\\" in raw_path:
+        raise ExportValidationError("Every export record must use a non-empty POSIX path.")
+    relative = PurePosixPath(raw_path)
+    if relative.is_absolute() or any(part in {"", ".", ".."} for part in relative.parts):
+        raise ExportValidationError(f"Unsafe export path: {raw_path}")
+    root = settings.export_dir.resolve()
+    directory = (root / Path(*relative.parts)).resolve()
+    if directory == root or root not in directory.parents:
+        raise ExportValidationError(f"Export path escaped the workspace: {raw_path}")
+    return directory
+
+
+def validate_export_catalog() -> dict:
+    """Load and validate the portable export before any database write occurs."""
+    catalog_path = settings.export_dir / "catalog.json"
+    if not catalog_path.is_file():
+        raise FileNotFoundError("No export catalog found.")
+    try:
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ExportValidationError(f"Export catalog is not valid JSON: {exc}") from exc
+    if not isinstance(catalog, dict):
+        raise ExportValidationError("Export catalog must be a JSON object.")
+    if catalog.get("export_schema_version") != EXPORT_SCHEMA_VERSION:
+        raise ExportValidationError(
+            f"Unsupported export schema version: {catalog.get('export_schema_version')!r}. "
+            f"Expected {EXPORT_SCHEMA_VERSION}."
+        )
+    records = catalog.get("records")
+    if not isinstance(records, list):
+        raise ExportValidationError("Export catalog records must be a list.")
+    if catalog.get("record_count") != len(records):
+        raise ExportValidationError("Export record_count does not match the records list.")
+    seen_ids: set[str] = set()
+    seen_paths: set[str] = set()
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            raise ExportValidationError(f"Export record {index} must be an object.")
+        record_id = record.get("id")
+        record_path = record.get("path")
+        if not isinstance(record_id, str) or not record_id:
+            raise ExportValidationError(f"Export record {index} is missing its id.")
+        if record_id in seen_ids:
+            raise ExportValidationError(f"Duplicate export record id: {record_id}")
+        if not isinstance(record_path, str) or record_path in seen_paths:
+            raise ExportValidationError(f"Duplicate or invalid export path: {record_path!r}")
+        seen_ids.add(record_id)
+        seen_paths.add(record_path)
+        directory = _record_directory(record)
+        for filename, hash_key in (("README.md", "markdown_sha256"), ("solution.py", "solution_sha256")):
+            path = directory / filename
+            expected_hash = record.get(hash_key)
+            if not path.is_file():
+                raise ExportValidationError(f"Missing export file: {record_path}/{filename}")
+            if not isinstance(expected_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_hash):
+                raise ExportValidationError(f"Invalid {hash_key} for {record_path}.")
+            if _sha(path) != expected_hash:
+                raise ExportValidationError(f"Hash mismatch for {record_path}/{filename}.")
+        metadata, _notes = _parse_markdown(directory / "README.md")
+        if metadata.get("export_schema_version") != EXPORT_SCHEMA_VERSION:
+            raise ExportValidationError(f"Unsupported README schema for {record_path}.")
+        if metadata.get("id") != record_id:
+            raise ExportValidationError(f"README id does not match catalog record {record_id}.")
+        for required in ("source", "source_key", "slug", "title", "difficulty", "status", "primary_subtag_id", "created_at", "updated_at"):
+            if required not in metadata:
+                raise ExportValidationError(f"README for {record_path} is missing {required}.")
+    return catalog
 
 
 def create_backup(keep: int = 14) -> Path | None:
@@ -54,7 +132,7 @@ def create_backup(keep: int = 14) -> Path | None:
 
 def _frontmatter(problem: dict) -> dict:
     return {
-        "export_schema_version": 1,
+        "export_schema_version": EXPORT_SCHEMA_VERSION,
         "id": problem["id"],
         "source": problem["source"],
         "source_key": problem["source_key"],
@@ -122,7 +200,7 @@ def export_catalog(session: Session) -> dict:
             })
         taxonomy = [taxonomy_to_dict(node) for node in session.scalars(select(TaxonomyNode).order_by(TaxonomyNode.kind, TaxonomyNode.sort_order, TaxonomyNode.name)).all()]
         catalog = {
-            "export_schema_version": 1,
+            "export_schema_version": EXPORT_SCHEMA_VERSION,
             "generated_at": None,
             "record_count": len(records),
             "taxonomy": taxonomy,
@@ -167,11 +245,41 @@ def _parse_markdown(path: Path) -> tuple[dict, dict[str, list[str]]]:
     return metadata, notes
 
 
-def restore_catalog(session: Session, dry_run: bool = True) -> dict:
+def restore_catalog(session: Session, dry_run: bool = True, *, commit: bool = True) -> dict:
     catalog_path = settings.export_dir / "catalog.json"
     if not catalog_path.exists():
         return {"available": False, "creates": 0, "updates": 0, "warnings": ["No export catalog found."]}
-    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    catalog = validate_export_catalog()
+    current_taxonomy_ids = set(session.scalars(select(TaxonomyNode.id)).all())
+    catalog_custom_ids = {
+        node_data["id"]
+        for node_data in catalog.get("taxonomy", [])
+        if isinstance(node_data, dict) and node_data.get("kind") == "custom" and isinstance(node_data.get("id"), str)
+    }
+    available_taxonomy_ids = current_taxonomy_ids | catalog_custom_ids
+    prepared: list[tuple[dict, dict[str, list[str]], Path]] = []
+    for record in catalog.get("records", []):
+        directory = _record_directory(record)
+        metadata, notes = _parse_markdown(directory / "README.md")
+        if metadata["primary_subtag_id"] not in available_taxonomy_ids:
+            raise ExportValidationError(f"Primary taxonomy node is missing for {metadata['title']}.")
+        for timestamp_key in ("created_at", "updated_at"):
+            try:
+                datetime.fromisoformat(metadata[timestamp_key].replace("Z", "+00:00"))
+            except (AttributeError, TypeError, ValueError) as exc:
+                raise ExportValidationError(f"Invalid {timestamp_key} for {metadata['title']}.") from exc
+        for event_data in metadata.get("mistake_events", []):
+            try:
+                datetime.fromisoformat(event_data["occurred_at"].replace("Z", "+00:00"))
+            except (AttributeError, KeyError, TypeError, ValueError) as exc:
+                raise ExportValidationError(f"Invalid mistake timestamp for {metadata['title']}.") from exc
+        prepared.append((metadata, notes, directory))
+    existing_ids = set(session.scalars(select(Problem.id)).all())
+    creates = sum(1 for record in catalog.get("records", []) if record["id"] not in existing_ids)
+    updates = len(catalog.get("records", [])) - creates
+    result = {"available": True, "creates": creates, "updates": updates, "warnings": []}
+    if dry_run:
+        return result
     for node_data in catalog.get("taxonomy", []):
         if node_data.get("kind") == "custom" and not session.get(TaxonomyNode, node_data["id"]):
             session.add(TaxonomyNode(
@@ -180,19 +288,8 @@ def restore_catalog(session: Session, dry_run: bool = True) -> dict:
                 color=node_data.get("color"), protected=False, sort_order=node_data.get("sort_order", 0),
             ))
     session.flush()
-    existing_ids = set(session.scalars(select(Problem.id)).all())
-    creates = sum(1 for record in catalog.get("records", []) if record["id"] not in existing_ids)
-    updates = len(catalog.get("records", [])) - creates
-    result = {"available": True, "creates": creates, "updates": updates, "warnings": []}
-    if dry_run:
-        return result
     taxonomy_ids = set(session.scalars(select(TaxonomyNode.id)).all())
-    for record in catalog.get("records", []):
-        directory = settings.export_dir / record["path"]
-        metadata, notes = _parse_markdown(directory / "README.md")
-        if metadata["primary_subtag_id"] not in taxonomy_ids:
-            result["warnings"].append(f"Skipped {metadata['title']}: primary taxonomy node is missing.")
-            continue
+    for metadata, notes, directory in prepared:
         problem = session.get(Problem, metadata["id"])
         if not problem:
             problem = Problem(id=metadata["id"], source=metadata["source"], source_key=metadata["source_key"], slug=metadata["slug"], title=metadata["title"], primary_subtag_id=metadata["primary_subtag_id"])
@@ -224,5 +321,6 @@ def restore_catalog(session: Session, dry_run: bool = True) -> dict:
             problem.mistake_events.append(event)
         session.flush()
         sync_problem_search(session, problem)
-    session.commit()
+    if commit:
+        session.commit()
     return result

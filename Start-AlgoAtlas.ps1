@@ -5,8 +5,8 @@ Set-Location -LiteralPath $AtlasRoot
 
 if (-not (Test-Path -LiteralPath '.venv\Scripts\python.exe')) {
   python -m venv .venv
-  .\.venv\Scripts\python.exe -m pip install -e .
 }
+.\.venv\Scripts\python.exe -m pip install -e .
 if (-not (Test-Path -LiteralPath 'node_modules')) { npm install }
 if (-not (Test-Path -LiteralPath 'dist\index.html')) { npm run build }
 
@@ -16,7 +16,7 @@ try {
 } catch { $health = $null }
 
 if (-not $health) {
-  .\.venv\Scripts\python.exe -m alembic upgrade head
+  .\.venv\Scripts\python.exe -m algo_atlas.bootstrap
   $process = Start-Process -FilePath '.\.venv\Scripts\python.exe' -ArgumentList '-m','uvicorn','algo_atlas.main:app','--host','127.0.0.1','--port','8000' -WorkingDirectory $AtlasRoot -WindowStyle Hidden -PassThru
   Set-Content -LiteralPath '.local\server.pid' -Value $process.Id
   $ready = $false

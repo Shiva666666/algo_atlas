@@ -74,23 +74,16 @@ The database remains local. The sync workflow creates a backup, produces determi
 
 ![Reviewed SQLite to GitHub publishing flow](docs/images/settings-sync.png)
 
-## Quick start on Windows
+## Quick start
 
-Requirements: **Python 3.11+**, **Node.js 22+**, **npm**, and **Git**.
+Requirements: **Python 3.11+**, **Node.js 22.13+**, **npm**, and **Git**.
+
+### Windows
 
 ```powershell
 cd C:\Users\skibbidy\Desktop\AlgoAtlas
 .\Start-AlgoAtlas.cmd
 ```
-
-The launcher is the easiest command because it performs the complete local startup flow:
-
-1. Creates `.venv` and installs the Python package when needed.
-2. Installs npm dependencies when needed.
-3. Builds the frontend when `dist/` is missing.
-4. Applies database migrations.
-5. Starts FastAPI at <http://127.0.0.1:8000/>.
-6. Opens Algo Atlas in your browser.
 
 Stop the background server with:
 
@@ -98,22 +91,60 @@ Stop the background server with:
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Stop-AlgoAtlas.ps1
 ```
 
+### macOS
+
+After cloning the repository, double-click `Start-AlgoAtlas.command` in Finder. You can also launch it from Terminal:
+
+```bash
+cd /path/to/AlgoAtlas
+./Start-AlgoAtlas.command
+```
+
+Use `./Start-AlgoAtlas.command --no-browser` when you do not want it to open a browser automatically. Stop the background server with:
+
+```bash
+./Stop-AlgoAtlas.command
+```
+
+Both launchers perform the same local startup flow:
+
+1. Creates `.venv` and installs the Python package when needed.
+2. Installs npm dependencies when needed.
+3. Builds the frontend when `dist/` is missing.
+4. Applies database migrations.
+5. Rebuilds a new local database from the tracked export catalog.
+6. Starts FastAPI at <http://127.0.0.1:8000/>.
+7. Opens Algo Atlas in your browser.
+
 ## Development
 
 Run the backend and Vite frontend separately when changing the source:
+
+Windows PowerShell:
 
 ```powershell
 cd C:\Users\skibbidy\Desktop\AlgoAtlas
 npm install
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m algo_atlas.bootstrap
 .\.venv\Scripts\python.exe -m uvicorn algo_atlas.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-In a second PowerShell window:
+macOS Terminal:
 
-```powershell
-cd C:\Users\skibbidy\Desktop\AlgoAtlas
+```bash
+cd /path/to/AlgoAtlas
+npm install
+python3 -m venv .venv
+./.venv/bin/python -m pip install -e ".[dev]"
+./.venv/bin/python -m algo_atlas.bootstrap
+./.venv/bin/python -m uvicorn algo_atlas.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+In a second terminal window:
+
+```bash
 npm run dev
 ```
 
@@ -140,7 +171,15 @@ exports/catalog.json + per-problem README.md + solution.py
 - `exports/<domain>/<sub-tag>/<problem>/README.md` stores readable metadata and structured notes.
 - Each exported problem includes a standalone `solution.py`.
 
-On a fresh machine, importing the tracked export reconstructs the database. Restore is previewed before writing and creates a database backup first, so the JSON and per-problem files act as the portable recovery layer.
+On a fresh clone, the bootstrap validates every tracked export and automatically reconstructs the local database. An initialization marker is stored inside that database after success. This means later deleting all problems does not unexpectedly import them again. Existing non-empty databases are always preserved; later export updates still use the reviewed restore action in **Settings & Sync**.
+
+## Troubleshooting a fresh clone
+
+- **The app opens with an empty library:** confirm `exports/catalog.json` exists, stop the server, pull `main`, and start the app again. A database that has not completed initialization will retry automatically.
+- **`Permission denied` on macOS:** run `chmod +x Start-AlgoAtlas.command Stop-AlgoAtlas.command` once, then retry.
+- **Python or Node is rejected:** verify `python3 --version` is at least 3.11 and `node --version` is at least 22.13.
+- **The server does not start on macOS:** inspect `.local/server.log` for the actionable startup error.
+- **An export is rejected:** do not edit `catalog.json`, an exported README, or `solution.py` by hand. Pull the reviewed export again so its stored hashes match.
 
 ## GitHub setup
 
@@ -176,5 +215,6 @@ src/                React application and reusable visualizer system
 tests/              Backend and workflow tests
 exports/            Git-friendly catalog and per-problem learning records
 docs/images/        Screenshots used by this README
-Start-AlgoAtlas.cmd One-command Windows launcher
+Start-AlgoAtlas.cmd Windows launcher
+Start-AlgoAtlas.command macOS launcher
 ```

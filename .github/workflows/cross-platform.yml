@@ -1,0 +1,52 @@
+name: Cross-platform compatibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.13.1"
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -e ".[dev]"
+          npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Run tests
+        run: python -m pytest
+
+      - name: Rebuild a fresh database from exports
+        run: |
+          python -c "import pathlib, shutil; shutil.rmtree(pathlib.Path('.local'), ignore_errors=True)"
+          python -m algo_atlas.bootstrap
+          python -c "import json, pathlib, sqlite3; expected=json.loads(pathlib.Path('exports/catalog.json').read_text(encoding='utf-8'))['record_count']; actual=sqlite3.connect('.local/algo_atlas.db').execute('select count(*) from problems').fetchone()[0]; assert actual == expected, (actual, expected)"
+
+      - name: Validate macOS launchers
+        if: runner.os == 'macOS'
+        run: |
+          bash -n Start-AlgoAtlas.command
+          bash -n Stop-AlgoAtlas.command
+          test "$(git ls-files --stage Start-AlgoAtlas.command | cut -d' ' -f1)" = "100755"
+          test "$(git ls-files --stage Stop-AlgoAtlas.command | cut -d' ' -f1)" = "100755"

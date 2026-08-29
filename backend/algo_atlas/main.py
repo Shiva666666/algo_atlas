@@ -15,8 +15,9 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from .analytics import analytics_overview, atlas_graph
+from .bootstrap import prepare_local_state
 from .config import settings
-from .db import delete_problem_search, get_session, init_db, load_problem, slugify, sync_problem_search, taxonomy_to_dict
+from .db import delete_problem_search, get_session, load_problem, slugify, sync_problem_search, taxonomy_to_dict
 from .export_service import create_backup, export_catalog, restore_catalog
 from .git_service import configure_git, git_state, preview_git, publish_git
 from .models import MistakeEvent, MistakeEventReason, NoteBullet, Problem, ProblemTaxonomy, TaxonomyNode, utcnow
@@ -26,7 +27,7 @@ from .taxonomy_seed import LEETCODE_ALIASES
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    init_db()
+    prepare_local_state()
     yield
 
 
