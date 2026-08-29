@@ -1,8 +1,15 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 11,
+  "record_count": 12,
   "records": [
+    {
+      "id": "b72d8fc7-6a98-4508-9ac3-cdfd24f39ff1",
+      "markdown_sha256": "d2263e340cdee00b60d3d4bc5659f85798914b450827fb5b77c72c7c577d2c62",
+      "path": "arrays-strings/arrays/count-the-number-of-incremovable-subarrays-i",
+      "solution_sha256": "965d28397a66f8c76919a0524710169e2abd247683e9e4b140273e630cea5e67",
+      "title": "Count the Number of Incremovable Subarrays I"
+    },
     {
       "id": "b7d3a194-15ab-4578-b37a-b196a8a7e8f0",
       "markdown_sha256": "b8d19e4b31356a4e5e162deb1a4b670ca713a5dc2a48d2ce7dd820aa7a689b2c",
