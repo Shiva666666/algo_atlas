@@ -58,7 +58,18 @@ def git_state(fetch: bool = False) -> dict:
             ahead, behind = map(int, divergence)
         if behind:
             warnings.append("The remote branch has unseen commits. Pull and resolve them before publishing.")
-    return {"remote": remote, "branch": branch, "user_name": name, "user_email": email, "ahead": ahead, "behind": behind, "warnings": warnings, "fetch_error": fetch_error}
+    return {
+        "remote": remote,
+        "branch": branch,
+        "user_name": name,
+        "user_email": email,
+        "ahead": ahead,
+        "behind": behind,
+        "has_head": has_head,
+        "remote_branch_exists": has_remote_branch,
+        "warnings": warnings,
+        "fetch_error": fetch_error,
+    }
 
 
 def _changes() -> list[dict]:
@@ -81,7 +92,10 @@ def preview_git(fetch: bool = True) -> dict:
     today = datetime.now().strftime("%Y-%m-%d")
     state.update({
         "changes": changes, "additions": added, "updates": updated, "deletions": deleted,
-        "proposed_commit": f"algos: {today} (+{added} ~{updated})", "ready": bool(changes) and not state["warnings"],
+        "proposed_commit": f"algos: {today} (+{added} ~{updated})",
+        "ready": not state["warnings"] and (
+            bool(changes) or state["ahead"] > 0 or (state["has_head"] and not state["remote_branch_exists"])
+        ),
     })
     return state
 
@@ -90,14 +104,17 @@ def publish_git() -> dict:
     preview = preview_git(fetch=True)
     if preview["warnings"]:
         raise RuntimeError(" ".join(preview["warnings"]))
-    if not preview["changes"]:
+    if preview["changes"]:
+        staged = _git("add", "-A", "--", "exports")
+        if staged.returncode != 0:
+            raise RuntimeError(staged.stderr.strip() or "Could not stage the export.")
+        committed = _git("commit", "--only", "-m", preview["proposed_commit"], "--", "exports")
+        if committed.returncode != 0:
+            raise RuntimeError(committed.stderr.strip() or "Could not create the export commit.")
+    elif not preview["ahead"] and preview["remote_branch_exists"]:
         return {**preview, "status": "no_changes"}
-    staged = _git("add", "-A", "--", "exports")
-    if staged.returncode != 0:
-        raise RuntimeError(staged.stderr.strip() or "Could not stage the export.")
-    committed = _git("commit", "-m", preview["proposed_commit"])
-    if committed.returncode != 0:
-        raise RuntimeError(committed.stderr.strip() or "Could not create the export commit.")
+    elif not preview["has_head"]:
+        return {**preview, "status": "no_changes"}
     pushed = _git("push", "-u", "origin", f"HEAD:{preview['branch']}", timeout=60)
     if pushed.returncode != 0:
         raise RuntimeError(f"The local commit was preserved, but GitHub rejected the push: {pushed.stderr.strip()}")

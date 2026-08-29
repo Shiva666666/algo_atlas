@@ -1,6 +1,7 @@
 import type {CSSProperties} from 'react';
 import type {Problem} from '../../types';
-import type {GenericFrameData,IntuitionFrameData,MonotonicWindowFrameData,PalindromeFrameData,SteinerFrameData,VisualFrame} from '../types';
+import type {GenericFrameData,IncremovableFrameData,IntuitionFrameData,MonotonicWindowFrameData,PalindromeFrameData,SteinerFrameData,VisualFrame} from '../types';
+import {IncremovableCanvas} from './IncremovableCanvas';
 import {IntuitionCanvas} from './IntuitionCanvas';
 import {MonotonicWindowCanvas} from './MonotonicWindowCanvas';
 import {SteinerCanvas} from './SteinerCanvas';
@@ -60,6 +61,7 @@ export function FrameCanvas({frame,problem}:{frame:VisualFrame;problem:Problem})
     case 'palindrome-cuts':return <PalindromeCanvas data={frame.data as PalindromeFrameData}/>;
     case 'steiner-tree':return <SteinerCanvas data={frame.data as SteinerFrameData}/>;
     case 'monotonic-window':return <MonotonicWindowCanvas data={frame.data as MonotonicWindowFrameData}/>;
+    case 'incremovable':return <IncremovableCanvas data={frame.data as IncremovableFrameData}/>;
     case 'intuition':return <IntuitionCanvas data={frame.data as IntuitionFrameData}/>;
     default:return <GenericCanvas data={frame.data as GenericFrameData} approach={problem.notes?.approach??[]}/>;
   }

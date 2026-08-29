@@ -4,6 +4,7 @@ import {kokoVisualizer,specialArrayVisualizer} from './binarySearch';
 import {fallingPathVisualizer} from './fallingPath';
 import {createGenericVisualizer} from './generic';
 import {ipoVisualizer} from './ipo';
+import {incremovableVisualizer} from './incremovable';
 import {monotonicWindowVisualizer} from './monotonicWindow';
 import {palindromePartitioningVisualizer} from './palindromePartitioning';
 import {steinerTreeVisualizer} from './steinerTree';
@@ -22,6 +23,7 @@ const specialized:Record<string,VisualizerAdapter>={
   'subsets-ii':subsetsVisualizer,
   'ipo':ipoVisualizer,
   'ticket-to-ride':ticketToRideVisualizer,
+  'count-the-number-of-incremovable-subarrays-i':incremovableVisualizer,
 };
 
 export function getVisualizer(problem:Problem):VisualizerAdapter{

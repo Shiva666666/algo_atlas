@@ -1,0 +1,27 @@
+{
+  "hook": {
+    "enabled": true,
+    "limits": {
+      "maxFindings": 5,
+      "maxChars": 8000
+    }
+  },
+  "detector": {
+    "designSystem": {
+      "enabled": false
+    },
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "src/styles.css"
+        ],
+        "createdAt": "2026-08-29T19:59:33.941Z",
+        "reason": "User-approved plan: the remaining two-axis grid is scoped to the functional algorithm visualization canvas."
+      }
+    ]
+  }
+}

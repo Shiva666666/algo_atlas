@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T00:00:00.000Z",
+  "title": "Design System: Algo Atlas",
+  "extensions": {
+    "colorMeta": {
+      "action-cyan": { "role": "primary", "displayName": "Action Cyan", "canonical": "#37d9ff", "tonalRamp": ["#06232a", "#0a3945", "#0c5263", "#14748a", "#1f9db9", "#37d9ff", "#8aecff", "#dcfaff"] },
+      "atlas-violet": { "role": "secondary", "displayName": "Atlas Violet", "canonical": "#9b8cff", "tonalRamp": ["#18132f", "#251d49", "#372b68", "#50428e", "#7162bb", "#9b8cff", "#c9c1ff", "#f0edff"] },
+      "signal-magenta": { "role": "tertiary", "displayName": "Signal Magenta", "canonical": "#f06cae", "tonalRamp": ["#341020", "#51162f", "#742043", "#9c315e", "#c94a84", "#f06cae", "#f8adcf", "#fde8f3"] },
+      "canvas": { "role": "neutral", "displayName": "Night Canvas", "canonical": "#080b10", "tonalRamp": ["#080b10", "#10151d", "#151b25", "#202836", "#354052", "#566478", "#99a4b3", "#eef4fb"] },
+      "surface": { "role": "neutral", "displayName": "Graphite Surface", "canonical": "#10151d", "tonalRamp": ["#080b10", "#10151d", "#151b25", "#202836", "#354052", "#566478", "#99a4b3", "#eef4fb"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "One dominant atlas or route heading." },
+      "headline": { "displayName": "Headline", "purpose": "Route titles and primary analytical findings." },
+      "title": { "displayName": "Title", "purpose": "Panel and form-section titles." },
+      "body": { "displayName": "Body", "purpose": "Reading copy, notes, and explanations." },
+      "label": { "displayName": "Label", "purpose": "Readable controls and concise metadata." },
+      "code": { "displayName": "Code", "purpose": "Source code, traces, hashes, and measurements only." }
+    },
+    "shadows": [
+      { "name": "overlay", "value": "0 24px 64px rgba(0, 0, 0, 0.48)", "purpose": "Floating dialogs and command palette only." }
+    ],
+    "motion": [
+      { "name": "standard", "value": "180ms cubic-bezier(0.2, 0, 0, 1)", "purpose": "Control, surface, and state transitions." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "640px" },
+      { "name": "tablet", "value": "768px" },
+      { "name": "desktop", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single next action in an action cluster.",
+      "html": "<button class=\"ds-btn-primary\">Log mistake</button>",
+      "css": ".ds-btn-primary{height:40px;padding:0 16px;border:1px solid #37d9ff;border-radius:6px;background:#37d9ff;color:#080b10;font:600 12px/1 IBM Plex Sans,Segoe UI,sans-serif;letter-spacing:.04em}.ds-btn-primary:hover{background:#8aecff}.ds-btn-primary:focus-visible{outline:2px solid #37d9ff;outline-offset:3px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A supporting action with visible containment.",
+      "html": "<button class=\"ds-btn-secondary\">Review export</button>",
+      "css": ".ds-btn-secondary{height:40px;padding:0 16px;border:1px solid #293140;border-radius:6px;background:#151b25;color:#eef4fb;font:600 12px/1 IBM Plex Sans,Segoe UI,sans-serif}.ds-btn-secondary:hover{border-color:#566478;background:#202836}.ds-btn-secondary:focus-visible{outline:2px solid #37d9ff;outline-offset:3px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A high-contrast field for search and structured input.",
+      "html": "<input class=\"ds-input\" aria-label=\"Search problems\" placeholder=\"Search problems\">",
+      "css": ".ds-input{height:40px;min-width:240px;padding:0 12px;border:1px solid #293140;border-radius:6px;background:#080b10;color:#eef4fb;font:400 16px/1 IBM Plex Sans,Segoe UI,sans-serif}.ds-input::placeholder{color:#778394}.ds-input:focus{border-color:#37d9ff;outline:2px solid rgba(55,217,255,.28);outline-offset:2px}"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "description": "A compact state label that pairs color with border and copy.",
+      "html": "<span class=\"ds-status\">Local</span>",
+      "css": ".ds-status{display:inline-flex;align-items:center;min-height:24px;padding:0 8px;border:1px solid #293140;border-radius:999px;background:#10151d;color:#a9b4c2;font:600 12px/1 IBM Plex Sans,Segoe UI,sans-serif;letter-spacing:.04em}"
+    },
+    {
+      "name": "Graphite Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "A flat content region separated by tone and one crisp edge.",
+      "html": "<section class=\"ds-card\"><h3>Recurring weakness</h3><p>Review the mistakes connected to this pattern.</p></section>",
+      "css": ".ds-card{width:320px;padding:24px;border:1px solid #293140;border-radius:8px;background:#10151d;color:#eef4fb;font-family:IBM Plex Sans,Segoe UI,sans-serif}.ds-card h3{margin:0 0 8px;font-size:16px}.ds-card p{margin:0;color:#a9b4c2;font-size:16px;line-height:1.6}.ds-card:focus-within{border-color:#37d9ff}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Cartographer’s Instrument",
+    "overview": "Algo Atlas should feel like a focused instrument for working with a living map: dark, precise, data-rich, and calm enough for long study sessions. The interface keeps the existing cyan-and-violet knowledge-constellation identity, but moves hierarchy, typography, and task state ahead of atmospheric decoration. This is an operate surface, not a promotional site. Layouts are dependable, controls are explicit, and depth is communicated mostly through tonal surfaces and relationships. Grids and restrained light effects appear only where they explain a graph, an algorithm, or current state.",
+    "keyCharacteristics": ["Graphite surfaces with crisp tonal separation.", "IBM Plex Sans for interface language; DM Mono only for code and compact measurements.", "Cyan for the primary next action, violet for structure and relationships.", "Dense enough for technical work, never smaller than a readable functional floor.", "Flat, purposeful components with visible state and minimal ornament."],
+    "rules": [
+      { "name": "The Rare Current Rule", "body": "Cyan identifies the next action or active state; it does not wash entire sections.", "section": "colors" },
+      { "name": "The Semantic Light Rule", "body": "Glow and grids are permitted only when they encode graph, focus, playback, or algorithm state.", "section": "colors" },
+      { "name": "The Instrument Label Rule", "body": "Uppercase labels are short, infrequent, and never substitutes for a clear heading.", "section": "typography" },
+      { "name": "The Tonal Layer Rule", "body": "Prefer one tonal step to decorative glass or ambient blur.", "section": "elevation" }
+    ],
+    "dos": ["Do make the primary learning action and current state obvious at a glance.", "Do use IBM Plex Sans for interface hierarchy and reserve DM Mono for code or measurements.", "Do use the shared 4px spacing scale and 40px/44px control floors.", "Do preserve grids and restrained glow when they communicate graph or algorithm state.", "Do show loading, empty, error, pending, success, focus, disabled, and reduced-motion states clearly."],
+    "donts": ["Don't add decorative global grids, blanket glassmorphism, or atmospheric blur to ordinary panels.", "Don't use tiny functional labels, repeated eyebrows, or all-caps copy as the main hierarchy.", "Don't give every analytical panel equal visual weight or nest cards only to create spacing.", "Don't use side-tab border accents, multiple competing primary actions, or broad rule suppressions.", "Don't change data behavior, export shape, or the existing social-preview identity during UI refinement."]
+  }
+}

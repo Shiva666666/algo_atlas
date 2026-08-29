@@ -10,7 +10,7 @@ export interface VisualFrame {
   phase:string;
   title:string;
   message:string;
-  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'intuition';
+  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition';
   data:unknown;
 }
 
@@ -79,6 +79,20 @@ export interface MonotonicWindowFrameData {
   bestRange:[number,number]|null;
   activeIndex:number|null;
   valid:boolean|null;
+  action:string;
+  insights:InsightModel;
+  rules:RuleFocus[];
+}
+
+export interface IncremovableFrameData {
+  nums:number[];
+  prefixEnd:number;
+  suffixStart:number;
+  activeIndex:number|null;
+  answer:number;
+  added:number;
+  bridgeValid:boolean|null;
+  allIncreasing:boolean;
   action:string;
   insights:InsightModel;
   rules:RuleFocus[];
