@@ -26,13 +26,13 @@ function readPath(value:unknown,path:Array<string|number>):unknown{
 function createFrames(input:unknown,problem:Problem):VisualFrame[]{
   const paths=collectPaths(input).slice(0,80);
   const transitions=problem.notes?.approach?.length?problem.notes.approach:['Inspect the supplied parameters and map them to this problem’s state.'];
-  const frames:VisualFrame[]=[{phase:'INPUT MAP',title:'Parameters loaded',message:'The universal renderer maps arrays, matrices, objects, and scalar parameters into a readable 2D state.',kind:'generic',data:{value:input,activePath:[],transitionIndex:-1} satisfies GenericFrameData}];
+  const frames:VisualFrame[]=[{phase:'INPUT MAP',title:'Inspect the input structure',message:'This fallback is a study outline, not algorithm execution. It shows input values and your saved notes; no computed result is produced.',kind:'generic',data:{value:input,activePath:[],transitionIndex:-1} satisfies GenericFrameData}];
   paths.forEach((path,index)=>{
     const value=readPath(input,path);
     frames.push({phase:'INPUT MAP',title:`Inspect ${path.length?path.join('.'):'input'}`,message:`Current value: ${typeof value==='string'?`“${value}”`:JSON.stringify(value)}`,kind:'generic',data:{value:input,activePath:path,transitionIndex:-1} satisfies GenericFrameData});
   });
-  transitions.forEach((message,index)=>frames.push({phase:'RECORDED APPROACH',title:`Transition ${index+1}`,message,kind:'generic',data:{value:input,activePath:paths[index%Math.max(paths.length,1)]??[],transitionIndex:index} satisfies GenericFrameData}));
-  frames.push({phase:'COMPLETE',title:'Trace complete',message:'This problem is using the universal structure trace. A source-specific adapter can add exact algorithm state transitions.',kind:'generic',data:{value:input,activePath:[],transitionIndex:transitions.length} satisfies GenericFrameData});
+  transitions.forEach((message,index)=>frames.push({phase:'SAVED NOTE',title:`Approach note ${index+1}`,message,kind:'generic',data:{value:input,activePath:[],transitionIndex:index} satisfies GenericFrameData}));
+  frames.push({phase:'OUTLINE END',title:'End of saved outline',message:'No algorithm ran and no answer was calculated. A problem-specific visualizer is needed to show computed state transitions.',kind:'generic',data:{value:input,activePath:[],transitionIndex:transitions.length} satisfies GenericFrameData});
   return frames;
 }
 
@@ -49,9 +49,9 @@ export function createGenericVisualizer(problem:Problem):VisualizerAdapter{
   const starter=starterFor(problem);
   return {
     id:'generic-structure',
-    name:'Universal parameter trace',
+    name:'Input and notes · study outline',
     mode:'generic',
-    description:'A safe fallback for every problem: paste JSON arrays, matrices, graphs, trees, strings, or scalar parameters and step through their structure alongside your recorded approach.',
+    description:'Inspect input values alongside your saved approach. This fallback is not an execution trace and does not calculate an answer.',
     inputLabel:'CUSTOM PARAMETERS · JSON OR RAW TEXT',
     placeholder:starter.input,
     presets:[starter],

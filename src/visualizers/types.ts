@@ -3,15 +3,16 @@ import type {Problem} from '../types';
 export interface VisualPreset {
   label:string;
   input:string;
-  source:'LeetCode'|'AtCoder'|'HackerRank'|'Diagnostic'|'Starter';
+  source:'LeetCode'|'LintCode'|'AtCoder'|'HackerRank'|'Diagnostic'|'Starter';
 }
 
 export interface VisualFrame {
   phase:string;
   title:string;
   message:string;
-  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition';
+  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal';
   data:unknown;
+  codeFocus?:string[];
 }
 
 export interface RuleFocus {
@@ -88,6 +89,8 @@ export interface IncremovableFrameData {
   nums:number[];
   prefixEnd:number;
   suffixStart:number;
+  suffixPointer?:number;
+  comparison?:{left:number;right:number;kind:'prefix'|'bridge'|'suffix';valid:boolean};
   activeIndex:number|null;
   answer:number;
   added:number;
@@ -188,6 +191,8 @@ export interface VisualizerAdapter {
   description:string;
   inputLabel:string;
   placeholder:string;
+  inputGuide?:string;
+  referenceCode?:string;
   presets:VisualPreset[];
   parseInput:(raw:string)=>unknown;
   createFrames:(input:unknown,problem:Problem)=>VisualFrame[];

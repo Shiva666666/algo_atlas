@@ -1,28 +1,32 @@
 import type {IncremovableFrameData} from '../types';
 import '../incremovable.css';
 import {InsightRail,RuleStrip} from './LearningPrimitives';
+import {StateLegend} from './LessonPrimitives';
 
 export function IncremovableCanvas({data}:{data:IncremovableFrameData}){
   const startCount=data.added>0&&!data.allIncreasing?Math.max(0,data.prefixEnd+2):0;
   const removalEnd=data.suffixStart-1;
+  const comparison=data.comparison;
+  const comparisonValid=comparison?.valid??data.bridgeValid;
   const bridge=data.suffixStart>=data.nums.length
     ?'empty suffix'
     :data.prefixEnd<0
       ?'empty prefix'
       :`${data.nums[data.prefixEnd]} < ${data.nums[data.suffixStart]}`;
   return <div className="incremovable-lab">
+    <StateLegend items={[{label:'Retained prefix',symbol:'[',color:'#48a9ff'},{label:'Retained suffix',symbol:']',color:'#63e8aa'},{label:'Removal gap',symbol:'−',color:'#f06cae'}]}/>
     <div className="incremovable-array" aria-label={`Array ${data.nums.join(', ')}`}>
       {data.nums.map((value,index)=>{
         const prefix=index<=data.prefixEnd;const suffix=index>=data.suffixStart;const middle=!prefix&&!suffix;
         return <article className={`${prefix?'prefix':''} ${suffix?'suffix':''} ${middle?'middle':''} ${data.activeIndex===index?'active':''}`} key={index}>
           <small>{index}</small><strong>{value}</strong>
-          {index===data.prefixEnd?<span>i</span>:index===data.suffixStart?<span>j</span>:null}
+          {(index===data.prefixEnd||index===(data.suffixPointer??data.suffixStart))&&<span>{[index===data.prefixEnd?'i':'',index===(data.suffixPointer??data.suffixStart)?'j':''].filter(Boolean).join(' · ')}</span>}
         </article>;
       })}
     </div>
     <div className="incremovable-status">
       <div><small>INCREASING PREFIX</small><strong>{data.prefixEnd<0?'empty':`[0, ${data.prefixEnd}]`}</strong></div>
-      <div className={data.bridgeValid===false?'invalid':data.bridgeValid===true?'valid':''}><small>BRIDGE</small><strong>{bridge}</strong></div>
+      <div className={comparisonValid===false?'invalid':comparisonValid===true?'valid':''}><small>{comparison?`${comparison.kind.toUpperCase()} TEST`:data.bridgeValid===null?'NEXT BRIDGE (UNTESTED)':'BRIDGE'}</small><strong>{comparison?`${data.nums[comparison.left]} < ${data.nums[comparison.right]} · ${comparison.valid?'true':'false'}`:bridge}</strong></div>
       <div><small>RUNNING ANSWER</small><strong>{data.answer}{data.added>0?`  (+${data.added})`:''}</strong></div>
     </div>
     <section className="removal-starts">

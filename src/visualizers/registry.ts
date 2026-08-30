@@ -5,6 +5,9 @@ import {fallingPathVisualizer} from './fallingPath';
 import {createGenericVisualizer} from './generic';
 import {ipoVisualizer} from './ipo';
 import {incremovableVisualizer} from './incremovable';
+import {nQueensVisualizer} from './nQueens';
+import {coinChangeVisualizer} from './coinChange';
+import {hexadecimalVisualizer} from './hexadecimal';
 import {monotonicWindowVisualizer} from './monotonicWindow';
 import {palindromePartitioningVisualizer} from './palindromePartitioning';
 import {steinerTreeVisualizer} from './steinerTree';
@@ -24,8 +27,11 @@ const specialized:Record<string,VisualizerAdapter>={
   'ipo':ipoVisualizer,
   'ticket-to-ride':ticketToRideVisualizer,
   'count-the-number-of-incremovable-subarrays-i':incremovableVisualizer,
+  'coin-change-ii':coinChangeVisualizer,
+  'convert-a-number-to-hexadecimal':hexadecimalVisualizer,
 };
 
 export function getVisualizer(problem:Problem):VisualizerAdapter{
+  if(problem.source.toLowerCase()==='lintcode'&&problem.source_key==='33')return nQueensVisualizer;
   return specialized[problem.source_key]??createGenericVisualizer(problem);
 }

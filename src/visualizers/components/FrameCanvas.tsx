@@ -5,6 +5,10 @@ import {IncremovableCanvas} from './IncremovableCanvas';
 import {IntuitionCanvas} from './IntuitionCanvas';
 import {MonotonicWindowCanvas} from './MonotonicWindowCanvas';
 import {SteinerCanvas} from './SteinerCanvas';
+import {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas} from './PracticeCanvas';
+import type {NQueensData} from '../nQueens';
+import type {CoinChangeData} from '../coinChange';
+import type {HexadecimalData} from '../hexadecimal';
 
 function PalindromeCanvas({data}:{data:PalindromeFrameData}){
   const n=data.s.length;
@@ -58,6 +62,9 @@ function GenericCanvas({data,approach}:{data:GenericFrameData;approach:string[]}
 
 export function FrameCanvas({frame,problem}:{frame:VisualFrame;problem:Problem}){
   switch(frame.kind){
+    case 'n-queens':return <NQueensCanvas data={frame.data as NQueensData}/>;
+    case 'coin-change':return <CoinChangeCanvas data={frame.data as CoinChangeData}/>;
+    case 'hexadecimal':return <HexadecimalCanvas data={frame.data as HexadecimalData}/>;
     case 'palindrome-cuts':return <PalindromeCanvas data={frame.data as PalindromeFrameData}/>;
     case 'steiner-tree':return <SteinerCanvas data={frame.data as SteinerFrameData}/>;
     case 'monotonic-window':return <MonotonicWindowCanvas data={frame.data as MonotonicWindowFrameData}/>;
