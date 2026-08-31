@@ -175,6 +175,42 @@ def _markdown(problem: dict) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+def _sync_export_tree_in_place(stage: Path) -> None:
+    """Update a watched export directory without renaming the directory itself.
+
+    Vite keeps a directory watcher on ``exports`` during local development. On
+    Windows that watcher can prevent ``os.replace(exports, previous)`` even
+    though individual files remain writable. Copying the staged tree in place
+    keeps the watched directory identity stable and lets the normal file-level
+    export flow continue.
+    """
+    settings.export_dir.mkdir(parents=True, exist_ok=True)
+    expected_files: set[Path] = set()
+    for source in stage.rglob("*"):
+        relative = source.relative_to(stage)
+        target = settings.export_dir / relative
+        if source.is_dir():
+            target.mkdir(parents=True, exist_ok=True)
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+        expected_files.add(relative)
+
+    for existing in settings.export_dir.rglob("*"):
+        if existing.is_file() and existing.relative_to(settings.export_dir) not in expected_files:
+            existing.unlink()
+    for directory in sorted(
+        (path for path in settings.export_dir.rglob("*") if path.is_dir()),
+        key=lambda path: len(path.parts),
+        reverse=True,
+    ):
+        try:
+            directory.rmdir()
+        except OSError:
+            # Non-empty directories are expected when a child remains.
+            pass
+
+
 def export_catalog(session: Session) -> dict:
     stage = settings.local_dir / f"export-stage-{uuid4().hex}"
     stage.mkdir(parents=True, exist_ok=False)
@@ -213,7 +249,13 @@ def export_catalog(session: Session) -> dict:
         if previous.exists():
             shutil.rmtree(previous)
         if settings.export_dir.exists():
-            os.replace(settings.export_dir, previous)
+            try:
+                os.replace(settings.export_dir, previous)
+            except PermissionError:
+                # A running Vite watcher can lock the directory on Windows.
+                # Keep the directory in place and update its files instead.
+                _sync_export_tree_in_place(stage)
+                return catalog
         try:
             os.replace(stage, settings.export_dir)
         except Exception:
