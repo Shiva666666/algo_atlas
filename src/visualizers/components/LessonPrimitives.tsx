@@ -37,7 +37,7 @@ export function StateLegend({items}:{items:Array<{label:string;symbol:string;col
 
 // Source-adapted from Kokonut UI SmoothTab (MIT): measure the active tab and
 // move its shared background. Native focus and arrow-key navigation are retained.
-export function SmoothTabs({value,onChange,items,id}:{value:string;onChange:(value:string)=>void;items:Array<{id:string;label:string}>;id:string}){
+export function SmoothTabs({value,onChange,items,id,label='Explanation view'}:{value:string;onChange:(value:string)=>void;items:Array<{id:string;label:string}>;id:string;label?:string}){
   const fallbackId=useId();const tabId=id||fallbackId;
   const container=useRef<HTMLDivElement>(null);
   const buttons=useRef<Array<HTMLButtonElement|null>>([]);
@@ -53,7 +53,7 @@ export function SmoothTabs({value,onChange,items,id}:{value:string;onChange:(val
     if(container.current)observer.observe(container.current);
     return()=>observer.disconnect();
   },[selected]);
-  return <div className="smooth-tabs" ref={container} role="tablist" aria-label="Explanation view">
+  return <div className="smooth-tabs" ref={container} role="tablist" aria-label={label}>
     <motion.div className="smooth-tab-indicator" aria-hidden="true" initial={false} animate={indicator} transition={reduced?{duration:0}:{type:'spring',stiffness:400,damping:30}}/>
     {items.map((item,index)=><button type="button" key={item.id} ref={element=>{buttons.current[index]=element}} role="tab" id={`${tabId}-${item.id}`} aria-controls={`${tabId}-${item.id}-panel`} aria-selected={value===item.id} tabIndex={value===item.id?0:-1} onClick={()=>onChange(item.id)} onKeyDown={event=>{
       let next=index;

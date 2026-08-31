@@ -26,6 +26,24 @@ and Python code/Steps. Preserve 44px control targets, visible cyan focus, readab
 labels, and keyboard-accessible scroll regions. Editing input pauses playback;
 a notice identifies the old input still shown until Build steps applies the edit.
 
+## Reusable diagram foundations
+
+Presentation-only primitives keep algorithm logic in adapters and make later
+lessons consistent:
+
+- `SequenceStrip` is the indexed array/string view for pointers, ranges,
+  retained/removed segments, and selectable intervals.
+- `RecursionWorkbench` is the call-stack view for active calls, candidates,
+  chosen paths, returns, undo, and separately recorded outputs.
+- `DependencyGrid` is the matrix/DP view for initialized versus unvisited cells,
+  explicit top/left/diagonal (or recurrence) dependencies, and result state.
+- `TrieTree` is the stable-prefix view for character edges, terminal words,
+  traversal focus, and capped suggestion results.
+
+Batch 1 uses these contracts through the typed `SequenceStrip`, trie, recursion,
+and grid frame payloads. New adapters must emit immutable snapshots and retain
+the reference-code focus mapping; saved user code remains reference-only.
+
 ## Layout
 
 Use `src/visualizers/lesson.css` as the surface authority.

@@ -213,6 +213,15 @@ Navigation uses one icon family, IBM Plex Sans labels, and a cyan edge/fill cue 
 
 The functional grid is scoped to the canvas. Controls and trace panels use the same surface, type, and state rules as the rest of the product; side-tab accents are replaced by full edges, tonal fills, or top rules that describe grouping without implying a browser tab.
 
+The Atlas home is a full-viewport spatial study network, not a flat constellation.
+Its 3D view uses deterministic volumetric neighborhoods, softly lit matte spheres,
+and individual curved relationship strands. No orbit rings, anatomical textures,
+or particle decoration. The independent 2D view is a readable, grouped
+technique-to-problem diagram; it does not reuse 3D coordinates. My study network
+is the default, with unused taxonomy available through All topics. Search and
+inspectors are overlays; the camera never resets on hover. Each node opens its
+exact library selection. See `.impeccable/surfaces/src-pages-atlaspage-tsx.md`.
+
 ## Do's and Don'ts
 
 ### Do:

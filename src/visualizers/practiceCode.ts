@@ -81,6 +81,64 @@ class Solution:
 
         return res`;
 
+export const searchSuggestionsCode = `from typing import List
+
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        trie = {}
+        res = []
+
+        # Build one path for every product.
+        for product in products:
+            node = trie
+            for char in product:
+                if char not in node:
+                    node[char] = {}
+                node = node[char]
+            node["$"] = product
+
+        def collect(node, temp):
+            if len(temp) == 3:
+                return
+            if "$" in node:
+                temp.append(node["$"])
+            for char in sorted(node):
+                if char != "$":
+                    collect(node[char], temp)
+
+        def dfs(prefix):
+            node = trie
+            for char in prefix:
+                if char not in node:
+                    return []
+                node = node[char]
+            temp = []
+            collect(node, temp)
+            return temp
+
+        for end in range(1, len(searchWord) + 1):
+            res.append(dfs(searchWord[:end]))
+        return res`;
+
+export const uniqueSplitCode = `class Solution:
+    def maxUniqueSplit(self, s: str) -> int:
+        seen = set()
+
+        def backtrack(i):
+            if i == len(s):
+                return 0
+
+            ans = 0
+            for j in range(i + 1, len(s) + 1):
+                part = s[i:j]
+                if part not in seen:
+                    seen.add(part)
+                    ans = max(ans, 1 + backtrack(j))
+                    seen.remove(part)
+            return ans
+
+        return backtrack(0)`;
+
 export const incremovableCode = `class Solution:
     def incremovableSubarrayCount(self, nums: List[int]) -> int:
         n = len(nums)

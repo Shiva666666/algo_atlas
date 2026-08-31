@@ -5,6 +5,7 @@ import {IncremovableCanvas} from './IncremovableCanvas';
 import {IntuitionCanvas} from './IntuitionCanvas';
 import {MonotonicWindowCanvas} from './MonotonicWindowCanvas';
 import {SteinerCanvas} from './SteinerCanvas';
+import {TrieSuggestionsCanvas,UniqueSplitCanvas} from './Batch1Canvas';
 import {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas} from './PracticeCanvas';
 import type {NQueensData} from '../nQueens';
 import type {CoinChangeData} from '../coinChange';
@@ -70,6 +71,8 @@ export function FrameCanvas({frame,problem}:{frame:VisualFrame;problem:Problem})
     case 'monotonic-window':return <MonotonicWindowCanvas data={frame.data as MonotonicWindowFrameData}/>;
     case 'incremovable':return <IncremovableCanvas data={frame.data as IncremovableFrameData}/>;
     case 'intuition':return <IntuitionCanvas data={frame.data as IntuitionFrameData}/>;
+    case 'trie-suggestions':return <TrieSuggestionsCanvas data={frame.data as import('../types').TrieSuggestionsFrameData}/>;
+    case 'unique-split':return <UniqueSplitCanvas data={frame.data as import('../types').UniqueSplitFrameData}/>;
     default:return <GenericCanvas data={frame.data as GenericFrameData} approach={problem.notes?.approach??[]}/>;
   }
 }

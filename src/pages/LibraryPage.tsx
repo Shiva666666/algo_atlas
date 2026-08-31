@@ -8,31 +8,30 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { api } from "../api";
-import type { Problem, TaxonomyResponse } from "../types";
+import type { TaxonomyResponse } from "../types";
+import {fetchLibrarySelection,updateLibraryFilter} from '../librarySelection';
+import '../librarySelection.css';
 
 export function LibraryPage() {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const [query, setQuery] = useState(params.get("q") ?? "");
+  const searchTerm=params.get('q')??'';
+  useEffect(()=>setQuery(searchTerm),[searchTerm]);
   const filterString = params.toString();
   const { data: taxonomy } = useQuery({
     queryKey: ["taxonomy"],
     queryFn: () => api<TaxonomyResponse>("/api/taxonomy"),
   });
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["problems", filterString],
-    queryFn: () =>
-      api<{ items: Problem[]; total: number }>(
-        `/api/problems?${filterString}&limit=250`,
-      ),
+    queryFn: () => fetchLibrarySelection(new URLSearchParams(filterString),api),
   });
   const update = (key: string, value: string) => {
-    const next = new URLSearchParams(params);
-    value ? next.set(key, value) : next.delete(key);
-    setParams(next);
+    setParams(updateLibraryFilter(params,key,value));
   };
   const runSearch = (event: React.FormEvent) => {
     event.preventDefault();
@@ -58,6 +57,7 @@ export function LibraryPage() {
           <Plus size={16} /> LOG MISTAKE
         </button>
       </div>
+      {(params.has('problem_id')||params.has('subtag_id')||params.has('taxonomy_id'))&&<div className="library-atlas-selection" role="status"><span><BookOpen size={16}/>{params.has('problem_id')?`Selected from atlas: ${data?.items[0]?.title??'problem'}`:`Atlas filter: ${taxonomy?.nodes.find(node=>node.id===(params.get('subtag_id')??params.get('taxonomy_id')))?.name??'selected classification'}`}</span><Link to="/library">Show all problems</Link></div>}
       <div className="library-tools panel">
         <form onSubmit={runSearch}>
           <Search size={17} />
@@ -129,6 +129,7 @@ export function LibraryPage() {
           <i />
         </div>
         {isLoading && <div className="table-empty">SCANNING THE ARCHIVE…</div>}
+        {error&&<div className="table-empty" role="alert">{error instanceof Error?error.message:'The selected problem could not be loaded.'} <Link to="/library">Return to all problems</Link></div>}
         {data?.items.map((problem) => (
           <button
             className="problem-row"

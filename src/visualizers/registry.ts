@@ -13,6 +13,10 @@ import {palindromePartitioningVisualizer} from './palindromePartitioning';
 import {steinerTreeVisualizer} from './steinerTree';
 import {subsetsVisualizer} from './subsets';
 import {ticketToRideVisualizer} from './ticketToRide';
+import {maximalSquareVisualizer} from './maximalSquare';
+import {searchSuggestionsVisualizer} from './searchSuggestions';
+import {uniqueSplitVisualizer} from './uniqueSplit';
+import {generateParenthesesVisualizer} from './generateParentheses';
 import type {VisualizerAdapter} from './types';
 
 const specialized:Record<string,VisualizerAdapter>={
@@ -29,9 +33,20 @@ const specialized:Record<string,VisualizerAdapter>={
   'count-the-number-of-incremovable-subarrays-i':incremovableVisualizer,
   'coin-change-ii':coinChangeVisualizer,
   'convert-a-number-to-hexadecimal':hexadecimalVisualizer,
+  'maximal-square':maximalSquareVisualizer,
+  'search-suggestions-system':searchSuggestionsVisualizer,
+  '1268':searchSuggestionsVisualizer,
+  'split-a-string-into-the-max-number-of-unique-substrings':uniqueSplitVisualizer,
+  '1593':uniqueSplitVisualizer,
+  'generate-parentheses':generateParenthesesVisualizer,
+  'generate-all-possible-parentheses':generateParenthesesVisualizer,
 };
 
 export function getVisualizer(problem:Problem):VisualizerAdapter{
   if(problem.source.toLowerCase()==='lintcode'&&problem.source_key==='33')return nQueensVisualizer;
-  return specialized[problem.source_key]??createGenericVisualizer(problem);
+  const adapter=specialized[problem.source_key]??createGenericVisualizer(problem);
+  // Keep the three established lessons pixel-stable while every other lesson
+  // gets the readable diagram-first inspector layout.
+  if(['coin-change-ii','convert-a-number-to-hexadecimal'].includes(problem.source_key))return adapter;
+  return {...adapter,presentation:'diagram-first'};
 }

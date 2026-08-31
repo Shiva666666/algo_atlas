@@ -10,7 +10,7 @@ export interface VisualFrame {
   phase:string;
   title:string;
   message:string;
-  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal';
+  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal'|'trie-suggestions'|'unique-split';
   data:unknown;
   codeFocus?:string[];
 }
@@ -101,7 +101,7 @@ export interface IncremovableFrameData {
   rules:RuleFocus[];
 }
 
-export type IntuitionVariant='binary-search'|'graph-coloring'|'grid-dp'|'subset-pruning'|'dual-heap'|'tree-path';
+export type IntuitionVariant='binary-search'|'graph-coloring'|'grid-dp'|'subset-pruning'|'dual-heap'|'tree-path'|'parentheses';
 
 export interface BinarySearchView {
   values:number[];
@@ -126,6 +126,7 @@ export interface GraphColoringView {
 export interface GridDpView {
   grid:number[][];
   dp:Array<Array<number|null>>;
+  storage?:'rolling-row'|'full-table';
   active:[number,number]|null;
   choices:Array<{row:number;column:number;value:number}>;
   chosen:[number,number]|null;
@@ -137,6 +138,16 @@ export interface SubsetPruningView {
   level:number;
   candidates:Array<{index:number;value:number;state:'available'|'chosen'|'skipped'}>;
   resultCount:number;
+  recorded?:number[][];
+}
+
+export interface ParenthesesView {
+  n:number;
+  partial:string;
+  open:number;
+  close:number;
+  action:'choose-open'|'choose-close'|'return'|'record';
+  results:string[];
 }
 
 export interface DualHeapView {
@@ -162,6 +173,7 @@ export interface IntuitionFrameData {
   graphColoring?:GraphColoringView;
   gridDp?:GridDpView;
   subsetPruning?:SubsetPruningView;
+  parentheses?:ParenthesesView;
   dualHeap?:DualHeapView;
   treePath?:TreePathView;
 }
@@ -196,4 +208,62 @@ export interface VisualizerAdapter {
   presets:VisualPreset[];
   parseInput:(raw:string)=>unknown;
   createFrames:(input:unknown,problem:Problem)=>VisualFrame[];
+  /** Redesigned lessons use the readable diagram-first workspace. */
+  presentation?:'diagram-first'|'classic';
+  /** Source-grounded reflection for the learner, when supplied by the user. */
+  mistakeExplanation?:string[];
+}
+
+export type TrieNodeState='idle'|'active'|'visited'|'terminal'|'missing';
+
+export interface TrieNodeView {
+  id:string;
+  label:string;
+  depth:number;
+  parent:string|null;
+  terminalProduct:string|null;
+  state:TrieNodeState;
+}
+
+export interface TrieEdgeView {
+  from:string;
+  to:string;
+  character:string;
+  state:'idle'|'active'|'visited';
+}
+
+export interface TrieSuggestionsFrameData {
+  products:string[];
+  searchWord:string;
+  nodes:TrieNodeView[];
+  edges:TrieEdgeView[];
+  currentPrefix:string;
+  prefixIndex:number;
+  traversalPath:string[];
+  activeNode:string|null;
+  activeCharacter:string|null;
+  terminalProduct:string|null;
+  suggestions:string[];
+  resultLists:string[][];
+  limit:3;
+  action:'insert'|'ready'|'walk'|'missing'|'collect'|'suggestion'|'prefix-complete'|'complete';
+}
+
+export interface UniqueSplitCallView {
+  start:number;
+  answer:number;
+}
+
+export interface UniqueSplitFrameData {
+  s:string;
+  start:number;
+  end:number|null;
+  candidate:string|null;
+  candidateRange:[number,number]|null;
+  path:string[];
+  seen:string[];
+  best:number;
+  callStack:UniqueSplitCallView[];
+  childResult:number|null;
+  action:'start'|'candidate'|'reject'|'choose'|'base'|'return'|'remove'|'complete';
 }

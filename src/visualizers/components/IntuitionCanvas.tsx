@@ -1,5 +1,5 @@
 import type {CSSProperties} from 'react';
-import type {BinarySearchView,DualHeapView,GraphColoringView,GridDpView,IntuitionFrameData,SubsetPruningView,TreePathView} from '../types';
+import type {BinarySearchView,DualHeapView,GraphColoringView,GridDpView,IntuitionFrameData,ParenthesesView,SubsetPruningView,TreePathView} from '../types';
 import {GraphCanvas} from './GraphCanvas';
 import {InsightRail,RuleStrip} from './LearningPrimitives';
 
@@ -19,13 +19,19 @@ function GraphColoringPlane({view}:{view:GraphColoringView}){
 
 function GridDpPlane({view}:{view:GridDpView}){
   return <div className="grid-dp-plane">
-    <div className="dp-matrix" style={{'--grid-columns':view.grid[0]?.length??1} as CSSProperties}>{view.grid.map((row,rowIndex)=><div key={rowIndex}>{row.map((value,columnIndex)=>{const active=view.active?.[0]===rowIndex&&view.active[1]===columnIndex;const chosen=view.chosen?.[0]===rowIndex&&view.chosen[1]===columnIndex;const candidate=view.choices.some(choice=>choice.row===rowIndex&&choice.column===columnIndex);return <article className={`${active?'active':''} ${chosen?'chosen':''} ${candidate?'candidate':''}`} key={columnIndex}><small>[{rowIndex},{columnIndex}]</small><strong>{value}</strong><span>{view.dp[rowIndex][columnIndex]===null?'dp ·':`dp ${view.dp[rowIndex][columnIndex]}`}</span></article>})}</div>)}</div>
-    <div className="choice-stack"><small>THREE CHILD CHOICES</small>{view.choices.length?view.choices.map(choice=><div className={view.chosen?.[0]===choice.row&&view.chosen[1]===choice.column?'chosen':''} key={`${choice.row}-${choice.column}`}><code>({choice.row},{choice.column})</code><strong>{choice.value}</strong></div>):<p>Seed the last row first.</p>}</div>
+    {view.storage==='rolling-row'&&<div className="dp-storage-note"><small>STORAGE</small><strong>Two rolling rows</strong><span>Previous row → current row</span></div>}
+    <div className="dp-matrix" style={{'--grid-columns':view.grid[0]?.length??1} as CSSProperties}>{view.grid.map((row,rowIndex)=><div key={rowIndex}>{row.map((value,columnIndex)=>{const active=view.active?.[0]===rowIndex&&view.active[1]===columnIndex;const chosen=view.chosen?.[0]===rowIndex&&view.chosen?.[1]===columnIndex;const candidate=view.choices.some(choice=>choice.row===rowIndex&&choice.column===columnIndex);return <article className={`${active?'active':''} ${chosen?'chosen':''} ${candidate?'candidate':''}`} key={columnIndex}><small>[{rowIndex},{columnIndex}]</small><strong>{value}</strong><span>{view.dp[rowIndex][columnIndex]===null?'dp ·':`dp ${view.dp[rowIndex][columnIndex]}`}</span></article>})}</div>)}</div>
+    <div className="choice-stack"><small>DEPENDENCIES FOR ACTIVE CELL</small>{view.choices.length?view.choices.map((choice,index)=>{const relation=['TOP','LEFT','DIAGONAL'][index]??'NEIGHBOR';const chosen=view.chosen?.[0]===choice.row&&view.chosen?.[1]===choice.column;return <div className={chosen?'chosen':''} key={`${choice.row}-${choice.column}`}><span>{relation}</span><code>({choice.row},{choice.column})</code><strong>{choice.value}</strong></div>}):<p>Seed the border before reading the recurrence.</p>}</div>
   </div>;
 }
 
 function SubsetPlane({view}:{view:SubsetPruningView}){
-  return <div className="subset-plane"><div className="recursion-path"><small>CURRENT PATH · LEVEL {view.level}</small><div>{view.path.length?view.path.map((value,index)=><span key={`${value}-${index}`}>{value}</span>):<em>empty subset</em>}</div><strong>{view.resultCount} unique subsets recorded</strong></div><span className="path-arrow">→</span><div className="sibling-row"><small>CANDIDATES AT THIS LEVEL</small><div>{view.candidates.map(candidate=><article className={candidate.state} key={candidate.index}><small>i={candidate.index}</small><strong>{candidate.value}</strong><span>{candidate.state==='skipped'?'same sibling value':candidate.state}</span></article>)}</div></div></div>;
+  const recorded=view.recorded??[];
+  return <div className="subset-plane"><div className="recursion-path"><small>CURRENT PATH · LEVEL {view.level}</small><div>{view.path.length?view.path.map((value,index)=><span key={`${value}-${index}`}>{value}</span>):<em>empty subset</em>}</div><strong>{view.resultCount} unique subsets recorded</strong><div className="recorded-subsets"><small>RECORDED OUTPUTS</small><div>{recorded.slice(-4).map((subset,index)=><code key={`${subset.join(',')}-${index}`}>{subset.length?`[${subset.join(', ')}]`:'[]'}</code>)}</div></div></div><span className="path-arrow">→</span><div className="sibling-row"><small>CANDIDATES AT THIS LEVEL</small><div>{view.candidates.map(candidate=><article className={candidate.state} key={candidate.index}><small>i={candidate.index}</small><strong>{candidate.value}</strong><span>{candidate.state==='skipped'?'same sibling value':candidate.state}</span></article>)}</div></div></div>;
+}
+
+function ParenthesesPlane({view}:{view:ParenthesesView}){
+  return <div className="parentheses-plane"><div className="paren-stage"><small>ACTIVE RECURSION</small><strong>{view.partial||'ε'}</strong><span>{view.open} opens · {view.close} closes · target {view.n} pairs</span></div><div className="paren-choices"><article className={view.action==='choose-open'?'active':''}><b>(</b><span>add while opens &lt; n</span></article><article className={view.action==='choose-close'?'active':''}><b>)</b><span>add only while closes &lt; opens</span></article></div><div className="paren-results"><small>RECORDED RESULTS · {view.results.length}</small><div>{view.results.slice(-5).map(result=><code key={result}>{result}</code>)}</div></div></div>;
 }
 
 function DualHeapPlane({view}:{view:DualHeapView}){
@@ -42,6 +48,7 @@ export function IntuitionCanvas({data}:{data:IntuitionFrameData}){
   if(data.variant==='graph-coloring'&&data.graphColoring)plane=<GraphColoringPlane view={data.graphColoring}/>;
   if(data.variant==='grid-dp'&&data.gridDp)plane=<GridDpPlane view={data.gridDp}/>;
   if(data.variant==='subset-pruning'&&data.subsetPruning)plane=<SubsetPlane view={data.subsetPruning}/>;
+  if(data.variant==='parentheses'&&data.parentheses)plane=<ParenthesesPlane view={data.parentheses}/>;
   if(data.variant==='dual-heap'&&data.dualHeap)plane=<DualHeapPlane view={data.dualHeap}/>;
   if(data.variant==='tree-path'&&data.treePath)plane=<TreePathPlane view={data.treePath}/>;
   return <div className={`intuition-lab intuition-${data.variant}`}>{plane}<RuleStrip rules={data.rules}/><InsightRail insights={data.insights}/></div>;

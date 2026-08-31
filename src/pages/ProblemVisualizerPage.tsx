@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {ArrowLeft,ChevronLeft,ChevronRight,ExternalLink,Pause,Play,RotateCcw,ScanLine} from 'lucide-react';
+import {ArrowLeft,ChevronLeft,ChevronRight,ExternalLink,Pause,Play,RotateCcw,ScanLine,X} from 'lucide-react';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {useNavigate,useParams} from 'react-router-dom';
 import {api} from '../api';
@@ -18,7 +18,7 @@ function buildTrace(adapter:VisualizerAdapter,problem:Problem,raw:string){
   return result;
 }
 
-function ExplanationPanel({adapter,problem,frames,index,stepTo}:{adapter:VisualizerAdapter;problem:Problem;frames:VisualFrame[];index:number;stepTo:(index:number)=>void}){
+function ExplanationPanel({adapter,problem,frames,index,stepTo,onClose}:{adapter:VisualizerAdapter;problem:Problem;frames:VisualFrame[];index:number;stepTo:(index:number)=>void;onClose:()=>void}){
   const [tab,setTab]=useState('code');
   const codeList=useRef<HTMLPreElement>(null);const stepList=useRef<HTMLOListElement>(null);
   const code=adapter.referenceCode??problem.python_code??'';
@@ -34,7 +34,8 @@ function ExplanationPanel({adapter,problem,frames,index,stepTo}:{adapter:Visuali
       if(top<panel.scrollTop||top+active.offsetHeight>panel.scrollTop+panel.clientHeight)panel.scrollTop=Math.max(0,top-panel.clientHeight/3);
     }
   },[index,tab]);
-  return <aside className="lesson-explanation">
+  return <aside className="lesson-explanation" aria-label="Code and steps inspector">
+    <div className="lesson-inspector-heading"><strong>Code &amp; steps</strong><LessonButton onClick={onClose} aria-label="Close code and steps inspector" title="Close inspector"><X size={16}/></LessonButton></div>
     <SmoothTabs id="lesson-view" value={tab} onChange={setTab} items={[{id:'code',label:'Python code'},{id:'steps',label:`Steps · ${frames.length}`}]}/>
     <div id="lesson-view-code-panel" role="tabpanel" aria-labelledby="lesson-view-code" hidden={tab!=='code'}>
       <p className="code-context">{adapter.referenceCode?(matches?'Reference code matches your saved text.':'Reference implementation shown. Your saved text differs; custom edits are not simulated.'):'Saved code for reference. This view does not execute or verify your Python.'}</p>
@@ -53,11 +54,14 @@ export function ProblemVisualizerPage(){
   const {problemId}=useParams();const navigate=useNavigate();
   const {data:problem,isLoading,error:loadError}=useQuery({queryKey:['problem',problemId],queryFn:()=>api<Problem>(`/api/problems/${problemId}`),enabled:!!problemId});
   const adapter=useMemo(()=>problem?getVisualizer(problem):null,[problem]);
+  const diagramFirst=adapter?.presentation==='diagram-first';
+  const [inspectorOpen,setInspectorOpen]=useState(false);
   const [raw,setRaw]=useState('');const [appliedInput,setAppliedInput]=useState('');
   const [frames,setFrames]=useState<VisualFrame[]>([]);const [frameIndex,setFrameIndex]=useState(0);
   const [playing,setPlaying]=useState(false);const [speed,setSpeed]=useState(1100);const [traceError,setTraceError]=useState('');
   useEffect(()=>{
     setPlaying(false);setFrames([]);setFrameIndex(0);setTraceError('');
+    setInspectorOpen(false);
     if(!problem||!adapter)return;
     const initial=adapter.presets[0]?.input??adapter.placeholder;setRaw(initial);setAppliedInput(initial);
     try{setFrames(buildTrace(adapter,problem,initial))}catch(error){setTraceError(error instanceof Error?error.message:'Could not build the trace.')}
@@ -84,15 +88,16 @@ export function ProblemVisualizerPage(){
       <div className="lesson-title"><h1>{problem.title}</h1><p className="lesson-meta">2D visual explanation · {problem.status}</p><p>{adapter.description}</p></div>
       {problem.url&&<a className="lesson-source" href={problem.url} target="_blank" rel="noreferrer">{problem.source}<ExternalLink size={14}/></a>}
     </header>
+    {adapter.mistakeExplanation&&<details className="lesson-missed-note"><summary>Why this was easy to miss</summary><ul>{adapter.mistakeExplanation.map(note=><li key={note}>{note}</li>)}</ul></details>}
     <form className="lesson-input" onSubmit={event=>{event.preventDefault();runTrace()}}>
       <label className="lesson-presets"><span>Try an example</span><select value={adapter.presets.find(preset=>preset.input===raw)?.input??''} onChange={event=>{setRaw(event.target.value);runTrace(event.target.value)}}><option value="" disabled>Custom input</option>{adapter.presets.map(preset=><option value={preset.input} key={preset.label}>{preset.label}</option>)}</select></label>
-      <label className="lesson-raw"><span>{adapter.inputLabel}</span><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label>
+      <details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>
       <LessonButton className="lesson-primary" type="submit"><ScanLine size={16}/> Build steps</LessonButton>
       <p id="lesson-input-guide">{adapter.inputGuide??`Use the example format shown above. ${adapter.mode==='generic'?'This fallback inspects parameters and notes, not algorithm execution.':'This teaching simulation uses bounded inputs.'}`}</p>
     </form>
     {traceError&&<p className="lesson-error" role="alert">{traceError}</p>}
     {dirty&&!traceError&&<p className="lesson-notice">Input edited. Build steps to apply it; the paused view below still uses <code>{appliedInput}</code>.</p>}
-    <div className="lesson-workspace">
+    <div className={`lesson-workspace ${diagramFirst?'diagram-first':'classic-workspace'}`}>
       <section className="lesson-stage" aria-label="Algorithm visual and playback">
         <div className="lesson-stage-label"><span>{adapter.mode==='generic'?'Study outline · not execution':adapter.referenceCode?'Code-linked algorithm trace':'Algorithm teaching model'}</span><small>Local simulation · Python never executed</small></div>
         <div className="lesson-controls" aria-label="Playback controls">
@@ -106,7 +111,8 @@ export function ProblemVisualizerPage(){
         <div className="lesson-timeline"><input aria-label="Trace step" aria-valuetext={`Step ${frameIndex+1}: ${current?.title??'No trace'}`} type="range" min={0} max={Math.max(0,frames.length-1)} value={frameIndex} disabled={!frames.length} onChange={event=>stepTo(Number(event.target.value))}/></div>
         {current?<><div className="lesson-frame-heading"><span>{current.phase}</span><h2>{current.title}</h2><p>{current.message}</p></div><div className="lesson-canvas"><FrameCanvas frame={current} problem={problem}/></div></>:<p className="lesson-empty">Enter a valid input and build steps to begin.</p>}
       </section>
-      <ExplanationPanel key={problem.id} adapter={adapter} problem={problem} frames={frames} index={frameIndex} stepTo={stepTo}/>
+      {diagramFirst&&!inspectorOpen&&<div className="lesson-inspector-launch"><p>Follow the visual state one operation at a time. Open the reference code or complete step list when you want to cross-check it.</p><LessonButton onClick={()=>setInspectorOpen(true)}><ScanLine size={16}/> Open code &amp; steps</LessonButton></div>}
+      {(!diagramFirst||inspectorOpen)&&<ExplanationPanel key={problem.id} adapter={adapter} problem={problem} frames={frames} index={frameIndex} stepTo={stepTo} onClose={()=>setInspectorOpen(false)}/>}
     </div>
   </section></LessonMotion>;
 }

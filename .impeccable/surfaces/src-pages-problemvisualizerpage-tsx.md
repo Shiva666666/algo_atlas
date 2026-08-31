@@ -33,13 +33,21 @@ the system and saved reduced-motion preferences.
 - Hexadecimal: signed input, unsigned 32-bit word, nibble lookup, prepend, shift.
 - Incremovable Subarrays I: corrected comparison timing and O(n) boundary counts.
 
+The current bounded batch also includes Search Suggestions System (trie build,
+prefix traversal, sorted terminal-first DFS, and the three-result guard), Max
+Unique Split (duplicate-sensitive backtracking), Subsets II (sibling pruning
+with recorded outputs), and Maximal Square (border and dependency DP).
+
 ## Verification boundary
 
 Algorithm/oracle tests, server-side render smoke tests, TypeScript/production
 build, backend tests, and local HTTP route/code-reference checks passed.
 The finish review resolved four source-level accessibility/craft findings.
-Desktop/mobile rendered visual verification was not performed: the Sites
-workflow requires explicit browser-testing opt-in, requested but not received.
-No deployment or data export was performed.
+Browser review was performed locally at desktop and mobile breakpoints. The
+trie and unique-split lessons were checked at 390×844, including collapsed
+custom input, playback, inspector open/close, readable wrapping, and console
+errors. The home network was checked in 3D and 2D; node destinations expose
+exact library URLs. Existing spatial captures remain in
+`.impeccable/review/spatial-network/`. No deployment or data export was performed.
 
 See docs/visualizer-conventions.md for the maintained implementation contract.
