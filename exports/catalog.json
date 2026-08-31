@@ -1,18 +1,32 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 12,
+  "record_count": 17,
   "records": [
     {
+      "id": "af76c9e8-ad95-4030-8525-faf1d04e3c13",
+      "markdown_sha256": "c1d0c8ebaf9640cffa5e7d8da84d5dd6f015bcf009a8925fe649316d68071625",
+      "path": "dynamic-programming/knapsack/coin-change-ii",
+      "solution_sha256": "376c83d17cbd11b12b88cc8392b0d1893b3c30105e8e3a534ffe9923869cafa8",
+      "title": "Coin Change II"
+    },
+    {
+      "id": "1b9d5067-f7dd-4beb-9db8-24e10eebd76e",
+      "markdown_sha256": "120a5dab48517b52e44adcfaeab3b8b1f545127976939129003b6aadf3c3c218",
+      "path": "math-bitwise/bit-manipulation/convert-a-number-to-hexadecimal",
+      "solution_sha256": "dda3634fb8075407d42f94b1dcca6833169012f970c4ba5a6bb08d73e10b4e36",
+      "title": "Convert a Number to Hexadecimal"
+    },
+    {
       "id": "b72d8fc7-6a98-4508-9ac3-cdfd24f39ff1",
-      "markdown_sha256": "d2263e340cdee00b60d3d4bc5659f85798914b450827fb5b77c72c7c577d2c62",
+      "markdown_sha256": "abef18d46c9797d8a5a78f780b363ca297b5584f6560cf1a8346cd5218163aa6",
       "path": "arrays-strings/arrays/count-the-number-of-incremovable-subarrays-i",
-      "solution_sha256": "965d28397a66f8c76919a0524710169e2abd247683e9e4b140273e630cea5e67",
+      "solution_sha256": "56e2a48c57230b38fd5c3a13c84d422a1d2f7e9710970c5a7dd36c9ae215b09a",
       "title": "Count the Number of Incremovable Subarrays I"
     },
     {
       "id": "b7d3a194-15ab-4578-b37a-b196a8a7e8f0",
-      "markdown_sha256": "b8d19e4b31356a4e5e162deb1a4b670ca713a5dc2a48d2ce7dd820aa7a689b2c",
+      "markdown_sha256": "37a685c2738b00c8f65cc9011b6831f2af30b9072abd99cc158388221e9f9de4",
       "path": "backtracking-combinatorics/subsets/generate-all-possible-parentheses",
       "solution_sha256": "22e27b12324b5349844596500e1dfb4ee2ec0f51707d1e821f3d6f69e7fa3a16",
       "title": "Generate Parentheses"
@@ -67,11 +81,25 @@
       "title": "Minimum Steiner Tree 2"
     },
     {
+      "id": "0b24f98f-7529-415a-9488-54510c7058e2",
+      "markdown_sha256": "fd4b491ce623e525d8e1b4f76f53e3de8ed7825a9c6e324b284ee62114fe487a",
+      "path": "backtracking-combinatorics/constraint-search/n-queens",
+      "solution_sha256": "37d67e8e2f7b924d33bcc0d3fa3c3a880cb22f7351ac1bca48b4c6e1cb2ea152",
+      "title": "N-Queens"
+    },
+    {
       "id": "6284537b-823e-4ed5-ad6f-a28129c54f1f",
       "markdown_sha256": "9905f1e31cdbef43d915f7fa457bfc75306637f7e2e3515942faff1c952608cc",
       "path": "dynamic-programming/1d-dp/palindrome-partitioning-ii",
       "solution_sha256": "b9c297ae915762ea49ca4308a219c86e7e1404499452dd5a16241faff47ab950",
       "title": "Palindrome Partitioning II"
+    },
+    {
+      "id": "f6ad1adb-fc4f-4311-abb5-80cd1cd1225c",
+      "markdown_sha256": "cb320e683a54ee35bead8470fe9bcf851fa26666e2e7ab6ee3ac807d378d7699",
+      "path": "trees-ordered/tries/search-suggestions-system",
+      "solution_sha256": "f61a3021eadcd50ea8a9b54ff39dbb9680cd66822dad064135333edf4f7d71c2",
+      "title": "Search Suggestions System"
     },
     {
       "id": "589f3150-d3cb-4218-8475-ce24f7f9e168",
@@ -81,8 +109,15 @@
       "title": "Special Array With X Elements Greater Than or Equal X"
     },
     {
+      "id": "04579f35-c4a8-491b-9969-97072142564d",
+      "markdown_sha256": "c8c04bf905b8b4be8f26175fc087af575d67ad61fefeeb9f08ad23a54d7c574e",
+      "path": "backtracking-combinatorics/constraint-search/split-a-string-into-the-max-number-of-unique-substrings",
+      "solution_sha256": "ec5b51d44915c679390913de07d80a754bf722d00084aaef022f1f5a50d6c0e5",
+      "title": "Split a String Into the Max Number of Unique Substrings"
+    },
+    {
       "id": "2dbad318-797a-4996-a5ba-26f236e1dfd0",
-      "markdown_sha256": "6c7ca62dee44c8e6914566189c0a337bb55254f6087a9a2d195cd880e791ba8f",
+      "markdown_sha256": "81e8e9a405917b7a9269da832d310d095d7e2e0f7cf1d5fa849fa0154adfb53e",
       "path": "backtracking-combinatorics/subsets/subsets-ii",
       "solution_sha256": "70f60384fa7de8e2c5c834d37656685446270bf36c403a99751ae03e9175ab7e",
       "title": "Subsets II"
