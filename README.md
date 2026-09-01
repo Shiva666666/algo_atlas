@@ -23,13 +23,13 @@ Most problem trackers remember whether a problem was solved. Algo Atlas remember
 
 Search across titles, code, notes, techniques, and classifications. Filter by domain, difficulty, or learning status to decide what to revisit next.
 
-![Searchable Algo Atlas problem library](docs/images/library.jpg)
+![Searchable Algo Atlas problem library](docs/images/library.png)
 
 ### Problem workspace
 
 Every problem has one focused workspace for source information, taxonomy, complexity, Python code, precision notes, and mistake history. The code is stored for review and is never executed by the app.
 
-![Problem editor with Python code and precision notes](docs/images/problem-editor.jpg)
+![Problem editor with Python code and precision notes](docs/images/problem-editor.png)
 
 The notes are intentionally structured around learning:
 
@@ -46,7 +46,7 @@ Use **Wrong Again** to append a new mistake event while preserving the same prob
 
 Visualizers connect the state, base condition, choice, transition, invariant, and final result. They include multiple presets, step controls, playback speed, a trace timeline, and code-token-to-visual mappings.
 
-![Minimum Steiner Tree graph and bitmask DP visualizer](docs/images/steiner-visualizer.png)
+![Generate Parentheses code-linked algorithm visualizer](docs/images/visualizer.png)
 
 The visualizer framework is reusable across Graph and DP problems, with specialized adapters for topics such as Steiner Tree DP, monotonic queues, subsets, binary search, IPO, falling paths, and graph traversal.
 
@@ -60,7 +60,7 @@ The dashboard summarizes the problem universe, repeated signals, domain distribu
 
 The Atlas view turns stored problems and taxonomy relationships into an explorable graph. It provides a quick visual answer to: *Where are my mistakes clustering?*
 
-![Interactive algorithm knowledge constellation](docs/images/atlas.png)
+![Interactive 2D algorithm knowledge map](docs/images/atlas-2d.png)
 
 ### Stable taxonomy with cross-cutting signals
 
