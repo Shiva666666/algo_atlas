@@ -13,6 +13,8 @@ export interface VisualFrame {
   kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal'|'trie-suggestions'|'unique-split';
   data:unknown;
   codeFocus?:string[];
+  /** Checkpoints are shown in guided mode; transitions remain available on demand. */
+  traceRole?:'checkpoint'|'transition';
 }
 
 export interface RuleFocus {
@@ -48,22 +50,42 @@ export interface InsightModel {
 }
 
 export interface SteinerFrameData {
+  stage:'floyd-warshall'|'steiner-dp';
   graph:{nodes:GraphNodeView[];edges:GraphEdgeView[]};
+  expandedGraph?:{nodes:GraphNodeView[];edges:GraphEdgeView[]};
   fixed:number[];
   s:number;
   t:number;
   layer:'comparison'|'base'|'with-s'|'answer';
+  transition:'overview'|'seed'|'merge'|'relax'|'query-seed'|'lookup'|'reconstruct'|'handoff';
   mask:number;
   maskWidth:number;
   maskTerminals:number[];
   submask:number|null;
+  otherMask:number|null;
   root:number|null;
   target:number|null;
   dpRow:Array<number|null>;
+  dpTable:Array<Array<number|null>>;
+  oldDpRow:Array<number|null>|null;
   oldCost:number|null;
   candidateCost:number|null;
   newCost:number|null;
-  answer:number;
+  answer:number|null;
+  distanceMatrix:Array<Array<number|null>>;
+  floyd?:{
+    matrix:Array<Array<number|null>>;
+    original:Array<Array<number|null>>;
+    intermediate:number|null;
+    current:[number,number]|null;
+    oldDistance:number|null;
+    viaDistance:number|null;
+    newDistance:number|null;
+    accepted:boolean|null;
+    candidatePath:number[];
+    completedIntermediates:number[];
+    sealed:boolean;
+  };
   comparison?:{naive:string;intended:string};
   insights:InsightModel;
   rules:RuleFocus[];
@@ -212,6 +234,8 @@ export interface VisualizerAdapter {
   presentation?:'diagram-first'|'classic';
   /** Source-grounded reflection for the learner, when supplied by the user. */
   mistakeExplanation?:string[];
+  /** Optional structured editor for adapters whose input has a matrix or other rich shape. */
+  inputEditor?:'steiner-matrix';
 }
 
 export type TrieNodeState='idle'|'active'|'visited'|'terminal'|'missing';

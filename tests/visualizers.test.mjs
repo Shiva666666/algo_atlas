@@ -12,10 +12,12 @@ const {nQueensVisualizer:nq,createNQueensFrames}=await load('nQueens.ts');
 const {coinChangeVisualizer:cc,createCoinChangeFrames}=await load('coinChange.ts');
 const {hexadecimalVisualizer:hx,createHexadecimalFrames}=await load('hexadecimal.ts');
 const {incremovableVisualizer:inc,createIncremovableFrames}=await load('incremovable.ts');
+const {steinerTreeVisualizer:st,parseSteinerInput}=await load('steinerTree.ts');
 const {normalizeCode,nQueensCode,hexadecimalCode}=await load('practiceCode.ts');
 const {getVisualizer}=await load('registry.ts');
 const {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas}=await load('components/PracticeCanvas.tsx');
 const {IncremovableCanvas}=await load('components/IncremovableCanvas.tsx');
+const {SteinerCanvas}=await load('components/SteinerCanvas.tsx');
 const problem={source:'leetcode',source_key:'unknown',primary_main:{slug:'arrays'},primary_subtag:{slug:'search'},notes:{approach:['A saved study note.']}};
 
 function coinOracle(coins,amount){
@@ -30,6 +32,23 @@ function removalOracle(nums){
     if(remaining.every((value,i)=>i===0||remaining[i-1]<value))intervals.push(`${start}:${end}`);
   }
   return intervals;
+}
+
+function steinerOracle(input){
+  const {n,k,c,query}=input;const distance=c.map(row=>[...row]);
+  for(let middle=0;middle<n;middle++)for(let i=0;i<n;i++)for(let j=0;j<n;j++)distance[i][j]=Math.min(distance[i][j],distance[i][middle]+distance[middle][j]);
+  const size=1<<k;const dp=Array.from({length:size},()=>Array(n).fill(Infinity));dp[0].fill(0);
+  for(let terminal=0;terminal<k;terminal++)dp[1<<terminal][terminal]=0;
+  for(let mask=1;mask<size;mask++){
+    for(let sub=mask;;sub=(sub-1)&mask){const other=mask^sub;for(let v=0;v<n;v++)dp[mask][v]=Math.min(dp[mask][v],dp[sub][v]+dp[other][v]);if(sub===0)break}
+    const old=[...dp[mask]];for(let u=0;u<n;u++)for(let v=0;v<n;v++)dp[mask][u]=Math.min(dp[mask][u],old[v]+distance[v][u]);
+  }
+  const source=query[0]-1;const target=query[1]-1;const ndp=Array.from({length:size},()=>Array(n).fill(Infinity));ndp[0][source]=0;
+  for(let mask=0;mask<size;mask++){
+    for(let sub=mask;;sub=(sub-1)&mask){const other=mask^sub;for(let v=0;v<n;v++)ndp[mask][v]=Math.min(ndp[mask][v],ndp[sub][v]+dp[other][v]);if(sub===0)break}
+    const old=[...ndp[mask]];for(let u=0;u<n;u++)for(let v=0;v<n;v++)ndp[mask][u]=Math.min(ndp[mask][u],old[v]+distance[v][u]);
+  }
+  return {distance,answer:ndp[size-1][target]};
 }
 
 test('N-Queens: complete search, attack sets, copied solutions and final undo',()=>{
@@ -130,6 +149,29 @@ test('Parsers reject coercion, invalid domains and unsupported large traces',()=
   for(const input of [{num:'26'},{num:true},{num:2147483648},{num:-2147483649},{num:1.5}])assert.throws(()=>hx.parseInput(JSON.stringify(input)));
   for(const nums of [[true],['1'],[[1]],[],[0],[9007199254740992],Array(19).fill(1)])assert.throws(()=>inc.parseInput(JSON.stringify({nums})));
   for(const adapter of [nq,cc,hx,inc])assert.throws(()=>adapter.parseInput('not JSON'));
+});
+
+test('Steiner studio: Floyd closure, exact DP answer, and immutable stage snapshots',()=>{
+  const reference=st.referenceCode.split('\n').map(line=>line.replace(/\s/g,''));
+  for(const preset of st.presets){
+    const input=parseSteinerInput(preset.input);const expected=steinerOracle(input);const frames=st.createFrames(input,problem);const floyd=frames.filter(frame=>frame.data.stage==='floyd-warshall');const dp=frames.filter(frame=>frame.data.stage==='steiner-dp');
+    assert.equal(st.inputEditor,'steiner-matrix');assert.ok(floyd.length>input.n*input.n*input.n);assert.ok(dp.length>0);
+    const cells=floyd.filter(frame=>frame.data.floyd.current!==null);assert.equal(cells.length,input.n**3);
+    const sealed=floyd.at(-1).data;assert.equal(sealed.floyd.sealed,true);assert.deepEqual(sealed.floyd.matrix,expected.distance.map(row=>row.map(value=>Number.isFinite(value)?value:null)));
+    const answer=dp.at(-1).data;assert.equal(answer.answer,expected.answer);assert.equal(answer.transition,'reconstruct');assert.equal(answer.stage,'steiner-dp');
+    assert.ok(frames.some(frame=>frame.traceRole==='transition'));assert.ok(frames.some(frame=>frame.traceRole==='checkpoint'));
+    for(const frame of frames){assert.ok(frame.codeFocus?.length,`${preset.label}: ${frame.title}`);for(const focus of frame.codeFocus)assert.ok(reference.some(line=>line.includes(focus.replace(/\s/g,''))),`${preset.label}: ${focus}`);if(frame.data.stage==='floyd-warshall'&&frame.data.floyd.current){const view=frame.data.floyd;assert.equal(view.newDistance,Math.min(view.oldDistance,view.viaDistance));}if(frame.data.stage==='steiner-dp'&&frame.data.transition==='merge'&&frame.data.submask!==null)assert.equal(frame.data.otherMask,frame.data.mask^frame.data.submask);if(frame.data.stage==='steiner-dp'&&frame.data.transition==='relax'&&frame.data.oldDpRow&&frame.data.root!==null&&frame.data.target!==null){const old=frame.data.oldDpRow[frame.data.root];const distance=frame.data.distanceMatrix[frame.data.root][frame.data.target];const candidate=(old===null||distance===null)?null:old+distance;assert.equal(frame.data.candidateCost,candidate)}}
+    const firstMatrix=JSON.stringify(frames[0].data.floyd.matrix);answer.dpTable[0][0]=999999;assert.equal(JSON.stringify(frames[0].data.floyd.matrix),firstMatrix);
+  }
+  const all=st.createFrames(st.parseInput(st.presets[0].input),problem);const guided=all.filter(frame=>frame.traceRole!=='transition');assert.ok(guided.length<all.length);assert.match(renderToStaticMarkup(React.createElement(SteinerCanvas,{data:all[0].data})),/Floyd/);assert.match(renderToStaticMarkup(React.createElement(SteinerCanvas,{data:all.at(-1).data})),/Steiner dynamic-programming state table/);
+});
+
+test('Steiner parser rejects malformed matrices and query endpoints',()=>{
+  const valid=JSON.parse(st.presets[0].input);
+  for(const value of [{...valid,n:2},{...valid,k:0},{...valid,c:[[0,1],[2,0]]},{...valid,c:valid.c.map(row=>[...row]),query:[1,2]},{...valid,c:valid.c.map(row=>[...row])}]){
+    if(value.c?.length===valid.c.length&&value.c[0]?.length===valid.c.length&&value.query?.[0]===valid.query[0])value.c[0][1]=value.c[1][0]+1;
+    assert.throws(()=>parseSteinerInput(JSON.stringify(value)));
+  }
 });
 
 test('All preset traces have code-focus snippets that exist in their reference',()=>{

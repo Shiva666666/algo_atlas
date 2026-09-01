@@ -36,7 +36,7 @@ export function GraphCanvas({nodes,edges,label}:GraphCanvasProps){
         {node.role==='source'&&<path d="M 0 -22 L 22 0 L 0 22 L -22 0 Z"/>}
         <text className="node-label" y={4}>{node.label}</text>
         {node.detail&&<text className="node-detail" y={37}>{node.detail}</text>}
-        <title>{node.label}{node.detail?` — ${node.detail}`:''}</title>
+        <title>{`${node.label}${node.detail?` — ${node.detail}`:''}`}</title>
       </g>})}
     </g>
   </svg>;

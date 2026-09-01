@@ -1,44 +1,37 @@
+import {useState} from 'react';
+import type {CSSProperties} from 'react';
 import type {SteinerFrameData} from '../types';
 import {GraphCanvas} from './GraphCanvas';
 import {formatCost,InsightRail,RuleStrip} from './LearningPrimitives';
+import {StateLegend} from './LessonPrimitives';
 
 function bit(mask:number,index:number){return (mask&(1<<index))!==0}
 
-export function SteinerCanvas({data}:{data:SteinerFrameData}){
-  const binary=data.mask.toString(2).padStart(data.maskWidth,'0');
-  return <div className="steiner-lab">
-    {data.comparison&&<div className="steiner-comparison">
-      <article><small>VISUALGO-STYLE BRUTE FORCE</small><strong>{data.comparison.naive}</strong><span>optional vertices are guessed</span></article>
-      <i>≠</i>
-      <article className="intended"><small>ATCODER STATE SPACE</small><strong>{data.comparison.intended}</strong><span>terminal masks are solved; connectors emerge</span></article>
-    </div>}
-    <div className="steiner-workbench">
-      <section className="graph-workbench">
-        <header><span>GRAPH PLANE</span><small>SQUARE = FIXED · DIAMOND = s · DOUBLE RING = t</small></header>
-        <GraphCanvas nodes={data.graph.nodes} edges={data.graph.edges} label={`Steiner graph for query ${data.s} to ${data.t}`}/>
-        <div className="graph-legend"><span className="terminal">fixed terminal</span><span className="source">query s</span><span className="target">query t</span><span className="selected">chosen tree</span><span className="active">current transition</span></div>
-      </section>
-      <section className="mask-workbench">
-        <header><span>{data.layer==='with-s'?'WITH-s DP':'BASE DP'}[mask][v]</span><small>{data.layer.replace('-',' ').toUpperCase()}</small></header>
-        <div className="mask-state">
-          <div><small>MASK</small><strong>{binary}</strong></div>
-          <div className="mask-chips">{data.maskTerminals.map((terminal,index)=><span className={bit(data.mask,index)?'on':''} key={terminal}>T{terminal}</span>)}</div>
-        </div>
-        {data.submask!==null&&<div className="split-tray"><small>SPLIT AT THE SAME ROOT</small><div><span>{data.submask.toString(2).padStart(data.maskWidth,'0')}</span><b>+</b><span>{(data.mask^data.submask).toString(2).padStart(data.maskWidth,'0')}</span><b>@ v={data.root}</b></div></div>}
-        <div className="dp-row" style={{'--dp-columns':data.dpRow.length} as React.CSSProperties}>
-          {data.dpRow.map((cost,index)=><div className={`${data.root===index+1?'root':''} ${data.target===index+1?'target':''}`} key={index}><small>v={index+1}</small><strong>{formatCost(cost)}</strong></div>)}
-        </div>
-        <div className="transition-ledger">
-          <div><small>OLD</small><b>{formatCost(data.oldCost)}</b></div>
-          <span>→</span>
-          <div><small>CANDIDATE</small><b>{formatCost(data.candidateCost)}</b></div>
-          <span>→</span>
-          <div><small>NEW</small><b>{formatCost(data.newCost)}</b></div>
-        </div>
-        <div className="answer-lookup"><small>QUERY LOOKUP</small><strong>withS[{binary}][t={data.t}] = {formatCost(data.answer)}</strong></div>
-      </section>
+function FloydWarshallCanvas({data}:{data:SteinerFrameData}){
+  const floyd=data.floyd;
+  if(!floyd)return <p className="lesson-empty">The distance-map snapshot is unavailable.</p>;
+  const current=floyd.current;const intermediate=floyd.intermediate;
+  return <div className="steiner-floyd-lab">
+    <div className="steiner-floyd-summary"><div><small>INTERMEDIATE BUDGET</small><strong>{intermediate===null?'—':`1…${intermediate}`}</strong></div><div><small>ACTIVE ROUTE</small><strong>{floyd.candidatePath.length?floyd.candidatePath.join(' → '):'Choose a cell'}</strong></div><div><small>STATE</small><strong>{floyd.sealed?'SEALED':floyd.accepted===true?'UPDATED':floyd.accepted===false?'UNCHANGED':'READY'}</strong></div></div>
+    <div className="steiner-floyd-workbench">
+      <section className="steiner-matrix-plane"><header><span>SHORTEST-PATH MATRIX · dist[i][j]</span><small>{floyd.sealed?'FINAL METRIC CLOSURE':intermediate===null?'DIRECT COSTS':`ALLOWING v${intermediate}`}</small></header><div className="steiner-matrix-scroll"><table className="steiner-distance-matrix"><caption>Floyd–Warshall distance matrix; rows are sources and columns are destinations.</caption><thead><tr><th scope="col">i \ j</th>{floyd.matrix.map((_,index)=><th className={index+1===intermediate?'axis-current':''} scope="col" key={index}>v{index+1}</th>)}</tr></thead><tbody>{floyd.matrix.map((row,rowIndex)=><tr key={rowIndex}><th className={rowIndex+1===intermediate?'axis-current':''} scope="row">v{rowIndex+1}</th>{row.map((value,columnIndex)=>{const active=current?.[0]===rowIndex&&current?.[1]===columnIndex;const via=current&&intermediate!==null&&(current[0]===rowIndex||current[1]===columnIndex);return <td className={`${active?'current ':''}${via?'via ':''}${value===null?'unreachable':''}`} key={columnIndex} aria-current={active?'true':undefined}><span>{formatCost(value)}</span>{active&&<small>{floyd.accepted?'new':'held'}</small>}</td>})}</tr>)}</tbody></table></div></section>
+      <section className="steiner-floyd-operation"><header><span>CELL OPERATION</span><small>ONE DISCRETE UPDATE</small></header><div className="floyd-equation"><code>dist[i][j]</code><b>← min</b><div><strong>{formatCost(floyd.oldDistance)}</strong><small>old</small></div><b>,</b><div className="via-value"><strong>{formatCost(floyd.viaDistance)}</strong><small>dist[i][k] + dist[k][j]</small></div><b>→</b><div className={floyd.accepted?'accepted-value':''}><strong>{formatCost(floyd.newDistance)}</strong><small>{floyd.accepted?'accepted':'kept'}</small></div></div><p className="floyd-rule">A route may use the current intermediate vertex only after its row has been admitted. This is why the outer <code>k</code> loop is the dependency boundary.</p>{current&&<dl className="floyd-coordinates"><div><dt>source i</dt><dd>v{current[0]}</dd></div><div><dt>intermediate k</dt><dd>v{intermediate}</dd></div><div><dt>destination j</dt><dd>v{current[1]}</dd></div></dl>}{floyd.sealed&&<div className="floyd-sealed">Distance map sealed. Switch to Steiner DP to spend these distances.</div>}</section>
     </div>
-    <RuleStrip rules={data.rules}/>
-    <InsightRail insights={data.insights}/>
+    <StateLegend items={[{label:'current cell',symbol:'■',color:'#37d9ff'},{label:'via k',symbol:'·',color:'#9b8cff'},{label:'accepted route',symbol:'→',color:'#4fd1a1'},{label:'unchanged',symbol:'—',color:'#a9b4c2'}]}/>
+    <RuleStrip rules={data.rules}/><InsightRail insights={data.insights}/>
   </div>;
 }
+
+function SteinerDpCanvas({data}:{data:SteinerFrameData}){
+  const [expanded,setExpanded]=useState(false);const binary=data.mask.toString(2).padStart(data.maskWidth,'0');const graph=expanded&&data.expandedGraph?data.expandedGraph:data.graph;const transitionLabel=data.transition==='query-seed'?'QUERY SOURCE':data.transition==='lookup'?'ANSWER LOOKUP':data.transition==='reconstruct'?'RECONSTRUCTION':data.transition.toUpperCase();
+  return <div className="steiner-dp-lab">
+    <div className="steiner-dp-banner"><div><small>DISTANCE SOURCE</small><strong>FLOYD–WARSHALL MAP SEALED</strong></div><div><small>QUERY BRANCH</small><strong>s = {data.s} → t = {data.t}</strong></div>{data.expandedGraph&&<label><input type="checkbox" checked={expanded} onChange={event=>setExpanded(event.target.checked)}/> Expand shortest paths</label>}</div>
+    <div className="steiner-workbench">
+      <section className="graph-workbench"><header><span>{expanded?'EXPANDED ORIGINAL GRAPH':'METRIC CLOSURE GRAPH'}</span><small>SQUARE = FIXED · DIAMOND = s · RING = t</small></header><GraphCanvas nodes={graph.nodes} edges={graph.edges} label={`Steiner graph for query ${data.s} to ${data.t}`}/><div className="graph-legend"><span className="terminal">fixed terminal</span><span className="source">query s</span><span className="target">query t</span><span className="selected">chosen tree</span><span className="active">current transition</span></div></section>
+      <section className="mask-workbench"><header><span>{data.layer==='with-s'?'WITH-s DP':'BASE DP'}[mask][v]</span><small>{transitionLabel}</small></header><div className="mask-state"><div><small>ACTIVE MASK</small><strong>{binary}</strong></div><div className="mask-chips">{data.maskTerminals.map((terminal,index)=><span className={bit(data.mask,index)?'on':''} key={terminal}>T{terminal}</span>)}</div></div>{data.submask!==null&&<div className="split-tray"><small>DISJOINT SUBMASK MERGE</small><div><span>{data.submask.toString(2).padStart(data.maskWidth,'0')}</span><b>+</b><span>{(data.otherMask??(data.mask^data.submask)).toString(2).padStart(data.maskWidth,'0')}</span><b>@ v={data.root??'—'}</b></div></div>}<div className="dp-table-scroll"><table className="steiner-dp-table"><caption>Steiner dynamic-programming state table. Rows are terminal masks; columns are attachment vertices.</caption><thead><tr><th scope="col">mask</th>{data.dpTable[0]?.map((_,index)=><th className={data.root===index+1?'column-current':''} scope="col" key={index}>v{index+1}</th>)}</tr></thead><tbody>{data.dpTable.map((row,rowIndex)=><tr className={rowIndex===data.mask?'row-current':''} key={rowIndex}><th scope="row">{rowIndex.toString(2).padStart(data.maskWidth,'0')}</th>{row.map((cost,columnIndex)=><td className={`${rowIndex===data.mask&&columnIndex+1===data.root?'cell-current ':''}${columnIndex+1===data.t?'cell-target':''}`} key={columnIndex}>{formatCost(cost)}</td>)}</tr>)}</tbody></table></div><div className="transition-ledger"><div><small>CURRENT</small><b>{formatCost(data.oldCost)}</b></div><span>→</span><div><small>CANDIDATE</small><b>{formatCost(data.candidateCost)}</b></div><span>→</span><div><small>NEW</small><b>{formatCost(data.newCost)}</b></div></div><div className="answer-lookup"><small>{data.transition==='lookup'||data.transition==='reconstruct'?'QUERY ANSWER':'NEXT STATE'}</small><strong>{data.answer===null?'Build toward the target':`ndp[${binary}][t=${data.t}] = ${formatCost(data.answer)}`}</strong></div></section>
+    </div>
+    <RuleStrip rules={data.rules}/><InsightRail insights={data.insights}/>
+  </div>;
+}
+
+export function SteinerCanvas({data}:{data:SteinerFrameData}){return data.stage==='floyd-warshall'?<FloydWarshallCanvas data={data}/>:<SteinerDpCanvas data={data}/>}

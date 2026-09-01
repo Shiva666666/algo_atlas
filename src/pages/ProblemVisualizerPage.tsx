@@ -6,6 +6,7 @@ import {api} from '../api';
 import type {Problem} from '../types';
 import {FrameCanvas} from '../visualizers/components/FrameCanvas';
 import {LessonButton,LessonMotion,SmoothTabs} from '../visualizers/components/LessonPrimitives';
+import {SteinerInputEditor} from '../visualizers/components/SteinerInputEditor';
 import {normalizeCode} from '../visualizers/practiceCode';
 import {getVisualizer} from '../visualizers/registry';
 import type {VisualFrame,VisualizerAdapter} from '../visualizers/types';
@@ -59,29 +60,38 @@ export function ProblemVisualizerPage(){
   const [raw,setRaw]=useState('');const [appliedInput,setAppliedInput]=useState('');
   const [frames,setFrames]=useState<VisualFrame[]>([]);const [frameIndex,setFrameIndex]=useState(0);
   const [playing,setPlaying]=useState(false);const [speed,setSpeed]=useState(1100);const [traceError,setTraceError]=useState('');
+  const [steinerStage,setSteinerStage]=useState('floyd-warshall');const [showAllSteps,setShowAllSteps]=useState(false);
+  const isSteiner=adapter?.inputEditor==='steiner-matrix';
+  const playbackFrames=useMemo(()=>{
+    let result=frames;
+    if(isSteiner&&!showAllSteps)result=result.filter(frame=>frame.traceRole!=='transition');
+    if(isSteiner)result=result.filter(frame=>(frame.data as {stage?:string}).stage===steinerStage);
+    return result;
+  },[frames,isSteiner,showAllSteps,steinerStage]);
   useEffect(()=>{
     setPlaying(false);setFrames([]);setFrameIndex(0);setTraceError('');
     setInspectorOpen(false);
+    setSteinerStage('floyd-warshall');setShowAllSteps(false);
     if(!problem||!adapter)return;
     const initial=adapter.presets[0]?.input??adapter.placeholder;setRaw(initial);setAppliedInput(initial);
     try{setFrames(buildTrace(adapter,problem,initial))}catch(error){setTraceError(error instanceof Error?error.message:'Could not build the trace.')}
   },[problem,adapter]);
   useEffect(()=>{
     if(!playing)return;
-    if(frameIndex>=frames.length-1){setPlaying(false);return}
+    if(frameIndex>=playbackFrames.length-1){setPlaying(false);return}
     const timer=window.setTimeout(()=>setFrameIndex(current=>current+1),speed);
     return()=>window.clearTimeout(timer);
-  },[playing,frameIndex,speed,frames.length]);
+  },[playing,frameIndex,speed,playbackFrames.length]);
 
   if(isLoading)return <div className="page-loading"><i/><p>Loading the visual explanation…</p></div>;
   if(loadError||!problem||!adapter)return <section className="page-scroll lesson-page"><div className="lesson-empty"><ScanLine size={28}/><h2>Visualizer unavailable</h2><p>{loadError instanceof Error?loadError.message:'This problem could not be loaded.'}</p><button type="button" onClick={()=>navigate(-1)}>Go back</button></div></section>;
 
-  const current=frames[frameIndex];const dirty=raw!==appliedInput;
+  const current=playbackFrames[frameIndex];const dirty=raw!==appliedInput;
   const runTrace=(nextRaw=raw)=>{
-    setPlaying(false);setFrameIndex(0);
+    setPlaying(false);setFrameIndex(0);if(isSteiner)setSteinerStage('floyd-warshall');
     try{setFrames(buildTrace(adapter,problem,nextRaw));setAppliedInput(nextRaw);setTraceError('')}catch(error){setFrames([]);setTraceError(error instanceof Error?error.message:'Could not build the trace.')}
   };
-  const stepTo=(index:number)=>{setPlaying(false);setFrameIndex(Math.max(0,Math.min(index,frames.length-1)))};
+  const stepTo=(index:number)=>{setPlaying(false);setFrameIndex(Math.max(0,Math.min(index,playbackFrames.length-1)))};
   return <LessonMotion><section className="page-scroll lesson-page">
     <header className="lesson-header">
       <LessonButton className="lesson-back" onClick={()=>navigate(`/problems/${problem.id}`)}><ArrowLeft size={16}/> Problem notes</LessonButton>
@@ -91,7 +101,7 @@ export function ProblemVisualizerPage(){
     {adapter.mistakeExplanation&&<details className="lesson-missed-note"><summary>Why this was easy to miss</summary><ul>{adapter.mistakeExplanation.map(note=><li key={note}>{note}</li>)}</ul></details>}
     <form className="lesson-input" onSubmit={event=>{event.preventDefault();runTrace()}}>
       <label className="lesson-presets"><span>Try an example</span><select value={adapter.presets.find(preset=>preset.input===raw)?.input??''} onChange={event=>{setRaw(event.target.value);runTrace(event.target.value)}}><option value="" disabled>Custom input</option>{adapter.presets.map(preset=><option value={preset.input} key={preset.label}>{preset.label}</option>)}</select></label>
-      <details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>
+      {isSteiner?<SteinerInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:<details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>}
       <LessonButton className="lesson-primary" type="submit"><ScanLine size={16}/> Build steps</LessonButton>
       <p id="lesson-input-guide">{adapter.inputGuide??`Use the example format shown above. ${adapter.mode==='generic'?'This fallback inspects parameters and notes, not algorithm execution.':'This teaching simulation uses bounded inputs.'}`}</p>
     </form>
@@ -100,19 +110,20 @@ export function ProblemVisualizerPage(){
     <div className={`lesson-workspace ${diagramFirst?'diagram-first':'classic-workspace'}`}>
       <section className="lesson-stage" aria-label="Algorithm visual and playback">
         <div className="lesson-stage-label"><span>{adapter.mode==='generic'?'Study outline · not execution':adapter.referenceCode?'Code-linked algorithm trace':'Algorithm teaching model'}</span><small>Local simulation · Python never executed</small></div>
+        {isSteiner&&<div className="steiner-stage-nav"><SmoothTabs id="steiner-stage" value={steinerStage} onChange={value=>{setPlaying(false);setFrameIndex(0);setSteinerStage(value)}} label="Steiner lesson stage" items={[{id:'floyd-warshall',label:'01 / Distance map'},{id:'steiner-dp',label:'02 / Steiner DP'}]}/><label className="trace-detail-toggle"><input type="checkbox" checked={showAllSteps} onChange={event=>{setPlaying(false);setFrameIndex(0);setShowAllSteps(event.target.checked)}}/> Show every transition</label></div>}
         <div className="lesson-controls" aria-label="Playback controls">
-          <LessonButton onClick={()=>stepTo(0)} disabled={!frames.length||frameIndex===0} aria-label="Restart trace" title="Restart trace"><RotateCcw size={17}/></LessonButton>
-          <LessonButton onClick={()=>stepTo(frameIndex-1)} disabled={!frames.length||frameIndex===0} aria-label="Previous step" title="Previous step"><ChevronLeft size={19}/></LessonButton>
-          <LessonButton className="lesson-play" onClick={()=>{if(!playing&&frameIndex===frames.length-1)setFrameIndex(0);setPlaying(value=>!value)}} disabled={frames.length<2||dirty}>{playing?<Pause size={17}/>:<Play size={17}/>} {playing?'Pause':frameIndex===frames.length-1?'Replay':'Play'}</LessonButton>
-          <LessonButton onClick={()=>stepTo(frameIndex+1)} disabled={!frames.length||frameIndex>=frames.length-1} aria-label="Next step" title="Next step"><ChevronRight size={19}/></LessonButton>
+          <LessonButton onClick={()=>stepTo(0)} disabled={!playbackFrames.length||frameIndex===0} aria-label="Restart trace" title="Restart trace"><RotateCcw size={17}/></LessonButton>
+          <LessonButton onClick={()=>stepTo(frameIndex-1)} disabled={!playbackFrames.length||frameIndex===0} aria-label="Previous step" title="Previous step"><ChevronLeft size={19}/></LessonButton>
+          <LessonButton className="lesson-play" onClick={()=>{if(!playing&&frameIndex===playbackFrames.length-1)setFrameIndex(0);setPlaying(value=>!value)}} disabled={playbackFrames.length<2||dirty}>{playing?<Pause size={17}/>:<Play size={17}/>} {playing?'Pause':frameIndex===playbackFrames.length-1?'Replay':'Play'}</LessonButton>
+          <LessonButton onClick={()=>stepTo(frameIndex+1)} disabled={!playbackFrames.length||frameIndex>=playbackFrames.length-1} aria-label="Next step" title="Next step"><ChevronRight size={19}/></LessonButton>
           <label>Speed<select value={speed} onChange={event=>setSpeed(Number(event.target.value))}><option value={2200}>0.5×</option><option value={1100}>1×</option><option value={550}>2×</option></select></label>
-          <output>Step {frames.length?frameIndex+1:0} <span>/ {frames.length}</span></output>
+          <output>Step {playbackFrames.length?frameIndex+1:0} <span>/ {playbackFrames.length}</span></output>
         </div>
-        <div className="lesson-timeline"><input aria-label="Trace step" aria-valuetext={`Step ${frameIndex+1}: ${current?.title??'No trace'}`} type="range" min={0} max={Math.max(0,frames.length-1)} value={frameIndex} disabled={!frames.length} onChange={event=>stepTo(Number(event.target.value))}/></div>
+        <div className="lesson-timeline"><input aria-label="Trace step" aria-valuetext={`Step ${frameIndex+1}: ${current?.title??'No trace'}`} type="range" min={0} max={Math.max(0,playbackFrames.length-1)} value={frameIndex} disabled={!playbackFrames.length} onChange={event=>stepTo(Number(event.target.value))}/></div>
         {current?<><div className="lesson-frame-heading"><span>{current.phase}</span><h2>{current.title}</h2><p>{current.message}</p></div><div className="lesson-canvas"><FrameCanvas frame={current} problem={problem}/></div></>:<p className="lesson-empty">Enter a valid input and build steps to begin.</p>}
       </section>
       {diagramFirst&&!inspectorOpen&&<div className="lesson-inspector-launch"><p>Follow the visual state one operation at a time. Open the reference code or complete step list when you want to cross-check it.</p><LessonButton onClick={()=>setInspectorOpen(true)}><ScanLine size={16}/> Open code &amp; steps</LessonButton></div>}
-      {(!diagramFirst||inspectorOpen)&&<ExplanationPanel key={problem.id} adapter={adapter} problem={problem} frames={frames} index={frameIndex} stepTo={stepTo} onClose={()=>setInspectorOpen(false)}/>}
+      {(!diagramFirst||inspectorOpen)&&<ExplanationPanel key={problem.id} adapter={adapter} problem={problem} frames={playbackFrames} index={frameIndex} stepTo={stepTo} onClose={()=>setInspectorOpen(false)}/>}
     </div>
   </section></LessonMotion>;
 }
