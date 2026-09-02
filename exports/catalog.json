@@ -1,7 +1,7 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 17,
+  "record_count": 18,
   "records": [
     {
       "id": "af76c9e8-ad95-4030-8525-faf1d04e3c13",
@@ -26,7 +26,7 @@
     },
     {
       "id": "b7d3a194-15ab-4578-b37a-b196a8a7e8f0",
-      "markdown_sha256": "37a685c2738b00c8f65cc9011b6831f2af30b9072abd99cc158388221e9f9de4",
+      "markdown_sha256": "334083eb07b7f9fc8e4559472776d59903e307d50f34307321f3e1a8261d8ebd",
       "path": "backtracking-combinatorics/subsets/generate-all-possible-parentheses",
       "solution_sha256": "22e27b12324b5349844596500e1dfb4ee2ec0f51707d1e821f3d6f69e7fa3a16",
       "title": "Generate Parentheses"
@@ -121,6 +121,13 @@
       "path": "backtracking-combinatorics/subsets/subsets-ii",
       "solution_sha256": "70f60384fa7de8e2c5c834d37656685446270bf36c403a99751ae03e9175ab7e",
       "title": "Subsets II"
+    },
+    {
+      "id": "c5e4f548-7943-4ddf-b26a-1d2b366e5763",
+      "markdown_sha256": "b0f5d55acaab7d3d4ac71bfe5e1e38bf9a4b56431850fd9cc22c9d0347f91f7e",
+      "path": "arrays-strings/strings/weighted-word-mapping",
+      "solution_sha256": "c5234cec3a5a5e57641568facd6c53c433a99f9d181790820e3b33c78a7684e1",
+      "title": "Weighted Word Mapping"
     }
   ],
   "taxonomy": [

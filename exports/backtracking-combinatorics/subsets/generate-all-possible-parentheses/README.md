@@ -7,7 +7,7 @@ slug: generate-all-possible-parentheses
 title: Generate Parentheses
 url: https://www.geeksforgeeks.org/problems/generate-all-possible-parentheses/1
 difficulty: Medium
-status: Open
+status: Resolved
 primary_subtag_id: 1efc727e-a024-5b08-bb5c-1ac9d1c864be
 primary_path:
 - backtracking-combinatorics
@@ -17,7 +17,7 @@ taxonomy_ids:
 time_complexity: O(C(n/2) × n)
 space_complexity: O(n) auxiliary + output
 created_at: '2026-08-28T02:16:58.279818Z'
-updated_at: '2026-08-31T14:21:54.306284Z'
+updated_at: '2026-09-01T13:14:52.131625Z'
 mistake_events:
 - id: 7cd5284b-9b80-41ca-bec8-9a8168a90ad4
   occurred_at: '2026-08-28T02:16:58.280224Z'
