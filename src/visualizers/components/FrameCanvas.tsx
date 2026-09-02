@@ -7,6 +7,7 @@ import {MonotonicWindowCanvas} from './MonotonicWindowCanvas';
 import {SteinerCanvas} from './SteinerCanvas';
 import {TrieSuggestionsCanvas,UniqueSplitCanvas} from './Batch1Canvas';
 import {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas} from './PracticeCanvas';
+import {WeightedWordMappingCanvas} from './WeightedWordMappingCanvas';
 import type {NQueensData} from '../nQueens';
 import type {CoinChangeData} from '../coinChange';
 import type {HexadecimalData} from '../hexadecimal';
@@ -73,6 +74,7 @@ export function FrameCanvas({frame,problem}:{frame:VisualFrame;problem:Problem})
     case 'intuition':return <IntuitionCanvas data={frame.data as IntuitionFrameData}/>;
     case 'trie-suggestions':return <TrieSuggestionsCanvas data={frame.data as import('../types').TrieSuggestionsFrameData}/>;
     case 'unique-split':return <UniqueSplitCanvas data={frame.data as import('../types').UniqueSplitFrameData}/>;
+    case 'weighted-word-mapping':return <WeightedWordMappingCanvas data={frame.data as import('../weightedWordMapping').WeightedWordFrameData}/>;
     default:return <GenericCanvas data={frame.data as GenericFrameData} approach={problem.notes?.approach??[]}/>;
   }
 }

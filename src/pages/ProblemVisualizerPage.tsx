@@ -7,6 +7,7 @@ import type {Problem} from '../types';
 import {FrameCanvas} from '../visualizers/components/FrameCanvas';
 import {LessonButton,LessonMotion,SmoothTabs} from '../visualizers/components/LessonPrimitives';
 import {SteinerInputEditor} from '../visualizers/components/SteinerInputEditor';
+import {WeightedWordInputEditor} from '../visualizers/components/WeightedWordInputEditor';
 import {normalizeCode} from '../visualizers/practiceCode';
 import {getVisualizer} from '../visualizers/registry';
 import type {VisualFrame,VisualizerAdapter} from '../visualizers/types';
@@ -62,6 +63,7 @@ export function ProblemVisualizerPage(){
   const [playing,setPlaying]=useState(false);const [speed,setSpeed]=useState(1100);const [traceError,setTraceError]=useState('');
   const [steinerStage,setSteinerStage]=useState('floyd-warshall');const [showAllSteps,setShowAllSteps]=useState(false);
   const isSteiner=adapter?.inputEditor==='steiner-matrix';
+  const isWeightedWord=adapter?.inputEditor==='weighted-word-grid';
   const playbackFrames=useMemo(()=>{
     let result=frames;
     if(isSteiner&&!showAllSteps)result=result.filter(frame=>frame.traceRole!=='transition');
@@ -101,7 +103,7 @@ export function ProblemVisualizerPage(){
     {adapter.mistakeExplanation&&<details className="lesson-missed-note"><summary>Why this was easy to miss</summary><ul>{adapter.mistakeExplanation.map(note=><li key={note}>{note}</li>)}</ul></details>}
     <form className="lesson-input" onSubmit={event=>{event.preventDefault();runTrace()}}>
       <label className="lesson-presets"><span>Try an example</span><select value={adapter.presets.find(preset=>preset.input===raw)?.input??''} onChange={event=>{setRaw(event.target.value);runTrace(event.target.value)}}><option value="" disabled>Custom input</option>{adapter.presets.map(preset=><option value={preset.input} key={preset.label}>{preset.label}</option>)}</select></label>
-      {isSteiner?<SteinerInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:<details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>}
+      {isSteiner?<SteinerInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:isWeightedWord?<WeightedWordInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:<details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>}
       <LessonButton className="lesson-primary" type="submit"><ScanLine size={16}/> Build steps</LessonButton>
       <p id="lesson-input-guide">{adapter.inputGuide??`Use the example format shown above. ${adapter.mode==='generic'?'This fallback inspects parameters and notes, not algorithm execution.':'This teaching simulation uses bounded inputs.'}`}</p>
     </form>

@@ -13,11 +13,13 @@ const {coinChangeVisualizer:cc,createCoinChangeFrames}=await load('coinChange.ts
 const {hexadecimalVisualizer:hx,createHexadecimalFrames}=await load('hexadecimal.ts');
 const {incremovableVisualizer:inc,createIncremovableFrames}=await load('incremovable.ts');
 const {steinerTreeVisualizer:st,parseSteinerInput}=await load('steinerTree.ts');
-const {normalizeCode,nQueensCode,hexadecimalCode}=await load('practiceCode.ts');
+const {weightedWordMappingVisualizer:wwm,createWeightedWordMappingFrames}=await load('weightedWordMapping.ts');
+const {normalizeCode,nQueensCode,hexadecimalCode,weightedWordMappingCode}=await load('practiceCode.ts');
 const {getVisualizer}=await load('registry.ts');
 const {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas}=await load('components/PracticeCanvas.tsx');
 const {IncremovableCanvas}=await load('components/IncremovableCanvas.tsx');
 const {SteinerCanvas}=await load('components/SteinerCanvas.tsx');
+const {WeightedWordMappingCanvas}=await load('components/WeightedWordMappingCanvas.tsx');
 const problem={source:'leetcode',source_key:'unknown',primary_main:{slug:'arrays'},primary_subtag:{slug:'search'},notes:{approach:['A saved study note.']}};
 
 function coinOracle(coins,amount){
@@ -32,6 +34,10 @@ function removalOracle(nums){
     if(remaining.every((value,i)=>i===0||remaining[i-1]<value))intervals.push(`${start}:${end}`);
   }
   return intervals;
+}
+
+function weightedWordOracle(input){
+  return input.words.map(word=>{const total=[...word].reduce((sum,char)=>sum+input.weights[char.charCodeAt(0)-97],0);return String.fromCharCode(122-(total%26))}).join('');
 }
 
 function steinerOracle(input){
@@ -174,6 +180,38 @@ test('Steiner parser rejects malformed matrices and query endpoints',()=>{
   }
 });
 
+test('Weighted Word Mapping: every character transition matches the independent oracle',()=>{
+  for(const preset of wwm.presets){
+    const input=wwm.parseInput(preset.input);const frames=createWeightedWordMappingFrames(input,problem);const last=frames.at(-1).data;
+    assert.equal(wwm.inputEditor,'weighted-word-grid');
+    assert.equal(last.output,weightedWordOracle(input));assert.equal(last.action,'complete');
+    assert.equal(last.totals.length,input.words.length);assert.equal(last.words.join('|'),input.words.join('|'));
+    const reference=weightedWordMappingCode.split('\n').map(line=>line.replace(/\s/g,''));
+    for(const frame of frames){
+      const data=frame.data;assert.ok(frame.codeFocus?.length,`${preset.label}: ${frame.title}`);
+      for(const focus of frame.codeFocus)assert.ok(reference.some(line=>line.includes(focus.replace(/\s/g,''))),`${preset.label}: ${focus}`);
+      if(data.action==='lookup')assert.equal(data.selectedWeight,input.weights[data.alphabetIndex]);
+      if(data.action==='add'){
+        assert.equal(data.newTotal,data.previousTotal+data.selectedWeight);
+        assert.equal(data.runningTotal,data.newTotal);
+      }
+      if(data.action==='modulo')assert.equal(data.modulo,data.runningTotal%26);
+      if(data.action==='map')assert.equal(data.mappedCharacter,String.fromCharCode(122-data.modulo));
+      if(data.action==='append')assert.equal(data.output.at(-1),data.mappedCharacter);
+      assert.ok(data.output.length<=data.words.length);
+      assert.ok(data.totals.every((total,index)=>total===[...data.words[index]].reduce((sum,char)=>sum+input.weights[char.charCodeAt(0)-97],0)));
+    }
+    const first=JSON.stringify(frames[0].data);last.words.push('mutated');last.weights[0]=999;last.totals.push(123);assert.equal(JSON.stringify(frames[0].data),first);
+  }
+});
+
+test('Weighted Word Mapping: parser rejects malformed, unsafe, and oversized inputs',()=>{
+  const valid=JSON.parse(wwm.presets[0].input);
+  for(const value of [null,{}, {...valid,words:[]},{...valid,words:['A']},{...valid,words:['']},{...valid,words:Array(9).fill('a')},{...valid,words:['a'.repeat(13)]},{...valid,words:['a'.repeat(65)]},{...valid,weights:[1,2]},{...valid,weights:[...valid.weights.slice(0,25),-1]},{...valid,weights:[...valid.weights.slice(0,25),1.5]}])assert.throws(()=>wwm.parseInput(JSON.stringify(value)));
+  const unsafe={words:['aa'],weights:[Number.MAX_SAFE_INTEGER,...Array(25).fill(0)]};assert.throws(()=>wwm.parseInput(JSON.stringify(unsafe)));
+  assert.throws(()=>wwm.parseInput('not JSON'));
+});
+
 test('All preset traces have code-focus snippets that exist in their reference',()=>{
   for(const adapter of [nq,cc,hx,inc])for(const preset of adapter.presets){
     const reference=adapter.referenceCode.split('\n').map(line=>line.replace(/\s/g,''));
@@ -195,6 +233,7 @@ test('Registry recognizes LintCode 33 without assigning that adapter to other so
   assert.equal(getVisualizer({...problem,source:'leetcode',source_key:'33'}).mode,'generic');
   assert.equal(getVisualizer({...problem,source_key:'coin-change-ii'}).id,cc.id);
   assert.equal(getVisualizer({...problem,source_key:'convert-a-number-to-hexadecimal'}).id,hx.id);
+  assert.equal(getVisualizer({...problem,source_key:'weighted-word-mapping'}).id,wwm.id);
   const generic=getVisualizer(problem);const frames=generic.createFrames({nums:[1,2,3]},problem);
   assert.match(frames[0].message,/not algorithm execution/);
   assert.ok(frames.filter(frame=>frame.phase==='SAVED NOTE').every(frame=>frame.data.activePath.length===0));
@@ -213,4 +252,8 @@ test('Render smoke: diagrams expose labels and distinct empty/computed/result st
   assert.match(render(HexadecimalCanvas,createHexadecimalFrames({num:0}).at(-1).data),/returns before the bit operations/);
   const bridge=createIncremovableFrames({nums:[1,3,5,2,4,6]}).find(f=>f.phase==='BRIDGE');
   assert.match(render(IncremovableCanvas,bridge.data),/false/);
+  const weighted=createWeightedWordMappingFrames(JSON.parse(wwm.presets[0].input));
+  assert.match(render(WeightedWordMappingCanvas,weighted.find(frame=>frame.data.action==='add').data),/A–Z WEIGHT LOOKUP/);
+  assert.match(render(WeightedWordMappingCanvas,weighted.find(frame=>frame.data.action==='modulo').data),/MODULO DECODER/);
+  assert.match(render(WeightedWordMappingCanvas,weighted.at(-1).data),/OUTPUT TAPE/);
 });

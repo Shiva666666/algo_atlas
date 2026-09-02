@@ -10,7 +10,7 @@ export interface VisualFrame {
   phase:string;
   title:string;
   message:string;
-  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal'|'trie-suggestions'|'unique-split';
+  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal'|'trie-suggestions'|'unique-split'|'weighted-word-mapping';
   data:unknown;
   codeFocus?:string[];
   /** Checkpoints are shown in guided mode; transitions remain available on demand. */
@@ -235,7 +235,7 @@ export interface VisualizerAdapter {
   /** Source-grounded reflection for the learner, when supplied by the user. */
   mistakeExplanation?:string[];
   /** Optional structured editor for adapters whose input has a matrix or other rich shape. */
-  inputEditor?:'steiner-matrix';
+  inputEditor?:'steiner-matrix'|'weighted-word-grid';
 }
 
 export type TrieNodeState='idle'|'active'|'visited'|'terminal'|'missing';
