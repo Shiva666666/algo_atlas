@@ -1,7 +1,7 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 18,
+  "record_count": 19,
   "records": [
     {
       "id": "af76c9e8-ad95-4030-8525-faf1d04e3c13",
@@ -58,6 +58,13 @@
       "path": "linear-structures/queues-and-deques/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit",
       "solution_sha256": "6f49bed4e4249a70a88b2dfbed6cfa44ebeb9b1c9b10b0b357da078d55be9029",
       "title": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
+    },
+    {
+      "id": "ae551e91-1e3d-4ccb-8b10-c20d6b45c68d",
+      "markdown_sha256": "496e91ec6dc6ffea0434ad24b16ca2d6fa016bb47a9c9892521666833599c03a",
+      "path": "backtracking-combinatorics/constraint-search/matchsticks-to-square",
+      "solution_sha256": "5f5f98c314f8ac4167ba0eb2159c444cc49966e0e1ba492089e48b83a54f7209",
+      "title": "Matchsticks to Square"
     },
     {
       "id": "588a7d5b-acff-4fb7-ba4e-6908f0af23dd",
