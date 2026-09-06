@@ -18,6 +18,7 @@ import {searchSuggestionsVisualizer} from './searchSuggestions';
 import {uniqueSplitVisualizer} from './uniqueSplit';
 import {generateParenthesesVisualizer} from './generateParentheses';
 import {weightedWordMappingVisualizer} from './weightedWordMapping';
+import {matchsticksSquareVisualizer} from './matchsticksSquare';
 import type {VisualizerAdapter} from './types';
 
 const specialized:Record<string,VisualizerAdapter>={
@@ -42,6 +43,8 @@ const specialized:Record<string,VisualizerAdapter>={
   'generate-parentheses':generateParenthesesVisualizer,
   'generate-all-possible-parentheses':generateParenthesesVisualizer,
   'weighted-word-mapping':weightedWordMappingVisualizer,
+  'matchsticks-to-square':matchsticksSquareVisualizer,
+  '473':matchsticksSquareVisualizer,
 };
 
 export function getVisualizer(problem:Problem):VisualizerAdapter{

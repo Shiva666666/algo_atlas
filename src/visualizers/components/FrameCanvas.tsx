@@ -8,6 +8,7 @@ import {SteinerCanvas} from './SteinerCanvas';
 import {TrieSuggestionsCanvas,UniqueSplitCanvas} from './Batch1Canvas';
 import {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas} from './PracticeCanvas';
 import {WeightedWordMappingCanvas} from './WeightedWordMappingCanvas';
+import {MatchsticksCanvas} from './MatchsticksCanvas';
 import type {NQueensData} from '../nQueens';
 import type {CoinChangeData} from '../coinChange';
 import type {HexadecimalData} from '../hexadecimal';
@@ -75,6 +76,7 @@ export function FrameCanvas({frame,problem}:{frame:VisualFrame;problem:Problem})
     case 'trie-suggestions':return <TrieSuggestionsCanvas data={frame.data as import('../types').TrieSuggestionsFrameData}/>;
     case 'unique-split':return <UniqueSplitCanvas data={frame.data as import('../types').UniqueSplitFrameData}/>;
     case 'weighted-word-mapping':return <WeightedWordMappingCanvas data={frame.data as import('../weightedWordMapping').WeightedWordFrameData}/>;
+    case 'matchsticks-square':return <MatchsticksCanvas data={frame.data as import('../matchsticksSquare').MatchsticksFrameData}/>;
     default:return <GenericCanvas data={frame.data as GenericFrameData} approach={problem.notes?.approach??[]}/>;
   }
 }

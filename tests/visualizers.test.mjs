@@ -14,12 +14,14 @@ const {hexadecimalVisualizer:hx,createHexadecimalFrames}=await load('hexadecimal
 const {incremovableVisualizer:inc,createIncremovableFrames}=await load('incremovable.ts');
 const {steinerTreeVisualizer:st,parseSteinerInput}=await load('steinerTree.ts');
 const {weightedWordMappingVisualizer:wwm,createWeightedWordMappingFrames}=await load('weightedWordMapping.ts');
+const {matchsticksSquareVisualizer:ms,createMatchsticksFrames,parseMatchsticksInput}=await load('matchsticksSquare.ts');
 const {normalizeCode,nQueensCode,hexadecimalCode,weightedWordMappingCode}=await load('practiceCode.ts');
 const {getVisualizer}=await load('registry.ts');
 const {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas}=await load('components/PracticeCanvas.tsx');
 const {IncremovableCanvas}=await load('components/IncremovableCanvas.tsx');
 const {SteinerCanvas}=await load('components/SteinerCanvas.tsx');
 const {WeightedWordMappingCanvas}=await load('components/WeightedWordMappingCanvas.tsx');
+const {MatchsticksCanvas}=await load('components/MatchsticksCanvas.tsx');
 const problem={source:'leetcode',source_key:'unknown',primary_main:{slug:'arrays'},primary_subtag:{slug:'search'},notes:{approach:['A saved study note.']}};
 
 function coinOracle(coins,amount){
@@ -38,6 +40,18 @@ function removalOracle(nums){
 
 function weightedWordOracle(input){
   return input.words.map(word=>{const total=[...word].reduce((sum,char)=>sum+input.weights[char.charCodeAt(0)-97],0);return String.fromCharCode(122-(total%26))}).join('');
+}
+
+function matchsticksOracle(values){
+  const total=values.reduce((sum,value)=>sum+value,0);if(total%4!==0)return false;
+  const target=total/4;const used=Array(values.length).fill(false);const sides=[0,0,0,0];
+  function place(index){
+    if(index===values.length)return sides.every(side=>side===target);
+    const value=values.slice().sort((a,b)=>b-a)[index];
+    for(let side=0;side<4;side++){if(sides[side]+value>target)continue;sides[side]+=value;const ok=place(index+1);sides[side]-=value;if(ok)return true;}
+    return false;
+  }
+  return place(0);
 }
 
 function steinerOracle(input){
@@ -210,6 +224,35 @@ test('Weighted Word Mapping: parser rejects malformed, unsafe, and oversized inp
   for(const value of [null,{}, {...valid,words:[]},{...valid,words:['A']},{...valid,words:['']},{...valid,words:Array(9).fill('a')},{...valid,words:['a'.repeat(13)]},{...valid,words:['a'.repeat(65)]},{...valid,weights:[1,2]},{...valid,weights:[...valid.weights.slice(0,25),-1]},{...valid,weights:[...valid.weights.slice(0,25),1.5]}])assert.throws(()=>wwm.parseInput(JSON.stringify(value)));
   const unsafe={words:['aa'],weights:[Number.MAX_SAFE_INTEGER,...Array(25).fill(0)]};assert.throws(()=>wwm.parseInput(JSON.stringify(unsafe)));
   assert.throws(()=>wwm.parseInput('not JSON'));
+});
+
+test('Matchsticks to Square: complete scalar backtracking agrees with an independent oracle',()=>{
+  const cases=[[1,1,2,2,2],[3,3,3,3,4],[2,2,2,2,3,3,7,7],[1,1,1,1],[1,2,3,4,5,5,6,7]];
+  const reference=ms.referenceCode.split('\n').map(line=>line.replace(/\s/g,''));
+  for(const values of cases){
+    const frames=createMatchsticksFrames({matchsticks:values});const last=frames.at(-1).data;
+    assert.equal(last.result,matchsticksOracle(values));
+    assert.deepEqual(last.original,values);assert.deepEqual(last.sorted.map(item=>item.value),[...values].sort((a,b)=>b-a));
+    for(const frame of frames){
+      const data=frame.data;assert.equal(frame.kind,'matchsticks-square');assert.ok(frame.codeFocus?.length);
+      for(const focus of frame.codeFocus)assert.ok(reference.some(line=>line.includes(focus.replace(/\s/g,''))),`${frame.title}: ${focus}`);
+      if(data.action==='check'||data.action==='prune')assert.equal(data.candidateSum,data.sideSums[data.activeSide]+data.currentStick.value);
+      if(data.action==='resume')assert.equal(data.childResult,false);
+      for(const side of ['left','right','top','down'])assert.equal(data.sideSums[side],data.sideSticks[side].reduce((sum,id)=>sum+data.sorted.find(item=>item.id===id).value,0));
+    }
+    const first=JSON.stringify(frames[0].data);last.sideSums.left=999;last.sorted[0].value=999;assert.equal(JSON.stringify(frames[0].data),first);
+  }
+  const diagnostic=createMatchsticksFrames({matchsticks:[2,2,2,2,3,3,7,7]});
+  assert.ok(diagnostic.some(frame=>frame.data.action==='resume'),'diagnostic must show a failed child returning to its parent');
+  assert.equal(diagnostic.at(-1).data.sideSums.left,7);assert.equal(diagnostic.at(-1).data.sideSums.right,7);
+  assert.match(renderToStaticMarkup(React.createElement(MatchsticksCanvas,{data:diagnostic.find(frame=>frame.data.action==='resume').data})),/Resume parent state/);
+});
+
+test('Matchsticks to Square: parser accepts shorthand and rejects unsafe domains',()=>{
+  assert.deepEqual(parseMatchsticksInput('[1,1,2,2,2]'),{matchsticks:[1,1,2,2,2]});
+  for(const value of [null,{},[],[0],[1.5],[-1],[1,2,3,4,5,6,7,8,9],Array(9).fill(1),['2']])assert.throws(()=>parseMatchsticksInput(JSON.stringify(value)));
+  assert.throws(()=>parseMatchsticksInput('not JSON'));
+  assert.equal(ms.inputEditor,'matchsticks');assert.equal(getVisualizer({...problem,source_key:'matchsticks-to-square'}).id,'matchsticks-to-square');
 });
 
 test('All preset traces have code-focus snippets that exist in their reference',()=>{
