@@ -46,7 +46,13 @@ Use **Wrong Again** to append a new mistake event while preserving the same prob
 
 Visualizers connect the state, base condition, choice, transition, invariant, and final result. They include multiple presets, step controls, playback speed, a trace timeline, and code-token-to-visual mappings.
 
-![Generate Parentheses code-linked algorithm visualizer](docs/images/visualizer.png)
+**Steiner Tree DP:** follow the selected query tree alongside the terminal-mask state table, with the active lookup and corresponding code tokens highlighted.
+
+![Steiner Tree visualizer showing highlighted query-tree edges, the terminal-mask DP table, and the final query lookup](docs/images/visualizer-steiner-dp.png)
+
+**N-Queens backtracking:** inspect a candidate square's column and diagonal conflicts on the working board, alongside the attack sets and highlighted reference-code lines.
+
+![N-Queens visualizer showing three placed queens, an attacked candidate square, occupied attack sets, and the matching Python condition](docs/images/visualizer-n-queens.png)
 
 The visualizer framework is reusable across Graph and DP problems, with specialized adapters for topics such as Steiner Tree DP, monotonic queues, subsets, binary search, IPO, falling paths, and graph traversal.
 
