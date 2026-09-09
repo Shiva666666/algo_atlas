@@ -1,7 +1,7 @@
 {
   "export_schema_version": 1,
   "generated_at": null,
-  "record_count": 19,
+  "record_count": 20,
   "records": [
     {
       "id": "af76c9e8-ad95-4030-8525-faf1d04e3c13",
@@ -100,6 +100,13 @@
       "path": "dynamic-programming/1d-dp/palindrome-partitioning-ii",
       "solution_sha256": "b9c297ae915762ea49ca4308a219c86e7e1404499452dd5a16241faff47ab950",
       "title": "Palindrome Partitioning II"
+    },
+    {
+      "id": "1fd7f8a2-c015-4c65-ac9c-07173af4d6f2",
+      "markdown_sha256": "693038d32aecda9e4e79149c881a123a40ad08672c2fe7ff4f1928b0de0654c5",
+      "path": "linear-structures/stacks/remove-k-digits",
+      "solution_sha256": "c04d34b5f8e35c393606a0c9c4b94009b729f5d2a3831781ddaa67963704b1c6",
+      "title": "Remove K Digits"
     },
     {
       "id": "f6ad1adb-fc4f-4311-abb5-80cd1cd1225c",
