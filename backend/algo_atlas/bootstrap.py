@@ -10,8 +10,8 @@ from sqlalchemy.orm import Session
 
 from .config import ensure_local_dirs, settings
 from .db import engine, init_db
-from .export_service import restore_catalog, validate_export_catalog
 from .models import AppSetting, Problem
+from .sync_service import reconcile_catalog
 
 INITIAL_RESTORE_KEY = "initial_export_restore_v1"
 
@@ -29,43 +29,37 @@ def migrate_database() -> None:
 
 
 def initialize_from_exports(target_engine: Engine = engine) -> dict:
-    """Restore a portable catalog exactly once for an empty local database."""
+    """Reconcile the pulled portable catalog with this device's local database."""
     init_db(target_engine)
     with Session(target_engine) as session:
-        marker = session.get(AppSetting, INITIAL_RESTORE_KEY)
+        before = session.scalar(select(func.count()).select_from(Problem)) or 0
+        sync_result = reconcile_catalog(session, dry_run=False)
         problem_count = session.scalar(select(func.count()).select_from(Problem)) or 0
-        if marker:
-            return {"status": "initialized", "problem_count": problem_count, "restored": 0}
-        if problem_count:
+        marker = session.get(AppSetting, INITIAL_RESTORE_KEY)
+        if not marker and sync_result["state"] != "no_export":
             marker_value = {
-                "status": "existing_database",
+                "status": "reconciled",
                 "problem_count": problem_count,
                 "completed_at": datetime.now(timezone.utc).isoformat(),
             }
             session.add(AppSetting(key=INITIAL_RESTORE_KEY, value=json.dumps(marker_value, sort_keys=True)))
             session.commit()
-            return {"status": "preserved", "problem_count": problem_count, "restored": 0}
-        catalog_path = settings.export_dir / "catalog.json"
-        if not catalog_path.is_file():
-            return {"status": "waiting_for_exports", "problem_count": 0, "restored": 0}
-        catalog = validate_export_catalog()
-        restore_result = restore_catalog(session, dry_run=False, commit=False)
-        restored_count = session.scalar(select(func.count()).select_from(Problem)) or 0
-        expected_count = catalog["record_count"]
-        if restored_count != expected_count:
-            session.rollback()
-            raise RuntimeError(f"Export restore produced {restored_count} problems; expected {expected_count}.")
-        marker_value = {
-            "status": "restored",
-            "problem_count": restored_count,
-            "completed_at": datetime.now(timezone.utc).isoformat(),
-        }
-        session.merge(AppSetting(key=INITIAL_RESTORE_KEY, value=json.dumps(marker_value, sort_keys=True)))
-        session.commit()
+
+        if sync_result["state"] == "no_export":
+            status = "waiting_for_exports"
+        elif sync_result["conflicts"]:
+            status = "conflicts"
+        elif before == 0 and problem_count:
+            status = "restored"
+        elif sync_result.get("applied", 0):
+            status = "updated"
+        else:
+            status = "preserved" if problem_count else "initialized"
         return {
-            "status": "restored",
-            "problem_count": restored_count,
-            "restored": restore_result["creates"],
+            "status": status,
+            "problem_count": problem_count,
+            "restored": sync_result.get("applied", 0) if before == 0 else 0,
+            "conflicts": len(sync_result["conflicts"]),
         }
 
 

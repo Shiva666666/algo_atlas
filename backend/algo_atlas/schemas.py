@@ -11,6 +11,7 @@ NOTE_SECTIONS = ("why_missed", "recognition_signals", "core_insight", "approach"
 
 
 class ProblemCreate(BaseModel):
+    record_initial_mistake: bool = True
     title: str = Field(min_length=1, max_length=240)
     url: str | None = Field(default=None, max_length=500)
     source: str = Field(default="leetcode", max_length=32)
@@ -89,3 +90,5 @@ class GitSettingsUpdate(BaseModel):
 
 class RestoreRequest(BaseModel):
     dry_run: bool = True
+    review_version: str | None = Field(default=None, max_length=128)
+    decisions: dict[str, Literal["keep_local", "use_incoming"]] = Field(default_factory=dict, max_length=500)

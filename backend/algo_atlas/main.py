@@ -18,11 +18,11 @@ from .analytics import analytics_overview, atlas_graph
 from .bootstrap import prepare_local_state
 from .config import settings
 from .db import delete_problem_search, get_session, load_problem, slugify, sync_problem_search, taxonomy_to_dict
-from .export_service import create_backup, export_catalog, restore_catalog
 from .git_service import configure_git, git_state, preview_git, publish_git
 from .models import MistakeEvent, MistakeEventReason, NoteBullet, Problem, ProblemTaxonomy, TaxonomyNode, utcnow
 from .schemas import CustomTaxonomyCreate, GitSettingsUpdate, LeetCodeImportRequest, MistakeCreate, ProblemCreate, ProblemUpdate, RestoreRequest, TaxonomyAliasUpdate
 from .serializers import problem_to_dict
+from .sync_service import SyncBlockedError, SyncBusyError, inspect_sync, prepare_export, reconcile_catalog
 from .taxonomy_seed import LEETCODE_ALIASES
 
 @asynccontextmanager
@@ -173,11 +173,12 @@ def create_problem(payload: ProblemCreate, session: Session = Depends(get_sessio
     session.add(problem)
     _apply_taxonomy(session, problem, payload.taxonomy_ids)
     _apply_notes(problem, payload.notes)
-    event = MistakeEvent(occurred_at=(payload.occurred_at or utcnow()).replace(tzinfo=None), observation=payload.observation)
-    for reason_id in payload.failure_reason_ids:
-        reason = _taxonomy(session, reason_id, {"failure"})
-        event.reason_links.append(MistakeEventReason(taxonomy_id=reason.id))
-    problem.mistake_events.append(event)
+    if payload.record_initial_mistake:
+        event = MistakeEvent(occurred_at=(payload.occurred_at or utcnow()).replace(tzinfo=None), observation=payload.observation)
+        for reason_id in payload.failure_reason_ids:
+            reason = _taxonomy(session, reason_id, {"failure"})
+            event.reason_links.append(MistakeEventReason(taxonomy_id=reason.id))
+        problem.mistake_events.append(event)
     try:
         session.flush()
         sync_problem_search(session, problem)
@@ -281,17 +282,32 @@ def import_leetcode(payload: LeetCodeImportRequest, session: Session = Depends(g
 
 @app.post("/api/export/preview")
 def export_preview(session: Session = Depends(get_session)) -> dict:
-    backup = create_backup()
-    catalog = export_catalog(session)
-    preview = preview_git(fetch=False)
-    return {"catalog": catalog, "backup": backup.name if backup else None, "git": preview}
+    try:
+        prepared = prepare_export(session)
+    except (SyncBlockedError, SyncBusyError) as exc:
+        raise HTTPException(409, str(exc)) from exc
+    return {**prepared, "git": preview_git(fetch=False)}
+
+
+@app.get("/api/sync/status")
+def sync_status(session: Session = Depends(get_session)) -> dict:
+    try:
+        return inspect_sync(session)
+    except SyncBusyError as exc:
+        raise HTTPException(409, str(exc)) from exc
 
 
 @app.post("/api/export/restore")
 def restore(payload: RestoreRequest, session: Session = Depends(get_session)) -> dict:
-    if not payload.dry_run:
-        create_backup()
-    return restore_catalog(session, dry_run=payload.dry_run)
+    try:
+        return reconcile_catalog(
+            session,
+            dry_run=payload.dry_run,
+            decisions=payload.decisions,
+            review_version=payload.review_version,
+        )
+    except (SyncBlockedError, SyncBusyError) as exc:
+        raise HTTPException(409, str(exc)) from exc
 
 
 @app.get("/api/git")
@@ -309,20 +325,22 @@ def update_git_settings(payload: GitSettingsUpdate) -> dict:
 
 @app.post("/api/git/preview")
 def preview_publish(session: Session = Depends(get_session)) -> dict:
-    backup = create_backup()
-    export_catalog(session)
+    try:
+        prepared = prepare_export(session)
+    except (SyncBlockedError, SyncBusyError) as exc:
+        raise HTTPException(409, str(exc)) from exc
     result = preview_git(fetch=True)
-    result["backup"] = backup.name if backup else None
+    result["backup"] = prepared["backup"]
+    result["sync"] = prepared["sync"]
     return result
 
 
 @app.post("/api/git/publish")
 def publish(session: Session = Depends(get_session)) -> dict:
-    create_backup()
-    export_catalog(session)
     try:
-        return publish_git()
-    except RuntimeError as exc:
+        prepared = prepare_export(session)
+        return {**publish_git(), "backup": prepared["backup"], "sync": prepared["sync"]}
+    except (RuntimeError, SyncBlockedError, SyncBusyError) as exc:
         raise HTTPException(409, str(exc)) from exc
 
 
@@ -334,8 +352,13 @@ if (settings.frontend_dist / "assets").exists():
 def spa(full_path: str):  # type: ignore[no-untyped-def]
     requested = (settings.frontend_dist / full_path).resolve()
     if settings.frontend_dist.exists() and requested.is_relative_to(settings.frontend_dist.resolve()) and requested.is_file():
-        return FileResponse(requested)
+        response = FileResponse(requested)
+        if requested.name == "index.html":
+            response.headers["Cache-Control"] = "no-cache, must-revalidate"
+        return response
     index = settings.frontend_dist / "index.html"
     if index.exists():
-        return FileResponse(index)
+        response = FileResponse(index)
+        response.headers["Cache-Control"] = "no-cache, must-revalidate"
+        return response
     raise HTTPException(404, "Frontend build not found. Run npm run build.")

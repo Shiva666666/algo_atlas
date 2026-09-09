@@ -6,7 +6,7 @@ from pathlib import Path
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from algo_atlas import export_service, git_service
+from algo_atlas import export_service, git_service, sync_service
 from algo_atlas.config import settings as default_settings
 from algo_atlas.db import build_engine, init_db
 from algo_atlas.export_service import export_catalog, restore_catalog
@@ -26,6 +26,7 @@ def test_export_is_deterministic_and_restorable(client, taxonomy, test_engine, t
     local_settings.local_dir.mkdir(parents=True)
     monkeypatch.setattr(export_service, "settings", local_settings)
     monkeypatch.setattr(git_service, "settings", local_settings)
+    monkeypatch.setattr(sync_service, "settings", local_settings)
 
     with Session(test_engine) as session:
         first = export_catalog(session)

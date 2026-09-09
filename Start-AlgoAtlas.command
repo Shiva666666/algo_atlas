@@ -35,70 +35,75 @@ fi
 VENV_PYTHON="$ATLAS_ROOT/.venv/bin/python"
 "$VENV_PYTHON" -m pip install -e .
 
-if [[ ! -d node_modules || ! -f node_modules/.package-lock.json || package-lock.json -nt node_modules/.package-lock.json ]]; then
+if [[ "$("$VENV_PYTHON" -m algo_atlas.launcher dependency-status)" == "stale" ]]; then
   npm ci
+  "$VENV_PYTHON" -m algo_atlas.launcher mark-dependencies >/dev/null
 fi
-
-NEEDS_BUILD="$($VENV_PYTHON - <<'PY'
-from pathlib import Path
-
-output = Path("dist/index.html")
-if not output.exists():
-    print("1")
-    raise SystemExit
-output_time = output.stat().st_mtime
-inputs = [Path("package.json"), Path("package-lock.json"), Path("vite.config.ts"), Path("tsconfig.json"), Path("index.html")]
-for directory in (Path("src"), Path("app"), Path("server"), Path("public")):
-    if directory.exists():
-        inputs.extend(path for path in directory.rglob("*") if path.is_file())
-print("1" if any(path.exists() and path.stat().st_mtime > output_time for path in inputs) else "0")
-PY
-)"
-if [[ "$NEEDS_BUILD" == "1" ]]; then
+if [[ "$("$VENV_PYTHON" -m algo_atlas.launcher frontend-status)" == "stale" ]]; then
   npm run build
+  "$VENV_PYTHON" -m algo_atlas.launcher mark-frontend >/dev/null
 fi
 
 mkdir -p .local
-"$VENV_PYTHON" -m algo_atlas.bootstrap
-
-if ! "$VENV_PYTHON" - <<'PY'
-import urllib.request
-
-try:
-    with urllib.request.urlopen("http://127.0.0.1:8000/api/health", timeout=1) as response:
-        raise SystemExit(0 if response.status == 200 else 1)
-except Exception:
-    raise SystemExit(1)
-PY
-then
-  nohup "$VENV_PYTHON" -m uvicorn algo_atlas.main:app --host 127.0.0.1 --port 8000 > .local/server.log 2>&1 &
-  SERVER_PID=$!
-  echo "$SERVER_PID" > .local/server.pid
-  READY=0
-  for _attempt in $(seq 1 40); do
-    if "$VENV_PYTHON" - <<'PY'
-import urllib.request
-
-try:
-    with urllib.request.urlopen("http://127.0.0.1:8000/api/health", timeout=1) as response:
-        raise SystemExit(0 if response.status == 200 else 1)
-except Exception:
-    raise SystemExit(1)
-PY
-    then
-      READY=1
-      break
-    fi
-    sleep 0.25
-  done
-  if [[ "$READY" != "1" ]]; then
-    echo "Algo Atlas did not start. Recent server output:" >&2
-    tail -n 40 .local/server.log >&2 || true
+PID_FILE="$ATLAS_ROOT/.local/server.pid"
+if [[ -f "$PID_FILE" ]]; then
+  SERVER_PID="$(tr -d '[:space:]' < "$PID_FILE")"
+  if [[ ! "$SERVER_PID" =~ ^[0-9]+$ ]]; then
+    echo "The Algo Atlas PID file is invalid. Verify the server before removing .local/server.pid." >&2
     exit 1
   fi
+  if kill -0 "$SERVER_PID" 2>/dev/null; then
+    PROCESS_COMMAND="$(ps -p "$SERVER_PID" -o command= 2>/dev/null || true)"
+    if [[ "$PROCESS_COMMAND" != *"$VENV_PYTHON -m uvicorn"* || "$PROCESS_COMMAND" != *"algo_atlas.main:app"* ]]; then
+      echo "PID $SERVER_PID does not belong to this Algo Atlas checkout. No process was stopped." >&2
+      exit 1
+    fi
+    kill "$SERVER_PID"
+    for ((_attempt=0; _attempt<50; _attempt++)); do
+      if ! kill -0 "$SERVER_PID" 2>/dev/null; then break; fi
+      sleep 0.1
+    done
+    if kill -0 "$SERVER_PID" 2>/dev/null; then
+      echo "Algo Atlas server PID $SERVER_PID did not stop." >&2
+      exit 1
+    fi
+  fi
+  rm -f "$PID_FILE"
+fi
+
+if [[ "$("$VENV_PYTHON" -m algo_atlas.launcher port-status --port 8000)" != "free" ]]; then
+  echo "Port 8000 is already used by another process. Algo Atlas did not stop or replace that process." >&2
+  exit 1
+fi
+
+BOOTSTRAP_RESULT="$("$VENV_PYTHON" -m algo_atlas.bootstrap)"
+echo "$BOOTSTRAP_RESULT"
+if ! "$VENV_PYTHON" -c 'import json,sys; raise SystemExit(0 if json.loads(sys.argv[1]).get("conflicts",0)==0 else 1)' "$BOOTSTRAP_RESULT"; then
+  echo "Algorithm sync conflicts need review in Settings & Sync. Local data was preserved." >&2
+fi
+
+nohup "$VENV_PYTHON" -m uvicorn algo_atlas.main:app --host 127.0.0.1 --port 8000 > .local/server.log 2>&1 &
+SERVER_PID=$!
+echo "$SERVER_PID" > "$PID_FILE"
+
+READY=0
+for ((_attempt=0; _attempt<40; _attempt++)); do
+  if [[ "$("$VENV_PYTHON" -m algo_atlas.launcher health-status)" == "ready" ]]; then
+    READY=1
+    break
+  fi
+  if ! kill -0 "$SERVER_PID" 2>/dev/null; then break; fi
+  sleep 0.25
+done
+if [[ "$READY" != "1" ]]; then
+  kill "$SERVER_PID" 2>/dev/null || true
+  rm -f "$PID_FILE"
+  echo "Algo Atlas did not start. Recent server output:" >&2
+  tail -n 40 .local/server.log >&2 || true
+  exit 1
 fi
 
 if [[ "$NO_BROWSER" != "1" ]]; then
   open "http://127.0.0.1:8000/"
 fi
-echo "Algo Atlas is running at http://127.0.0.1:8000/"
+echo "Algo Atlas is running with the latest pulled UI and algorithms at http://127.0.0.1:8000/"

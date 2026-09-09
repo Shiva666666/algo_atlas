@@ -8,7 +8,7 @@ import pytest
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
-from algo_atlas import bootstrap, export_service
+from algo_atlas import bootstrap, export_service, sync_service
 from algo_atlas.bootstrap import INITIAL_RESTORE_KEY, prepare_local_state
 from algo_atlas.config import settings as default_settings
 from algo_atlas.db import build_engine, init_db
@@ -33,6 +33,7 @@ def bootstrap_environment(tmp_path, monkeypatch):
     )
     monkeypatch.setattr(bootstrap, "settings", local_settings)
     monkeypatch.setattr(export_service, "settings", local_settings)
+    monkeypatch.setattr(sync_service, "settings", local_settings)
     target_engine = build_engine(f"sqlite:///{local_settings.database_path.as_posix()}")
     yield local_settings, target_engine
     target_engine.dispose()
@@ -47,7 +48,7 @@ def test_fresh_database_restores_the_tracked_catalog(bootstrap_environment):
     expected = json.loads((local_settings.export_dir / "catalog.json").read_text(encoding="utf-8"))["record_count"]
     result = prepare_local_state(target_engine, run_migrations=False)
     with Session(target_engine) as session:
-        assert result == {"status": "restored", "problem_count": expected, "restored": expected}
+        assert result == {"status": "restored", "problem_count": expected, "restored": expected, "conflicts": 0}
         assert problem_count(session) == expected
         assert session.get(AppSetting, INITIAL_RESTORE_KEY) is not None
 
@@ -70,14 +71,15 @@ def test_existing_database_is_preserved(bootstrap_environment):
 
 
 def test_initialized_database_stays_empty_after_user_deletes_every_problem(bootstrap_environment):
-    _local_settings, target_engine = bootstrap_environment
+    local_settings, target_engine = bootstrap_environment
+    expected = json.loads((local_settings.export_dir / "catalog.json").read_text(encoding="utf-8"))["record_count"]
     prepare_local_state(target_engine, run_migrations=False)
     with Session(target_engine) as session:
         session.execute(delete(Problem))
         session.commit()
     result = prepare_local_state(target_engine, run_migrations=False)
     with Session(target_engine) as session:
-        assert result == {"status": "initialized", "problem_count": 0, "restored": 0}
+        assert result == {"status": "conflicts", "problem_count": 0, "restored": 0, "conflicts": expected}
         assert problem_count(session) == 0
 
 
@@ -102,7 +104,7 @@ def test_invalid_exports_do_not_partially_initialize(bootstrap_environment):
     catalog = json.loads((local_settings.export_dir / "catalog.json").read_text(encoding="utf-8"))
     record = catalog["records"][0]
     (local_settings.export_dir / record["path"] / "solution.py").write_text("# corrupted\n", encoding="utf-8")
-    with pytest.raises(ExportValidationError, match="Hash mismatch"):
+    with pytest.raises(sync_service.SyncBlockedError, match="Hash mismatch"):
         prepare_local_state(target_engine, run_migrations=False)
     with Session(target_engine) as session:
         assert problem_count(session) == 0
