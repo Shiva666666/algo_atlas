@@ -9,11 +9,13 @@ import {LessonButton,LessonMotion,SmoothTabs} from '../visualizers/components/Le
 import {SteinerInputEditor} from '../visualizers/components/SteinerInputEditor';
 import {WeightedWordInputEditor} from '../visualizers/components/WeightedWordInputEditor';
 import {MatchsticksInputEditor} from '../visualizers/components/MatchsticksInputEditor';
+import {RemoveKDigitsInputEditor} from '../visualizers/components/RemoveKDigitsInputEditor';
 import {normalizeCode} from '../visualizers/practiceCode';
 import {getVisualizer} from '../visualizers/registry';
 import type {VisualFrame,VisualizerAdapter} from '../visualizers/types';
 import '../visualizers/learning.css';
 import '../visualizers/lesson.css';
+import '../visualizers/removeKDigits.css';
 
 function buildTrace(adapter:VisualizerAdapter,problem:Problem,raw:string){
   const result=adapter.createFrames(adapter.parseInput(raw),problem);
@@ -67,6 +69,7 @@ export function ProblemVisualizerPage(){
   const isSteiner=adapter?.inputEditor==='steiner-matrix';
   const isWeightedWord=adapter?.inputEditor==='weighted-word-grid';
   const isMatchsticks=adapter?.inputEditor==='matchsticks';
+  const isDigits=adapter?.inputEditor==='digit-string';
   const playbackFrames=useMemo(()=>{
     let result=frames;
     if(isSteiner&&!showAllSteps)result=result.filter(frame=>frame.traceRole!=='transition');
@@ -93,8 +96,12 @@ export function ProblemVisualizerPage(){
 
   const current=playbackFrames[frameIndex];const dirty=raw!==appliedInput;
   const runTrace=(nextRaw=raw)=>{
-    setPlaying(false);setFrameIndex(0);if(isSteiner)setSteinerStage('floyd-warshall');
-    try{setFrames(buildTrace(adapter,problem,nextRaw));setAppliedInput(nextRaw);setTraceError('')}catch(error){setFrames([]);setTraceError(error instanceof Error?error.message:'Could not build the trace.')}
+    setPlaying(false);
+    try{
+      const replacement=buildTrace(adapter,problem,nextRaw);
+      setFrames(replacement);setFrameIndex(0);if(isSteiner)setSteinerStage('floyd-warshall');
+      setAppliedInput(nextRaw);setTraceError('');
+    }catch(error){setTraceError(error instanceof Error?error.message:'Could not build the trace.')}
   };
   const stepTo=(index:number)=>{setPlaying(false);setFrameIndex(Math.max(0,Math.min(index,playbackFrames.length-1)))};
   const stepToAction=(action:string)=>{
@@ -110,12 +117,12 @@ export function ProblemVisualizerPage(){
     {adapter.mistakeExplanation&&<details className="lesson-missed-note"><summary>Why this was easy to miss</summary><ul>{adapter.mistakeExplanation.map(note=><li key={note}>{note}</li>)}</ul></details>}
     <form className="lesson-input" onSubmit={event=>{event.preventDefault();runTrace()}}>
       <label className="lesson-presets"><span>Try an example</span><select value={adapter.presets.find(preset=>preset.input===raw)?.input??''} onChange={event=>{setRaw(event.target.value);runTrace(event.target.value)}}><option value="" disabled>Custom input</option>{adapter.presets.map(preset=><option value={preset.input} key={preset.label}>{preset.label}</option>)}</select></label>
-      {isSteiner?<SteinerInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:isWeightedWord?<WeightedWordInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:isMatchsticks?<MatchsticksInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:<details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>}
+      {isDigits?<RemoveKDigitsInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:isSteiner?<SteinerInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:isWeightedWord?<WeightedWordInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:isMatchsticks?<MatchsticksInputEditor raw={raw} onChange={value=>{setRaw(value);setPlaying(false)}}/>:<details className="lesson-custom-input"><summary>{adapter.inputLabel}<span>Edit JSON input</span></summary><label className="lesson-raw"><textarea rows={2} value={raw} onChange={event=>{setRaw(event.target.value);setPlaying(false)}} aria-describedby="lesson-input-guide" placeholder={adapter.placeholder} spellCheck={false}/></label></details>}
       <LessonButton className="lesson-primary" type="submit"><ScanLine size={16}/> Build steps</LessonButton>
       <p id="lesson-input-guide">{adapter.inputGuide??`Use the example format shown above. ${adapter.mode==='generic'?'This fallback inspects parameters and notes, not algorithm execution.':'This teaching simulation uses bounded inputs.'}`}</p>
     </form>
     {traceError&&<p className="lesson-error" role="alert">{traceError}</p>}
-    {dirty&&!traceError&&<p className="lesson-notice">Input edited. Build steps to apply it; the paused view below still uses <code>{appliedInput}</code>.</p>}
+    {dirty&&frames.length>0&&<p className="lesson-notice">Input edited. Build steps to apply it; the paused view below still uses <code>{appliedInput}</code>.</p>}
     <div className={`lesson-workspace ${diagramFirst?'diagram-first':'classic-workspace'}`}>
       <section className="lesson-stage" aria-label="Algorithm visual and playback">
         <div className="lesson-stage-label"><span>{adapter.mode==='generic'?'Study outline · not execution':adapter.referenceCode?'Code-linked algorithm trace':'Algorithm teaching model'}</span><small>Local simulation · Python never executed</small></div>
@@ -127,6 +134,7 @@ export function ProblemVisualizerPage(){
           <LessonButton onClick={()=>stepTo(frameIndex+1)} disabled={!playbackFrames.length||frameIndex>=playbackFrames.length-1} aria-label="Next step" title="Next step"><ChevronRight size={19}/></LessonButton>
           {isMatchsticks&&<><LessonButton className="matchsticks-jump-control" onClick={()=>stepToAction('prune')} disabled={!playbackFrames.some((frame,index)=>index>frameIndex&&(frame.data as {action?:string}).action==='prune')} title="Jump to next capacity rejection">Next rejection</LessonButton><LessonButton className="matchsticks-jump-control" onClick={()=>stepToAction('resume')} disabled={!playbackFrames.some((frame,index)=>index>frameIndex&&(frame.data as {action?:string}).action==='resume')} title="Jump to next failed-child return">Next backtrack</LessonButton></>}
           <label>Speed<select value={speed} onChange={event=>setSpeed(Number(event.target.value))}><option value={2200}>0.5×</option><option value={1100}>1×</option><option value={550}>2×</option></select></label>
+          {isDigits&&<><LessonButton onClick={()=>stepToAction('pop')} disabled={!playbackFrames.some((frame,index)=>index>frameIndex&&(frame.data as {action?:string}).action==='pop')}>Next removal</LessonButton><LessonButton onClick={()=>{const next=playbackFrames.findIndex((frame,index)=>index>frameIndex&&frame.phase!==current?.phase);if(next>=0)stepTo(next)}} disabled={!playbackFrames.some((frame,index)=>index>frameIndex&&frame.phase!==current?.phase)}>Next phase</LessonButton></>}
           <output>Step {playbackFrames.length?frameIndex+1:0} <span>/ {playbackFrames.length}</span></output>
         </div>
         <div className="lesson-timeline"><input aria-label="Trace step" aria-valuetext={`Step ${frameIndex+1}: ${current?.title??'No trace'}`} type="range" min={0} max={Math.max(0,playbackFrames.length-1)} value={frameIndex} disabled={!playbackFrames.length} onChange={event=>stepTo(Number(event.target.value))}/></div>

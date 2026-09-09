@@ -4,7 +4,7 @@ import type {ComponentProps,ReactNode} from 'react';
 
 export function useLessonReducedMotion(){
   const systemReduced=useReducedMotion();
-  const [localReduced,setLocalReduced]=useState(()=>localStorage.getItem('algo-atlas-reduced-motion')==='true');
+  const [localReduced,setLocalReduced]=useState(()=>typeof localStorage!=='undefined'&&localStorage.getItem('algo-atlas-reduced-motion')==='true');
   useEffect(()=>{
     const sync=()=>setLocalReduced(localStorage.getItem('algo-atlas-reduced-motion')==='true');
     window.addEventListener('storage',sync);

@@ -120,3 +120,28 @@ confirmed all four records select the right adapter and match its reference code
 These are not browser evidence: desktop/mobile rendering, keyboard interaction,
 zoom, overflow, and reduced-motion behavior still need authorized browser checks.
 Do not claim screenshot or visual QA until it occurs.
+
+## Remove K Digits lesson
+
+- Keep `src/visualizers/reference/remove-k-digits.py` as the canonical raw Python
+  reference; derive displayed code and exact line focus from this same source.
+- Accept a string of 1–32 ASCII digits, with no leading zeros except `"0"`, and
+  integer `k` from 1 through its length. Never convert the whole number to numeric form.
+- The stack stores original indexes: show `index → num[index]`, with the top on
+  the right. Equal digits fail strict `>`; after budget exhaustion the stack may descend.
+- Emit pop and `k-=1` separately; `pendingSpend` explains the intervening state.
+  Evaluate scan terms in order: stack, top > current, k; tail terms: k, stack.
+  Display short-circuited terms as “not evaluated,” never false.
+- Preserve scan → tail cleanup → build → trim order, including `res = ""` before
+  tail cleanup. The remove-all guard skips all four phases and returns `"0"`.
+  Zero trimming moves a pointer in `res`; it changes neither stack nor budget.
+- Reuse `StateLegend`, `SmoothTabs`, and the shared reduced-motion preference with
+  Motion for React. Allow grid children to shrink and legends to wrap; digit strips
+  scroll locally. This refinement resolved mobile min-content overflow.
+- `POST /api/problems` accepts optional `record_initial_mistake` (default `true`);
+  use `false` for solved-only additions without a mistake event. No migration is required.
+- Recorded handoff, 2026-09-07: reviewer verdict “ship” from seven desktop/mobile/reflow
+  screenshots; 20 visualizer tests, 23 backend tests, and the production build passed.
+  Browser checks covered custom input, invalid input preserving the previous trace,
+  playback, keyboard, saved-code matching, reduced motion, CSS 200% zoom and 720px
+  reflow. These checks do not establish a full WCAG audit or native browser zoom coverage.

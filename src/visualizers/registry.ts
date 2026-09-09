@@ -19,6 +19,7 @@ import {uniqueSplitVisualizer} from './uniqueSplit';
 import {generateParenthesesVisualizer} from './generateParentheses';
 import {weightedWordMappingVisualizer} from './weightedWordMapping';
 import {matchsticksSquareVisualizer} from './matchsticksSquare';
+import {removeKDigitsVisualizer} from './removeKDigits';
 import type {VisualizerAdapter} from './types';
 
 const specialized:Record<string,VisualizerAdapter>={
@@ -45,6 +46,8 @@ const specialized:Record<string,VisualizerAdapter>={
   'weighted-word-mapping':weightedWordMappingVisualizer,
   'matchsticks-to-square':matchsticksSquareVisualizer,
   '473':matchsticksSquareVisualizer,
+  'remove-k-digits':removeKDigitsVisualizer,
+  '402':removeKDigitsVisualizer,
 };
 
 export function getVisualizer(problem:Problem):VisualizerAdapter{

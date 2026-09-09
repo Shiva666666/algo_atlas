@@ -22,6 +22,76 @@ const {IncremovableCanvas}=await load('components/IncremovableCanvas.tsx');
 const {SteinerCanvas}=await load('components/SteinerCanvas.tsx');
 const {WeightedWordMappingCanvas}=await load('components/WeightedWordMappingCanvas.tsx');
 const {MatchsticksCanvas}=await load('components/MatchsticksCanvas.tsx');
+const {removeKDigitsVisualizer:rk,createRemoveKDigitsFrames,parseRemoveKDigitsInput}=await load('removeKDigits.ts');
+const {RemoveKDigitsCanvas}=await load('components/RemoveKDigitsCanvas.tsx');
+const {RemoveKDigitsInputEditor}=await load('components/RemoveKDigitsInputEditor.tsx');
+
+function removalStringOracle(num,k){
+  const candidates=[];
+  function choose(start,partial){
+    if(partial.length===num.length-k){candidates.push(partial.replace(/^0+/, '')||'0');return;}
+    for(let index=start;index<num.length;index++)choose(index+1,partial+num[index]);
+  }
+  choose(0,'');
+  return candidates.sort((a,b)=>a.length-b.length||a.localeCompare(b))[0];
+}
+
+test('Remove K Digits: exhaustive small subsequence oracle and 32-digit string arithmetic',()=>{
+  let count=0;
+  for(let length=1;length<=5;length++)for(let pattern=0;pattern<3**length;pattern++){
+    let x=pattern;let num='';for(let i=0;i<length;i++){num+=String(x%3+1);x=Math.floor(x/3);}
+    for(let k=1;k<=length;k++){assert.equal(createRemoveKDigitsFrames({num,k}).at(-1).data.result,removalStringOracle(num,k));count++;}
+  }
+  assert.ok(count>1000);
+  for(const preset of rk.presets){const input=rk.parseInput(preset.input);assert.equal(createRemoveKDigitsFrames(input).at(-1).data.result,removalStringOracle(input.num,input.k));}
+  assert.equal(createRemoveKDigitsFrames({num:'9'.repeat(32),k:1}).at(-1).data.result,'9'.repeat(31));
+});
+
+test('Remove K Digits: index identity, short circuit, source lines, and separate budget accounting',()=>{
+  const source=rk.referenceCode.split('\n');
+  for(const preset of rk.presets){
+    const frames=createRemoveKDigitsFrames(rk.parseInput(preset.input));
+    for(let step=0;step<frames.length;step++){
+      const frame=frames[step],d=frame.data;
+      assert.equal(frame.kind,'remove-k-digits');assert.equal(frame.codeLines.length,1);
+      assert.equal(source[frame.codeLines[0]-1].trim(),frame.codeFocus[0]);
+      assert.equal(d.topIndex,d.stack.at(-1)??null);
+      assert.deepEqual([...d.stack].sort((a,b)=>a-b),d.stack);
+      assert.equal(new Set([...d.stack,...d.removed.map(item=>item.index)]).size,d.stack.length+d.removed.length);
+      assert.equal(d.removed.length,d.originalK-d.remainingK+(d.pendingSpend?1:0));
+      if(d.action==='compare'){
+        const present=d.stack.length>0;assert.equal(d.condition.stackPresent,present);
+        assert.equal(d.condition.greater,present?d.num[d.topIndex]>d.currentDigit:null);
+        assert.equal(d.condition.budgetAvailable,d.condition.greater===true?d.remainingK>0:null);
+      }
+      if(d.action==='pop'){const previous=frames[step-1].data;assert.equal(d.removed.at(-1).index,previous.stack.at(-1));assert.equal(d.remainingK,previous.remainingK);}
+      if(d.action==='spend')assert.equal(d.remainingK,frames[step-1].data.remainingK-1);
+      if(d.action==='append-output')assert.equal(d.rawOutput,frames[step-1].data.rawOutput+d.num[d.outputIndex]);
+      if(d.action==='trim-step'){assert.equal(d.trimIndex,frames[step-1].data.trimIndex+1);assert.equal(d.remainingK,frames[step-1].data.remainingK);assert.deepEqual(d.stack,frames[step-1].data.stack);}
+      assert.equal(d.rawOutput,d.stack.map(index=>d.num[index]).join('').slice(0,d.rawOutput.length));
+    }
+    const before=JSON.stringify(frames[0].data);frames.at(-1).data.stack.push(99);frames.at(-1).data.removed.push({index:99,reason:'mutated'});assert.equal(JSON.stringify(frames[0].data),before);
+  }
+});
+
+test('Remove K Digits: equality, budget exhaustion, tail removal, early return, and zero formatting',()=>{
+  const equal=createRemoveKDigitsFrames({num:'1111',k:2});assert.ok(equal.filter(f=>f.data.action==='pop').every(f=>f.data.phase==='tail'));
+  const exhausted=createRemoveKDigitsFrames({num:'321',k:1}).at(-1).data;assert.equal(exhausted.stack.map(i=>exhausted.num[i]).join(''),'21');
+  const early=createRemoveKDigitsFrames({num:'10',k:2});assert.equal(early.length,2);assert.equal(early.at(-1).data.earlyReturn,true);assert.deepEqual(early.at(-1).data.stack,[]);
+  const zeros=createRemoveKDigitsFrames({num:'1000',k:1}).at(-1).data;assert.equal(zeros.rawOutput,'000');assert.equal(zeros.trimIndex,3);assert.equal(zeros.result,'0');
+  const cascade=createRemoveKDigitsFrames({num:'123045',k:3});assert.equal(cascade.filter(f=>f.data.action==='pop'&&f.data.scanIndex===3).length,3);
+});
+
+test('Remove K Digits: strict parser, registry and semantic UI',()=>{
+  for(const value of [null,[],{}, {num:123,k:1},{num:'',k:1},{num:'01',k:1},{num:'1 2',k:1},{num:'１２',k:1},{num:'+12',k:1},{num:'1.2',k:1},{num:'1'.repeat(33),k:1},{num:'123',k:0},{num:'123',k:4},{num:'123',k:1.5},{num:'123',k:'1'},{num:'123',k:true}])assert.throws(()=>parseRemoveKDigitsInput(JSON.stringify(value)));
+  assert.throws(()=>parseRemoveKDigitsInput('{bad'));
+  assert.equal(createRemoveKDigitsFrames({num:'0',k:1}).at(-1).data.result,'0');
+  for(const key of ['402','remove-k-digits'])assert.equal(getVisualizer({source:'leetcode',source_key:key}).id,rk.id);
+  const markup=renderToStaticMarkup(React.createElement(RemoveKDigitsCanvas,{data:createRemoveKDigitsFrames({num:'10200',k:1}).at(-1).data}));
+  for(const text of ['Index stack','Removal budget','Removed digits','Raw res','Returned string','200','Trim zeros'])assert.ok(markup.includes(text),text);
+  const input=renderToStaticMarkup(React.createElement(RemoveKDigitsInputEditor,{raw:'{"num":"123","k":1}',onChange:()=>{}}));
+  assert.match(input,/role="tabpanel"/);assert.match(input,/digits-input-fields-panel/);
+});
 const problem={source:'leetcode',source_key:'unknown',primary_main:{slug:'arrays'},primary_subtag:{slug:'search'},notes:{approach:['A saved study note.']}};
 
 function coinOracle(coins,amount){

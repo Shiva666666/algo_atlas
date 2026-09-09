@@ -10,7 +10,7 @@ export interface VisualFrame {
   phase:string;
   title:string;
   message:string;
-  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal'|'trie-suggestions'|'unique-split'|'weighted-word-mapping'|'matchsticks-square';
+  kind:'palindrome-cuts'|'generic'|'steiner-tree'|'monotonic-window'|'incremovable'|'intuition'|'n-queens'|'coin-change'|'hexadecimal'|'trie-suggestions'|'unique-split'|'weighted-word-mapping'|'matchsticks-square'|'remove-k-digits';
   data:unknown;
   codeFocus?:string[];
   /** Optional exact source lines for repeated expressions such as recursive returns. */
@@ -237,7 +237,7 @@ export interface VisualizerAdapter {
   /** Source-grounded reflection for the learner, when supplied by the user. */
   mistakeExplanation?:string[];
   /** Optional structured editor for adapters whose input has a matrix or other rich shape. */
-  inputEditor?:'steiner-matrix'|'weighted-word-grid'|'matchsticks';
+  inputEditor?:'steiner-matrix'|'weighted-word-grid'|'matchsticks'|'digit-string';
 }
 
 export type TrieNodeState='idle'|'active'|'visited'|'terminal'|'missing';

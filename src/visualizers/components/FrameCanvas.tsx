@@ -9,6 +9,7 @@ import {TrieSuggestionsCanvas,UniqueSplitCanvas} from './Batch1Canvas';
 import {NQueensCanvas,CoinChangeCanvas,HexadecimalCanvas} from './PracticeCanvas';
 import {WeightedWordMappingCanvas} from './WeightedWordMappingCanvas';
 import {MatchsticksCanvas} from './MatchsticksCanvas';
+import {RemoveKDigitsCanvas} from './RemoveKDigitsCanvas';
 import type {NQueensData} from '../nQueens';
 import type {CoinChangeData} from '../coinChange';
 import type {HexadecimalData} from '../hexadecimal';
@@ -65,6 +66,7 @@ function GenericCanvas({data,approach}:{data:GenericFrameData;approach:string[]}
 
 export function FrameCanvas({frame,problem}:{frame:VisualFrame;problem:Problem}){
   switch(frame.kind){
+    case 'remove-k-digits':return <RemoveKDigitsCanvas data={frame.data as import('../removeKDigits').RemoveKDigitsData}/>;
     case 'n-queens':return <NQueensCanvas data={frame.data as NQueensData}/>;
     case 'coin-change':return <CoinChangeCanvas data={frame.data as CoinChangeData}/>;
     case 'hexadecimal':return <HexadecimalCanvas data={frame.data as HexadecimalData}/>;
