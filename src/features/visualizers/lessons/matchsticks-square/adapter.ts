@@ -16,7 +16,7 @@ export const matchsticksSquareVisualizer: VisualizerAdapter<unknown, Matchsticks
   description:
     'Watch each legal side choice, failed child return, and sibling exploration build—or rule out—a square.',
   inputLabel: 'MATCHSTICKS · four side assignment',
-  inputGuide: `Use 1–${MAX_STICKS} positive safe-integer sticks. The trace is capped at ${MAX_FRAMES.toLocaleString()} frames so every displayed result is complete.`,
+  inputGuide: `Use 1–${MAX_STICKS} positive safe-integer sticks. The trace is capped at ${MAX_FRAMES.toLocaleString('en-IN')} frames so every displayed result is complete.`,
   placeholder: JSON.stringify({ matchsticks: defaultInput }),
   referenceCode: matchsticksSquareCode,
   presets: lessonPresets,

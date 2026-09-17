@@ -125,7 +125,7 @@ export function WeightedWordMappingCanvas({ data }: { data: WeightedWordFrameDat
               {data.selectedWeight === null ? '' : `+ ${data.selectedWeight}`}{' '}
               {data.newTotal === null ? '' : `= ${data.newTotal}`}
             </code>
-            <strong>{data.runningTotal.toLocaleString()}</strong>
+            <strong>{data.runningTotal.toLocaleString('en-IN')}</strong>
           </div>
           <p>
             {data.action === 'lookup'

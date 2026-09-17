@@ -133,7 +133,7 @@ export function createMatchsticksFrames(
   ) => {
     if (frames.length >= MAX_FRAMES)
       throw new Error(
-        `Trace too large. Try a smaller input (maximum ${MAX_FRAMES.toLocaleString()} frames).`,
+        `Trace too large. Try a smaller input (maximum ${MAX_FRAMES.toLocaleString('en-IN')} frames).`,
       );
     const current = stack.at(-1);
     const data = makeData(

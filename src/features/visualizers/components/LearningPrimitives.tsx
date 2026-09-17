@@ -33,5 +33,5 @@ export function RuleStrip({ rules }: { rules: RuleFocus[] }) {
 }
 
 export function formatCost(value: number | null) {
-  return value === null ? '∞' : value.toLocaleString();
+  return value === null ? '∞' : value.toLocaleString('en-IN');
 }

@@ -810,7 +810,7 @@ export function createFrames(value: unknown, _problem: Problem): VisualFrame<Ste
       'with-s',
       'lookup',
       `Read ndp[full][t = ${input.query[1]}]`,
-      `The target column forces t into the connected graph without adding another mask bit. The answer is ${answer.toLocaleString()}.`,
+      `The target column forces t into the connected graph without adding another mask bit. The answer is ${answer.toLocaleString('en-IN')}.`,
       ['answer[s][t] = ndp[full_mask][t]'],
       true,
     ),
