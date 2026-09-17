@@ -1,0 +1,7 @@
+target-version = "py311"
+line-length = 100
+include = ["backend/algo_atlas/**/*.py", "tests/backend/**/*.py", "scripts/**/*.py"]
+extend-exclude = ["backend/alembic", "exports", ".local", ".venv", "**/reference.py", "backend/algo_atlas/learning_pack_code.py"]
+
+[lint]
+select = ["I"]

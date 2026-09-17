@@ -18,12 +18,12 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
           cache: pip
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.13.1"
+          node-version: '22.13.1'
           cache: npm
 
       - name: Install dependencies
@@ -35,7 +35,16 @@ jobs:
         run: npm run build
 
       - name: Run tests
-        run: python -m pytest
+        run: |
+          npm test
+          python -m pytest
+
+      - name: Check formatting and architecture
+        run: |
+          npm run format:check
+          python -m ruff format --check .
+          python -m ruff check .
+          npm run check:architecture
 
       - name: Rebuild a fresh database from exports
         run: |

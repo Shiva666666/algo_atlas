@@ -1,0 +1,275 @@
+/* Editor */
+.editor-page {
+  padding-top: 25px;
+}
+.editor-top {
+  max-width: 1600px;
+  margin: 0 auto 20px;
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  align-items: center;
+  gap: 18px;
+}
+.editor-top h2 {
+  font-size: 28px;
+  margin: 0;
+}
+.back-btn {
+  border: 0;
+  background: transparent;
+  color: #747d90;
+  font: 500 8px DM Mono;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.editor-actions {
+  display: flex;
+  gap: 9px;
+}
+.danger-icon {
+  width: 39px;
+  height: 39px;
+  border: 1px solid rgba(255, 117, 143, 0.2);
+  background: rgba(255, 117, 143, 0.04);
+  color: #ff758f;
+  cursor: pointer;
+}
+.editor-grid {
+  max-width: 1600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.72fr);
+  gap: 14px;
+}
+.editor-main,
+.notes-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.form-panel {
+  padding-bottom: 18px;
+}
+.form-grid {
+  padding: 17px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.form-grid label,
+.custom-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.form-grid label.full,
+.custom-panel label.full {
+  grid-column: 1 / -1;
+}
+label > span,
+.chip-field > span {
+  font: 500 8px DM Mono;
+  color: #737d91;
+  letter-spacing: 0.1em;
+}
+input,
+select,
+textarea {
+  border: 1px solid var(--line);
+  background: #090d16;
+  color: #dce3ef;
+  outline: 0;
+  border-radius: 2px;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(50, 230, 226, 0.45);
+  box-shadow: 0 0 0 2px rgba(50, 230, 226, 0.035);
+}
+.form-grid input,
+.form-grid select,
+.custom-panel input,
+.custom-panel select {
+  height: 38px;
+  padding: 0 10px;
+  font-size: 11px;
+}
+.input-action {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: #090d16;
+  padding-left: 10px;
+  color: #5f697c;
+}
+.input-action input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  height: 100%;
+}
+.input-action button {
+  height: 28px;
+  margin-right: 5px;
+  border: 1px solid rgba(50, 230, 226, 0.25);
+  background: rgba(50, 230, 226, 0.06);
+  color: #7edddd;
+  font: 500 8px DM Mono;
+  cursor: pointer;
+}
+.chip-field {
+  padding: 0 17px 10px;
+}
+.chip-field > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+.chip-field button {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+  color: #737c8e;
+  padding: 6px 9px;
+  font: 500 8px DM Mono;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.chip-field button.selected {
+  border-color: rgba(50, 230, 226, 0.38);
+  background: rgba(50, 230, 226, 0.08);
+  color: #aaf3f1;
+  box-shadow: 0 0 11px rgba(50, 230, 226, 0.05);
+}
+.failure-field button.selected {
+  border-color: rgba(255, 60, 172, 0.38);
+  background: rgba(255, 60, 172, 0.08);
+  color: #ff9dd4;
+}
+.code-panel {
+  overflow: hidden;
+}
+.monaco-editor,
+.monaco-editor-background,
+.monaco-editor .margin {
+  background-color: #080b13 !important;
+}
+.notes-panel {
+  padding-bottom: 12px;
+}
+.notes-panel label {
+  display: flex;
+  flex-direction: column;
+  margin: 14px 15px 0;
+}
+.notes-panel label > span {
+  color: #a0a9b9;
+}
+.notes-panel label > small {
+  font-size: 8px;
+  color: #565f71;
+  margin: 4px 0 8px;
+}
+.notes-panel textarea,
+.repeat-modal textarea {
+  resize: vertical;
+  padding: 10px;
+  line-height: 1.55;
+  font: 400 10px DM Mono;
+}
+.history-panel {
+  padding-bottom: 10px;
+}
+.history-panel > div:not(.panel-title) {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: 10px;
+  margin: 15px;
+}
+.history-panel > div > i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff3cac;
+  box-shadow: 0 0 7px #ff3cac;
+  margin-top: 4px;
+}
+.history-panel > div > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.history-panel b {
+  font-size: 10px;
+}
+.history-panel small {
+  font: 400 8px DM Mono;
+  color: #727b8e;
+}
+.history-panel p {
+  margin: 3px 0;
+  color: #8d96a8;
+  font-size: 10px;
+}
+.toast-message {
+  position: fixed;
+  right: 25px;
+  top: 102px;
+  z-index: 30;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #17101b;
+  border: 1px solid rgba(255, 117, 143, 0.35);
+  color: #ff9aaf;
+  padding: 11px 13px;
+  font: 500 9px DM Mono;
+  box-shadow: 0 12px 35px #000;
+}
+.toast-message.success {
+  background: #0e1917;
+  border-color: rgba(99, 232, 170, 0.35);
+  color: #8cf1be;
+}
+.toast-message button {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+}
+.repeat-modal {
+  width: min(540px, calc(100vw - 30px));
+  padding: 24px;
+}
+.repeat-modal h3 {
+  font: 600 24px 'IBM Plex Sans';
+  margin: 7px 0 20px;
+}
+.repeat-modal textarea {
+  width: 100%;
+  margin: 18px 0;
+}
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border: 0;
+  background: transparent;
+  color: #7a8395;
+  cursor: pointer;
+}

@@ -1,0 +1,1721 @@
+[
+  {
+    "source": "LeetCode",
+    "source_key": "repeated-substring-pattern",
+    "id": "repeated-substring-pattern",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def repeatedSubstringPattern(self, s: str) -> bool:\n\n        n = len( s )\n\n        for length in range( 1, n//2 + 1):\n\n            if (n % length) == 0:\n\n                sub = s[ : length]\n\n                if sub*(n//length) == s:\n\n                    return True\n\n\n        return False",
+    "presets": [
+      {
+        "label": "Official · abab",
+        "source": "LeetCode",
+        "input": "{\"s\":\"abab\"}",
+        "count": 12,
+        "traceHash": "9646adbff6d4a018d45539a5c6033421ef849f11a9cdc140940416fc28d10a41",
+        "markupHash": "24b21e002ffbd4b8ab9de60c1a60e4b7ae9b7eddd4a7bd857f92512e4395ac4d"
+      },
+      {
+        "label": "Official · aba",
+        "source": "LeetCode",
+        "input": "{\"s\":\"aba\"}",
+        "count": 7,
+        "traceHash": "8f904a745a22710de3cf852b91322298416bd35ffb4f651526f91777525de795",
+        "markupHash": "0e99449fa4d1d620bebd2649dd136b55e77b66873aebff226ca0d7cea5bb7d6b"
+      },
+      {
+        "label": "Official · abcabcabcabc",
+        "source": "LeetCode",
+        "input": "{\"s\":\"abcabcabcabc\"}",
+        "count": 17,
+        "traceHash": "25824b4abd9671a8f1abc2a9cc5ae9bc54d7fd25d7918bf4f818e66a2b038e88",
+        "markupHash": "a824b91e10cfeec768398b85fdf2590be86e749bc23c3702107faaa9d9e6cd41"
+      },
+      {
+        "label": "Diagnostic · a",
+        "source": "Diagnostic",
+        "input": "{\"s\":\"a\"}",
+        "count": 2,
+        "traceHash": "ce8e2701fbac086467c6742de78c417336aac28931eed82c14a544372b06b4cc",
+        "markupHash": "a5d4beed7e4fa1462ff5d7752834af94aa51de3d4a2210797cc75cf319dda169"
+      },
+      {
+        "label": "Diagnostic · aaaa",
+        "source": "Diagnostic",
+        "input": "{\"s\":\"aaaa\"}",
+        "count": 7,
+        "traceHash": "193cf7dd0bf9a955bed99e7dbdde673502c4d78fcafabf0d3b3191128a6f1f61",
+        "markupHash": "bf879eeae42e3b9664c6b850454999a7bd6156280d560cc556865116271a76e4"
+      },
+      {
+        "label": "Diagnostic · ababac",
+        "source": "Diagnostic",
+        "input": "{\"s\":\"ababac\"}",
+        "count": 17,
+        "traceHash": "a1e0c155a5187350a15546337439c9788d0855a082394ac716d64ca7784eed74",
+        "markupHash": "22148dacbd982abc18ffdf00729caa16d9d5a6d8359c73b5f491b5f45e336bfc"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "459",
+    "id": "repeated-substring-pattern",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def repeatedSubstringPattern(self, s: str) -> bool:\n\n        n = len( s )\n\n        for length in range( 1, n//2 + 1):\n\n            if (n % length) == 0:\n\n                sub = s[ : length]\n\n                if sub*(n//length) == s:\n\n                    return True\n\n\n        return False",
+    "presets": [
+      {
+        "label": "Official · abab",
+        "source": "LeetCode",
+        "input": "{\"s\":\"abab\"}",
+        "count": 12,
+        "traceHash": "9646adbff6d4a018d45539a5c6033421ef849f11a9cdc140940416fc28d10a41",
+        "markupHash": "24b21e002ffbd4b8ab9de60c1a60e4b7ae9b7eddd4a7bd857f92512e4395ac4d"
+      },
+      {
+        "label": "Official · aba",
+        "source": "LeetCode",
+        "input": "{\"s\":\"aba\"}",
+        "count": 7,
+        "traceHash": "8f904a745a22710de3cf852b91322298416bd35ffb4f651526f91777525de795",
+        "markupHash": "0e99449fa4d1d620bebd2649dd136b55e77b66873aebff226ca0d7cea5bb7d6b"
+      },
+      {
+        "label": "Official · abcabcabcabc",
+        "source": "LeetCode",
+        "input": "{\"s\":\"abcabcabcabc\"}",
+        "count": 17,
+        "traceHash": "25824b4abd9671a8f1abc2a9cc5ae9bc54d7fd25d7918bf4f818e66a2b038e88",
+        "markupHash": "a824b91e10cfeec768398b85fdf2590be86e749bc23c3702107faaa9d9e6cd41"
+      },
+      {
+        "label": "Diagnostic · a",
+        "source": "Diagnostic",
+        "input": "{\"s\":\"a\"}",
+        "count": 2,
+        "traceHash": "ce8e2701fbac086467c6742de78c417336aac28931eed82c14a544372b06b4cc",
+        "markupHash": "a5d4beed7e4fa1462ff5d7752834af94aa51de3d4a2210797cc75cf319dda169"
+      },
+      {
+        "label": "Diagnostic · aaaa",
+        "source": "Diagnostic",
+        "input": "{\"s\":\"aaaa\"}",
+        "count": 7,
+        "traceHash": "193cf7dd0bf9a955bed99e7dbdde673502c4d78fcafabf0d3b3191128a6f1f61",
+        "markupHash": "bf879eeae42e3b9664c6b850454999a7bd6156280d560cc556865116271a76e4"
+      },
+      {
+        "label": "Diagnostic · ababac",
+        "source": "Diagnostic",
+        "input": "{\"s\":\"ababac\"}",
+        "count": 17,
+        "traceHash": "a1e0c155a5187350a15546337439c9788d0855a082394ac716d64ca7784eed74",
+        "markupHash": "22148dacbd982abc18ffdf00729caa16d9d5a6d8359c73b5f491b5f45e336bfc"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "max-area-of-island",
+    "id": "max-area-of-island",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:\n\n\n        directions = [(0 , 1),(1 , 0),(0 , -1),(-1 , 0)]\n\n        seen = set()\n\n        def dfs(row, column):\n\n            if grid[row][column] == 0:\n\n                return 0\n\n            seen.add((row, column))\n\n            local_area = 1\n\n            for r,c in directions:\n                new_r, new_c= row+r, column+c\n\n                if 0<=new_r<len(grid) and 0<=new_c<len(grid[0]) and (new_r, new_c) not in seen:\n                    local_area+= dfs(new_r, new_c)\n\n\n            return local_area\n\n\n        max_area = 0\n\n        for r in range(len(grid)):\n            for c in range(len(grid[0])):\n\n                if grid[r][c] == 1:\n                    if (r,c) not in seen:\n                        max_area = max(max_area,dfs(r,c))\n\n\n        return max_area",
+    "presets": [
+      {
+        "label": "Diagnostic · separate islands → 3",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1,1,0],[0,1,0],[1,0,1]]}",
+        "count": 147,
+        "traceHash": "f7c83f13acfa07d12a359ee4301e9b81baca39d66274694880ade0d919a11a1e",
+        "markupHash": "26387e48e921220a023471745cc4464906459436e1d3a527b9b6fe5943ca18ce"
+      },
+      {
+        "label": "Official · largest island → 6",
+        "source": "LeetCode",
+        "input": "{\"grid\":[[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]}",
+        "count": 805,
+        "traceHash": "80f4812cb12ca90dc0b686524c5a1b20452fee2c1daee39e0ed244bb81c117c0",
+        "markupHash": "12da6dadea78929bd68de5c30925bec5d433d4de6dd6a9fa3db49492bc267781"
+      },
+      {
+        "label": "Official · water only → 0",
+        "source": "LeetCode",
+        "input": "{\"grid\":[[0,0,0,0,0,0,0,0]]}",
+        "count": 12,
+        "traceHash": "9f0c1d5d82d9255fe47a60784c3e61e6e3bf96cc4d94433f3062433335210e52",
+        "markupHash": "212f490ef89c1a5b94cac415acb557b3d3de83b1c6d6e3fa0215982b507c264e"
+      },
+      {
+        "label": "Diagnostic · single land → 1",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1]]}",
+        "count": 25,
+        "traceHash": "415f9017273c82ff64a25046fa3f0391bfa33bdb4faebfb06965f2ba239fdf95",
+        "markupHash": "61a3b5396542ae379cef469a6fafbc3697eece1cd65abc6248f85e9619cbef0b"
+      },
+      {
+        "label": "Diagnostic · diagonals → 1",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1,0],[0,1]]}",
+        "count": 64,
+        "traceHash": "ff882f6be152c7c8ee98dfbdbc51ea9530c72b986a71794d8dd8bcccbdc5a0bc",
+        "markupHash": "1f38f007da8ca13dc336b8c4f0491a85590b8ebe0ed84626de34f8ffe685c94e"
+      },
+      {
+        "label": "Diagnostic · all land → 6",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1,1,1],[1,1,1]]}",
+        "count": 125,
+        "traceHash": "750c2284577b7870d5b9bc572c1e6ccc1283b45abbffe38d0255ca5efb969e06",
+        "markupHash": "4811bde15131e1f76f33638e1dcabb45dea588a0816839ea181a2ead89f83ad2"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "695",
+    "id": "max-area-of-island",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:\n\n\n        directions = [(0 , 1),(1 , 0),(0 , -1),(-1 , 0)]\n\n        seen = set()\n\n        def dfs(row, column):\n\n            if grid[row][column] == 0:\n\n                return 0\n\n            seen.add((row, column))\n\n            local_area = 1\n\n            for r,c in directions:\n                new_r, new_c= row+r, column+c\n\n                if 0<=new_r<len(grid) and 0<=new_c<len(grid[0]) and (new_r, new_c) not in seen:\n                    local_area+= dfs(new_r, new_c)\n\n\n            return local_area\n\n\n        max_area = 0\n\n        for r in range(len(grid)):\n            for c in range(len(grid[0])):\n\n                if grid[r][c] == 1:\n                    if (r,c) not in seen:\n                        max_area = max(max_area,dfs(r,c))\n\n\n        return max_area",
+    "presets": [
+      {
+        "label": "Diagnostic · separate islands → 3",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1,1,0],[0,1,0],[1,0,1]]}",
+        "count": 147,
+        "traceHash": "f7c83f13acfa07d12a359ee4301e9b81baca39d66274694880ade0d919a11a1e",
+        "markupHash": "26387e48e921220a023471745cc4464906459436e1d3a527b9b6fe5943ca18ce"
+      },
+      {
+        "label": "Official · largest island → 6",
+        "source": "LeetCode",
+        "input": "{\"grid\":[[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]}",
+        "count": 805,
+        "traceHash": "80f4812cb12ca90dc0b686524c5a1b20452fee2c1daee39e0ed244bb81c117c0",
+        "markupHash": "12da6dadea78929bd68de5c30925bec5d433d4de6dd6a9fa3db49492bc267781"
+      },
+      {
+        "label": "Official · water only → 0",
+        "source": "LeetCode",
+        "input": "{\"grid\":[[0,0,0,0,0,0,0,0]]}",
+        "count": 12,
+        "traceHash": "9f0c1d5d82d9255fe47a60784c3e61e6e3bf96cc4d94433f3062433335210e52",
+        "markupHash": "212f490ef89c1a5b94cac415acb557b3d3de83b1c6d6e3fa0215982b507c264e"
+      },
+      {
+        "label": "Diagnostic · single land → 1",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1]]}",
+        "count": 25,
+        "traceHash": "415f9017273c82ff64a25046fa3f0391bfa33bdb4faebfb06965f2ba239fdf95",
+        "markupHash": "61a3b5396542ae379cef469a6fafbc3697eece1cd65abc6248f85e9619cbef0b"
+      },
+      {
+        "label": "Diagnostic · diagonals → 1",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1,0],[0,1]]}",
+        "count": 64,
+        "traceHash": "ff882f6be152c7c8ee98dfbdbc51ea9530c72b986a71794d8dd8bcccbdc5a0bc",
+        "markupHash": "1f38f007da8ca13dc336b8c4f0491a85590b8ebe0ed84626de34f8ffe685c94e"
+      },
+      {
+        "label": "Diagnostic · all land → 6",
+        "source": "Diagnostic",
+        "input": "{\"grid\":[[1,1,1],[1,1,1]]}",
+        "count": 125,
+        "traceHash": "750c2284577b7870d5b9bc572c1e6ccc1283b45abbffe38d0255ca5efb969e06",
+        "markupHash": "4811bde15131e1f76f33638e1dcabb45dea588a0816839ea181a2ead89f83ad2"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "palindrome-partitioning-ii",
+    "id": "palindrome-partitioning-ii",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Example 1 · aab",
+        "input": "{\"s\":\"aab\"}",
+        "source": "LeetCode",
+        "count": 12,
+        "traceHash": "0585ca88407fd47e98dd0934c4129762a4c9f31201f9ecd867a04a10004f3846",
+        "markupHash": "cb9056e450e21115d48cde8d5fa1f9622d4a73a933de4138bf64be1a4279adfe"
+      },
+      {
+        "label": "Example 2 · a",
+        "input": "{\"s\":\"a\"}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "e9f8744ff4dd7019cbad77b9e8670f7f20cec8d8f3ad2f7faa02e4669f5a8173",
+        "markupHash": "feadcde9a646e0627d465d5a7cbf6121638262c94fa3d24ee423171d874810be"
+      },
+      {
+        "label": "Example 3 · ab",
+        "input": "{\"s\":\"ab\"}",
+        "source": "LeetCode",
+        "count": 7,
+        "traceHash": "71060696d02ea64056c3d964e3e7d5ff1bf14543f5add787d5106e77bd2091f7",
+        "markupHash": "a8bff6a89f4d42901d0df555edc16a73b0f6b66db65944da1026429ae6adb199"
+      },
+      {
+        "label": "Index check · cdd",
+        "input": "{\"s\":\"cdd\"}",
+        "source": "Diagnostic",
+        "count": 12,
+        "traceHash": "5b6cdd618fda838a455aa11eeaaee779c2e6a23be875bf660a509e8bd07af446",
+        "markupHash": "b66e924d559b3454f5f159126ba9af823ccb9b4ab073b62b4f367ea364e1f349"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "abc395-g",
+    "id": "abc395-g",
+    "presentation": "diagram-first",
+    "referenceCode": "# preprocess\nn, k = map(int, input().split())\n\ncost = []\nfor i in range(n):\n    cost.append(list(map(int, input().split())))\n\nqueries_length = int(input())\nqueries = []\n\nfor i in range(queries_length):\n    queries.append(list(map(int, input().split())))\n\n# floyd for all source shortest path matrix, can use all source dijkstra too maybe time is same idk, GPT says dijkstras is O(N(ElogN)) for all pairs\n# makes sense so for all pairs in a dense complete graph it might be O(N**3logN) as E becomes N**2\n# floyd is a standard N**3\n# The reason we do not miss it is that Floyd's DP state is not \"use exactly k.\" It is: shortest path from i to j using only intermediates 0...k\nfor intermediate_vertex in range(n):\n    for current_vertex in range(n):\n        for final_vertex in range(n):\n            cost[current_vertex][final_vertex] = min(\n                cost[current_vertex][final_vertex],\n                cost[current_vertex][intermediate_vertex]\n                + cost[intermediate_vertex][final_vertex],\n            )\n\n# stiener dp\nINF = float(\"inf\")\ndp = [[INF] * n for _ in range(1 << k)]\ndp[0] = [0] * n  # empty subset is 0\n\nfor t in range(k):\n    dp[1 << t][t] = 0  # when only terminal is requried (basecase) bottom of our tree cost is 0\n\nfor mask in range(1, 1 << k):\n    sub = mask\n    while True:\n        other = mask ^ sub\n        for v in range(n):\n            dp[mask][v] = min(\n                dp[mask][v],\n                dp[sub][v] + dp[other][v],\n            )  # merging two subsets which are mutually exclusive\n\n        # this has to be outside the for v loop\n        if sub == 0:\n            break\n        sub = (sub - 1) & mask\n\n    old = dp[mask][:]\n    for u in range(n):\n        for v in range(n):\n            dp[mask][u] = min(dp[mask][u], old[v] + cost[v][u])\n\nfull_mask = (1 << k) - 1\nanswer = [[INF] * n for _ in range(n)]\n\n# s can be any non-fixed terminal\nfor s in range(k, n):\n    # ndp[mask][v] connects s, the fixed terminals in mask, and v\n    ndp = [[INF] * n for _ in range(1 << k)]\n    ndp[0][s] = 0\n\n    for mask in range(1 << k):\n        sub = mask\n        while True:\n            other = mask ^ sub\n            for v in range(n):\n                ndp[mask][v] = min(\n                    ndp[mask][v],\n                    ndp[sub][v] + dp[other][v],\n                )\n\n            if sub == 0:\n                break\n            sub = (sub - 1) & mask\n\n        old = ndp[mask][:]\n        for u in range(n):\n            for v in range(n):\n                ndp[mask][u] = min(\n                    ndp[mask][u],\n                    old[v] + cost[v][u],\n                )\n\n    for t in range(k, n):\n        answer[s][t] = ndp[full_mask][t]\n\n# queries use 1-based vertex numbering\nfor s, t in queries:\n    print(answer[s - 1][t - 1])\n",
+    "presets": [
+      {
+        "label": "Official sample · connector reuse",
+        "input": "{\"n\":5,\"k\":2,\"c\":[[0,395,395,1,1],[395,0,1,395,1],[395,1,0,395,1],[1,395,395,0,1],[1,1,1,1,0]],\"query\":[3,4]}",
+        "source": "AtCoder",
+        "count": 404,
+        "traceHash": "9d55658159689f2e97bb96e3f4ac0a7708af69fd0733b003378c09c57efdbd85",
+        "markupHash": "5cc9273af0862353e00d180708146889b7c2a0d85e114bb55ce312cb4092366b"
+      },
+      {
+        "label": "Hidden hub beats required-only MST",
+        "input": "{\"n\":5,\"k\":2,\"c\":[[0,9,9,9,1],[9,0,9,9,1],[9,9,0,9,1],[9,9,9,0,1],[1,1,1,1,0]],\"query\":[3,4]}",
+        "source": "Diagnostic",
+        "count": 404,
+        "traceHash": "ad36236c22a6c9d9b8bfb22b3cdc3e2abc77d9ce33545b3eb4d5f449892326a3",
+        "markupHash": "c4231b18da9cbb1115347235e8d96ae16694891c847354294ffc2ae645364efd"
+      },
+      {
+        "label": "Indirect route beats direct edge",
+        "input": "{\"n\":4,\"k\":1,\"c\":[[0,1,9,9],[1,0,1,9],[9,1,0,1],[9,9,1,0]],\"query\":[2,4]}",
+        "source": "Diagnostic",
+        "count": 148,
+        "traceHash": "a8e14643ee430fc254aa0eb537a3d7ad36049df0d6ee9f12b6ed7cf97b673cb5",
+        "markupHash": "1cbf17927bb301bc6bdd818a2834f021a53fc3faf63d69594d40bd2f5dd2d761"
+      },
+      {
+        "label": "True split at the query root",
+        "input": "{\"n\":7,\"k\":3,\"c\":[[0,20,20,20,20,1,20],[20,0,20,20,20,1,20],[20,20,0,20,20,20,1],[20,20,20,0,20,20,1],[20,20,20,20,0,1,1],[1,1,20,20,1,0,20],[20,20,1,1,1,20,0]],\"query\":[4,5]}",
+        "source": "Diagnostic",
+        "count": 1473,
+        "traceHash": "b96a54477a3e2ca834672aa4135d670cf312ed968bfe8a2887184d88b63bb408",
+        "markupHash": "3e21775a2dde6d322771665638c6795c998ea10d8e80452e446f5eaddf9caa2e"
+      },
+      {
+        "label": "Zero weights and tied optima",
+        "input": "{\"n\":5,\"k\":2,\"c\":[[0,7,7,7,0],[7,0,7,7,0],[7,7,0,7,0],[7,7,7,0,0],[0,0,0,0,0]],\"query\":[3,4]}",
+        "source": "Diagnostic",
+        "count": 404,
+        "traceHash": "fce84d846ec3128e7dfb249f592473a64cb8865f9c8b5ff8d8b7d80ad49ca7dc",
+        "markupHash": "b23de6da7354c0215e4931c3cc6cb7e7101e6fa218aa01134ecc4eb6613a59c7"
+      },
+      {
+        "label": "64-bit total cost",
+        "input": "{\"n\":5,\"k\":3,\"c\":[[0,1000000000,1000000000,1000000000,1000000000],[1000000000,0,1000000000,1000000000,1000000000],[1000000000,1000000000,0,1000000000,1000000000],[1000000000,1000000000,1000000000,0,1000000000],[1000000000,1000000000,1000000000,1000000000,0]],\"query\":[4,5]}",
+        "source": "Diagnostic",
+        "count": 785,
+        "traceHash": "5e6deed86f5913e1f9cb488e9f7c657d7addb7ad1fa420760ed54fd1b9a8e18f",
+        "markupHash": "13ed6402b15a22e4bc9f503246aea14c811af1cd43feaa375de7b4e53ec2c6a4"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit",
+    "id": "longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Default · expand then shrink",
+        "input": "{\"nums\":[8,2,4,7],\"limit\":4}",
+        "source": "LeetCode",
+        "count": 16,
+        "traceHash": "130d5daec5209c78f38001e4beb77c6b44771e5e163d80df79febc6f7e3dbf29",
+        "markupHash": "58396374361c7f642ee9d309a1b629ccd613839ec8c7e2eef4ba36dbc9fbfc0f"
+      },
+      {
+        "label": "Long middle window",
+        "input": "{\"nums\":[10,1,2,4,7,2],\"limit\":5}",
+        "source": "LeetCode",
+        "count": 22,
+        "traceHash": "393a9c802e335f19482ebd5701cb9404d57f67f3038996004743e423af2de024",
+        "markupHash": "fb0286ee9af9bd668c5f566fafc318f5445951202a1e6f53c829f17d2e11da60"
+      },
+      {
+        "label": "Duplicates · limit zero",
+        "input": "{\"nums\":[4,2,2,2,4,4,2,2],\"limit\":0}",
+        "source": "LeetCode",
+        "count": 32,
+        "traceHash": "0cbbd980df655f84696ec8000f1b9fb6b9501603d180f49e9091252629f2b403",
+        "markupHash": "993141e6ec39b4461e1a906379b706bc10750d1d83ccc1b4d90c85bf3599e2f4"
+      },
+      {
+        "label": "Singleton",
+        "input": "{\"nums\":[5],\"limit\":0}",
+        "source": "Diagnostic",
+        "count": 5,
+        "traceHash": "f2a7f8b142890ed3373bc3c4e5d0136836c6747f6865780d13bfd8b845e4994e",
+        "markupHash": "f5e6d8a6143858f078aa2881729484c2e8e24bb30b7f9f2b4181b97dbfe4db02"
+      },
+      {
+        "label": "Increasing values",
+        "input": "{\"nums\":[1,2,3,4,5],\"limit\":3}",
+        "source": "Diagnostic",
+        "count": 18,
+        "traceHash": "a95a025a2ade266b87519a8b8be51695c2650967f6b16f8ac188bda4d593b8d0",
+        "markupHash": "a7b94b2cd2bf15ae24a0f573c9aa52659a1cea78f8829556cb068f84c84b97dc"
+      },
+      {
+        "label": "Duplicate block + spike",
+        "input": "{\"nums\":[1,1,1,10,1,1],\"limit\":0}",
+        "source": "Diagnostic",
+        "count": 24,
+        "traceHash": "696bf5db9a36b5f3d288984a584f540f1a2f1ec502f43faf0d48de93af64df88",
+        "markupHash": "0b771246a78f9ef057e26306d721e53c12582a593bcdff775ad64d443ffe6f39"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "koko-eating-bananas",
+    "id": "koko-eating-bananas",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Default example",
+        "input": "{\"piles\":[3,6,7,11],\"h\":8}",
+        "source": "LeetCode",
+        "count": 6,
+        "traceHash": "0c4d48d7fb0b73545ba46d2b730ccdb762ae97c0bf29e98b3aa636b7c037b9cc",
+        "markupHash": "49d05fbbf7871fd6206ff0e193277125b9b33d94496a96848923b336ce89894f"
+      },
+      {
+        "label": "Tight deadline",
+        "input": "{\"piles\":[30,11,23,4,20],\"h\":5}",
+        "source": "LeetCode",
+        "count": 6,
+        "traceHash": "18a2f89e6be8d8e71fccc6ae5bfd2d6e4e5cea415c0e86a5740a01819a800a79",
+        "markupHash": "07142470137bd26038296375280df02999594404a08ad55682a46c657846628f"
+      },
+      {
+        "label": "One extra hour",
+        "input": "{\"piles\":[30,11,23,4,20],\"h\":6}",
+        "source": "LeetCode",
+        "count": 7,
+        "traceHash": "2c5b99c8ef7c6ff33f6597f93c1329a34ea7bd43b622c139865be4da9d67359c",
+        "markupHash": "d425b60d2b57c0b1270f894f7b2f44ac61fe1c10f24ac5e46632dc4f8369251f"
+      },
+      {
+        "label": "Single pile",
+        "input": "{\"piles\":[9],\"h\":3}",
+        "source": "Diagnostic",
+        "count": 5,
+        "traceHash": "7e7027a7d30d7d66128c596835e1303155e104c74de928c0257509691c1c9f01",
+        "markupHash": "39d2f0c1df3e55509b31be46600ef013b239768a9130665017f5a95d84142c0a"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "special-array-with-x-elements-greater-than-or-equal-x",
+    "id": "special-array-with-x-elements-greater-than-or-equal-x",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Answer does not appear",
+        "input": "{\"nums\":[3,5]}",
+        "source": "LeetCode",
+        "count": 3,
+        "traceHash": "aea69f5ce80a6def89e6e8bfa825fac57824dd878b1247f6f08830f3c2764dc3",
+        "markupHash": "39a1342ec6042a73452532b9cf97913eb1795334a6caab0c52a2154020d3529d"
+      },
+      {
+        "label": "No valid x",
+        "input": "{\"nums\":[0,0]}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "2ae71c321bc46daaea3bd29fecc331ab501387dff5176189526b68883e497b80",
+        "markupHash": "8d84b6f5ad818317ad1a609b10d78f0807600f557efd5085f044a149a087e7af"
+      },
+      {
+        "label": "Mixed zeros",
+        "input": "{\"nums\":[0,4,3,0,4]}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "ab6ab1ee67216f526f16cc2b9f15159517505182b7412d19e18faf4e4d0e44cf",
+        "markupHash": "868c0f2cab4ea200511eeaa691e55d6b699f4f823379ef7c5c36b2c17db32946"
+      },
+      {
+        "label": "Boundary not exact",
+        "input": "{\"nums\":[3,6,7,7,0]}",
+        "source": "Diagnostic",
+        "count": 5,
+        "traceHash": "e9a55bbe437e8aa60bf505fd2a98c94713543affe0a20ccc16bd87ce2178653a",
+        "markupHash": "76b4b004badb7fe461a5d14186d45f9d6e7f4f2d425b3b55c6ae01dab6bf8989"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "minimum-falling-path-sum",
+    "id": "minimum-falling-path-sum",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Default · answer 13",
+        "input": "{\"matrix\":[[2,1,3],[6,5,4],[7,8,9]]}",
+        "source": "LeetCode",
+        "count": 15,
+        "traceHash": "79ef7c035d683473e3de037f6ce3441707934df032e8b65ef73c5856f5f04fb3",
+        "markupHash": "70dedaae9a4ece9b880b82837f5c7728c602893cf400d63b0e74a556adac87e7"
+      },
+      {
+        "label": "Negative values",
+        "input": "{\"matrix\":[[-19,57],[-40,-5]]}",
+        "source": "LeetCode",
+        "count": 7,
+        "traceHash": "4ab75bb66385323de4481d7ac0faae299939f0271c5c6dec2b725172b8e6c86c",
+        "markupHash": "779862bb88c2f27a08c4d026908f8d240622630f2ce363a38a94088c94c81bb8"
+      },
+      {
+        "label": "Single cell",
+        "input": "{\"matrix\":[[-7]]}",
+        "source": "Diagnostic",
+        "count": 3,
+        "traceHash": "58fea412b2ac267e70f8a61d646dc95d813c7d2d99f50a00590ff5547fc06a6c",
+        "markupHash": "60659e9133f9e64f87cff40ef6bee4b5e4143e0b98deb4ce957958fb973d3ef9"
+      },
+      {
+        "label": "Boundary diagonals matter",
+        "input": "{\"matrix\":[[9,2,9],[1,8,1],[9,1,9]]}",
+        "source": "Diagnostic",
+        "count": 15,
+        "traceHash": "bf08a4ef1eb472c7252ea1daab294ddb750ed744722e40fe7c767bd36e774dc8",
+        "markupHash": "2dde56b4a0332ceaa6b463b359368f21c10fad5087ce23f2c5f3007716c4d362"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "is-graph-bipartite",
+    "id": "is-graph-bipartite",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Even cycle · true",
+        "input": "{\"graph\":[[1,3],[0,2],[1,3],[0,2]]}",
+        "source": "LeetCode",
+        "count": 11,
+        "traceHash": "9d8ded83f499c0896df64b763da4f60c35b1b7e727fef2eb37063ce403326436",
+        "markupHash": "65f05b277a6c7b1362d6d137f663444804b272b457efbfd065f2881e00b1ac4a"
+      },
+      {
+        "label": "Triangle · false",
+        "input": "{\"graph\":[[1,2,3],[0,2],[0,1,3],[0,2]]}",
+        "source": "LeetCode",
+        "count": 8,
+        "traceHash": "beacae59a5e0fafdf0387c2abde7310aff8079676cfb36305c4af9b9e8a045c7",
+        "markupHash": "b73e22ec2fdda08be6cd42664757a30be6c1db416ea67719821f358f45277b9c"
+      },
+      {
+        "label": "Disconnected components",
+        "input": "{\"graph\":[[1],[0],[3,4],[2],[2],[]]}",
+        "source": "Diagnostic",
+        "count": 14,
+        "traceHash": "e654b6824a4575d2a20df709885f3ab97891d55eccd3802e0750aa818980d63a",
+        "markupHash": "6d602f1e846dc6291b4f5b64deed6d251a930f5285772fb08079e1b1c4b411d8"
+      },
+      {
+        "label": "Single isolated node",
+        "input": "{\"graph\":[[]]}",
+        "source": "Diagnostic",
+        "count": 4,
+        "traceHash": "d72de9a4d5b2cecef756b34e7f30b05d2ce005fd55d0e81082acd78fa2cae2e1",
+        "markupHash": "d1981856c19ebad6c54014bc1df31e00c8850502dfa82adb298d6cd255f49cec"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "subsets-ii",
+    "id": "subsets-ii",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Default duplicate pair",
+        "input": "{\"nums\":[1,2,2]}",
+        "source": "LeetCode",
+        "count": 20,
+        "traceHash": "370f3a44cb611bb621f07a1e1d3cb13e99a6913d2b73004fd8d34045d19ea63b",
+        "markupHash": "aec6c1d314b34a079d697fa0f859b1c9f23a34e239842d5517db05daf6db7f73"
+      },
+      {
+        "label": "All duplicates",
+        "input": "{\"nums\":[2,2,2]}",
+        "source": "Diagnostic",
+        "count": 15,
+        "traceHash": "feca4e1530093690cd75fb2ba8cb9d734c69b1deee0065ee10cb27a36d4924e3",
+        "markupHash": "3deef865425019162a1de53690d51d08e8ef4f57d3a7a3badceb5c4e516e4372"
+      },
+      {
+        "label": "No duplicates",
+        "input": "{\"nums\":[1,2,3]}",
+        "source": "Diagnostic",
+        "count": 24,
+        "traceHash": "d11ec13ed39d9bba30018f4346562c61f56a4430ed2311fe90c2c2999ae97f78",
+        "markupHash": "c65c2cb52bd9ba569a63b62a7c8c09858a95de631655a9a02c199b31869d5fab"
+      },
+      {
+        "label": "Duplicate groups",
+        "input": "{\"nums\":[1,1,2,2]}",
+        "source": "Diagnostic",
+        "count": 31,
+        "traceHash": "f0f02326f665fb755b375db205e2048f9f1ac0041669dd8c3835da8327d3ed43",
+        "markupHash": "8d03a298202ffdd8b0f4a3324b740b03bf85cfe46eb5f85a39a21b6ebf08234d"
+      },
+      {
+        "label": "Empty input",
+        "input": "{\"nums\":[]}",
+        "source": "Diagnostic",
+        "count": 3,
+        "traceHash": "925a11e59e0f974ebd814b56d237a43bbadd774f75dc33fb3301d292f075e94e",
+        "markupHash": "de45653f860d5260a2ceafc7aff801afe8e77be34abea81ec29d35f54a58e6a3"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "ipo",
+    "id": "ipo",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Default · unlock after first pick",
+        "input": "{\"k\":2,\"w\":0,\"profits\":[1,2,3],\"capital\":[0,1,1]}",
+        "source": "LeetCode",
+        "count": 8,
+        "traceHash": "08020b21f81973733e5cfc7eb2f44d76100ae318e437f2d3aeb6cf4d57ee1a92",
+        "markupHash": "5545829bf19f752a1f33d9ee46f7f31951ecb3d95bee91b43e70f1305cc618b0"
+      },
+      {
+        "label": "Nothing affordable",
+        "input": "{\"k\":3,\"w\":0,\"profits\":[1,2],\"capital\":[1,2]}",
+        "source": "Diagnostic",
+        "count": 4,
+        "traceHash": "4e17906498b63ab230bd9ffe0117f82782d43934086a751727d2df6fb1d4024c",
+        "markupHash": "40ce9826249ece1baea649526c491dfc23c88621f59457ff452b2a24ff5ef2be"
+      },
+      {
+        "label": "All affordable immediately",
+        "input": "{\"k\":2,\"w\":5,\"profits\":[1,9,4],\"capital\":[0,2,5]}",
+        "source": "Diagnostic",
+        "count": 8,
+        "traceHash": "37490328f6d7e1d93213f240d81119a68e2bafceaff0b55a7773795cb81dd50d",
+        "markupHash": "4d484f6c8963360a43c236e21664413fe9b0d12b398f09995770fc0c83689326"
+      },
+      {
+        "label": "k exceeds useful projects",
+        "input": "{\"k\":5,\"w\":1,\"profits\":[2,3],\"capital\":[0,3]}",
+        "source": "Diagnostic",
+        "count": 10,
+        "traceHash": "6381a92c0209b690afe383c4adfe6dec413a802227a3bd25ea470e248a3f0bc1",
+        "markupHash": "5807507cc1a426571804c2a4b26d21b75b1036f7cbad5cd883dcd6f2497486e6"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "ticket-to-ride",
+    "id": "ticket-to-ride",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Branching tree · one chosen path",
+        "input": "{\"n\":6,\"roads\":[[1,2,3],[2,3,2],[2,4,1],[4,5,2],[4,6,4]],\"tickets\":[[1,5,10],[3,6,8],[1,3,3]],\"choice\":[1,5]}",
+        "source": "HackerRank",
+        "count": 6,
+        "traceHash": "64502f314265c31a293aa4fda9015393818b8bfa4341798909c457478e09b054",
+        "markupHash": "e4c085ac3c1d33feed13764b9e46af95d7ce20401ee079b76da9711a926a2194"
+      },
+      {
+        "label": "Two-node tree",
+        "input": "{\"n\":2,\"roads\":[[1,2,5]],\"tickets\":[[1,2,9]],\"choice\":[1,2]}",
+        "source": "Diagnostic",
+        "count": 6,
+        "traceHash": "90fc1506ffcb998554935e4670e320db5d8f88b6fda45fd42f298530197fe955",
+        "markupHash": "3c5e05e7f11d1445726d2c853d94a4715a2e475f86195fa7a6a89f93507d3d19"
+      },
+      {
+        "label": "Path-shaped tree",
+        "input": "{\"n\":5,\"roads\":[[1,2,1],[2,3,2],[3,4,3],[4,5,4]],\"tickets\":[[1,4,9],[2,5,8]],\"choice\":[2,5]}",
+        "source": "Diagnostic",
+        "count": 6,
+        "traceHash": "2fde4d7628e7306d7884d8c21facb60c16b491bc3522b5dc9d9dbcff305cbd8e",
+        "markupHash": "a77043622ddf3573c068a5044169ad0fb0d1f5f0c4f5b098233ad6b3698f4a01"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "count-the-number-of-incremovable-subarrays-i",
+    "id": "count-the-number-of-incremovable-subarrays-i",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def incremovableSubarrayCount(self, nums: List[int]) -> int:\n        n = len(nums)\n        i = 0\n\n        # Find the longest strictly increasing prefix.\n        while i + 1 < n and nums[i] < nums[i + 1]:\n            i += 1\n\n        # Every non-empty subarray is removable.\n        if i == n - 1:\n            return n * (n + 1) // 2\n\n        # Empty suffix: remove [start, n - 1] for start in [0, i + 1].\n        ans = i + 2\n        j = n - 1\n\n        # Extend a strictly increasing suffix to the left.\n        while j == n - 1 or nums[j] < nums[j + 1]:\n            # The retained prefix must connect strictly below nums[j].\n            while i >= 0 and nums[i] >= nums[j]:\n                i -= 1\n\n            # Remove [start, j - 1] for every start in [0, i + 1].\n            ans += i + 2\n            j -= 1\n\n        return ans",
+    "presets": [
+      {
+        "label": "Bridge retreats once",
+        "input": "{\"nums\":[6,5,7,8]}",
+        "source": "LeetCode",
+        "count": 16,
+        "traceHash": "6c29be84552eae08d95b465c8105c54875e9497444fd6674b4f5714d0fac2d48",
+        "markupHash": "6fa4ea5e7ad6a3ca01f4a958fce8d515cf63986d616630ec12bbbe7ce38caf55"
+      },
+      {
+        "label": "Already increasing",
+        "input": "{\"nums\":[1,2,3,4]}",
+        "source": "LeetCode",
+        "count": 5,
+        "traceHash": "5e79a0a50ac1f7385a245ddc91ce67b6927d480ef2a45e41eb7ef2ebe5a5ba3d",
+        "markupHash": "64e20dfcbf883f9b6d666f509924169440d72e8670e2beb91eb5509818e110f3"
+      },
+      {
+        "label": "Strictly decreasing",
+        "input": "{\"nums\":[8,7,6]}",
+        "source": "LeetCode",
+        "count": 10,
+        "traceHash": "db3a31d0c89154068c045d4b2212bf39e8f1e8e429a44d2dba9fa1588b70975e",
+        "markupHash": "b62f4f0275d197b621d264ffb07241fc8bed6aa369fe4a3be8a6e3be36864047"
+      },
+      {
+        "label": "Multiple bridge moves",
+        "input": "{\"nums\":[1,3,5,2,4,6]}",
+        "source": "Diagnostic",
+        "count": 20,
+        "traceHash": "7b8a078954225e7ecc74779a084d2f7f60be9b12b438122edc4fa4b32df835f5",
+        "markupHash": "e8f272e912371d27482b47523b11bf4977c446d5e258229ef0edfa832d59dfc3"
+      },
+      {
+        "label": "Singleton",
+        "input": "{\"nums\":[5]}",
+        "source": "Diagnostic",
+        "count": 2,
+        "traceHash": "d0165f22c6913b277f1697394311e4760b0dcbf23e8f48740875f1e5d6b190d0",
+        "markupHash": "6e19a6a4e939265b64698ef7a7c7eabaa3816c9d311ef898d68717642aebfa74"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "coin-change-ii",
+    "id": "coin-change-ii",
+    "presentation": null,
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def change(self, amount: int, coins: List[int]) -> int:\n        cache = {}\n\n        def dfs(i, a):\n            if a == amount:\n                return 1\n            if a > amount:\n                return 0\n            if i == len(coins):\n                return 0\n            if (i, a) in cache:\n                return cache[(i, a)]\n\n            cache[(i, a)] = dfs(i, a + coins[i]) + dfs(i + 1, a)\n            return cache[(i, a)]\n\n        return dfs(0, 0)",
+    "presets": [
+      {
+        "label": "Four combinations",
+        "input": "{\"coins\":[1,2,5],\"amount\":5}",
+        "source": "LeetCode",
+        "count": 124,
+        "traceHash": "60be675c9ed2c0c6f7ba45b4b993492634b4337bfa69d453cc9812035cdb61e2",
+        "markupHash": "2dc69585ffb36127d1c696312d3de078228829af26a84f36fcb6d035b96ea8dc"
+      },
+      {
+        "label": "Impossible amount",
+        "input": "{\"coins\":[2],\"amount\":3}",
+        "source": "LeetCode",
+        "count": 20,
+        "traceHash": "0bc3011a5d41fe6699525a4fad08aa9a90bc826e9e00d70fbc6885d1176f6127",
+        "markupHash": "5943fc1e3241f961fd87b2036e043d759f9718a676f20da36595aaa5ad725c4f"
+      },
+      {
+        "label": "One denomination",
+        "input": "{\"coins\":[10],\"amount\":10}",
+        "source": "LeetCode",
+        "count": 12,
+        "traceHash": "ccc9c2a4386810499bfa1282a13d77190336f4c6e0c4a9d3eb48f12802705a79",
+        "markupHash": "1e2d50d5630e43d9b71886100c21acef65c0b7be98e2be8db8c1be9d627a2ded"
+      },
+      {
+        "label": "Zero amount",
+        "input": "{\"coins\":[1,2],\"amount\":0}",
+        "source": "Diagnostic",
+        "count": 4,
+        "traceHash": "6322d67f7e9a744cc31c17fa0762984ca308e3ec09dd76ab6a74c82bb6d55070",
+        "markupHash": "56d582e20a4b4c5c8fdc211a947e8879c9ceb6c776d66db04085fbe982003573"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "convert-a-number-to-hexadecimal",
+    "id": "convert-a-number-to-hexadecimal",
+    "presentation": null,
+    "referenceCode": "from collections import defaultdict\n\nclass Solution:\n    def toHex(self, num: int) -> str:\n        if num == 0:\n            return \"0\"\n\n        res = \"\"\n        hashmap = defaultdict(str)\n        num &= 0xFFFFFFFF\n\n        for i in range(10):\n            hashmap[i] = str(i)\n\n        hashmap[10] = \"a\"\n        hashmap[11] = \"b\"\n        hashmap[12] = \"c\"\n        hashmap[13] = \"d\"\n        hashmap[14] = \"e\"\n        hashmap[15] = \"f\"\n\n        while num > 0:\n            res = hashmap[num & 15] + res\n            num >>= 4\n\n        return res",
+    "presets": [
+      {
+        "label": "26 becomes 1a",
+        "input": "{\"num\":26}",
+        "source": "LeetCode",
+        "count": 10,
+        "traceHash": "669aa4ff7fb6e4a260b54bc204feaf548bfe5aba18a2ed8f9f82f5130e64b8c2",
+        "markupHash": "2f6d94b230432e495761a7a7fab61749ccb935cbb75f7c88a026b570c949d238"
+      },
+      {
+        "label": "Negative one",
+        "input": "{\"num\":-1}",
+        "source": "LeetCode",
+        "count": 28,
+        "traceHash": "14cd219eef6855328193d13df9c676c27b5dc681213303ed378655589b8d80ea",
+        "markupHash": "f60c1fa4b86a8c42274668a9cc7c995f030fb10ba6f923394f18657353961b4f"
+      },
+      {
+        "label": "Zero",
+        "input": "{\"num\":0}",
+        "source": "Diagnostic",
+        "count": 2,
+        "traceHash": "c7360db5bed45e87676526d926bb6594174391ffce2824c4f2b2d4b09e5f657f",
+        "markupHash": "5d251fe29ca3c00d3b732cc8c87926f62375428ea30d0b46ab0990a355e42a83"
+      },
+      {
+        "label": "Minimum signed integer",
+        "input": "{\"num\":-2147483648}",
+        "source": "Diagnostic",
+        "count": 28,
+        "traceHash": "dd5827f8cd1c8eee1d631837ab4b49913256db52f264fb409f623a52ad4d009f",
+        "markupHash": "c61edf0c1a2609ec62473ad037b3f0c02af15f3654cdb3ee879e9f283836f68b"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "maximal-square",
+    "id": "maximal-square",
+    "presentation": "diagram-first",
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def maximalSquare(self, matrix: List[List[str]]) -> int:\n        m, n = len(matrix), len(matrix[0])\n        dp = [list(map(int, row)) for row in matrix]\n        res = max(max(dp[0]), max(dp[i][0] for i in range(m)))\n        for i in range(1, m):\n            for j in range(1, n):\n                if dp[i][j]:\n                    dp[i][j] = 1 + min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1])\n                    res = max(res, dp[i][j])\n        return res ** 2",
+    "presets": [
+      {
+        "label": "Default · area 4",
+        "input": "{\"matrix\":[[\"1\",\"0\",\"1\"],[\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\"]]}",
+        "source": "LeetCode",
+        "count": 11,
+        "traceHash": "9d9d5d366772c858db64a61204549b0403feea727d25c778dd4032056531bbf8",
+        "markupHash": "aab4f27ad4218d06467c8f0496e16fecb63ead71419caeb3fdda40b5b4317326"
+      },
+      {
+        "label": "All zeros",
+        "input": "{\"matrix\":[[\"0\",\"0\"],[\"0\",\"0\"]]}",
+        "source": "Diagnostic",
+        "count": 6,
+        "traceHash": "99a4b1b37cd0fb096e5c54e71d439c8fa9ebfb10f8d21790b53d4973adf7aaaa",
+        "markupHash": "a106cecf114ba210c1d2f727bf21f54dea36332eed830d682315cff240fb55ac"
+      },
+      {
+        "label": "Single cell",
+        "input": "{\"matrix\":[[\"1\"]]}",
+        "source": "Diagnostic",
+        "count": 3,
+        "traceHash": "d26cbc0a419b1256f57261e8ea8b5838c30cdd150bc7b36344858158d7da061f",
+        "markupHash": "382ca7ca7ef5b993bb08a0bcd7a61669de988200c8b3cc0ea0581f9e9d4f73dd"
+      },
+      {
+        "label": "Rectangular grid",
+        "input": "{\"matrix\":[[\"1\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\"]]}",
+        "source": "Diagnostic",
+        "count": 10,
+        "traceHash": "b0143f5fe462bcdae132ab4e2972384afa18169787417581a8368cd3425b5744",
+        "markupHash": "4bf8ff83611328618919d22d2d90ea49ecefe2892e8b378c05f9a2064aef810f"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "search-suggestions-system",
+    "id": "search-suggestions-system",
+    "presentation": "diagram-first",
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:\n        trie = {}\n        res = []\n\n        # Build one path for every product.\n        for product in products:\n            node = trie\n            for char in product:\n                if char not in node:\n                    node[char] = {}\n                node = node[char]\n            node[\"$\"] = product\n\n        def collect(node, temp):\n            if len(temp) == 3:\n                return\n            if \"$\" in node:\n                temp.append(node[\"$\"])\n            for char in sorted(node):\n                if char != \"$\":\n                    collect(node[char], temp)\n\n        def dfs(prefix):\n            node = trie\n            for char in prefix:\n                if char not in node:\n                    return []\n                node = node[char]\n            temp = []\n            collect(node, temp)\n            return temp\n\n        for end in range(1, len(searchWord) + 1):\n            res.append(dfs(searchWord[:end]))\n        return res",
+    "presets": [
+      {
+        "label": "Mouse suggestions",
+        "input": "{\"products\":[\"mobile\",\"mouse\",\"moneypot\",\"monitor\",\"mousepad\"],\"searchWord\":\"mouse\"}",
+        "source": "LeetCode",
+        "count": 161,
+        "traceHash": "c3b392689bf1b871bbf2524dfe38ec12efd48206d82dbbca064974a093cd3734",
+        "markupHash": "07068ba021b93aa3b84a289841f27c8b4db589fb9d0d48c8cf4f0b2f246b5f37"
+      },
+      {
+        "label": "The prefix is also a product",
+        "input": "{\"products\":[\"app\",\"apple\",\"application\",\"apt\"],\"searchWord\":\"app\"}",
+        "source": "Diagnostic",
+        "count": 110,
+        "traceHash": "be882c540722ec4225804089a2617ea2aeb88ff426eeee81c490f2fb8e779015",
+        "markupHash": "c00c95e4c4fe5975ca68c27c011ab4b6980bb67bfe62d1c8338d42de5549e9e2"
+      },
+      {
+        "label": "Missing branch",
+        "input": "{\"products\":[\"bags\",\"baggage\",\"banner\"],\"searchWord\":\"xyz\"}",
+        "source": "Diagnostic",
+        "count": 26,
+        "traceHash": "1f9b68d020167b267ffa2910ae20726d1fa4ff2f7aecb610b0ff497ffd62ba7f",
+        "markupHash": "9f23227806ab83c8e47b7811adba8ed150ecb90c27c15aa021d46d78267e71c3"
+      },
+      {
+        "label": "Exactly three results",
+        "input": "{\"products\":[\"car\",\"carbon\",\"card\",\"care\",\"cargo\"],\"searchWord\":\"car\"}",
+        "source": "Diagnostic",
+        "count": 81,
+        "traceHash": "5cfa0faf50d7c800ff1019ba1708a2e2be9ee7478784bb5f29855e8d6b5ec0a5",
+        "markupHash": "4d093f4b1b7473f5e7da2cd49471d8085e2cbf1cfdd86615862804d571326287"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "1268",
+    "id": "search-suggestions-system",
+    "presentation": "diagram-first",
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:\n        trie = {}\n        res = []\n\n        # Build one path for every product.\n        for product in products:\n            node = trie\n            for char in product:\n                if char not in node:\n                    node[char] = {}\n                node = node[char]\n            node[\"$\"] = product\n\n        def collect(node, temp):\n            if len(temp) == 3:\n                return\n            if \"$\" in node:\n                temp.append(node[\"$\"])\n            for char in sorted(node):\n                if char != \"$\":\n                    collect(node[char], temp)\n\n        def dfs(prefix):\n            node = trie\n            for char in prefix:\n                if char not in node:\n                    return []\n                node = node[char]\n            temp = []\n            collect(node, temp)\n            return temp\n\n        for end in range(1, len(searchWord) + 1):\n            res.append(dfs(searchWord[:end]))\n        return res",
+    "presets": [
+      {
+        "label": "Mouse suggestions",
+        "input": "{\"products\":[\"mobile\",\"mouse\",\"moneypot\",\"monitor\",\"mousepad\"],\"searchWord\":\"mouse\"}",
+        "source": "LeetCode",
+        "count": 161,
+        "traceHash": "c3b392689bf1b871bbf2524dfe38ec12efd48206d82dbbca064974a093cd3734",
+        "markupHash": "07068ba021b93aa3b84a289841f27c8b4db589fb9d0d48c8cf4f0b2f246b5f37"
+      },
+      {
+        "label": "The prefix is also a product",
+        "input": "{\"products\":[\"app\",\"apple\",\"application\",\"apt\"],\"searchWord\":\"app\"}",
+        "source": "Diagnostic",
+        "count": 110,
+        "traceHash": "be882c540722ec4225804089a2617ea2aeb88ff426eeee81c490f2fb8e779015",
+        "markupHash": "c00c95e4c4fe5975ca68c27c011ab4b6980bb67bfe62d1c8338d42de5549e9e2"
+      },
+      {
+        "label": "Missing branch",
+        "input": "{\"products\":[\"bags\",\"baggage\",\"banner\"],\"searchWord\":\"xyz\"}",
+        "source": "Diagnostic",
+        "count": 26,
+        "traceHash": "1f9b68d020167b267ffa2910ae20726d1fa4ff2f7aecb610b0ff497ffd62ba7f",
+        "markupHash": "9f23227806ab83c8e47b7811adba8ed150ecb90c27c15aa021d46d78267e71c3"
+      },
+      {
+        "label": "Exactly three results",
+        "input": "{\"products\":[\"car\",\"carbon\",\"card\",\"care\",\"cargo\"],\"searchWord\":\"car\"}",
+        "source": "Diagnostic",
+        "count": 81,
+        "traceHash": "5cfa0faf50d7c800ff1019ba1708a2e2be9ee7478784bb5f29855e8d6b5ec0a5",
+        "markupHash": "4d093f4b1b7473f5e7da2cd49471d8085e2cbf1cfdd86615862804d571326287"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "split-a-string-into-the-max-number-of-unique-substrings",
+    "id": "split-a-string-into-the-max-number-of-unique-substrings",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def maxUniqueSplit(self, s: str) -> int:\n        seen = set()\n\n        def backtrack(i):\n            if i == len(s):\n                return 0\n\n            ans = 0\n            for j in range(i + 1, len(s) + 1):\n                part = s[i:j]\n                if part not in seen:\n                    seen.add(part)\n                    ans = max(ans, 1 + backtrack(j))\n                    seen.remove(part)\n            return ans\n\n        return backtrack(0)",
+    "presets": [
+      {
+        "label": "ababccc → 5",
+        "input": "{\"s\":\"ababccc\"}",
+        "source": "LeetCode",
+        "count": 407,
+        "traceHash": "2719fc508e0db7544425b9b0c705d75aa7c2b796f2177c97a7cb1bf90a33814f",
+        "markupHash": "82f9af01d572c6918ec227b783757a28ff40906fc44da435a4e10b3bbcc49a19"
+      },
+      {
+        "label": "aba → 2",
+        "input": "{\"s\":\"aba\"}",
+        "source": "LeetCode",
+        "count": 31,
+        "traceHash": "f25055d8cfd1cd31661b957d7d961a5e74e52e11bc59d6329509c7cf3ac5aabe",
+        "markupHash": "4a036ecd9149fb6d66b0fa61300b98802be46ae7473e8afae4371c5501b3214b"
+      },
+      {
+        "label": "Repeated character",
+        "input": "{\"s\":\"aa\"}",
+        "source": "LeetCode",
+        "count": 13,
+        "traceHash": "01a53aa7902dc1540973adf46253e1e3c9accb6c0bc9dc4e5dac175d525f9aa7",
+        "markupHash": "30bb47d4a4275ec3b7ca6528c06b35fb12af3b7b8669f541da478b31b1fb607a"
+      },
+      {
+        "label": "All unique",
+        "input": "{\"s\":\"abcd\"}",
+        "source": "Diagnostic",
+        "count": 70,
+        "traceHash": "bc401bf041b6a4cee8051010f5ed0d45eb31d3e0d488436d1bf3ace6ed7ba644",
+        "markupHash": "8abc7a67d1b3068d0abc10b311e8d13d71e269e8d88106d33afbd8fd67f4994a"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "1593",
+    "id": "split-a-string-into-the-max-number-of-unique-substrings",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def maxUniqueSplit(self, s: str) -> int:\n        seen = set()\n\n        def backtrack(i):\n            if i == len(s):\n                return 0\n\n            ans = 0\n            for j in range(i + 1, len(s) + 1):\n                part = s[i:j]\n                if part not in seen:\n                    seen.add(part)\n                    ans = max(ans, 1 + backtrack(j))\n                    seen.remove(part)\n            return ans\n\n        return backtrack(0)",
+    "presets": [
+      {
+        "label": "ababccc → 5",
+        "input": "{\"s\":\"ababccc\"}",
+        "source": "LeetCode",
+        "count": 407,
+        "traceHash": "2719fc508e0db7544425b9b0c705d75aa7c2b796f2177c97a7cb1bf90a33814f",
+        "markupHash": "82f9af01d572c6918ec227b783757a28ff40906fc44da435a4e10b3bbcc49a19"
+      },
+      {
+        "label": "aba → 2",
+        "input": "{\"s\":\"aba\"}",
+        "source": "LeetCode",
+        "count": 31,
+        "traceHash": "f25055d8cfd1cd31661b957d7d961a5e74e52e11bc59d6329509c7cf3ac5aabe",
+        "markupHash": "4a036ecd9149fb6d66b0fa61300b98802be46ae7473e8afae4371c5501b3214b"
+      },
+      {
+        "label": "Repeated character",
+        "input": "{\"s\":\"aa\"}",
+        "source": "LeetCode",
+        "count": 13,
+        "traceHash": "01a53aa7902dc1540973adf46253e1e3c9accb6c0bc9dc4e5dac175d525f9aa7",
+        "markupHash": "30bb47d4a4275ec3b7ca6528c06b35fb12af3b7b8669f541da478b31b1fb607a"
+      },
+      {
+        "label": "All unique",
+        "input": "{\"s\":\"abcd\"}",
+        "source": "Diagnostic",
+        "count": 70,
+        "traceHash": "bc401bf041b6a4cee8051010f5ed0d45eb31d3e0d488436d1bf3ace6ed7ba644",
+        "markupHash": "8abc7a67d1b3068d0abc10b311e8d13d71e269e8d88106d33afbd8fd67f4994a"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "generate-parentheses",
+    "id": "generate-parentheses",
+    "presentation": "diagram-first",
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def generateParenthesis(self, n: int) -> List[str]:\n        result = []\n        def backtrack(current, opened, closed):\n            if len(current) == 2 * n:\n                result.append(current)\n                return\n            if opened < n:\n                backtrack(current + \"(\", opened + 1, closed)\n            if closed < opened:\n                backtrack(current + \")\", opened, closed + 1)\n        backtrack(\"\", 0, 0)\n        return result",
+    "presets": [
+      {
+        "label": "Default · n = 3",
+        "input": "{\"n\":3}",
+        "source": "LeetCode",
+        "count": 48,
+        "traceHash": "742ea72c6013df9cfe28f1b110951e5ce8b58ba0125cdc52b0e3d956c6d9a270",
+        "markupHash": "11e6ddc16eb8dc6a4ef9560c29881040ad93614f7aebae362c2aff1b79368d09"
+      },
+      {
+        "label": "Single pair",
+        "input": "{\"n\":1}",
+        "source": "Diagnostic",
+        "count": 6,
+        "traceHash": "42e28a1df07d11d5d70c70687d96a4caca8cf1acf3dfc99a78ef06596910f642",
+        "markupHash": "7c11f2a12d2642d5a4724c505b1f4a1504ac12c60a0164c84ecfd5266546822f"
+      },
+      {
+        "label": "Empty result",
+        "input": "{\"n\":0}",
+        "source": "Diagnostic",
+        "count": 2,
+        "traceHash": "10d1b6769f97034a0122085481df248ec9359021857eee91a1032af1c2cbc290",
+        "markupHash": "eb63ba3c427e9bc6417e6ed6d76c952cbc869cd37ad8e5f7fedb71d7885c9edd"
+      },
+      {
+        "label": "Four pairs",
+        "input": "{\"n\":4}",
+        "source": "Diagnostic",
+        "count": 141,
+        "traceHash": "fd924a40ca08f8be988143205ea309269fc78cb652c31b8dc1f069a1e792dad5",
+        "markupHash": "65e1158532f7c01d444868ebf379d4d3c8bcf719376eda69772ab172dd0f0527"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "generate-all-possible-parentheses",
+    "id": "generate-parentheses",
+    "presentation": "diagram-first",
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def generateParenthesis(self, n: int) -> List[str]:\n        result = []\n        def backtrack(current, opened, closed):\n            if len(current) == 2 * n:\n                result.append(current)\n                return\n            if opened < n:\n                backtrack(current + \"(\", opened + 1, closed)\n            if closed < opened:\n                backtrack(current + \")\", opened, closed + 1)\n        backtrack(\"\", 0, 0)\n        return result",
+    "presets": [
+      {
+        "label": "Default · n = 3",
+        "input": "{\"n\":3}",
+        "source": "LeetCode",
+        "count": 48,
+        "traceHash": "742ea72c6013df9cfe28f1b110951e5ce8b58ba0125cdc52b0e3d956c6d9a270",
+        "markupHash": "11e6ddc16eb8dc6a4ef9560c29881040ad93614f7aebae362c2aff1b79368d09"
+      },
+      {
+        "label": "Single pair",
+        "input": "{\"n\":1}",
+        "source": "Diagnostic",
+        "count": 6,
+        "traceHash": "42e28a1df07d11d5d70c70687d96a4caca8cf1acf3dfc99a78ef06596910f642",
+        "markupHash": "7c11f2a12d2642d5a4724c505b1f4a1504ac12c60a0164c84ecfd5266546822f"
+      },
+      {
+        "label": "Empty result",
+        "input": "{\"n\":0}",
+        "source": "Diagnostic",
+        "count": 2,
+        "traceHash": "10d1b6769f97034a0122085481df248ec9359021857eee91a1032af1c2cbc290",
+        "markupHash": "eb63ba3c427e9bc6417e6ed6d76c952cbc869cd37ad8e5f7fedb71d7885c9edd"
+      },
+      {
+        "label": "Four pairs",
+        "input": "{\"n\":4}",
+        "source": "Diagnostic",
+        "count": 141,
+        "traceHash": "fd924a40ca08f8be988143205ea309269fc78cb652c31b8dc1f069a1e792dad5",
+        "markupHash": "65e1158532f7c01d444868ebf379d4d3c8bcf719376eda69772ab172dd0f0527"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "weighted-word-mapping",
+    "id": "weighted-word-mapping",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def mapWordWeights(self, words: List[str], weights: List[int]) -> str:\n\n        word_idx = []\n\n        for word in words:\n\n            weight = 0\n\n            for char in word:\n\n                weight += weights[ord(char) - ord('a')]\n\n            word_idx.append(weight)\n\n        res = \"\"\n\n        for idx in word_idx:\n\n            x = idx % 26\n\n            real = ord('z') - x\n\n            #word_idx.append(chr(real))\n            res += chr(real)\n\n        #return \"\".join(word_idx)\n\n        return res",
+    "presets": [
+      {
+        "label": "LeetCode example · rij",
+        "input": "{\"words\":[\"abcd\",\"def\",\"xyz\"],\"weights\":[5,3,12,14,1,2,3,2,10,6,6,9,7,8,7,10,8,9,6,9,9,8,3,7,7,2]}",
+        "source": "LeetCode",
+        "count": 37,
+        "traceHash": "6bfd360d093b766378740f8117a2e449753307caf9d9f9482da6801db3783f70",
+        "markupHash": "d3ca28f89fae267dcfe4d700bc1ec03e49b330ea6c342f33b7d65941076cd781"
+      },
+      {
+        "label": "Uniform weights · yyy",
+        "input": "{\"words\":[\"a\",\"b\",\"c\"],\"weights\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}",
+        "source": "LeetCode",
+        "count": 23,
+        "traceHash": "92b5cf997315b653d1c6b83b159e632b9e3173987e9b632735bb3b9f46371b31",
+        "markupHash": "9e1d3d638ac4458232a0a2101952e6da48d8b4c99966ad97c9f317ebb4f3c833"
+      },
+      {
+        "label": "Remainder zero · z",
+        "input": "{\"words\":[\"a\"],\"weights\":[26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}",
+        "source": "Diagnostic",
+        "count": 9,
+        "traceHash": "3aa77f461738d8e87dbfa2ea1d1bf9b1a80f09dc960ed8aeac66172d24fbff1b",
+        "markupHash": "62061832a6d55f36883bafea69bd1e0dd40ebc49e0c6415f34b833123cb1c950"
+      },
+      {
+        "label": "Remainder 25 · a",
+        "input": "{\"words\":[\"a\"],\"weights\":[25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}",
+        "source": "Diagnostic",
+        "count": 9,
+        "traceHash": "92d4bccbd6a73a5749740899285bdb59511c2bcf5a99b45986d9486c622a429c",
+        "markupHash": "79c2147670138a360bc69058f7cfe0996e86fcdfd5de4602addbd2e7e6040cb4"
+      },
+      {
+        "label": "Repeated letters",
+        "input": "{\"words\":[\"aaaa\",\"zz\"],\"weights\":[2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3]}",
+        "source": "Diagnostic",
+        "count": 24,
+        "traceHash": "9e7ca97051ab58ac0a7b7e9220efcda556e5e003250b3db078592a6d33f7370d",
+        "markupHash": "09902f04c1171917b11cf8f83f76ec0ae89de6957821701c92f3632447c278d8"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "matchsticks-to-square",
+    "id": "matchsticks-to-square",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def makesquare(self, matchsticks: List[int]) -> bool:\n\n        target = sum(matchsticks) // 4\n\n        if sum(matchsticks) % 4 != 0:\n            return False\n\n        matchsticks.sort()\n        matchsticks.reverse()\n\n        def backtrack(i, left, right, top, down):\n\n            if i == len(matchsticks) and (left == right and right == top and top == down):\n                return True\n            elif i >= len(matchsticks) and (left != right or right != top or top != down):\n                return False\n            else:\n                if left + matchsticks[i] <= target:\n                    if backtrack(i+1, left + matchsticks[i], right, top, down):\n                        return True\n                if right + matchsticks[i] <= target:\n                    if backtrack(i+1, left, right + matchsticks[i], top, down):\n                        return True\n\n                if top + matchsticks[i] <= target:\n                    if backtrack(i+1, left, right, top + matchsticks[i], down):\n                        return True\n                if down + matchsticks[i] <= target:\n                    if backtrack(i+1, left, right, top, down+matchsticks[i]):\n                        return True\n\n            return False\n\n        return backtrack(0,0,0,0,0)",
+    "presets": [
+      {
+        "label": "LeetCode example · true",
+        "input": "{\"matchsticks\":[1,1,2,2,2]}",
+        "source": "LeetCode",
+        "count": 45,
+        "traceHash": "09f0b6e009c81358375d0d82334f6fc11ae7b05cd19758af187207db14c1174f",
+        "markupHash": "43908edd06221591295783a1acd26a2e4b342630d4b51703cde1f252b3b7ed78"
+      },
+      {
+        "label": "LeetCode example · false",
+        "input": "{\"matchsticks\":[3,3,3,3,4]}",
+        "source": "LeetCode",
+        "count": 718,
+        "traceHash": "43a640f12101fb54ba97e5326eedd630df3100ced05ffbffbff342480d94715f",
+        "markupHash": "e82237ca925cb4ff38ec0b17f59139f867d1c2775a3a975ee64ffc1efbc09f02"
+      },
+      {
+        "label": "Diagnostic · sibling branch lesson",
+        "input": "{\"matchsticks\":[2,2,2,2,3,3,7,7]}",
+        "source": "Diagnostic",
+        "count": 115,
+        "traceHash": "a6f4197ef716ed95fbefc1a56518c60585ed5e85e02acdcc591d2873f0f7f1f0",
+        "markupHash": "ffe5736e3654ccb2dc88f72b5db56f006e39d0699231ea53890625cd3e786128"
+      },
+      {
+        "label": "Non-divisible total",
+        "input": "{\"matchsticks\":[1,1,1,2]}",
+        "source": "Diagnostic",
+        "count": 3,
+        "traceHash": "5bdab4531404b04e6ab01f0eabaeecff6787c50bcd29e3e144ded37b820cbe81",
+        "markupHash": "0ae4ca78ec20159e5a10441351af9f1ae59d93cd2528d99f3d4cc717b0c1c502"
+      },
+      {
+        "label": "Oversized stick",
+        "input": "{\"matchsticks\":[9,1,1,1]}",
+        "source": "Diagnostic",
+        "count": 14,
+        "traceHash": "eaf773c4ac698632b5b0c7ff15a048e438386057a60d137931ffa86d97b8704d",
+        "markupHash": "4e0e7ac42ea9a7b6daaf0c21adb5b08a7193fea7048c24e66d80cae3faf3bfd6"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "473",
+    "id": "matchsticks-to-square",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def makesquare(self, matchsticks: List[int]) -> bool:\n\n        target = sum(matchsticks) // 4\n\n        if sum(matchsticks) % 4 != 0:\n            return False\n\n        matchsticks.sort()\n        matchsticks.reverse()\n\n        def backtrack(i, left, right, top, down):\n\n            if i == len(matchsticks) and (left == right and right == top and top == down):\n                return True\n            elif i >= len(matchsticks) and (left != right or right != top or top != down):\n                return False\n            else:\n                if left + matchsticks[i] <= target:\n                    if backtrack(i+1, left + matchsticks[i], right, top, down):\n                        return True\n                if right + matchsticks[i] <= target:\n                    if backtrack(i+1, left, right + matchsticks[i], top, down):\n                        return True\n\n                if top + matchsticks[i] <= target:\n                    if backtrack(i+1, left, right, top + matchsticks[i], down):\n                        return True\n                if down + matchsticks[i] <= target:\n                    if backtrack(i+1, left, right, top, down+matchsticks[i]):\n                        return True\n\n            return False\n\n        return backtrack(0,0,0,0,0)",
+    "presets": [
+      {
+        "label": "LeetCode example · true",
+        "input": "{\"matchsticks\":[1,1,2,2,2]}",
+        "source": "LeetCode",
+        "count": 45,
+        "traceHash": "09f0b6e009c81358375d0d82334f6fc11ae7b05cd19758af187207db14c1174f",
+        "markupHash": "43908edd06221591295783a1acd26a2e4b342630d4b51703cde1f252b3b7ed78"
+      },
+      {
+        "label": "LeetCode example · false",
+        "input": "{\"matchsticks\":[3,3,3,3,4]}",
+        "source": "LeetCode",
+        "count": 718,
+        "traceHash": "43a640f12101fb54ba97e5326eedd630df3100ced05ffbffbff342480d94715f",
+        "markupHash": "e82237ca925cb4ff38ec0b17f59139f867d1c2775a3a975ee64ffc1efbc09f02"
+      },
+      {
+        "label": "Diagnostic · sibling branch lesson",
+        "input": "{\"matchsticks\":[2,2,2,2,3,3,7,7]}",
+        "source": "Diagnostic",
+        "count": 115,
+        "traceHash": "a6f4197ef716ed95fbefc1a56518c60585ed5e85e02acdcc591d2873f0f7f1f0",
+        "markupHash": "ffe5736e3654ccb2dc88f72b5db56f006e39d0699231ea53890625cd3e786128"
+      },
+      {
+        "label": "Non-divisible total",
+        "input": "{\"matchsticks\":[1,1,1,2]}",
+        "source": "Diagnostic",
+        "count": 3,
+        "traceHash": "5bdab4531404b04e6ab01f0eabaeecff6787c50bcd29e3e144ded37b820cbe81",
+        "markupHash": "0ae4ca78ec20159e5a10441351af9f1ae59d93cd2528d99f3d4cc717b0c1c502"
+      },
+      {
+        "label": "Oversized stick",
+        "input": "{\"matchsticks\":[9,1,1,1]}",
+        "source": "Diagnostic",
+        "count": 14,
+        "traceHash": "eaf773c4ac698632b5b0c7ff15a048e438386057a60d137931ffa86d97b8704d",
+        "markupHash": "4e0e7ac42ea9a7b6daaf0c21adb5b08a7193fea7048c24e66d80cae3faf3bfd6"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "remove-k-digits",
+    "id": "remove-k-digits",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def removeKdigits(self, num: str, k: int) -> str:\n\n        if len(num) == k:\n            return \"0\"\n\n        stack = []\n\n        for i in range(len(num)):\n\n            cur = int(num[i])\n\n            while stack and int(num[stack[-1]]) > cur and k:\n                stack.pop()\n                k-=1\n\n            stack.append(i)\n\n        res = \"\"\n\n        while k and stack:\n            stack.pop()\n            k-=1\n\n        for digit in stack:\n\n            res += num[digit]\n\n        i = 0\n\n        if len(res) > 1:\n\n            while i<len(res) and res[i] == \"0\":\n                i+=1\n\n\n        return \"0\" if i == len(res) else res[i:]",
+    "presets": [
+      {
+        "label": "Official · 1219",
+        "source": "LeetCode",
+        "input": "{\"num\":\"1432219\",\"k\":3}",
+        "count": 42,
+        "traceHash": "7d05ee72ea8cde16143a4eb25d980612f1e4cc9cbd016655ce4b494398db1182",
+        "markupHash": "554e64d39313d3ff93a1590aaef1c4d38b6e7bd26ba924c82e9c3526a1242b05"
+      },
+      {
+        "label": "Official · leading zero → 200",
+        "source": "LeetCode",
+        "input": "{\"num\":\"10200\",\"k\":1}",
+        "count": 32,
+        "traceHash": "b94f54d45e8c85ac41a12765d642e1f9e86369374a1afc1f0b4046ab0f50600c",
+        "markupHash": "08e5d5ed9a339397edebff381b862c77e266705fc2fa88f8c040bcdf32586d71"
+      },
+      {
+        "label": "Official · remove all → 0",
+        "source": "LeetCode",
+        "input": "{\"num\":\"10\",\"k\":2}",
+        "count": 2,
+        "traceHash": "cb1869eab5a6654c19d3c387130660ee07fb9454d01bd1ef4899d56c0a3017f0",
+        "markupHash": "f32daee3fc9a915227c2c7d3a44d29a942951c6cdf98e2278700ef2cf4f61a0e"
+      },
+      {
+        "label": "Increasing · tail cleanup",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"12345\",\"k\":2}",
+        "count": 32,
+        "traceHash": "c90d595029163e315ab16ea9387580cda313345c85d42d13cf854d6164c15381",
+        "markupHash": "6d718b49ea93002a208bb8e067d119640c1ac3a572f1cd1c9f9cead33649e876"
+      },
+      {
+        "label": "Equal digits · strict >",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"1111\",\"k\":2}",
+        "count": 28,
+        "traceHash": "2e26df5aa91182fd1386afa3e5c3dfd29222c948fa7a528b19bf9ac1143964bb",
+        "markupHash": "2ebabce7cfbf4983d2b60833ef08a3ac99366cd9dec8f02315dab62d760fc27a"
+      },
+      {
+        "label": "Cascade · repeated pops",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"123045\",\"k\":3}",
+        "count": 40,
+        "traceHash": "680537e0dcd4d9488116f73bc5e1c2828bd73568deff960e6e1df6e13d520182",
+        "markupHash": "6036159c9d5fb45af561a00a737cd0d5f32e32082b250042eb3efb9779a2c911"
+      },
+      {
+        "label": "Budget exhausted · 21",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"321\",\"k\":1}",
+        "count": 22,
+        "traceHash": "1c04c23f51280d99a86f1024ff67bec45dfa3a26228b7779fecd8fa7bac7d3aa",
+        "markupHash": "70de0c9babb8caa3440a811c721d45b4292901d8884d64a4cf99b933a62138fe"
+      },
+      {
+        "label": "All retained digits zero",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"1000\",\"k\":1}",
+        "count": 32,
+        "traceHash": "b0bcf57eb5960afbb73f281775407fca34becf278bb589625a562baf864c5f41",
+        "markupHash": "cc417e893f5d2b69cc179dce1f4ff96ff3c82d5d3ae8647058a13146528ddc90"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "articulation-point2616",
+    "id": "articulation-point2616",
+    "presentation": "diagram-first",
+    "referenceCode": "from collections import defaultdict\nclass Solution:\n    def articulationPoints(self, V: int, edges: list[list[int]]) -> list[int]:\n        adj_list = defaultdict(list)\n        for edge in edges:\n            v1, v2 = edge\n            adj_list[v1].append(v2); adj_list[v2].append(v1)\n        seen = set(); timer = 0\n        low = [0] * V; discovery_time = [0] * V; articulation = set()\n        def dfs(curr, parent):\n            nonlocal timer\n            seen.add(curr); discovery_time[curr] = timer; low[curr] = timer; timer += 1\n            children = 0\n            for v in adj_list[curr]:\n                if v not in seen:\n                    children += 1; dfs(v, curr); low[curr] = min(low[curr], low[v])\n                    if parent != -1 and low[v] >= discovery_time[curr]: articulation.add(curr)\n                elif v != parent: low[curr] = min(low[curr], discovery_time[v])\n            if parent == -1 and children > 1: articulation.add(curr)\n        for i in range(V):\n            if i not in seen: dfs(i, -1)\n        if not articulation: return [-1]\n        return sorted(articulation)",
+    "presets": [
+      {
+        "label": "Screenshot",
+        "input": "{\"V\":5,\"edges\":[[0,1],[1,4],[4,3],[4,2],[2,3]]}",
+        "source": "HackerRank",
+        "count": 14,
+        "traceHash": "73112ede0352085cf0d9cf6acc49d114581cab7df83ab663855766a60cf8fb93",
+        "markupHash": "f51b8631ec8936a864b7be7ebe3f7605499d576fd1e4b6f9362104d16785d444"
+      },
+      {
+        "label": "Triangle",
+        "input": "{\"V\":3,\"edges\":[[0,1],[1,2],[2,0]]}",
+        "source": "HackerRank",
+        "count": 8,
+        "traceHash": "c27b9bff49b82e9867ba2242a338c2b059526497b295b3c9d02e1cb8e355d6f4",
+        "markupHash": "adee42243ac9bcf819a840f6d4639eeb32d139cb0de017fee6d6f987817c7dc2"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "maximum-length-of-a-concatenated-string-with-unique-characters",
+    "id": "maximum-length-of-a-concatenated-string-with-unique-characters",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def maxLength(self, arr: List[str]) -> int:\n        def backtrack(i, word):\n            if i == len(arr): return len(word)\n            temp = len(word); temp_set = set(word)\n            for j in range(i+1, len(arr)):\n                if len(set(arr[j])) == len(arr[j]) and temp_set.isdisjoint(set(arr[j])):\n                    temp = max(temp, backtrack(j, word + arr[j]))\n            return temp\n        return backtrack(-1, \"\")",
+    "presets": [
+      {
+        "label": "Default",
+        "input": "{\"arr\":[\"un\",\"iq\",\"ue\"]}",
+        "source": "LeetCode",
+        "count": 14,
+        "traceHash": "2f9b5942c54e860a171a3241c4f8755a50ea273977cd697d2c2fcd6c159a0f22",
+        "markupHash": "9bd48ef2d3e779930be768425efe17a36a540e37816c60226d0a507118025148"
+      },
+      {
+        "label": "Greedy trap",
+        "input": "{\"arr\":[\"ab\",\"cd\",\"aef\"]}",
+        "source": "LeetCode",
+        "count": 14,
+        "traceHash": "091706dc8962fc711484f570a910c347ee0139e937149e11420ac16402f7493c",
+        "markupHash": "c3477155e74bc921d2d2845fa4dd4e8e1c2a245a8ff7724411aaec9dc001b978"
+      },
+      {
+        "label": "Internal duplicates",
+        "input": "{\"arr\":[\"aa\",\"bb\"]}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "9cfa1a5c8d94e2286af2262c7679170ad332057f566c4228cbef4725d5a85277",
+        "markupHash": "9fcdff017f26616f1fd8790d4ac00ed8ef2879141d5a8133d6d3f947074d657c"
+      },
+      {
+        "label": "Duplicate items",
+        "input": "{\"arr\":[\"ab\",\"ab\",\"cd\"]}",
+        "source": "LeetCode",
+        "count": 13,
+        "traceHash": "a4a4bb79ffbc4ca0ddc71fa94356309e193b12dd48ce9d328f6729a9bdc65d3f",
+        "markupHash": "5fa1024cfb7d28e92b4b3f58ffdfaf1ae62563380273887759f37a0b7fd76466"
+      },
+      {
+        "label": "Full alphabet",
+        "input": "{\"arr\":[\"abcdefghijklmnopqrstuvwxyz\"]}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "2bb232a75cdff32ff34fdfd05f97fcc1526bc0e173580e24d403951873e3525c",
+        "markupHash": "2b740891086615719940d934b1ea405748cc259e6a8c63631f86dee01c1ea4a1"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "1239",
+    "id": "maximum-length-of-a-concatenated-string-with-unique-characters",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def maxLength(self, arr: List[str]) -> int:\n        def backtrack(i, word):\n            if i == len(arr): return len(word)\n            temp = len(word); temp_set = set(word)\n            for j in range(i+1, len(arr)):\n                if len(set(arr[j])) == len(arr[j]) and temp_set.isdisjoint(set(arr[j])):\n                    temp = max(temp, backtrack(j, word + arr[j]))\n            return temp\n        return backtrack(-1, \"\")",
+    "presets": [
+      {
+        "label": "Default",
+        "input": "{\"arr\":[\"un\",\"iq\",\"ue\"]}",
+        "source": "LeetCode",
+        "count": 14,
+        "traceHash": "2f9b5942c54e860a171a3241c4f8755a50ea273977cd697d2c2fcd6c159a0f22",
+        "markupHash": "9bd48ef2d3e779930be768425efe17a36a540e37816c60226d0a507118025148"
+      },
+      {
+        "label": "Greedy trap",
+        "input": "{\"arr\":[\"ab\",\"cd\",\"aef\"]}",
+        "source": "LeetCode",
+        "count": 14,
+        "traceHash": "091706dc8962fc711484f570a910c347ee0139e937149e11420ac16402f7493c",
+        "markupHash": "c3477155e74bc921d2d2845fa4dd4e8e1c2a245a8ff7724411aaec9dc001b978"
+      },
+      {
+        "label": "Internal duplicates",
+        "input": "{\"arr\":[\"aa\",\"bb\"]}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "9cfa1a5c8d94e2286af2262c7679170ad332057f566c4228cbef4725d5a85277",
+        "markupHash": "9fcdff017f26616f1fd8790d4ac00ed8ef2879141d5a8133d6d3f947074d657c"
+      },
+      {
+        "label": "Duplicate items",
+        "input": "{\"arr\":[\"ab\",\"ab\",\"cd\"]}",
+        "source": "LeetCode",
+        "count": 13,
+        "traceHash": "a4a4bb79ffbc4ca0ddc71fa94356309e193b12dd48ce9d328f6729a9bdc65d3f",
+        "markupHash": "5fa1024cfb7d28e92b4b3f58ffdfaf1ae62563380273887759f37a0b7fd76466"
+      },
+      {
+        "label": "Full alphabet",
+        "input": "{\"arr\":[\"abcdefghijklmnopqrstuvwxyz\"]}",
+        "source": "LeetCode",
+        "count": 4,
+        "traceHash": "2bb232a75cdff32ff34fdfd05f97fcc1526bc0e173580e24d403951873e3525c",
+        "markupHash": "2b740891086615719940d934b1ea405748cc259e6a8c63631f86dee01c1ea4a1"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "minimum-number-of-vertices-to-reach-all-nodes",
+    "id": "minimum-number-of-vertices-to-reach-all-nodes",
+    "presentation": "diagram-first",
+    "referenceCode": "#from collections import defaultdict, deque\nclass Solution:\n    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:\n        idx = [0]*n\n        for edge in edges:\n            frm, to = edge; idx[to]+=1\n        res = []\n        for i in range(n):\n            if idx[i] == 0: res.append(i)\n        return res",
+    "presets": [
+      {
+        "label": "Default",
+        "input": "{\"n\":6,\"edges\":[[0,1],[0,2],[2,5],[3,4],[4,2]]}",
+        "source": "LeetCode",
+        "count": 12,
+        "traceHash": "579d5544c7479293b6c8019d54c1d24da3a54a1a846f358c6a242eff7cd6bec4",
+        "markupHash": "3cae23f2764620495fa564f76683522d14b187791d51dedfc936e794d6ad96f5"
+      },
+      {
+        "label": "Chain",
+        "input": "{\"n\":4,\"edges\":[[0,1],[1,2],[2,3]]}",
+        "source": "LeetCode",
+        "count": 8,
+        "traceHash": "960c72e0651bdf01b950f60c7b934627aed8316c0d3570f5e628993bf0e08aa1",
+        "markupHash": "d33a188593ce9c28150c630b331d5d53411859a2065aa9ce42c686b77e5ed4d1"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "1557",
+    "id": "minimum-number-of-vertices-to-reach-all-nodes",
+    "presentation": "diagram-first",
+    "referenceCode": "#from collections import defaultdict, deque\nclass Solution:\n    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:\n        idx = [0]*n\n        for edge in edges:\n            frm, to = edge; idx[to]+=1\n        res = []\n        for i in range(n):\n            if idx[i] == 0: res.append(i)\n        return res",
+    "presets": [
+      {
+        "label": "Default",
+        "input": "{\"n\":6,\"edges\":[[0,1],[0,2],[2,5],[3,4],[4,2]]}",
+        "source": "LeetCode",
+        "count": 12,
+        "traceHash": "579d5544c7479293b6c8019d54c1d24da3a54a1a846f358c6a242eff7cd6bec4",
+        "markupHash": "3cae23f2764620495fa564f76683522d14b187791d51dedfc936e794d6ad96f5"
+      },
+      {
+        "label": "Chain",
+        "input": "{\"n\":4,\"edges\":[[0,1],[1,2],[2,3]]}",
+        "source": "LeetCode",
+        "count": 8,
+        "traceHash": "960c72e0651bdf01b950f60c7b934627aed8316c0d3570f5e628993bf0e08aa1",
+        "markupHash": "d33a188593ce9c28150c630b331d5d53411859a2065aa9ce42c686b77e5ed4d1"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "minimum-score-triangulation-of-polygon",
+    "id": "minimum-score-triangulation-of-polygon",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def minScoreTriangulation(self, values: List[int]) -> int:\n        n = len(values); memo = {}\n        def solve(i,j):\n            if (j-i+1) < 3: memo[(i,j)] = 0; return 0\n            if (i,j) in memo: return memo[(i,j)]\n            for k in range(i+1, j):\n                score = values[i]*values[k]*values[j] + solve(i,k) + solve(k,j)\n                if (i,j) in memo: memo[(i,j)] = min(memo[(i,j)], score)\n                else: memo[(i,j)] = score\n            return memo[(i,j)]\n        solve(0,n-1); return memo[(0,n-1)]",
+    "presets": [
+      {
+        "label": "Default",
+        "input": "{\"values\":[1,3,1,4,1,5]}",
+        "source": "LeetCode",
+        "count": 63,
+        "traceHash": "ffe456682d6b642b5cb732663c918383b31a376e2a7f9cf8a5d9b2d8a06e2c66",
+        "markupHash": "340e36d00308a200ffa78d2acb7b83a679a1cb370e7f4507a411a41ebe65ba07"
+      },
+      {
+        "label": "Triangle",
+        "input": "{\"values\":[1,2,3]}",
+        "source": "LeetCode",
+        "count": 6,
+        "traceHash": "58f2cde6e99e04aeba1c6a9978828603d8f7c4c94b7892b81e5208b291355422",
+        "markupHash": "1e1d11e088265b023ee3bcc081ab80e1c0d4b21f8441961acf77e6a8b9023484"
+      },
+      {
+        "label": "Quadrilateral",
+        "input": "{\"values\":[3,7,4,5]}",
+        "source": "LeetCode",
+        "count": 15,
+        "traceHash": "34943a3e32e67a1cc02de51b07c89e8a6ea0f5937ff7ac379b12c1a15c814f40",
+        "markupHash": "38bb98227a171ef501bb960e661ab65c46792917588b9ec2f889772103b4eff7"
+      },
+      {
+        "label": "Equal weights",
+        "input": "{\"values\":[1,1,1,1]}",
+        "source": "LeetCode",
+        "count": 15,
+        "traceHash": "3d29ca6ff265b99408f04e2b0567a3f048ebce27b5dc3f1e98aa5289ecb8db77",
+        "markupHash": "d936dc55af95f20aa0e0df219e6bbc370e8f1178b5edaf179c6dcb03d9bf12b2"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "1039",
+    "id": "minimum-score-triangulation-of-polygon",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def minScoreTriangulation(self, values: List[int]) -> int:\n        n = len(values); memo = {}\n        def solve(i,j):\n            if (j-i+1) < 3: memo[(i,j)] = 0; return 0\n            if (i,j) in memo: return memo[(i,j)]\n            for k in range(i+1, j):\n                score = values[i]*values[k]*values[j] + solve(i,k) + solve(k,j)\n                if (i,j) in memo: memo[(i,j)] = min(memo[(i,j)], score)\n                else: memo[(i,j)] = score\n            return memo[(i,j)]\n        solve(0,n-1); return memo[(0,n-1)]",
+    "presets": [
+      {
+        "label": "Default",
+        "input": "{\"values\":[1,3,1,4,1,5]}",
+        "source": "LeetCode",
+        "count": 63,
+        "traceHash": "ffe456682d6b642b5cb732663c918383b31a376e2a7f9cf8a5d9b2d8a06e2c66",
+        "markupHash": "340e36d00308a200ffa78d2acb7b83a679a1cb370e7f4507a411a41ebe65ba07"
+      },
+      {
+        "label": "Triangle",
+        "input": "{\"values\":[1,2,3]}",
+        "source": "LeetCode",
+        "count": 6,
+        "traceHash": "58f2cde6e99e04aeba1c6a9978828603d8f7c4c94b7892b81e5208b291355422",
+        "markupHash": "1e1d11e088265b023ee3bcc081ab80e1c0d4b21f8441961acf77e6a8b9023484"
+      },
+      {
+        "label": "Quadrilateral",
+        "input": "{\"values\":[3,7,4,5]}",
+        "source": "LeetCode",
+        "count": 15,
+        "traceHash": "34943a3e32e67a1cc02de51b07c89e8a6ea0f5937ff7ac379b12c1a15c814f40",
+        "markupHash": "38bb98227a171ef501bb960e661ab65c46792917588b9ec2f889772103b4eff7"
+      },
+      {
+        "label": "Equal weights",
+        "input": "{\"values\":[1,1,1,1]}",
+        "source": "LeetCode",
+        "count": 15,
+        "traceHash": "3d29ca6ff265b99408f04e2b0567a3f048ebce27b5dc3f1e98aa5289ecb8db77",
+        "markupHash": "d936dc55af95f20aa0e0df219e6bbc370e8f1178b5edaf179c6dcb03d9bf12b2"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "402",
+    "id": "remove-k-digits",
+    "presentation": "diagram-first",
+    "referenceCode": "class Solution:\n    def removeKdigits(self, num: str, k: int) -> str:\n\n        if len(num) == k:\n            return \"0\"\n\n        stack = []\n\n        for i in range(len(num)):\n\n            cur = int(num[i])\n\n            while stack and int(num[stack[-1]]) > cur and k:\n                stack.pop()\n                k-=1\n\n            stack.append(i)\n\n        res = \"\"\n\n        while k and stack:\n            stack.pop()\n            k-=1\n\n        for digit in stack:\n\n            res += num[digit]\n\n        i = 0\n\n        if len(res) > 1:\n\n            while i<len(res) and res[i] == \"0\":\n                i+=1\n\n\n        return \"0\" if i == len(res) else res[i:]",
+    "presets": [
+      {
+        "label": "Official · 1219",
+        "source": "LeetCode",
+        "input": "{\"num\":\"1432219\",\"k\":3}",
+        "count": 42,
+        "traceHash": "7d05ee72ea8cde16143a4eb25d980612f1e4cc9cbd016655ce4b494398db1182",
+        "markupHash": "554e64d39313d3ff93a1590aaef1c4d38b6e7bd26ba924c82e9c3526a1242b05"
+      },
+      {
+        "label": "Official · leading zero → 200",
+        "source": "LeetCode",
+        "input": "{\"num\":\"10200\",\"k\":1}",
+        "count": 32,
+        "traceHash": "b94f54d45e8c85ac41a12765d642e1f9e86369374a1afc1f0b4046ab0f50600c",
+        "markupHash": "08e5d5ed9a339397edebff381b862c77e266705fc2fa88f8c040bcdf32586d71"
+      },
+      {
+        "label": "Official · remove all → 0",
+        "source": "LeetCode",
+        "input": "{\"num\":\"10\",\"k\":2}",
+        "count": 2,
+        "traceHash": "cb1869eab5a6654c19d3c387130660ee07fb9454d01bd1ef4899d56c0a3017f0",
+        "markupHash": "f32daee3fc9a915227c2c7d3a44d29a942951c6cdf98e2278700ef2cf4f61a0e"
+      },
+      {
+        "label": "Increasing · tail cleanup",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"12345\",\"k\":2}",
+        "count": 32,
+        "traceHash": "c90d595029163e315ab16ea9387580cda313345c85d42d13cf854d6164c15381",
+        "markupHash": "6d718b49ea93002a208bb8e067d119640c1ac3a572f1cd1c9f9cead33649e876"
+      },
+      {
+        "label": "Equal digits · strict >",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"1111\",\"k\":2}",
+        "count": 28,
+        "traceHash": "2e26df5aa91182fd1386afa3e5c3dfd29222c948fa7a528b19bf9ac1143964bb",
+        "markupHash": "2ebabce7cfbf4983d2b60833ef08a3ac99366cd9dec8f02315dab62d760fc27a"
+      },
+      {
+        "label": "Cascade · repeated pops",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"123045\",\"k\":3}",
+        "count": 40,
+        "traceHash": "680537e0dcd4d9488116f73bc5e1c2828bd73568deff960e6e1df6e13d520182",
+        "markupHash": "6036159c9d5fb45af561a00a737cd0d5f32e32082b250042eb3efb9779a2c911"
+      },
+      {
+        "label": "Budget exhausted · 21",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"321\",\"k\":1}",
+        "count": 22,
+        "traceHash": "1c04c23f51280d99a86f1024ff67bec45dfa3a26228b7779fecd8fa7bac7d3aa",
+        "markupHash": "70de0c9babb8caa3440a811c721d45b4292901d8884d64a4cf99b933a62138fe"
+      },
+      {
+        "label": "All retained digits zero",
+        "source": "Diagnostic",
+        "input": "{\"num\":\"1000\",\"k\":1}",
+        "count": 32,
+        "traceHash": "b0bcf57eb5960afbb73f281775407fca34becf278bb589625a562baf864c5f41",
+        "markupHash": "cc417e893f5d2b69cc179dce1f4ff96ff3c82d5d3ae8647058a13146528ddc90"
+      }
+    ]
+  },
+  {
+    "source": "LintCode",
+    "source_key": "33",
+    "id": "lintcode-33-n-queens",
+    "presentation": null,
+    "referenceCode": "from typing import List\n\nclass Solution:\n    def solve_n_queens(self, n: int) -> List[List[str]]:\n        res = []\n        sol = []\n        col, diag1, diag2 = set(), set(), set()\n\n        def backtrack(i):\n            if i == n:\n                res.append(sol[:])\n                return\n\n            for k in range(n):\n                d1 = i - k\n                d2 = i + k\n                if k in col or d1 in diag1 or d2 in diag2:\n                    continue\n\n                row_str = \".\" * k + \"Q\" + \".\" * (n - k - 1)\n                sol.append(row_str)\n                col.add(k)\n                diag1.add(d1)\n                diag2.add(d2)\n\n                backtrack(i + 1)\n\n                col.remove(k)\n                diag1.remove(d1)\n                diag2.remove(d2)\n                sol.pop()\n\n        backtrack(0)\n        return res",
+    "presets": [
+      {
+        "label": "Two solutions · n = 4",
+        "input": "{\"n\":4}",
+        "source": "LintCode",
+        "count": 172,
+        "traceHash": "a3afbf2d377a7da5844f6528c06e4f0d85e3cea0a259f1b09da519f85eafb8a2",
+        "markupHash": "ba1c6a7301e85c03d5fcf6a08df4dc6f86fc8a7e6d7d067ed90e36c60c5988fb"
+      },
+      {
+        "label": "One square",
+        "input": "{\"n\":1}",
+        "source": "Diagnostic",
+        "count": 9,
+        "traceHash": "06812b118d54b56d5db4af24ed455553b7e88444a8e18d1ae0ea12f32140f29e",
+        "markupHash": "a5487589e3553cde77a7f733a0dd1c3c2b8beacadd8077cad5df1c6104325c6f"
+      },
+      {
+        "label": "No solution · n = 2",
+        "input": "{\"n\":2}",
+        "source": "Diagnostic",
+        "count": 22,
+        "traceHash": "190a6c813f4fcfafacd9e816bbbda569240a0938f43de2f34dd17be6694a4b63",
+        "markupHash": "827d178cbbed9a5a91bc8a593cf17ed9435b91f1c83845cf784d133b86876b89"
+      },
+      {
+        "label": "No solution · n = 3",
+        "input": "{\"n\":3}",
+        "source": "Diagnostic",
+        "count": 55,
+        "traceHash": "da8f175671af4812ecaba6a8b694e46c13c4bf09e07debab6ae0d1cb2f31aafb",
+        "markupHash": "b953614d02ce24b52f648c214c256afabc0afb747dec98e2c4a27c525d164f34"
+      },
+      {
+        "label": "Ten solutions · n = 5",
+        "input": "{\"n\":5}",
+        "source": "Diagnostic",
+        "count": 603,
+        "traceHash": "8f55ba355b49e3a19a715258713f03e2c0fff178ed057c4f69f449316f47a38b",
+        "markupHash": "3729c5493d2422c37f7f41f3c6b780be32312d9b4bb248e9bbc6cc9151ce8d20"
+      }
+    ]
+  },
+  {
+    "source": "LeetCode",
+    "source_key": "33",
+    "id": "generic-structure",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Array parameters",
+        "input": "{\"nums\":[2,7,11,15],\"target\":9}",
+        "source": "Starter",
+        "count": 8,
+        "traceHash": "87b39619ec1fe9220f73a88d3df727c0ac0242bb445b7e5a48cdbc20786b30ca",
+        "markupHash": "3ad11f31b2a3bd2ad4c25c9fced0a6f1547d72d96c70c9e60a5bfd577aab435f"
+      }
+    ]
+  },
+  {
+    "source": "Custom",
+    "source_key": "unknown",
+    "id": "generic-structure",
+    "presentation": "diagram-first",
+    "referenceCode": null,
+    "presets": [
+      {
+        "label": "Array parameters",
+        "input": "{\"nums\":[2,7,11,15],\"target\":9}",
+        "source": "Starter",
+        "count": 8,
+        "traceHash": "87b39619ec1fe9220f73a88d3df727c0ac0242bb445b7e5a48cdbc20786b30ca",
+        "markupHash": "3ad11f31b2a3bd2ad4c25c9fced0a6f1547d72d96c70c9e60a5bfd577aab435f"
+      }
+    ]
+  }
+]

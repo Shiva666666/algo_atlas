@@ -8,10 +8,10 @@ from alembic.config import Config
 from sqlalchemy import Engine, func, select
 from sqlalchemy.orm import Session
 
-from .config import ensure_local_dirs, settings
-from .db import engine, init_db
-from .models import AppSetting, Problem
-from .sync_service import reconcile_catalog
+from algo_atlas.config import ensure_local_dirs, settings
+from algo_atlas.db import engine, init_db
+from algo_atlas.models import AppSetting, Problem
+from algo_atlas.services.sync import reconcile_catalog
 
 INITIAL_RESTORE_KEY = "initial_export_restore_v1"
 
@@ -42,7 +42,9 @@ def initialize_from_exports(target_engine: Engine = engine) -> dict:
                 "problem_count": problem_count,
                 "completed_at": datetime.now(timezone.utc).isoformat(),
             }
-            session.add(AppSetting(key=INITIAL_RESTORE_KEY, value=json.dumps(marker_value, sort_keys=True)))
+            session.add(
+                AppSetting(key=INITIAL_RESTORE_KEY, value=json.dumps(marker_value, sort_keys=True))
+            )
             session.commit()
 
         if sync_result["state"] == "no_export":

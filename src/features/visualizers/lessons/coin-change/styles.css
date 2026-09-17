@@ -1,0 +1,181 @@
+/* Coin Change II: collected amount is the column axis, not remaining amount. */
+.coin-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--lesson-border);
+  margin-bottom: 20px;
+}
+.coin-summary > span {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--lesson-muted);
+}
+.coin-summary b {
+  font-size: 16px;
+  color: var(--lesson-text);
+  font-weight: 500;
+}
+.call-stack {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0 0 8px;
+  margin: 0;
+  overflow: auto;
+  max-height: 110px;
+}
+.call-stack li {
+  flex-shrink: 0;
+  border: 1px solid var(--lesson-border);
+  border-radius: 5px;
+  padding: 8px 10px;
+  display: grid;
+  gap: 6px;
+  background: #151b25;
+}
+.call-stack li.active {
+  border-color: var(--lesson-cyan);
+  background: #142c3a;
+}
+.call-stack small {
+  font-size: 12px;
+  color: var(--lesson-muted);
+}
+.call-stack code {
+  font-size: 13px;
+}
+.call-stack .empty-stack {
+  font-size: 13px;
+  color: var(--lesson-muted);
+  border: 0;
+  padding-left: 0;
+}
+.active-call {
+  display: grid;
+  gap: 8px;
+  padding: 16px 0;
+}
+.active-call > b {
+  font:
+    14px 'DM Mono',
+    monospace;
+  color: var(--lesson-cyan);
+}
+.active-call > span {
+  font-size: 13px;
+  color: var(--lesson-muted);
+  line-height: 1.6;
+}
+.returned-value {
+  font-size: 16px;
+  color: #4fd1a1;
+  font-weight: 500;
+}
+.coin-branches {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 24px;
+}
+.coin-branches > div {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  background: #151b25;
+  border: 1px solid var(--lesson-border);
+  border-radius: 7px;
+}
+.coin-branches > div.active {
+  border-color: var(--lesson-cyan);
+  background: #122936;
+}
+.coin-branches small {
+  font-size: 13px;
+  color: #c4b9ff;
+}
+.coin-branches code {
+  font-size: 13px;
+}
+.coin-branches div > span {
+  font-size: 12px;
+  color: var(--lesson-muted);
+  line-height: 1.5;
+}
+.coin-branches b {
+  font-size: 14px;
+  font-weight: 500;
+}
+.branch-plus {
+  font-size: 20px;
+  color: var(--lesson-muted);
+}
+.memo-scroll {
+  overflow: auto;
+  border: 1px solid var(--lesson-border);
+  border-radius: 6px;
+}
+.coin-memo {
+  width: 100%;
+  border-collapse: collapse;
+  font:
+    13px 'DM Mono',
+    monospace;
+  text-align: center;
+}
+.coin-memo caption {
+  caption-side: bottom;
+  text-align: left;
+  padding: 12px;
+  font:
+    12px/1.6 'IBM Plex Sans',
+    sans-serif;
+  color: var(--lesson-muted);
+}
+.coin-memo th,
+.coin-memo td {
+  min-width: 42px;
+  height: 48px;
+  padding: 8px;
+  border: 1px solid #293140;
+}
+.coin-memo th {
+  background: #192230;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c0ccd9;
+}
+.coin-memo th:first-child {
+  min-width: 80px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+.coin-memo small {
+  display: block;
+  font:
+    12px/1.6 'IBM Plex Sans',
+    sans-serif;
+  white-space: nowrap;
+  color: var(--lesson-muted);
+}
+.coin-memo td {
+  color: #a9b4c2;
+  background: #0b1119;
+}
+.coin-memo td.computed {
+  background: #24253d;
+  color: #c4b9ff;
+}
+.coin-memo td.current {
+  outline: 2px solid var(--lesson-cyan);
+  outline-offset: -2px;
+  color: #e2faff;
+  background: #163040;
+}
+.coin-memo td.base-column {
+  background: #1a202a;
+}

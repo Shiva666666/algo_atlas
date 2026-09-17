@@ -1,0 +1,144 @@
+/* Kokonut SmoothTab adaptation: one measured, spring-driven active background. */
+.smooth-tabs {
+  display: flex;
+  position: relative;
+  background: #080b10;
+  margin: 12px;
+  border-radius: 7px;
+  padding: 4px;
+}
+.smooth-tabs button {
+  position: relative;
+  flex: 1;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 14px;
+  color: var(--lesson-muted);
+  z-index: 1;
+}
+.smooth-tabs button[aria-selected='true'] {
+  color: var(--lesson-text);
+}
+.smooth-tab-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  background: #253140;
+  border-radius: 5px;
+  pointer-events: none;
+}
+.code-context,
+.code-footnote {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--lesson-muted);
+  padding: 0 18px;
+  margin: 12px 0;
+}
+.lesson-code {
+  position: relative;
+  font:
+    12px/1.8 'DM Mono',
+    monospace;
+  overflow: auto;
+  max-height: 680px;
+  min-height: 200px;
+  background: #0a0f16;
+  margin: 0;
+  padding: 16px 0;
+  color: #c9d7e8;
+  tab-size: 4;
+  scrollbar-color: #394454 #0a0f16;
+}
+.code-line {
+  display: flex;
+  min-width: max-content;
+  padding: 1px 18px 1px 0;
+  border-left: 3px solid transparent;
+  min-height: 24px;
+}
+.code-line > i {
+  display: inline-block;
+  flex: 0 0 42px;
+  text-align: right;
+  margin-right: 16px;
+  font-size: 12px;
+  color: #8596ab;
+  user-select: none;
+  font-style: normal;
+}
+.code-line.current {
+  background: #163040;
+  border-left-color: var(--lesson-cyan);
+  color: #e9fbff;
+}
+.code-line.current > i {
+  color: var(--lesson-cyan);
+}
+.saved-code {
+  padding: 12px 18px;
+  border-top: 1px solid var(--lesson-border);
+}
+.saved-code summary {
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 44px;
+  align-content: center;
+}
+.saved-code pre {
+  font-size: 12px;
+  line-height: 1.8;
+  overflow: auto;
+  max-height: 400px;
+}
+.lesson-step-list {
+  position: relative;
+  list-style: none;
+  padding: 8px 12px;
+  margin: 0;
+  max-height: 760px;
+  overflow: auto;
+}
+.lesson-step-list button {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: left;
+  background: transparent;
+  min-height: 66px;
+}
+.lesson-step-list button:hover {
+  background: #151f2c;
+}
+.lesson-step-list button.current {
+  border-color: #2c6176;
+  background: #122936;
+}
+.lesson-step-list button > span:first-child {
+  font:
+    12px 'DM Mono',
+    monospace;
+  color: var(--lesson-muted);
+  min-width: 22px;
+}
+.lesson-step-list button > span:last-child {
+  display: grid;
+  gap: 5px;
+}
+.lesson-step-list small {
+  font-size: 12px;
+  color: var(--lesson-muted);
+  text-transform: capitalize;
+}
+.lesson-step-list b {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}

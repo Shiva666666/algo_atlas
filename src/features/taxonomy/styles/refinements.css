@@ -1,0 +1,74 @@
+/* Taxonomy */
+.taxonomy-legend span,
+.local-shield {
+  min-height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font: 600 12px/1 var(--font-ui);
+}
+
+.taxonomy-stats {
+  gap: 0;
+  margin-bottom: 24px;
+  border-block: 1px solid var(--color-border);
+}
+
+.taxonomy-stats article {
+  height: 92px;
+  border: 0;
+  border-right: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
+}
+
+.taxonomy-stats article:last-child {
+  border-right: 0;
+}
+
+.taxonomy-stats strong {
+  font: 600 30px/1 var(--font-ui);
+}
+
+.taxonomy-stats span {
+  color: var(--color-text-muted);
+  font: 600 12px/1.25 var(--font-ui);
+  letter-spacing: 0.03em;
+}
+
+.taxonomy-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  gap: 20px;
+}
+
+.family-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.family-card {
+  min-height: 190px;
+  animation-duration: 220ms;
+}
+
+.family-card::after {
+  display: none;
+}
+
+.family-card header > i {
+  filter: none;
+}
+
+.family-card header b {
+  color: var(--color-text);
+  font: 600 15px/1.2 var(--font-ui);
+}
+
+.family-card header small,
+.family-card > div span,
+.taxonomy-side > p,
+.custom-panel > p {
+  color: var(--color-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.5;
+}

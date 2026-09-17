@@ -1,0 +1,207 @@
+/* N-Queens: working state and copied results are intentionally separate. */
+.queen-workspace {
+  display: grid;
+  grid-template-columns: minmax(190px, 1.25fr) minmax(170px, 1fr);
+  gap: 24px;
+}
+.queen-coordinates {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-template-rows: 24px 1fr;
+  gap: 6px;
+  font:
+    12px 'DM Mono',
+    monospace;
+}
+.queen-axis-corner {
+  font-size: 12px;
+  color: var(--lesson-muted);
+  align-self: center;
+}
+.queen-column-axis {
+  display: grid;
+  grid-template-columns: repeat(var(--board-n), 1fr);
+  text-align: center;
+  align-items: center;
+  color: var(--lesson-muted);
+}
+.queen-row-axis {
+  display: grid;
+  grid-template-rows: repeat(var(--board-n), 1fr);
+  text-align: center;
+  align-items: center;
+  color: var(--lesson-muted);
+}
+.queen-row-axis .current {
+  color: var(--lesson-cyan);
+  font-weight: 600;
+}
+.queen-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--board-n), 1fr);
+  aspect-ratio: 1;
+  border: 1px solid #465167;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.queen-square {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: #263244;
+  border: 1px solid transparent;
+  min-width: 0;
+}
+.queen-square.dark {
+  background: #192230;
+}
+.queen-square > span {
+  color: #7e8ca0;
+  font-size: 18px;
+}
+.queen-square b {
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 500;
+  z-index: 1;
+}
+.queen-square.placed {
+  background: #302c4d;
+  color: #c4b9ff;
+}
+.queen-square.candidate {
+  border: 2px solid var(--lesson-cyan);
+  color: var(--lesson-cyan);
+  background: #153647;
+}
+.queen-square.conflict {
+  background: #482b3c;
+  border-color: #ff6b7a;
+  color: #ffacb5;
+}
+.queen-attack-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.queen-attack-lines line {
+  stroke: #ff8997;
+  stroke-width: 0.035;
+  stroke-dasharray: 0.08 0.08;
+  opacity: 0.8;
+}
+.queen-state dl {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.queen-state dl > div {
+  border-bottom: 1px solid var(--lesson-border);
+  padding-bottom: 12px;
+}
+.queen-state dt {
+  font-size: 12px;
+  color: var(--lesson-muted);
+  line-height: 1.7;
+}
+.queen-state dt code {
+  display: block;
+  font-size: 12px;
+  color: #c4b9ff;
+}
+.queen-state dd {
+  font:
+    13px/1.7 'DM Mono',
+    monospace;
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+}
+.candidate-check {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid #2c6176;
+  border-radius: 6px;
+  background: #14232e;
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+}
+.candidate-check.is-conflict {
+  border-color: #ff6b7a;
+  background: #281a22;
+}
+.candidate-check > b {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.candidate-check > span {
+  font-family: 'DM Mono', monospace;
+}
+.candidate-check p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c0ccd9;
+  margin: 4px 0 0;
+}
+.saved-boards {
+  margin-top: 24px;
+  border-top: 1px solid var(--lesson-border);
+  padding-top: 12px;
+}
+.saved-boards summary,
+.hex-lookup summary {
+  cursor: pointer;
+  font-size: 14px;
+  min-height: 44px;
+  line-height: 1.7;
+  padding: 6px 0;
+}
+.saved-boards summary strong {
+  font-size: 14px;
+  color: var(--lesson-cyan);
+  padding: 2px 8px;
+  background: #17313e;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+.saved-boards summary > span {
+  display: block;
+  color: var(--lesson-muted);
+  font-size: 12px;
+}
+.saved-board-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 12px;
+}
+.saved-board-list figure {
+  margin: 0;
+  width: 112px;
+}
+.mini-board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-n), 1fr);
+  aspect-ratio: 1;
+  gap: 2px;
+}
+.mini-board > span {
+  display: grid;
+  place-items: center;
+  background: #1b2636;
+  color: #8a98a9;
+  font:
+    12px 'DM Mono',
+    monospace;
+}
+.mini-board > span.placed {
+  color: #c4b9ff;
+  background: #302c4d;
+}
+.saved-board-list figcaption {
+  font-size: 12px;
+  margin-top: 8px;
+  color: var(--lesson-muted);
+}

@@ -7,7 +7,7 @@ The user requested these library and correctness preferences on 2026-08-31.
 
 ## Shared interface
 
-Reuse `src/visualizers/components/LessonPrimitives.tsx` before adding dependencies:
+Reuse `src/shared/ui/LessonPrimitives.tsx` before adding dependencies:
 
 - `StateLegend` adapts Bklit UI's Legend primitives. Symbols and labels identify
   states; hovering emphasizes the key without filtering algorithm data.
@@ -46,7 +46,7 @@ the reference-code focus mapping; saved user code remains reference-only.
 
 ## Layout
 
-Use `src/visualizers/lesson.css` as the surface authority.
+Use `src/features/visualizers/lesson.css` as the surface authority.
 
 - Desktop: diagram and explanation occupy distinct columns; controls wrap.
 - At 1200px and below: narrow the explanation column and stack the queen board
@@ -123,7 +123,7 @@ Do not claim screenshot or visual QA until it occurs.
 
 ## Remove K Digits lesson
 
-- Keep `src/visualizers/reference/remove-k-digits.py` as the canonical raw Python
+- Keep `src/features/visualizers/lessons/remove-k-digits/reference.py` as the canonical raw Python
   reference; derive displayed code and exact line focus from this same source.
 - Accept a string of 1–32 ASCII digits, with no leading zeros except `"0"`, and
   integer `k` from 1 through its length. Never convert the whole number to numeric form.
@@ -145,3 +145,36 @@ Do not claim screenshot or visual QA until it occurs.
   Browser checks covered custom input, invalid input preserving the previous trace,
   playback, keyboard, saved-code matching, reduced motion, CSS 200% zoom and 720px
   reflow. These checks do not establish a full WCAG audit or native browser zoom coverage.
+
+## Repeated Substring Pattern and Max Area of Island lessons
+
+- `src/features/visualizers/lessons/repeated-substring/` and
+  `src/features/visualizers/lessons/max-area-island/` each own a canonical
+  `reference.py` and pure `trace.ts`.
+  Keep immutable snapshots and exact `codeFocus`/`codeLines` tied to those sources.
+- Repeated Substring Pattern tests prefix lengths that divide the string length,
+  then tiles the prefix; it does not use KMP. Marked equality positions explain
+  the string comparison and must not imply an extra loop in the Python reference.
+  String/JSON input accepts 1–32 lowercase ASCII letters.
+- Max Area of Island follows recursive DFS in right/down/left/up order. Water
+  returns zero without entering `seen`; mark land before recursion and keep the
+  input grid immutable. Distinguish each call's subtotal from the seen-cell count;
+  update the global maximum only after the root call returns. Grid/JSON input
+  accepts rectangular numeric binary grids of 1–10 rows and 1–13 columns.
+- Each lesson’s `Canvas.tsx`, shared `StructuredInputEditor.tsx`, and
+  `components/styles/sequence-and-grid.css` extend
+  the incumbent lesson surface with `StateLegend`, `SmoothTabs`, `LessonMotion`,
+  and `LessonButton`, including shared reduced motion. Keep functional annotations
+  at least 12px, local scrolling scoped, and mobile content stacked. Invalid
+  rebuilds preserve the previous applied trace. Registry selection supports slugs
+  and LeetCode keys 459/695 through the existing routes.
+- Approved records are Resolved with screenshot code and notes, zero mistake
+  events, and `record_initial_mistake: false`; this handoff does not export or publish.
+- Recorded handoff, 2026-09-13: 25 visualizer tests, 37 backend tests, and build
+  passed; independent periodicity and BFS oracles checked results. Browser checks
+  covered 1440px desktop, 390px mobile, 720px reflow, inputs, playback, keyboard,
+  trace preservation, code matching, and system/saved reduced motion. Nine viewport
+  screenshots are in `.impeccable/review/two-lessons`. Independent review's F1
+  (annotations below 12px) was fixed; final verdict review found F1 resolved with
+  no resulting wrapping/overflow regression. Native 200% browser zoom remains
+  unverified; this evidence does not establish a full accessibility audit.

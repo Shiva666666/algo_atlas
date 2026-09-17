@@ -9,7 +9,7 @@ import subprocess
 import urllib.request
 from pathlib import Path
 
-from .config import settings
+from algo_atlas.config import settings
 
 FRONTEND_FILES = (
     "package.json",
@@ -25,7 +25,9 @@ FRONTEND_DIRS = ("src", "public", "server")
 
 def _node_version() -> str:
     try:
-        result = subprocess.run(["node", "--version"], capture_output=True, text=True, check=False, timeout=5)
+        result = subprocess.run(
+            ["node", "--version"], capture_output=True, text=True, check=False, timeout=5
+        )
     except (OSError, subprocess.SubprocessError):
         return "unavailable"
     return result.stdout.strip() if result.returncode == 0 else "unavailable"
@@ -78,7 +80,9 @@ def _write_marker(path: Path, fingerprint: str) -> None:
     os.replace(temporary, path)
 
 
-def dependency_is_stale(root: Path = settings.root_dir, local_dir: Path = settings.local_dir) -> bool:
+def dependency_is_stale(
+    root: Path = settings.root_dir, local_dir: Path = settings.local_dir
+) -> bool:
     installed_lock = root / "node_modules" / ".package-lock.json"
     marker = _read_marker(local_dir / "npm-install.json")
     return not installed_lock.is_file() or marker.get("fingerprint") != dependency_fingerprint(root)
@@ -86,7 +90,9 @@ def dependency_is_stale(root: Path = settings.root_dir, local_dir: Path = settin
 
 def frontend_is_stale(root: Path = settings.root_dir, local_dir: Path = settings.local_dir) -> bool:
     marker = _read_marker(local_dir / "frontend-build.json")
-    return not (root / "dist" / "index.html").is_file() or marker.get("fingerprint") != frontend_fingerprint(root)
+    return not (root / "dist" / "index.html").is_file() or marker.get(
+        "fingerprint"
+    ) != frontend_fingerprint(root)
 
 
 def mark_dependencies(root: Path = settings.root_dir, local_dir: Path = settings.local_dir) -> str:
@@ -122,7 +128,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Shared startup checks for Algo Atlas.")
     parser.add_argument(
         "command",
-        choices=("dependency-status", "mark-dependencies", "frontend-status", "mark-frontend", "port-status", "health-status"),
+        choices=(
+            "dependency-status",
+            "mark-dependencies",
+            "frontend-status",
+            "mark-frontend",
+            "port-status",
+            "health-status",
+        ),
     )
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()

@@ -2,11 +2,11 @@ import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
 import {MemoryRouter,Route,Routes} from 'react-router-dom';
-import {AppLayout} from '../src/components/AppLayout';
-import {AtlasPage} from '../src/pages/AtlasPage';
+import {AppLayout} from '../src/app/AppLayout';
+import {AtlasPage} from '../src/features/atlas';
 import {makeAtlasFixture} from './atlas-fixture';
-import '../src/styles.css';
-import '../src/refined.css';
+import '../src/app/styles/base.css';
+import '../src/app/styles/refinements.css';
 
 // Vite development harness: populated in memory, no API requests or record writes.
 if(import.meta.env.DEV){

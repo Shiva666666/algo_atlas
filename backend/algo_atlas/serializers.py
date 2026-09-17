@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from collections import defaultdict
 
-from .db import taxonomy_to_dict
-from .models import Problem
+from algo_atlas.models import Problem
+from algo_atlas.persistence.problems import taxonomy_to_dict
 
 
 def iso(value):  # type: ignore[no-untyped-def]
@@ -12,7 +12,10 @@ def iso(value):  # type: ignore[no-untyped-def]
 
 def problem_to_dict(problem: Problem, detail: bool = True) -> dict:
     main = problem.primary_subtag.parent
-    taxonomy = sorted((taxonomy_to_dict(link.taxonomy) for link in problem.taxonomy_links), key=lambda node: (node["kind"], node["name"]))
+    taxonomy = sorted(
+        (taxonomy_to_dict(link.taxonomy) for link in problem.taxonomy_links),
+        key=lambda node: (node["kind"], node["name"]),
+    )
     result = {
         "id": problem.id,
         "source": problem.source,
@@ -38,11 +41,15 @@ def problem_to_dict(problem: Problem, detail: bool = True) -> dict:
         notes[item.section].append(item.text)
     events = []
     for event in sorted(problem.mistake_events, key=lambda item: item.occurred_at, reverse=True):
-        events.append({
-            "id": event.id,
-            "occurred_at": iso(event.occurred_at),
-            "observation": event.observation,
-            "reasons": [taxonomy_to_dict(link.taxonomy) for link in event.reason_links],
-        })
-    result.update({"python_code": problem.python_code, "notes": dict(notes), "mistake_events": events})
+        events.append(
+            {
+                "id": event.id,
+                "occurred_at": iso(event.occurred_at),
+                "observation": event.observation,
+                "reasons": [taxonomy_to_dict(link.taxonomy) for link in event.reason_links],
+            }
+        )
+    result.update(
+        {"python_code": problem.python_code, "notes": dict(notes), "mistake_events": events}
+    )
     return result

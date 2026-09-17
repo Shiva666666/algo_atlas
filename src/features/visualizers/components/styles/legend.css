@@ -1,0 +1,45 @@
+/* Bklit Legend adaptation. The key emphasizes a category without hiding data. */
+.state-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.state-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--lesson-muted);
+  transition: opacity 0.15s ease;
+}
+.state-legend-marker {
+  font:
+    600 16px 'DM Mono',
+    monospace;
+  display: inline-flex;
+  width: 18px;
+  justify-content: center;
+}
+.visual-section-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+}
+.visual-section-label > span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--lesson-muted);
+}
+.visual-footnote {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--lesson-muted);
+  margin: 16px 0 0;
+}

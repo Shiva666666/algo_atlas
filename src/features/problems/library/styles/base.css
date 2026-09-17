@@ -1,0 +1,181 @@
+/* Library */
+.library-tools {
+  max-width: 1600px;
+  margin: 0 auto 14px;
+  padding: 16px;
+}
+.library-tools form {
+  height: 44px;
+  border: 1px solid rgba(50, 230, 226, 0.16);
+  background: rgba(4, 7, 13, 0.7);
+  display: flex;
+  align-items: center;
+  padding-left: 13px;
+  color: #697286;
+}
+.library-tools form input {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: #e8edf8;
+  padding: 0 11px;
+  outline: 0;
+  font-size: 12px;
+}
+.library-tools form button {
+  height: 30px;
+  margin-right: 7px;
+  border: 1px solid rgba(50, 230, 226, 0.35);
+  background: rgba(50, 230, 226, 0.06);
+  color: #9cefee;
+  font: 500 8px DM Mono;
+  padding: 0 13px;
+  cursor: pointer;
+}
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 13px;
+}
+.filter-row > span {
+  font: 500 8px DM Mono;
+  color: #647085;
+  letter-spacing: 0.11em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 4px;
+}
+.filter-row select,
+.clear-filter {
+  height: 31px;
+  border: 1px solid var(--line);
+  background: #0c101a;
+  color: #8d95a7;
+  font: 500 9px DM Mono;
+  padding: 0 25px 0 9px;
+}
+.clear-filter {
+  margin-left: auto;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.library-table {
+  max-width: 1600px;
+  margin: auto;
+  overflow: hidden;
+}
+.table-header,
+.problem-row {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.7fr) 115px 125px 90px 110px 20px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 19px;
+}
+.table-header {
+  height: 42px;
+  border-bottom: 1px solid var(--line);
+  color: #5d6679;
+  font: 500 8px DM Mono;
+  letter-spacing: 0.1em;
+}
+.table-header span:last-of-type {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.problem-row {
+  width: 100%;
+  height: 70px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.052);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  content-visibility: auto;
+  contain-intrinsic-size: 70px;
+}
+.problem-row:hover {
+  background: linear-gradient(90deg, rgba(50, 230, 226, 0.035), rgba(124, 92, 255, 0.025));
+}
+.problem-title {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+}
+.problem-title > i {
+  grid-row: 1 / span 2;
+  width: 4px;
+  height: 32px;
+  border-radius: 4px;
+  background: var(--domain);
+  box-shadow: 0 0 10px var(--domain);
+}
+.problem-title b {
+  font: 600 12px 'IBM Plex Sans';
+}
+.problem-title small {
+  font: 400 8px DM Mono;
+  color: #626b7e;
+  margin-top: 4px;
+}
+.problem-title em {
+  font-style: normal;
+  color: #343b4b;
+}
+.difficulty {
+  font: 500 8px DM Mono;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.difficulty-easy {
+  color: #63e8aa;
+}
+.difficulty-medium {
+  color: #ffbd59;
+}
+.difficulty-hard {
+  color: #ff758f;
+}
+.mistake-count,
+.updated {
+  font: 500 9px DM Mono;
+  color: #7c8597;
+}
+.library-footer {
+  max-width: 1600px;
+  margin: 12px auto;
+  display: flex;
+  justify-content: space-between;
+  font: 500 8px DM Mono;
+  color: #50596b;
+  letter-spacing: 0.09em;
+}
+.table-empty,
+.empty-library {
+  padding: 50px;
+  text-align: center;
+  color: #60697c;
+  font: 500 9px DM Mono;
+}
+.empty-library h3 {
+  font: 600 18px 'IBM Plex Sans';
+  color: #c9cfdb;
+}
+.empty-library p {
+  font: 400 11px 'IBM Plex Sans';
+}
+.empty-library button {
+  border: 1px solid rgba(50, 230, 226, 0.4);
+  background: rgba(50, 230, 226, 0.05);
+  color: #a7eeee;
+  padding: 9px 12px;
+  font: 500 8px DM Mono;
+  cursor: pointer;
+}

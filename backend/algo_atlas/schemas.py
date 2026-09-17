@@ -3,11 +3,19 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field, HttpUrl, field_validator
+from pydantic import BaseModel, Field, field_validator
 
 Difficulty = Literal["Easy", "Medium", "Hard"]
 ProblemStatus = Literal["Open", "Understood", "Resolved"]
-NOTE_SECTIONS = ("why_missed", "recognition_signals", "core_insight", "approach", "invariants", "edge_cases", "follow_up")
+NOTE_SECTIONS = (
+    "why_missed",
+    "recognition_signals",
+    "core_insight",
+    "approach",
+    "invariants",
+    "edge_cases",
+    "follow_up",
+)
 
 
 class ProblemCreate(BaseModel):
@@ -91,4 +99,6 @@ class GitSettingsUpdate(BaseModel):
 class RestoreRequest(BaseModel):
     dry_run: bool = True
     review_version: str | None = Field(default=None, max_length=128)
-    decisions: dict[str, Literal["keep_local", "use_incoming"]] = Field(default_factory=dict, max_length=500)
+    decisions: dict[str, Literal["keep_local", "use_incoming"]] = Field(
+        default_factory=dict, max_length=500
+    )

@@ -1,0 +1,12 @@
+/* Ordered compatibility manifest: preserve the cascade when extending styles. */
+@import './components/styles/workspace.css';
+@import './components/styles/tabs.css';
+@import './components/styles/legend.css';
+@import './components/styles/structures.css';
+@import './lessons/n-queens/styles.css';
+@import './lessons/coin-change/styles.css';
+@import './lessons/hexadecimal/styles.css';
+@import './lessons/incremovable/refinements.css';
+@import './lessons/matchsticks-square/styles.css';
+@import './components/styles/graph-and-interval.css';
+@import './lessons/remove-k-digits/styles.css';

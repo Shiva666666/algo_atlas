@@ -1,0 +1,160 @@
+/* Taxonomy */
+.taxonomy-legend {
+  display: flex;
+  gap: 10px;
+}
+.taxonomy-legend span,
+.local-shield {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  font: 500 8px DM Mono;
+  color: #778195;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.taxonomy-stats {
+  max-width: 1600px;
+  margin: 0 auto 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.taxonomy-stats article {
+  height: 86px;
+  padding: 15px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+.taxonomy-stats strong {
+  font: 600 29px 'IBM Plex Sans';
+}
+.taxonomy-stats span {
+  font: 500 8px DM Mono;
+  color: #6b7487;
+  letter-spacing: 0.1em;
+}
+.taxonomy-layout {
+  max-width: 1600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 14px;
+}
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.family-card {
+  min-height: 190px;
+  animation: rise 0.45s ease both;
+  animation-delay: var(--delay);
+  overflow: hidden;
+}
+.family-card:after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -55% 20%;
+  height: 100px;
+  background: var(--family);
+  opacity: 0.06;
+  filter: blur(35px);
+}
+.family-card header {
+  height: 67px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 15px;
+}
+.family-card header > i {
+  color: var(--family);
+  filter: drop-shadow(0 0 7px var(--family));
+}
+.family-card header > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.family-card header b {
+  font: 600 11px 'IBM Plex Sans';
+}
+.family-card header small {
+  font: 400 8px DM Mono;
+  color: #5f697b;
+}
+.family-card header > svg {
+  color: #3d4658;
+}
+.family-card > div {
+  padding: 13px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.family-card > div span {
+  font: 400 9px DM Mono;
+  color: #858ea0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.family-card > div i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--family);
+  opacity: 0.7;
+}
+.taxonomy-layout > aside {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.taxonomy-side,
+.custom-panel {
+  padding-bottom: 17px;
+}
+.taxonomy-side > p,
+.custom-panel > p {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #778093;
+  padding: 0 16px;
+}
+.pattern-cloud,
+.custom-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 5px 16px;
+}
+.pattern-cloud span,
+.custom-list span {
+  font: 500 8px DM Mono;
+  color: #9584cf;
+  border: 1px solid rgba(169, 139, 255, 0.16);
+  background: rgba(169, 139, 255, 0.04);
+  padding: 6px 7px;
+}
+.custom-panel label {
+  margin: 13px 16px;
+}
+.custom-panel > .primary-btn {
+  margin: 4px 16px;
+}
+.custom-list {
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+@keyframes rise {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}

@@ -10,9 +10,14 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "lint": "tsc -b",
-    "test:visualizers": "node --test tests/visualizers.test.mjs",
-    "test:atlas": "node --test tests/atlas.test.mjs tests/spatial.test.mjs",
-    "ui:detect": "npx impeccable detect src/"
+    "test:visualizers": "node scripts/test-frontend.mjs visualizers",
+    "test:atlas": "node scripts/test-frontend.mjs atlas",
+    "ui:detect": "npx impeccable detect src/",
+    "test": "node scripts/test-frontend.mjs",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "format": "prettier --write src tests/frontend scripts/*.mjs docs/*.md AGENTS.md README.md package.json .github/workflows/cross-platform.yml",
+    "format:check": "prettier --check src tests/frontend scripts/*.mjs docs/*.md AGENTS.md README.md package.json .github/workflows/cross-platform.yml",
+    "check": "npm run lint && npm run check:architecture && npm run format:check && npm test"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
@@ -38,6 +43,7 @@
     "@types/three": "^0.180.0",
     "@vitejs/plugin-react": "6.0.2",
     "eslint": "9.39.4",
+    "prettier": "3.6.2",
     "typescript": "5.9.3",
     "vite": "8.2.2"
   },

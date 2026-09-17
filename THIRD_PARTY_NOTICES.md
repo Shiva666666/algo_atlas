@@ -1,7 +1,7 @@
 # Third-party UI source notices
 
 The algorithm diagrams and trace engines are custom Algo Atlas code. Two small UI
-primitives in `src/visualizers/components/LessonPrimitives.tsx` are source-adapted
+primitives in `src/shared/ui/LessonPrimitives.tsx` are source-adapted
 from the following MIT-licensed projects, retaining their interaction patterns
 while replacing Tailwind styling with this project's CSS and adding accessibility
 and reduced-motion behavior. These are not full library installations.

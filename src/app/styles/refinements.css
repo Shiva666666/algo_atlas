@@ -1,0 +1,10 @@
+/* Ordered compatibility manifest: preserve the cascade when extending styles. */
+@import '../../shared/styles/tokens-and-controls.css';
+@import '../../features/atlas/styles/refinements.css';
+@import '../../features/dashboard/styles/refinements.css';
+@import '../../features/problems/library/styles/refinements.css';
+@import '../../features/problems/editor/styles/refinements.css';
+@import '../../features/taxonomy/styles/refinements.css';
+@import '../../features/settings/styles/refinements.css';
+@import '../../features/visualizers/styles/refinements.css';
+@import './command-palette.css';

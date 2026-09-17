@@ -1,0 +1,142 @@
+/* Atlas */
+.atlas-workspace {
+  background:
+    radial-gradient(circle at 68% 45%, rgba(72, 54, 148, 0.13), transparent 38%),
+    var(--color-canvas);
+}
+
+.hero-copy {
+  left: clamp(28px, 4vw, 60px);
+  top: clamp(28px, 6vh, 72px);
+  max-width: 390px;
+}
+
+.hero-copy h2 {
+  margin: 0 0 20px;
+  color: var(--color-text);
+  font: 600 clamp(38px, 4.4vw, 68px) / 1.01 var(--font-ui);
+  letter-spacing: -0.055em;
+}
+
+.hero-copy h2 em {
+  color: var(--color-violet);
+  -webkit-text-stroke: 0;
+}
+
+.hero-copy > p {
+  max-width: 46ch;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.ghost-cta {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: 600 12px/1 var(--font-ui);
+  letter-spacing: 0.03em;
+}
+
+.atlas {
+  left: 28%;
+  bottom: 124px;
+}
+
+.atlas::after {
+  display: none;
+}
+
+.atlas-vignette {
+  background: radial-gradient(
+    circle at 55% 48%,
+    transparent 38%,
+    rgba(8, 11, 16, 0.18) 72%,
+    var(--color-canvas) 108%
+  );
+}
+
+.atlas-label,
+.aggregate-badge {
+  min-height: 28px;
+  border-radius: var(--radius-sm);
+  font: 600 11px/1 var(--font-ui);
+  letter-spacing: 0.04em;
+}
+
+.atlas-label {
+  color: var(--color-text-muted);
+}
+
+.aggregate-badge {
+  border-color: rgba(155, 140, 255, 0.34);
+  background: rgba(155, 140, 255, 0.08);
+  color: #c9c1ff;
+}
+
+.atlas-node {
+  box-shadow: 0 0 18px color-mix(in srgb, var(--node) 15%, transparent);
+}
+
+.atlas-node span,
+.atlas-node b {
+  font-family: var(--font-code);
+  font-size: 11px;
+}
+
+.metrics {
+  left: clamp(24px, 3vw, 48px);
+  right: clamp(24px, 3vw, 48px);
+  bottom: 20px;
+  height: 112px;
+  grid-template-columns: 1.15fr 1fr 1.55fr 0.85fr;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: rgba(16, 21, 29, 0.95);
+  backdrop-filter: none;
+  overflow: hidden;
+}
+
+.metrics article {
+  padding: 18px 20px;
+  border-right-color: var(--color-border);
+}
+
+.metrics span,
+.metrics small {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+.metrics span {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.metrics strong {
+  color: var(--color-text);
+  font: 600 30px/1 var(--font-ui);
+}
+
+.metrics strong.word {
+  color: var(--color-magenta);
+  font-size: 17px;
+}
+
+.metrics small {
+  color: var(--color-text-secondary);
+}
+
+.meter {
+  height: 3px;
+  background: var(--color-border);
+}
+
+.meter i {
+  background: var(--color-cyan);
+  box-shadow: none;
+}

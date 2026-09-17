@@ -64,7 +64,7 @@ The dashboard summarizes the problem universe, repeated signals, domain distribu
 
 ### Knowledge constellation
 
-The Atlas view turns stored problems and taxonomy relationships into an explorable graph. It provides a quick visual answer to: *Where are my mistakes clustering?*
+The Atlas view turns stored problems and taxonomy relationships into an explorable graph. It provides a quick visual answer to: _Where are my mistakes clustering?_
 
 ![Interactive 2D algorithm knowledge map](docs/images/atlas-2d.png)
 
@@ -213,6 +213,11 @@ Algo Atlas stages only `exports/` from the in-app sync flow. Credentials are del
 
 ## Architecture
 
+For file ownership, extension examples and dependency rules, read
+[AGENTS.md](AGENTS.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+New lessons live in named folders and register their renderer and playback
+metadata without editing shared playback code.
+
 - **Frontend:** React 19, TypeScript, Vite, Monaco Editor, ECharts, Three.js.
 - **Backend:** FastAPI, SQLAlchemy, Alembic, Pydantic.
 - **Storage:** SQLite with WAL, foreign keys, and FTS5 search.
@@ -222,9 +227,17 @@ Algo Atlas stages only `exports/` from the in-app sync flow. Credentials are del
 ## Quality checks
 
 ```powershell
+npm run check
 npm run build
 .\.venv\Scripts\python.exe -m pytest
+.\.venv\Scripts\python.exe -m ruff check .
+.\.venv\Scripts\python.exe -m ruff format --check .
 ```
+
+On macOS, use `./.venv/bin/python` instead. `npm test` runs every frontend suite
+once; `test:atlas` and `test:visualizers` remain available for focused checks.
+Use `npm run format` and `python -m ruff format .` to format source changes.
+Exports and canonical algorithm reference files are excluded.
 
 ## Repository layout
 

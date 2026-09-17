@@ -1,0 +1,10 @@
+/* Ordered compatibility manifest: preserve the cascade when extending styles. */
+@import '../../shared/styles/foundations.css';
+@import './layout.css';
+@import '../../features/dashboard/styles/base.css';
+@import '../../features/problems/library/styles/base.css';
+@import '../../features/problems/editor/styles/base.css';
+@import '../../features/taxonomy/styles/base.css';
+@import '../../features/settings/styles/base.css';
+@import '../../shared/ui/dialogs.css';
+@import '../../features/visualizers/styles/base.css';

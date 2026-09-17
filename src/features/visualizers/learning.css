@@ -1,0 +1,4 @@
+/* Ordered compatibility manifest: preserve the cascade when extending styles. */
+@import './components/styles/learning.css';
+@import './lessons/weighted-word-mapping/styles.css';
+@import './lessons/weighted-word-mapping/input.css';

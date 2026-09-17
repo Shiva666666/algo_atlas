@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.local/
+.agents/
+.codex/
+.impeccable/
+.openai/
+exports/
+public/
+package-lock.json
+**/reference.py
+**/reference.ts
+tests/frontend/fixtures/

@@ -1,0 +1,142 @@
+/* Editor */
+.editor-page {
+  padding-top: 20px;
+}
+
+.editor-top {
+  position: sticky;
+  top: -20px;
+  z-index: 5;
+  grid-template-columns: 88px minmax(0, 1fr) auto;
+  min-height: 76px;
+  margin-bottom: 20px;
+  padding: 12px 0;
+  background: rgba(8, 11, 16, 0.97);
+}
+
+.editor-top h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.back-btn {
+  min-height: 40px;
+  color: var(--color-text-secondary);
+  font: 600 12px/1 var(--font-ui);
+}
+
+.editor-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.danger-icon,
+.visualize-btn,
+.repeat-btn,
+.save-btn {
+  min-height: 40px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.danger-icon {
+  min-width: 40px;
+  border-color: rgba(255, 107, 122, 0.35);
+  background: rgba(255, 107, 122, 0.08);
+  color: #ff9aa6;
+}
+
+.editor-grid {
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.8fr);
+  gap: 16px;
+}
+
+.editor-main,
+.notes-column {
+  gap: 16px;
+}
+
+.form-grid {
+  padding: 20px;
+  gap: 16px;
+}
+
+.form-grid input,
+.form-grid select,
+.custom-panel input,
+.custom-panel select,
+.input-action {
+  min-height: 40px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+}
+
+.input-action button {
+  min-height: 32px;
+  border-radius: var(--radius-sm);
+  font: 600 12px/1 var(--font-ui);
+}
+
+.chip-field {
+  padding-inline: 20px;
+}
+
+.chip-field button,
+.pattern-cloud span,
+.custom-list span {
+  min-height: 30px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font: 500 12px/1.2 var(--font-ui);
+}
+
+.chip-field button.selected {
+  border-color: var(--color-cyan);
+  background: rgba(55, 217, 255, 0.1);
+  color: var(--color-text);
+  box-shadow: none;
+}
+
+.notes-panel label > small,
+.history-panel small,
+.history-panel p {
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.notes-panel textarea,
+.repeat-modal textarea {
+  min-height: 100px;
+  padding: 12px;
+  font: 400 13px/1.55 var(--font-code);
+}
+
+.history-panel b {
+  font-size: 13px;
+}
+
+.history-panel > div > i {
+  background: var(--color-magenta);
+  box-shadow: none;
+}
+
+.toast-message,
+.result-banner {
+  border-radius: var(--radius-md);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.modal-backdrop {
+  backdrop-filter: none;
+}
+
+.repeat-modal h3 {
+  font-family: var(--font-ui);
+}
