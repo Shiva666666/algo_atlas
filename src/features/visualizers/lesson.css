@@ -9,4 +9,5 @@
 @import './lessons/incremovable/refinements.css';
 @import './lessons/matchsticks-square/styles.css';
 @import './components/styles/graph-and-interval.css';
+@import './components/styles/traversal-workbench.css';
 @import './lessons/remove-k-digits/styles.css';

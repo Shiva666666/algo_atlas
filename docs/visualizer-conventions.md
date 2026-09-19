@@ -178,3 +178,72 @@ Do not claim screenshot or visual QA until it occurs.
   (annotations below 12px) was fixed; final verdict review found F1 resolved with
   no resulting wrapping/overflow regression. Native 200% browser zoom remains
   unverified; this evidence does not establish a full accessibility audit.
+
+## Graph and grid traversal lesson family
+
+The graph lesson family uses presentation-only primitives from
+`components/TraversalPrimitives.tsx`; algorithms and snapshots stay inside each
+named lesson folder.
+
+- `GraphTraversalWorkbench` shows stable node identity, directed or undirected
+  edges, inspected connections, and component/algorithm state.
+- `GridTraversalBoard` shows walls, numeric cells, frontiers, visited state,
+  bounds, paths, and room gates without changing the input model.
+- `FrontierLedger` presents a queue, DFS stack, or min-heap with stable item
+  identity and explicit discovered-versus-processed state.
+- `DistanceMatrix` exposes initialized infinity, active `i -> k -> j`
+  dependencies, old/candidate/new distances, and threshold membership.
+- `MistakeCheckpoint` is an optional typed frame annotation. It quotes the saved
+  expression, states the violated invariant, and gives the correction without
+  inventing execution states.
+
+The diagram-first workspace keeps presets and playback visible, collapses custom
+input initially, and keeps the code/steps inspector closed. Opening the inspector
+must preserve the current frame. Mobile uses the existing accessible drawer and
+44px controls. State is expressed with text as well as color; functional labels
+remain at least 12px.
+
+The implemented bounded contracts are: graph lessons 1–12 vertices depending on
+the lesson, maze/farmland grids at most 8×10, fish grids at most 10×10, Floyd
+graphs at most 7 vertices, and room-time grids at most 8×8. Complete traces are
+never truncated. Each lesson owns a canonical `reference.py`, typed immutable
+trace, diagnostic presets, renderer, editor, and numeric/slug registry aliases.
+
+State coverage is part of the reusable contract, not lesson-specific decoration:
+
+- Directed reachability shows discovery, queue order, key inspection, processing,
+  and the final reachable/locked result. Complete Components separates component
+  collection from degree auditing and accepted/rejected verdicts; the 10 isolated
+  node boundary keeps every singleton visible and counts all ten as complete.
+- Grid lessons distinguish frontier, candidate, active, visited, rejected, path,
+  rectangle-bound, subtotal, and completed-result states as applicable. Minimum
+  Time also separates heap pop, stale-entry rejection, wait, alternating movement
+  duration, relaxation, and destination finalization.
+- Find the City preserves initialized infinity, direct-edge and diagonal setup,
+  active Floyd `i -> k -> j` dependencies, relaxation, threshold counts, and the
+  largest-index tie break. These states must remain readable in text and tables
+  even when color is unavailable.
+
+Recorded handoff, 2026-09-19: Keys and Rooms (841), Nearest Exit (1926),
+Farmland (1992), Maximum Fish (2658), Find the City (1334), and Minimum Time II
+(3342) were added as Resolved; Complete Components (2685) was intentionally added
+as Open. Exactly two explicit mistake events were added, for Farmland and Minimum
+Time. Max Area of Island (695) remained byte-for-byte unchanged and selected its
+existing renderer in browser regression.
+
+Verification passed 43 visualizer tests, including independent reachability,
+DSU, BFS, rectangle, repeated-Dijkstra, and bounded time-expanded oracles; 41
+backend tests; the production build; and Ruff. `npm run check` completed 64 of 65
+checks, with the remaining check being the expected live-browser skip. The
+Impeccable detector returned `[]`, the final independent reviewer verdict was
+SHIP, and the browser console contained no warnings or errors.
+
+Browser review covered 1920×1080, 1366×768, 390×844, keyboard-opened inspector,
+44px mobile controls, malformed JSON feedback, playback/inspector continuity,
+and a 683px effective viewport as a CSS 200%-reflow equivalent. The retained
+screenshots directly show the 10-isolated-node boundary, Farmland, the Floyd
+matrix, mobile closed/open inspector states, the unchanged Max Area renderer, and
+Minimum Time; they are in `.impeccable/review/graph-lessons`. The in-app browser
+ignored native zoom keystrokes and exposed no live reduced-motion emulation
+capability, so native browser zoom and live reduced-motion emulation remain
+explicitly unclaimed.

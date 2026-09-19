@@ -2,6 +2,7 @@ import { useLessonTrace } from './core/useLessonTrace';
 import { useProblemQuery } from '../problems/index';
 
 import { ExplanationPanel } from './components/ExplanationPanel';
+import { MistakeCheckpoint } from './components/TraversalPrimitives';
 import { nextJump, type JumpControl } from './core/lesson';
 
 import {
@@ -62,7 +63,7 @@ export function ProblemVisualizerPage() {
     );
   if (loadError || !problem || !adapter)
     return (
-      <section className="page-scroll lesson-page">
+      <section className={`page-scroll lesson-page ${diagramFirst ? 'diagram-first-page' : ''}`}>
         <div className="lesson-empty">
           <ScanLine size={28} />
           <h2>Visualizer unavailable</h2>
@@ -96,7 +97,7 @@ export function ProblemVisualizerPage() {
   };
   return (
     <LessonMotion>
-      <section className="page-scroll lesson-page">
+      <section className={`page-scroll lesson-page ${diagramFirst ? 'diagram-first-page' : ''}`}>
         <header className="lesson-header">
           <LessonButton className="lesson-back" onClick={() => navigate(`/problems/${problem.id}`)}>
             <ArrowLeft size={16} /> Problem notes
@@ -150,14 +151,31 @@ export function ProblemVisualizerPage() {
             </select>
           </label>
           {InputEditor ? (
-            <InputEditor
-              key={adapter.id}
-              raw={raw}
-              onChange={(value) => {
-                setRaw(value);
-                setPlaying(false);
-              }}
-            />
+            diagramFirst ? (
+              <details className="lesson-custom-input lesson-structured-disclosure">
+                <summary>
+                  {adapter.inputLabel}
+                  <span>Edit custom input</span>
+                </summary>
+                <InputEditor
+                  key={adapter.id}
+                  raw={raw}
+                  onChange={(value) => {
+                    setRaw(value);
+                    setPlaying(false);
+                  }}
+                />
+              </details>
+            ) : (
+              <InputEditor
+                key={adapter.id}
+                raw={raw}
+                onChange={(value) => {
+                  setRaw(value);
+                  setPlaying(false);
+                }}
+              />
+            )
           ) : (
             <details className="lesson-custom-input">
               <summary>
@@ -307,6 +325,9 @@ export function ProblemVisualizerPage() {
                   <h2>{current.title}</h2>
                   <p>{current.message}</p>
                 </div>
+                {current.mistakeCheckpoint && (
+                  <MistakeCheckpoint checkpoint={current.mistakeCheckpoint} />
+                )}
                 <div className="lesson-canvas">
                   <Canvas frame={current} problem={problem} />
                 </div>

@@ -30,6 +30,13 @@ import { lesson as articulationPointsLesson } from './lessons/articulation-point
 import { lesson as uniqueConcatenationLesson } from './lessons/unique-concatenation';
 import { lesson as minimumVerticesLesson } from './lessons/minimum-vertices';
 import { lesson as polygonTriangulationLesson } from './lessons/polygon-triangulation';
+import { lesson as keysRoomsLesson } from './lessons/keys-and-rooms';
+import { lesson as completeComponentsLesson } from './lessons/complete-components';
+import { lesson as nearestExitLesson } from './lessons/nearest-exit';
+import { lesson as farmlandLesson } from './lessons/farmland';
+import { lesson as maximumFishLesson } from './lessons/maximum-fish';
+import { lesson as findCityLesson } from './lessons/find-city';
+import { lesson as minimumTimeRoomLesson } from './lessons/minimum-time-room';
 export const lessons: Lesson[] = [
   bipartiteLesson,
   kokoLesson,
@@ -58,6 +65,13 @@ export const lessons: Lesson[] = [
   uniqueConcatenationLesson,
   minimumVerticesLesson,
   polygonTriangulationLesson,
+  keysRoomsLesson,
+  completeComponentsLesson,
+  nearestExitLesson,
+  farmlandLesson,
+  maximumFishLesson,
+  findCityLesson,
+  minimumTimeRoomLesson,
 ];
 const byKey = new Map<string, Lesson>();
 for (const lesson of lessons)

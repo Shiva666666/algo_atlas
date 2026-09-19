@@ -209,6 +209,39 @@
 .lesson-custom-input .lesson-raw {
   padding: 10px 0 0;
 }
+.lesson-structured-disclosure > .structured-traversal-input {
+  padding-top: 12px;
+}
+.diagram-first-page {
+  padding-top: 20px;
+}
+.diagram-first-page .lesson-header {
+  margin-bottom: 14px;
+  gap: 10px 20px;
+}
+.diagram-first-page .lesson-back {
+  min-height: 44px;
+}
+.diagram-first-page .lesson-title h1 {
+  margin-bottom: 6px;
+}
+.diagram-first-page .lesson-meta {
+  margin-bottom: 6px;
+}
+.diagram-first-page .lesson-title > p:last-child {
+  line-height: 1.45;
+}
+.diagram-first-page .lesson-missed-note {
+  margin-bottom: 12px;
+}
+.diagram-first-page .lesson-input {
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.diagram-first-page .lesson-frame-heading {
+  min-height: 112px;
+  padding-block: 14px;
+}
 .lesson-inspector-launch {
   display: flex;
   align-items: center;

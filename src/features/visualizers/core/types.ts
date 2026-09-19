@@ -17,6 +17,16 @@ export interface VisualFrame<D = unknown> {
   codeLines?: number[];
   /** Checkpoints are shown in guided mode; transitions remain available on demand. */
   traceRole?: 'checkpoint' | 'transition';
+  /** Source-grounded correction shown beside the exact operation it explains. */
+  mistakeCheckpoint?: MistakeCheckpoint;
+}
+
+export interface MistakeCheckpoint {
+  title: string;
+  submitted: string;
+  invariant: string;
+  correction: string;
+  tone?: 'mistake' | 'refinement';
 }
 
 export interface RuleFocus {
