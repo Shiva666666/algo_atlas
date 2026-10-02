@@ -168,8 +168,7 @@ export function useProblemEditor() {
     });
   const openVisualizer = () => {
     if (!problemId) return;
-    const tab = window.open(`/problems/${problemId}/visualize`, '_blank', 'noopener,noreferrer');
-    if (tab) tab.opener = null;
+    navigate(`/problems/${problemId}/visualize`);
   };
   return {
     problemId,

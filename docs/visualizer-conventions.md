@@ -247,3 +247,98 @@ Minimum Time; they are in `.impeccable/review/graph-lessons`. The in-app browser
 ignored native zoom keystrokes and exposed no live reduced-motion emulation
 capability, so native browser zoom and live reduced-motion emulation remain
 explicitly unclaimed.
+
+## September 30 sequence, dependency, and memoized-recursion lessons
+
+The bounded extension adds Triangle (120), Perfect Squares (279), Maximum
+Nesting Depth (1614), Count Ways To Build Good Strings (2466), and Course
+Schedule II (210). Each owns its canonical screenshot algorithm, strict parser,
+typed copied frames, presets, renderer, input editor, and numeric/slug aliases.
+Saved Python remains a separate reference, never executable teaching input.
+
+Reusable presentation contracts:
+
+- `components/StudyPrimitives.tsx` exports `SequenceStrip`, `DependencyGrid`,
+  and `OperationLedger`. Strips show indexed values/characters, a labeled pointer,
+  semantic states, and derived range annotations. Their local scrolling follows
+  the active index without scrolling the page or interpolating algorithm values.
+- `DependencyGrid` renders ragged triangular rows with separate input and cost
+  labels, real parent connections, and explicit current/compared cells. It does
+  not compute DP values or replace existing rectangular-grid renderers.
+- `components/MemoizedRecursionWorkbench.tsx` presents supplied call ancestry,
+  child return slots, memo entries, and evaluated expressions. `null` means an
+  unknown or pending value, not zero. Its shared call snapshot contract lives in
+  `core/memoized-recursion-types.ts`; traces must not import rendering modules.
+- Course Schedule reuses `GraphTraversalWorkbench` and `FrontierLedger`.
+  Directed arrowhead contrast and the readable minimum graph width are scoped
+  to the new study workspace, leaving existing lesson rendering untouched.
+
+The new `.study-workbench` layout preserves the incumbent diagram-first shell,
+Bklit legend, Kokonut tabs, and Motion controls. Custom input and the inspector
+start collapsed. Opening either retains the frame; editing pauses playback;
+invalid input retains the last successfully built trace. Functional labels stay
+at least 12px, controls remain 44px, and diagrams scroll locally. Memo and call
+panels sit side by side on wide layouts and stack below 980px.
+
+Source fidelity requirements:
+
+- Triangle distinguishes its first-column assignment from interior parent
+  comparisons. The final highlighted path is explicitly reconstructed from DP
+  values, not represented as a predecessor array stored by the reference.
+- Perfect Squares preserves seeded square memo entries, memo-before-zero guard
+  order, ascending subtraction choices, returned child values, minimum updates,
+  and the `square > remainder` break. The zero-return branch is unreachable for
+  valid inputs in this seeded implementation; document that fact, never fabricate
+  a zero call merely to illustrate the branch.
+- Nesting Depth updates the maximum at a closing parenthesis **before** reducing
+  current depth. Matched ranges are derived annotations, not reference state.
+- Good Strings preserves `memo[high] = 1`, overflow checks, stopping contribution,
+  zero-then-one recursion, addition after both returns, and modulo storage. Equal
+  block lengths still represent two distinct appended strings and count twice.
+- Course Schedule preserves input-edge order, numeric initial discovery, FIFO
+  processing, zero-only enqueueing, the early no-zero guard, and final processed
+  count. Show a partial recorded order separately from a failed empty result;
+  blocked courses may depend on a cycle without belonging to that cycle.
+
+Teaching limits are explicit next to each editor: Triangle 1–8 rows with exact
+lengths 1…n and values −10,000…10,000; balanced arithmetic/digit expressions
+1–64 characters; Perfect Squares n=1…40; Good Strings
+1 ≤ low ≤ high ≤ 24 and 1 ≤ zero, one ≤ low; Course Schedule 1–12 courses with
+unique valid non-self prerequisite pairs. Complete traces are not truncated.
+
+Recorded verification, 2026-10-01:
+
+- 49 visualizer tests passed, including independent exhaustive-path, BFS,
+  parenthesis-stack, explicit-string/bottom-up, and DFS-cycle/order oracles.
+  Tests cover presets, limits, intermediate invariants, independent snapshots,
+  exact reference focus, aliases, and unchanged incumbent golden fixtures.
+- `npm run check`: 70 passed, one expected optional Atlas live-browser skip.
+  Build, 41 backend tests, Ruff check, and Ruff formatting passed. Existing large
+  Dashboard/3D bundle warnings remain unrelated to these lessons.
+- Live browser evidence covers all five lessons at 1366×768 and 390×844,
+  intermediate diagrams and final answers, keyboard inspector continuity,
+  editing/playback pause, invalid-input preservation, and local scrolling.
+  Triangle additionally has a 390px inspector capture and 683px CSS reflow
+  capture. Good Strings operated with the saved reduced-motion preference
+  enabled; the original preference was restored after the check.
+- 1920×1080 CSS layout was exercised without page overflow, but the in-app
+  browser physically clipped captures to 1683px. Full 1920px visual acceptance
+  remains unverified. Native zoom keystrokes did not change width/scale/DPR;
+  683px is CSS reflow evidence, not native 200% zoom. Live OS reduced-motion
+  emulation was unavailable and is not claimed.
+- The fresh Impeccable reviewer identified one material arrowhead-contrast fix.
+  Its verdict pass scored that fix resolved in the corrected desktop/mobile
+  captures and returned SHIP at that scope. Hook detector reported no findings.
+  The final browser console returned no warnings or errors. Browser regression
+  confirmed the three protected lessons still use their original specialized
+  traces, and Course Schedule's disconnected cycle returns failure after partial
+  processing. Evidence lives in `.impeccable/review/september-lessons`.
+- Five unique local records were created as Resolved with
+  `record_initial_mistake: false`, no notes or mistake events. Hash comparison
+  confirmed all 33 pre-existing full record responses unchanged. Coin Change II,
+  N-Queens, and Hexadecimal remain protected.
+
+Additional questions through Saturday, October 3 remain unassigned until their
+screenshots/solutions arrive. Document their source algorithm and bounded visual
+states first, then form a later verified batch around compatible foundations;
+do not silently extend this completed five-lesson batch.

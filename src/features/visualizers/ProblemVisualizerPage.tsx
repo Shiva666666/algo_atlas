@@ -108,7 +108,7 @@ export function ProblemVisualizerPage() {
             <p>{adapter.description}</p>
           </div>
           {problem.url && (
-            <a className="lesson-source" href={problem.url} target="_blank" rel="noreferrer">
+            <a className="lesson-source" href={problem.url} rel="noreferrer">
               {problem.source}
               <ExternalLink size={14} />
             </a>

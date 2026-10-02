@@ -1,0 +1,303 @@
+.study-workbench {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  font-family: var(--font-ui);
+  color: var(--color-text);
+}
+.study-workbench > *,
+.study-sequence {
+  min-width: 0;
+}
+.study-workbench .traversal-graph {
+  min-width: 640px;
+}
+.lesson-page:has(.study-workbench) .lesson-header {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 14px;
+}
+.lesson-page:has(.study-workbench) .lesson-back {
+  grid-column: 1;
+}
+.lesson-page:has(.study-workbench) .lesson-title h1 {
+  font-size: 26px;
+}
+.lesson-page:has(.study-workbench) .lesson-input {
+  margin-bottom: 12px;
+  gap: 8px 16px;
+}
+.lesson-page:has(.study-workbench) .lesson-stage-label {
+  padding: 8px 16px;
+}
+.lesson-page:has(.study-workbench) .lesson-controls {
+  padding: 10px 16px 4px;
+}
+.lesson-page:has(.study-workbench) .lesson-timeline {
+  padding: 0 16px;
+}
+.lesson-page:has(.study-workbench) .lesson-frame-heading {
+  min-height: 0;
+  padding: 12px 16px;
+}
+.lesson-page:has(.study-workbench) .lesson-frame-heading > span {
+  display: none;
+}
+.lesson-page:has(.study-workbench) .lesson-frame-heading h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.lesson-page:has(.study-workbench) .lesson-frame-heading p {
+  font-size: 14px;
+  line-height: 1.45;
+}
+.lesson-page:has(.study-workbench) .lesson-canvas {
+  padding: 16px;
+}
+.study-workbench h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+.study-workbench p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.study-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 310px);
+  gap: 24px;
+  align-items: start;
+}
+.study-layout > * {
+  min-width: 0;
+}
+.study-scroll {
+  max-width: 100%;
+  overflow: auto;
+  scrollbar-color: var(--color-border) var(--color-canvas);
+  padding: 4px 2px 14px;
+}
+.study-scroll:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+.study-strip {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 6px;
+  width: max-content;
+}
+.study-strip li {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  min-width: 54px;
+  min-height: 92px;
+  padding: 9px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-canvas);
+}
+.study-strip b {
+  font: 600 20px/1.25 var(--font-mono);
+}
+.study-strip span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+.study-strip .study-index {
+  font: 12px var(--font-mono);
+}
+.study-strip .study-active {
+  border-color: var(--color-cyan);
+  background: #102932;
+}
+.study-strip .study-pending {
+  border-color: #f1b85b;
+}
+.study-strip .study-stored {
+  background: #14221e;
+  border-color: #4fd1a1;
+}
+.study-strip .study-result {
+  background: #222039;
+  border-color: var(--color-violet);
+}
+.study-pointer {
+  font-size: 12px;
+  color: var(--color-cyan);
+}
+.study-ranges {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.study-ranges li {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-violet);
+  padding-bottom: 4px;
+}
+.study-triangle {
+  display: block;
+  margin-inline: auto;
+}
+.study-triangle rect {
+  fill: var(--color-canvas);
+  stroke: var(--color-border);
+}
+.study-triangle text {
+  text-anchor: middle;
+  font-family: var(--font-mono);
+  fill: var(--color-text);
+}
+.study-triangle .triangle-input {
+  font-size: 12px;
+  fill: var(--color-text-secondary);
+}
+.study-triangle .triangle-cost {
+  font-size: 19px;
+  font-weight: 600;
+}
+.study-triangle .triangle-index {
+  font-size: 12px;
+  fill: var(--color-text-secondary);
+}
+.study-triangle .study-active rect {
+  fill: #102932;
+  stroke: var(--color-cyan);
+  stroke-width: 2;
+}
+.study-triangle .study-dependency rect {
+  fill: #222039;
+  stroke: var(--color-violet);
+  stroke-width: 2;
+}
+.study-triangle .study-result rect {
+  fill: #14221e;
+  stroke: #4fd1a1;
+  stroke-width: 2;
+}
+.dependency-link {
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+.dependency-link.focused {
+  stroke: var(--color-violet);
+  stroke-width: 2;
+}
+.study-operation {
+  min-width: 0;
+  padding: 16px 0;
+  border-block: 1px solid var(--color-border);
+}
+.study-operation .study-equation {
+  font: 500 15px/1.6 var(--font-mono);
+  color: var(--color-cyan);
+  overflow-wrap: anywhere;
+  margin-bottom: 14px;
+}
+.study-operation dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.study-operation dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.study-operation dt {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.study-operation dd {
+  margin: 0;
+  font: 500 14px var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.study-operation > p:last-child:not(.study-equation) {
+  margin-top: 16px;
+}
+.depth-meter {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  padding: 16px 0;
+}
+.depth-meter div {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+.depth-meter .occupied {
+  background: #222039;
+  border-color: var(--color-violet);
+  color: var(--color-text);
+}
+.memo-branches {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.memo-branches li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  padding: 8px 0;
+  border-top: 1px solid var(--color-border);
+}
+.memo-branches b {
+  font-family: var(--font-mono);
+  color: var(--color-violet);
+}
+.memo-choice {
+  margin-top: 18px;
+}
+.memo-choice h3 {
+  margin-bottom: 8px;
+}
+.memo-call-state {
+  min-width: 0;
+}
+.memo-call-scroll {
+  max-height: 250px;
+  overflow: auto;
+}
+.memo-call-scroll .frontier-ledger li {
+  flex-direction: column;
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .lesson-page:has(.study-workbench) .lesson-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .lesson-page:has(.study-workbench) .lesson-back {
+    grid-column: 1 / -1;
+  }
+  .study-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.study-workbench .traversal-graph defs marker path {
+  fill: #607086;
+}

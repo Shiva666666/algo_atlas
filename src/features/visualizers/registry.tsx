@@ -37,6 +37,11 @@ import { lesson as farmlandLesson } from './lessons/farmland';
 import { lesson as maximumFishLesson } from './lessons/maximum-fish';
 import { lesson as findCityLesson } from './lessons/find-city';
 import { lesson as minimumTimeRoomLesson } from './lessons/minimum-time-room';
+import { lesson as triangleLesson } from './lessons/triangle';
+import { lesson as depthLesson } from './lessons/maximum-nesting-depth';
+import { lesson as squaresLesson } from './lessons/perfect-squares';
+import { lesson as goodStringsLesson } from './lessons/good-strings';
+import { lesson as courseLesson } from './lessons/course-schedule';
 export const lessons: Lesson[] = [
   bipartiteLesson,
   kokoLesson,
@@ -72,6 +77,11 @@ export const lessons: Lesson[] = [
   maximumFishLesson,
   findCityLesson,
   minimumTimeRoomLesson,
+  triangleLesson,
+  depthLesson,
+  squaresLesson,
+  goodStringsLesson,
+  courseLesson,
 ];
 const byKey = new Map<string, Lesson>();
 for (const lesson of lessons)
