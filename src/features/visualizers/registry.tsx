@@ -48,6 +48,7 @@ import { lesson as scoreParenthesesLesson } from './lessons/score-parentheses';
 import { lesson as validParenthesisStringLesson } from './lessons/valid-parenthesis-string';
 import { lesson as floodFillLesson } from './lessons/flood-fill';
 import { lesson as wiggleSortLesson } from './lessons/wiggle-sort';
+import { lesson as removeInvalidParenthesesLesson } from './lessons/remove-invalid-parentheses';
 export const lessons: Lesson[] = [
   bipartiteLesson,
   kokoLesson,
@@ -94,6 +95,7 @@ export const lessons: Lesson[] = [
   validParenthesisStringLesson,
   floodFillLesson,
   wiggleSortLesson,
+  removeInvalidParenthesesLesson,
 ];
 const byKey = new Map<string, Lesson>();
 for (const lesson of lessons)

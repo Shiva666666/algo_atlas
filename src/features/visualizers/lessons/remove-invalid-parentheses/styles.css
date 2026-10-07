@@ -1,0 +1,147 @@
+.removal-phases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+.removal-phases span {
+  font-size: 13px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+.removal-phases .current {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+.removal-phases .complete {
+  color: #4fd1a1;
+  border-color: #4fd1a1;
+}
+.removal-origin .deleted {
+  background: #301925;
+  border-color: #f06cae;
+}
+.removal-origin .deleted b {
+  color: #f06cae;
+  text-decoration: line-through;
+}
+.removal-origin .deleted span {
+  color: #f4a3ca;
+}
+.removal-candidates,
+.removal-ledgers {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.removal-transfer {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  background: #102932;
+  border: 1px solid var(--color-cyan);
+  border-radius: 6px;
+}
+.removal-transfer strong {
+  color: var(--color-cyan);
+}
+.removal-transfer code {
+  overflow-wrap: anywhere;
+  font: 14px var(--font-mono);
+}
+.removal-ancestry {
+  max-height: 310px;
+}
+.removal-ancestry ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.removal-ancestry li {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--color-violet);
+  border-radius: 6px;
+  background: #222039;
+}
+.removal-ancestry .active-call {
+  background: #102932;
+  border-color: var(--color-cyan);
+}
+.removal-ancestry span {
+  font-size: 13px;
+}
+.removal-ancestry code {
+  font: 16px var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.removal-validation {
+  display: grid;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+.removal-validation h3 {
+  margin: 0;
+}
+.removal-validation dl {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.removal-validation dt {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+.removal-validation dd {
+  margin: 4px 0 0;
+  font: 16px var(--font-mono);
+}
+.removal-validation.invalid strong,
+.removal-validation.duplicate strong {
+  color: #f06cae;
+}
+.removal-validation.valid strong {
+  color: #4fd1a1;
+}
+.removal-answers {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+  display: grid;
+  gap: 12px;
+}
+.removal-answers h3 {
+  margin: 0;
+}
+.removal-answers ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.removal-answers li {
+  display: grid;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid #4fd1a1;
+  border-radius: 6px;
+  background: #14221e;
+}
+.removal-answers code {
+  font: 16px var(--font-mono);
+  color: #7ee5ba;
+}
+.removal-answers span {
+  font-size: 13px;
+  color: #7ee5ba;
+}
+.removal-empty {
+  padding: 18px;
+  border: 1px dashed var(--color-border);
+}

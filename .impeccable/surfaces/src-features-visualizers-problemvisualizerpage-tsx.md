@@ -27,6 +27,29 @@ related_targets:
 
 # Problem visualizer — graph lesson family
 
+## Direction contract — Remove Invalid Parentheses
+
+THESIS: Minimum deletions define a search budget; equal counts alone do not prove
+validity. Show one active ancestry, not an unreadable exponential tree.
+
+OWN-WORLD: Incumbent graphite workbench, cyan current token, violet ancestry and
+stored openings, magenta deleted tokens, green unique answers; readable language
+and monospace strings, indexes, and measurements.
+
+STORY: Count unmatched parentheses, follow a deletion, inspect its validator,
+then resume the unchanged caller. Distinguish accepted-result deduplication from
+search pruning. Letters are never deletion choices.
+
+FIRST VIEWPORT: Indexed original string above the wider candidate ribbon and
+active ancestry; compact removal and validation ledger on the right. Unique
+answers sit below. Playback remains above; input and source start collapsed.
+
+FORM: Precisely specified incumbent extension, code-led; no concept seed applies.
+Signature: returning from a candidate restores its parent's string and resumes
+the next current-index choice, without an invented shared-state undo.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
 ## Direction contract — October bracket, fill and sorting extension
 
 THESIS: Reveal the actual changing state and each decisive condition, rather than
