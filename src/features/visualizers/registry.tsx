@@ -42,6 +42,12 @@ import { lesson as depthLesson } from './lessons/maximum-nesting-depth';
 import { lesson as squaresLesson } from './lessons/perfect-squares';
 import { lesson as goodStringsLesson } from './lessons/good-strings';
 import { lesson as courseLesson } from './lessons/course-schedule';
+import { lesson as validParenthesesLesson } from './lessons/valid-parentheses';
+import { lesson as minimumAddParenthesesLesson } from './lessons/minimum-add-parentheses';
+import { lesson as scoreParenthesesLesson } from './lessons/score-parentheses';
+import { lesson as validParenthesisStringLesson } from './lessons/valid-parenthesis-string';
+import { lesson as floodFillLesson } from './lessons/flood-fill';
+import { lesson as wiggleSortLesson } from './lessons/wiggle-sort';
 export const lessons: Lesson[] = [
   bipartiteLesson,
   kokoLesson,
@@ -82,6 +88,12 @@ export const lessons: Lesson[] = [
   squaresLesson,
   goodStringsLesson,
   courseLesson,
+  validParenthesesLesson,
+  minimumAddParenthesesLesson,
+  scoreParenthesesLesson,
+  validParenthesisStringLesson,
+  floodFillLesson,
+  wiggleSortLesson,
 ];
 const byKey = new Map<string, Lesson>();
 for (const lesson of lessons)

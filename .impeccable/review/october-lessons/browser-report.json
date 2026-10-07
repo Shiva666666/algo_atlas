@@ -1,0 +1,63 @@
+{
+  "report": [
+    {
+      "lesson": "Valid Parentheses",
+      "desktop": 1366,
+      "intermediate": 900,
+      "mobile": 390,
+      "keyboardInspector": true,
+      "invalidInputPreserved": true,
+      "allFrames": 20
+    },
+    {
+      "lesson": "Minimum Add to Make Parentheses Valid",
+      "desktop": 1366,
+      "intermediate": 900,
+      "mobile": 390,
+      "keyboardInspector": true,
+      "invalidInputPreserved": true,
+      "allFrames": 15
+    },
+    {
+      "lesson": "Score of Parentheses",
+      "desktop": 1366,
+      "intermediate": 900,
+      "mobile": 390,
+      "keyboardInspector": true,
+      "invalidInputPreserved": true,
+      "allFrames": 43
+    },
+    {
+      "lesson": "Valid Parenthesis String",
+      "desktop": 1366,
+      "intermediate": 900,
+      "mobile": 390,
+      "keyboardInspector": true,
+      "invalidInputPreserved": true,
+      "allFrames": 12
+    },
+    {
+      "lesson": "Flood Fill",
+      "desktop": 1366,
+      "intermediate": 900,
+      "mobile": 390,
+      "keyboardInspector": true,
+      "invalidInputPreserved": true,
+      "allFrames": 96
+    },
+    {
+      "lesson": "Wiggle Sort II",
+      "desktop": 1366,
+      "intermediate": 900,
+      "mobile": 390,
+      "keyboardInspector": true,
+      "invalidInputPreserved": true,
+      "allFrames": 29
+    }
+  ],
+  "console": [],
+  "reducedMotion": "system emulated and saved preference exercised in isolated browser",
+  "zoom": "683px CSS reflow, not native browser zoom",
+  "navigation": "same tab",
+  "data": "All API requests intercepted; no writes"
+}

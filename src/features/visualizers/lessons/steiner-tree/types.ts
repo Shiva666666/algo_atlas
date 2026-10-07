@@ -9,14 +9,7 @@ export interface SteinerFrameData {
   t: number;
   layer: 'comparison' | 'base' | 'with-s' | 'answer';
   transition:
-    | 'overview'
-    | 'seed'
-    | 'merge'
-    | 'relax'
-    | 'query-seed'
-    | 'lookup'
-    | 'reconstruct'
-    | 'handoff';
+    'overview' | 'seed' | 'merge' | 'relax' | 'query-seed' | 'lookup' | 'reconstruct' | 'handoff';
   mask: number;
   maskWidth: number;
   maskTerminals: number[];

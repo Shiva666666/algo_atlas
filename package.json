@@ -29,8 +29,8 @@
     "echarts-for-react": "^3.0.5",
     "lucide-react": "^0.468.0",
     "motion": "^13.1.1",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-force-graph-3d": "^1.29.0",
     "react-router-dom": "^7.9.0",
     "three": "^0.180.0"
@@ -38,14 +38,14 @@
   "devDependencies": {
     "@openai/sites-vite-plugin": "^0.1.0 || ^0.2.0",
     "@types/node": "22.19.19",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/three": "^0.180.0",
-    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-react": "^6.1.2",
     "eslint": "9.39.4",
-    "prettier": "3.6.2",
+    "prettier": "^3.9.9",
     "typescript": "5.9.3",
-    "vite": "8.2.2"
+    "vite": "^8.3.3"
   },
   "overrides": {
     "dompurify": ">=3.4.13"

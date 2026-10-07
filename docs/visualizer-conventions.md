@@ -338,7 +338,109 @@ Recorded verification, 2026-10-01:
   confirmed all 33 pre-existing full record responses unchanged. Coin Change II,
   N-Queens, and Hexadecimal remain protected.
 
-Additional questions through Saturday, October 3 remain unassigned until their
-screenshots/solutions arrive. Document their source algorithm and bounded visual
-states first, then form a later verified batch around compatible foundations;
-do not silently extend this completed five-lesson batch.
+At the September handoff, additional questions through Saturday, October 3 were
+unassigned pending their screenshots and solutions. The six supplied algorithms
+are documented as the separate October extension below; the completed five-lesson
+batch and its evidence retain their original scope.
+
+## October bracket, fill, and sorting lessons
+
+The October extension adds Valid Parentheses (20), Flood Fill (733), Minimum Add
+to Make Parentheses Valid (921), Score of Parentheses (856), Valid Parenthesis
+String (678), and Wiggle Sort II (324). Each owns its canonical screenshot
+`reference.py`, pure typed trace, strict parser, diagnostic presets, renderer,
+input editor, and lesson definition. Register each definition once in
+`registry.tsx`, with its problem slug and LeetCode numeric alias. Course Schedule
+II (210) keeps its existing verified renderer and trace.
+
+Reusable contracts:
+
+- `components/IndexedStackRail.tsx` presents original character indexes with
+  bottom-to-top order and the top on the right. The original index is the stable
+  token identity, including repeated bracket values; labels distinguish top,
+  stored, and empty resources. Its focusable region scrolls locally. It owns
+  presentation, not push/pop logic or matching decisions.
+- The same module's `BracketRibbon` reuses `SequenceStrip` for indexed input,
+  the current read pointer, and read/unread labels. `BracketLegend` reuses Bklit's
+  `StateLegend`, with cyan current state, violet stored resources, magenta
+  rejection, and green completion. Symbols and labels accompany color.
+- `components/BracketInputEditor.tsx` provides String/JSON modes through
+  Kokonut's `SmoothTabs`. Invalid JSON can be repaired in JSON mode; input
+  validity and permitted characters remain the adapter's responsibility.
+- `core/reference-trace.ts` exports `referenceWriter`: match a complete trimmed
+  source line, choose its exact occurrence when repeated, expose its one-based
+  `codeLines` and `codeFocus`, and clone frame data with `structuredClone`.
+  Repeated `pop`, `return`, or pointer-update lines must highlight the branch
+  actually taken. The helper throws on a missing occurrence instead of silently
+  highlighting a similar line. `bracketString` centralizes bounded character
+  validation without requiring all bracket lessons to accept the same alphabet.
+- Flood Fill reuses `GridTraversalBoard`, `FrontierLedger`, and
+  `OperationLedger`. FIFO queue entries use distinct entry IDs even when their
+  coordinates are equal. These identities must not be conflated with a stack's
+  original character indexes.
+- Score and Wiggle Sort reuse `SequenceStrip` and `OperationLedger`. Derived
+  depth diagrams, occurrence IDs, and final inequality checks are labeled
+  teaching annotations; they do not add variables or operations to the Python
+  source.
+
+| Lesson                                | Teaching input                                                                | Required source behavior                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Valid Parentheses                     | 1–32 characters from `(){}[]`                                                 | Preserve opening detection, the empty-stack guard, then the `()`, `{}`, `[]` comparisons in that order. Match only the current top; reject a mismatched closer immediately. Final validity is `len(stack) == 0`.                                                                                                                                                             |
+| Minimum Add to Make Parentheses Valid | 1–32 characters from `()`                                                     | Push openings. A closer pops if a resource exists; otherwise increment the missing-opening count. Add the remaining stack length after scanning. Show the count, not an invented repaired string.                                                                                                                                                                            |
+| Score of Parentheses                  | 2–32 balanced characters from `()`                                            | This source has counters, not a stack. Decrement depth on a closer before testing the primitive `()` leaf and adding `2 ** depth`. Keep pointer advances, contributions, running score, and returned score distinct.                                                                                                                                                         |
+| Valid Parenthesis String              | 1–32 characters from `()*`                                                    | The source names its opening deque `queue`, but both deques use append/pop as LIFO resources. Prefer an opening over a star during scan. In cleanup, reject a star before its remaining opening, then pop the opening and star separately. Only successful completion assigns unused stars the empty role. Resource-consumption order is not a final nested-pairing diagram. |
+| Flood Fill                            | Rectangular 1–8 × 1–10 integer image; colors 0–9; valid zero-based `sr`, `sc` | Preserve right/down/up/left order, recolor then mark seen on dequeue, duplicate queued coordinates, and the already-seen `continue`. Neighbor predicates short-circuit in source order; untested terms read “Not evaluated.” Equal source/target colors still traverse; unique processed and actually changed pixel counts are separate. Return the working image.           |
+| Wiggle Sort II                        | 1–12 integers in 0–5000 admitting a strict wiggle                             | Show `sorted(nums)` as one operation, the backward lower/upper pointers, alternating valley/peak writes into `nums`, and the odd-length peak guard. Unwritten cells retain original values. Python implicitly returns `None`; the final diagram verifies the modified array. Reject inputs that cannot meet the strict-wiggle guarantee.                                     |
+
+The six lessons extend the incumbent `.study-workbench` hierarchy: presets and
+playback precede the main ribbon or coordinate grid; the larger diagram sits
+beside a compact operation ledger and stacks at 980px and below. Custom input
+and the source inspector start collapsed. Opening either retains the frame,
+editing pauses playback, and a failed build retains the previous applied trace.
+Functional labels remain at least 12px, controls retain 44px targets, and large
+ribbons, rails, diagrams, and code scroll in their own regions. Existing same-tab
+navigation and shared system/saved reduced motion remain in use. Saved Python
+is displayed separately and is never executed.
+
+The extension keeps graphite tones, IBM Plex Sans interface hierarchy, DM Mono
+indexes and measurements, cyan focus, violet structure, magenta rejection, and
+green completion. Written Wiggle Sort destination cells use a scoped green
+treatment consistent with their “Written result” legend; the active transfer
+stays cyan. This is a lesson-state correction, not a new global token or visual
+world. `PRODUCT.md`, `DESIGN.md`, and `.impeccable/design.json` were preserved.
+Pre-existing drift remains recorded rather than adopted as a rule: shared
+`LessonButton` uses a 0.98 press scale, while DESIGN.md's button guidance says
+“no scale.” The existing source adaptation and preference are unchanged.
+
+Recorded verification, 2026-10-07:
+
+- `npm run test:visualizers`: 56 passed. `npm run check`: 77 passed with one
+  expected optional Atlas live-browser skip. All 41 backend tests and the
+  production build passed; the incumbent large-chunk warning remains. The main
+  detector ran once and returned `[]`; the audit reported zero findings.
+- `.impeccable/review/october-lessons/browser-report.json` records all six
+  lessons at 1366px, 900px, and 390px, keyboard inspector opening, playback,
+  input editing, invalid-build trace preservation, 44px controls, and an empty
+  browser console. System reduced motion was emulated and the saved preference
+  exercised in an isolated browser. All API requests were intercepted for these
+  lesson checks; they did not write records. The 683px capture is CSS reflow
+  evidence, not native 200% browser zoom. The Windows computer-use entrypoint
+  was unavailable; the disclosed browser fallback supplied this evidence.
+- The independent finish reviewer requested F1: violet written Wiggle Sort
+  cells contradicted the green legend. After the scoped destination correction,
+  the reviewer confirmed green written cells and cyan active transfers at
+  desktop, intermediate, mobile, and final states, returning SHIP for F1 only.
+  This is not an unqualified approval of the whole surface.
+- The authorized local API changes created six Resolved records with code and
+  notes and no initial mistake events. Course Schedule II received notes only;
+  its code, classification, and history were preserved. Full hashes for the 37
+  unrelated records remained unchanged. The catalog grew from 38 to 44 and its
+  Resolved count from 27 to 33; title/code/notes search under Resolved passed.
+  A separate read-only SQLite process confirmed all seven source identities
+  are Resolved with nonempty code, 8–11 note bullets each, and zero mistake
+  events. A separate read-only browser check of the actual local catalog passed
+  for all seven records: Resolved status and core-insight notes were visible,
+  2D Visualization stayed in the same page and selected the specialized lesson,
+  and the inspector reported “Reference code matches your saved text.” That
+  check produced no API writes or page errors. No export, commit, or push was
+  performed.

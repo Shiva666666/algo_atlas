@@ -13,9 +13,43 @@ related_targets:
   - "src/features/visualizers/lessons/perfect-squares/"
   - "src/features/visualizers/lessons/good-strings/"
   - "src/features/visualizers/lessons/course-schedule/"
+  - "src/features/visualizers/components/IndexedStackRail.tsx"
+  - "src/features/visualizers/components/BracketInputEditor.tsx"
+  - "src/features/visualizers/components/styles/indexed-stack.css"
+  - "src/features/visualizers/core/reference-trace.ts"
+  - "src/features/visualizers/lessons/valid-parentheses/"
+  - "src/features/visualizers/lessons/minimum-add-parentheses/"
+  - "src/features/visualizers/lessons/score-parentheses/"
+  - "src/features/visualizers/lessons/valid-parenthesis-string/"
+  - "src/features/visualizers/lessons/flood-fill/"
+  - "src/features/visualizers/lessons/wiggle-sort/"
 ---
 
 # Problem visualizer — graph lesson family
+
+## Direction contract — October bracket, fill and sorting extension
+
+THESIS: Reveal the actual changing state and each decisive condition, rather than
+an unrelated animation of the final answer. Six new lessons extend the existing
+diagram-first surface; Course Schedule II retains its verified lesson.
+
+OWN-WORLD: Preserve graphite surfaces, readable sans-serif explanations, indexed
+mono measurements, cyan focus, violet structure, magenta rejection and green success.
+
+STORY: Choose a preset, step through the screenshot algorithm, inspect its source,
+then vary bounded input. Stack identities, FIFO duplicates, depth contributions
+and reverse-half pointers make each result explainable.
+
+FIRST VIEWPORT: Presets and playback precede a wide indexed ribbon or coordinate
+grid. The primary state occupies the larger column beside a compact operation
+ledger. Custom input and the source inspector remain initially collapsed.
+
+FORM: Precisely specified incumbent extension, code-led; no concept seed applies.
+Shared indexed stack rails connect closers to the current top; flood fill exposes
+dequeue-time marking, and wiggle sort exposes lower/upper source transfers.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 
 ## Job and direction
 
@@ -177,3 +211,88 @@ warnings or errors. Two additional captures show Triangle's 683px reflow and
 Hexadecimal still build their original specialized traces without the new study
 workspace. Course Schedule's disconnected-cycle preset retained the partial
 recorded order separately from its failed empty return.
+
+## October 7 bracket, fill, and sorting extension
+
+Valid Parentheses (20), Flood Fill (733), Minimum Add to Make Parentheses Valid
+(921), Score of Parentheses (856), Valid Parenthesis String (678), and Wiggle
+Sort II (324) extend the existing surface through six named lesson folders and
+registry definitions. Course Schedule II keeps its existing code, trace, and
+renderer. The October direction contract above remains the authority; no new
+world or global design-system change applies.
+
+The indexed input ribbon precedes the main diagram. `IndexedStackRail` presents
+original character identities from bottom to top, with the top on the right,
+explicit empty state, and a locally scrollable keyboard region. The opening and
+star rails in Valid Parenthesis String are both LIFO resources despite the
+source's `queue` variable name. Flood Fill instead presents a front-first FIFO
+ledger whose entry IDs preserve duplicate coordinates. These identities and
+orders are part of the meaning, not interchangeable visual styling.
+
+`BracketInputEditor` reuses Kokonut `SmoothTabs` for String/JSON input, and the
+ribbon/rails reuse Bklit `StateLegend` and restrained shared Motion behavior.
+`referenceWriter` in the neutral core maps each frame to a complete source line
+and its exact repeated occurrence, then clones its payload. Every new lesson
+owns a canonical raw Python reference, typed immutable trace, bounded parser,
+diagnostic presets, input editor, and registry aliases. The reference is
+simulated; arbitrary saved Python is never executed.
+
+| Lesson | Bounded input | Decisive source states |
+| --- | --- | --- |
+| Valid Parentheses | 1–32 characters from `(){}[]` | Opening push, empty-stack guard, ordered round/curly/square top comparisons, pop or immediate rejection, then final stack emptiness. |
+| Minimum Add to Make Parentheses Valid | 1–32 characters from `()` | Opening push, closer pop or missing-opening increment, then addition of the unmatched-opening count. No generated repaired string. |
+| Score of Parentheses | 2–32 balanced characters from `()` | Actual pointer, depth, and running score; decrement before primitive-leaf `2 ** depth`; separately recorded contributions. The depth diagram is derived, not a reference stack. |
+| Valid Parenthesis String | 1–32 characters from `()*` | Opening-before-star scan preference, separate LIFO rails, ordered cleanup check that a closing star follows its opening, and separate pops. Unused stars become empty only on success; consumption is not final nested pairing. |
+| Flood Fill | 1–8 × 1–10 image, colors 0–9, valid zero-based start | Right/down/up/left candidates, source-order short-circuit predicates, recolor then mark seen on dequeue, duplicate entries, already-seen skip, and final image. Source equals target still traverses; processed and changed counts differ. |
+| Wiggle Sort II | 1–12 integers in 0–5000 with strict-wiggle feasibility | One sorted-copy operation, backward lower/upper pointers, alternating in-place destination writes, pointer advances, and odd-length guard. Final inequalities are derived checks; the Python return is implicitly `None`. |
+
+The primary diagram keeps more width than the compact operation ledger, then
+stacks at 980px and below. Presets and playback remain first, with the custom
+editor and inspector initially collapsed. Opening either preserves the frame;
+editing pauses playback; invalid builds retain the previous trace. Labels meet
+the 12px functional floor, touch controls retain 44px targets, and large diagrams
+scroll locally. Existing same-tab navigation is retained.
+
+Observed palette and type follow the incumbent system: graphite surfaces,
+IBM Plex Sans language, DM Mono indexes and values, cyan current state, violet
+structure, magenta rejection, and green completion. The Wiggle Sort correction
+scopes green written destination cells to `.wiggle-destination`; current
+transfers remain cyan and shared result styling remains unchanged. Existing
+global product/design files were preserved. The shared button's 0.98 press
+scale conflicts with DESIGN.md's pre-existing “no scale” wording; it was not
+repaired or promoted into the global system during this extension.
+
+## October 7 verification and record evidence
+
+The main run passed 56 visualizer tests, 77 checks with one expected optional
+live-browser skip, 41 backend tests, and the production build. The existing
+large-chunk warning remains. The main detector ran once with `[]`; audit findings
+were zero. The browser report and screenshots are in
+`.impeccable/review/october-lessons`.
+
+The isolated browser report covers all six lessons at 1366px, 900px, and 390px,
+keyboard inspector continuity, play/pause, input editing, invalid-build trace
+preservation, 44px controls, system reduced-motion emulation, and the saved
+preference. Its console is empty and every API request was intercepted, so this
+lesson review made no data writes. The 683px screenshot establishes CSS reflow,
+not native 200% browser zoom. Windows computer-use was unavailable and the
+browser fallback was disclosed.
+
+The independent review returned FIX for F1: violet written Wiggle Sort cells
+contradicted the green “Written result” key. Corrected captures showed green
+written cells and cyan active transfers across desktop, 900px, 390px, and final
+states. The follow-up verdict was SHIP at F1-only scope; broader visual acceptance
+must not be inferred from that verdict.
+
+The authorized catalog API changes created six Resolved records with notes,
+canonical code, and no initial mistake events. Course Schedule II received
+notes only, preserving its code, classification, and history. All 37 unrelated
+full-record hashes remained unchanged. Counts changed from 38 to 44 total and
+27 to 33 Resolved; title/code/notes searches under Resolved passed. Independent
+read-only SQLite inspection found all seven source identities Resolved with
+nonempty code, 8–11 note bullets each, and zero events. A separate read-only
+browser acceptance check of the actual local catalog passed for all seven:
+Resolved status and core-insight notes were visible, 2D Visualization remained
+in the same page and loaded the specialized lesson, and the inspector reported
+“Reference code matches your saved text.” It recorded no API writes or page
+errors. No export or Git publication occurred.

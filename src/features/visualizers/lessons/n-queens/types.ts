@@ -8,13 +8,5 @@ export interface NQueensData {
   candidate: { row: number; column: number; conflicts: number[] } | null;
   solutions: number[][];
   action:
-    | 'start'
-    | 'call'
-    | 'check'
-    | 'reject'
-    | 'place'
-    | 'undo'
-    | 'solution'
-    | 'return'
-    | 'complete';
+    'start' | 'call' | 'check' | 'reject' | 'place' | 'undo' | 'solution' | 'return' | 'complete';
 }

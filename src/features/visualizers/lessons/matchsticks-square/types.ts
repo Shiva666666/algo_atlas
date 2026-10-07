@@ -18,12 +18,7 @@ export type MatchsticksAction =
   | 'return-success'
   | 'complete';
 export type MatchstickChoiceState =
-  | 'untried'
-  | 'checking'
-  | 'pruned'
-  | 'exploring'
-  | 'failed'
-  | 'successful';
+  'untried' | 'checking' | 'pruned' | 'exploring' | 'failed' | 'successful';
 export interface MatchstickChoice {
   side: MatchstickSide;
   state: MatchstickChoiceState;

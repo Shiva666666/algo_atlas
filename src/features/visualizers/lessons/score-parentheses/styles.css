@@ -1,0 +1,41 @@
+.depth-column {
+  fill: #9b8cff;
+  opacity: 0.55;
+}
+.depth-active {
+  fill: #37d9ff;
+}
+.score-studio svg text {
+  fill: #a9b4c2;
+  font:
+    12px 'DM Mono',
+    monospace;
+  text-anchor: middle;
+}
+.score-contributions {
+  list-style: none;
+  padding: 0;
+}
+.score-contributions li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #293140;
+}
+.score-contributions code {
+  color: #4fd1a1;
+}
+.repair-equation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  font-size: 16px;
+}
+.repair-equation span {
+  font-family: 'DM Mono', monospace;
+  color: #c4baff;
+}

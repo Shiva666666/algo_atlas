@@ -1,12 +1,5 @@
 export type DiagramState =
-  | 'idle'
-  | 'frontier'
-  | 'active'
-  | 'seen'
-  | 'success'
-  | 'rejected'
-  | 'blocked'
-  | 'candidate';
+  'idle' | 'frontier' | 'active' | 'seen' | 'success' | 'rejected' | 'blocked' | 'candidate';
 
 export interface WorkbenchNode {
   id: number;
