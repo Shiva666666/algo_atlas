@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "report": [
+    {
+      "width": 1366,
+      "states": [
+        "seal-budget",
+        "delete",
+        "check-initialize",
+        "resume",
+        "result"
+      ],
+      "pageOverflow": false,
+      "controls44px": true
+    },
+    {
+      "width": 900,
+      "states": [
+        "seal-budget",
+        "delete",
+        "check-initialize",
+        "resume",
+        "result"
+      ],
+      "pageOverflow": false,
+      "controls44px": true
+    },
+    {
+      "width": 390,
+      "states": [
+        "seal-budget",
+        "delete",
+        "check-initialize",
+        "resume",
+        "result"
+      ],
+      "pageOverflow": false,
+      "controls44px": true
+    }
+  ],
+  "frames": 182,
+  "console": [],
+  "keyboard": true,
+  "invalidAndLimitPreserveTrace": true,
+  "editingPauses": true,
+  "inputModesSynchronized": true,
+  "sameTab": true,
+  "reducedMotion": "system emulated and saved setting in isolated browser",
+  "zoom": "683px CSS reflow; native 200% zoom unverified",
+  "data": "GET-only intercepted API; no writes"
+}

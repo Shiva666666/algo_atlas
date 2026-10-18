@@ -1,0 +1,165 @@
+.counting-studio {
+  --studio-cyan: var(--color-cyan);
+  min-width: 0;
+}
+.counting-studio section,
+.counting-studio aside {
+  min-width: 0;
+}
+.counting-studio [hidden] {
+  display: none;
+}
+.studio-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+  margin-top: 24px;
+}
+.studio-ledger {
+  display: grid;
+  gap: 18px;
+}
+.studio-ledger .studio-section {
+  margin-top: 0;
+}
+.studio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 13px/1.5 var(--font-code);
+}
+.studio-table caption {
+  text-align: left;
+  padding: 10px 0;
+  font: 14px/1.6 var(--font-ui);
+  color: var(--color-text-secondary);
+}
+.studio-table th,
+.studio-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+.studio-table thead th {
+  background: var(--color-surface-raised);
+  color: var(--color-text-secondary);
+}
+.studio-table th {
+  font-weight: 500;
+}
+.studio-table tr.memo-current {
+  background: #112e38;
+  color: var(--color-cyan);
+}
+.studio-formula {
+  display: block;
+  font: 500 15px/1.8 var(--font-code);
+  color: var(--color-violet);
+}
+.studio-formula-values {
+  margin: 12px 0 0;
+  display: grid;
+  gap: 10px;
+  font-size: 14px;
+}
+.studio-formula-values > div {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.studio-formula-values dt {
+  color: var(--color-text-secondary);
+}
+.studio-formula-values dd {
+  font: 13px var(--font-code);
+  margin: 0;
+}
+.studio-inline-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0;
+}
+.studio-inline-values dt {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+.studio-inline-values dd {
+  margin: 8px 0 0;
+  font: 16px var(--font-code);
+}
+.studio-result {
+  display: block;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-success);
+  color: var(--color-success);
+  font: 600 18px var(--font-ui);
+}
+.studio-pending,
+.studio-transfer,
+.studio-memo-hit {
+  padding: 16px;
+  margin-top: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface-raised);
+}
+.studio-transfer strong {
+  display: block;
+  color: var(--color-cyan);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.studio-memo-hit h3 {
+  color: var(--color-success);
+}
+.counting-studio .studio-note {
+  margin: 16px 0;
+}
+.studio-text-button {
+  margin-top: 14px;
+  min-height: 44px;
+  padding: 8px 12px;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+  border-radius: 6px;
+  font: 14px var(--font-ui);
+  cursor: pointer;
+}
+.studio-text-button:hover {
+  border-color: var(--color-cyan);
+}
+.studio-text-button:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+}
+.number-array-editor {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.number-array-editor label {
+  display: grid;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+.number-array-editor input,
+.number-array-editor textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  font: 14px var(--font-code);
+}
+.number-array-editor p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+@media (max-width: 560px) {
+  .studio-table th,
+  .studio-table td {
+    padding: 10px 8px;
+  }
+}

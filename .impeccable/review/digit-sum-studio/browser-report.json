@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "report": [
+    {
+      "width": 1366,
+      "overflow": false,
+      "targets44": true,
+      "inspectKeepsFrame": true,
+      "inspectPauses": true
+    },
+    {
+      "width": 900,
+      "overflow": false,
+      "targets44": true,
+      "inspectKeepsFrame": true,
+      "inspectPauses": true
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "targets44": true,
+      "inspectKeepsFrame": true,
+      "inspectPauses": true
+    }
+  ],
+  "keyboard": true,
+  "invalidPreservesTrace": true,
+  "inputSync": true,
+  "editingPauses": true,
+  "referenceMatched": true,
+  "sameTab": true,
+  "reducedMotion": "system emulation and saved isolated preference",
+  "zoom": "683px CSS reflow only; native 200% zoom unverified",
+  "apiWrites": 0,
+  "console": []
+}

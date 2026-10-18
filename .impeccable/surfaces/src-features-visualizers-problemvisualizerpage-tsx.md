@@ -319,3 +319,257 @@ Resolved status and core-insight notes were visible, 2D Visualization remained
 in the same page and loaded the specialized lesson, and the inspector reported
 “Reference code matches your saved text.” It recorded no API writes or page
 errors. No export or Git publication occurred.
+
+## October 7 Remove Invalid Parentheses implementation
+
+Remove Invalid Parentheses (301) implements the direction contract above through
+`lessons/remove-invalid-parentheses/`, its pure typed trace, canonical raw Python
+reference, bounded parser, diagnostic presets, renderer, input editor, and one
+registry definition with numeric/slug aliases. Minimal Removal Lab preserves
+the incumbent world and shared route. Presets and playback precede the original
+ID ribbon; the wider candidate/ancestry workspace sits beside a compact budget
+and validator ledger, with unique answers below. The custom editor and source
+inspector start collapsed.
+
+The budget scan seals unmatched closers plus remaining openings before search.
+Each deletion builds an immutable substring, keeps original IDs, shifts current
+positions, and passes the removed current index into the child. Letters are
+never deleted. The active ancestry marks suspended callers and locally follows
+the active leaf or resumed parent without scrolling the page. Returning resumes
+the unchanged caller's loop; it does not undo a shared string or stop siblings.
+
+Leaves use the exact removal budget. Accepted duplicates skip `check(s_loc)`;
+other leaves compare opening/closing counts before scanning prefix validity.
+`seen` stores accepted answers, not search states. The validator returns a
+boolean; `backtrack` returns control. Python's `stack.clear()` reuses the same
+list as the answer collector after the opening-count phase. The canonical
+reference remains exact and is never executed.
+
+Inputs accept 1–12 lowercase ASCII letters and parentheses. A pure counting pass
+enforces the 12,000-frame cap before allocating snapshots; no partial trace is
+applied. Editing pauses playback, invalid rebuilds retain the applied trace,
+and String/JSON modes remain synchronized. The workspace reuses `SequenceStrip`,
+`IndexedStackRail`, `OperationLedger`, Bklit `StateLegend`, Kokonut `SmoothTabs`,
+and shared Motion controls. Graphite surfaces, IBM Plex Sans text, DM Mono
+strings/indexes, cyan current state, violet ancestry/openings, magenta rejection,
+and green unique answers remain incumbent. Labels, local keyboard scroll regions,
+44px targets, same-tab navigation, and system/saved reduced motion carry through.
+No raster, dependency, or global design-file change applies.
+
+## Remove Invalid Parentheses verification and record evidence
+
+The final active-card fix passed 62 visualizer tests, 41 backend tests, and the
+production build. The general check passed 83 checks with one expected optional
+live-browser skip. The main detector ran once on changed UI files and returned
+`[]`. The bounded Edge report and captures live in
+`.impeccable/review/remove-invalid-parentheses`; they cover 1366px, 900px, and
+390px, budget/deletion/validator/return/result states, keyboard, 44px controls,
+playback/editing/rebuild preservation, input-mode synchronization, same-tab
+navigation, and system/saved reduced motion. The console was empty and intercepted
+API requests made no writes.
+
+The independent finish reviewer confirmed the active-call clipping finding F1
+resolved and disposition SHIP at F1-only accepted-fix scope; this is not
+full-surface approval. The additional
+`prefix-rejection-390-canvas.png` and `deep-return-390-canvas.png` captures show
+the full active leaf and resumed parent. Native Windows computer-use was
+unavailable. Native 200% browser zoom is unverified; 683px establishes CSS reflow
+only. The shared button's previously documented 0.98 press scale drift remains
+unrepaired and is not promoted into the global system.
+
+The authorized local API addition produced one Hard, Resolved record with
+Constraint Search, DFS, and Strings classification, exact canonical code,
+structured notes, and zero mistake events. All 44 unrelated records remained
+preserved; counts are 45 total and 34 Resolved. Title/code/notes searches and
+Atlas inclusion passed in `.local/remove-invalid-record.json`. Independent
+read-only SQLite verification confirmed source key `remove-invalid-parentheses`,
+12 note bullets across six sections, and zero events. Numeric 301 is the registry
+alias. Actual persisted-record browser acceptance in
+`.local/remove-invalid-acceptance.json` passed: status/notes visible, same-tab
+2D route, specialized lesson, canonical reference match, zero page errors, and
+zero API writes during review. This workflow performed no export, commit, or
+push and preserved existing user changes.
+
+## Direction contract — Distinct Squares and Maximum OR
+
+THESIS: Two source-linked lessons explain aggregate updates and counted choices, not decorative trees. Read mode: make the next state understandable.
+
+OWN-WORLD: Preserve the graphite instrument, IBM Plex Sans language, DM Mono data, cyan current state, violet structure, magenta deferred/rejected evidence and green committed results. This is an incumbent extension, not a new visual world.
+
+STORY: 2916 connects changed subarray starts to squared-sum updates and deferred child tags. 2044 connects index choices to bit unions and reusable suffix counts. Both preserve the supplied Python.
+
+FIRST VIEWPORT: Existing playback and indexed input lead. 2916 defaults to a wide count strip beside its contribution ledger; linked tabs reveal the interval tree at the same frame. 2044 places aligned bit rows and take/skip branches beside a return ledger, with ancestry and sparse memo below. Mobile stacks panels and scrolls wide diagrams locally.
+
+FORM: Confirmed two linked views for 2916; incumbent diagram-first composition for both. No concept seed or comp is required for this scoped extension. Signature interactions are left/right lazy-tag transfer and memo-count return; motion never invents intermediate values.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## Distinct Squares and Maximum OR completion
+
+The final direction contract above is implemented by
+`lessons/distinct-squares-segment-tree/` (2916) and
+`lessons/maximum-or-subsets/` (2044), with one registry definition per lesson and
+LeetCode numeric/slug aliases. Both retain exact canonical raw Python, bounded
+strict input, immutable source-linked frames, diagnostic presets, and the shared
+diagram-first shell. Saved Python is never executed.
+
+2916 opens in Subarray Counts with committed logical counts, a separately labeled
+pending +1 preview, and an endpoint contribution history. Its Canvas-local Lazy
+Tree State tab preserves that frame and pauses playback. The real deferred tree
+exposes stored S/Q/lazy, source node indexes and intervals, active helper ancestry,
+overlap checks, and left-then-right propagation before clearing the parent tag.
+The formula ledger uses old S when updating Q. Guided checkpoints coexist with
+all transitions and endpoint/push/contribution jumps; inspecting a node also uses
+the generic Canvas `onInteract` pause contract.
+
+2044 aligns bit rows with indexed take/skip choices, a return ledger, active
+ancestry, and sparse tuple memo. It builds the fixed target, takes before
+skipping, checks memo before base, and never caches terminal returns. Stored zero
+is a computed count; null remains pending. Equal values at different indexes
+retain separate subset choices. Derived take previews are labeled; completed
+branch counts are green and pending child slots magenta.
+
+Array/JSON editors accept 1–12 positive integers for 2916 and 1–8 for 2044, at
+most 100,000 each. The shared `completeTrace` counting pass enforces 12,000 frames
+before snapshot allocation. Invalid or excessive builds keep the previous trace;
+editing pauses playback. Graphite surfaces, IBM Plex Sans language, DM Mono
+measurements, cyan current state, violet structure, magenta deferred/pending
+evidence, and green committed results match the incumbent design. The wider
+diagram and compact ledger stack below 980px; diagrams, memo, and ancestry scroll
+locally. Shared legends, tabs, Motion controls, focus, 12px labels, 44px targets,
+same-tab navigation, and system/saved reduced motion remain in use. `PRODUCT.md`,
+`DESIGN.md`, and the design sidecar are preserved; no dependencies or shipping
+raster assets were added.
+
+## Counting studios verification and record evidence
+
+Final `npm run check` passed 90 checks with one expected optional live-Atlas
+skip, including types, architecture, and formatting. All 69 visualizer tests,
+the production build, 71 backend tests, Ruff check, and Ruff formatting passed
+(57 files already formatted). After F1, the seven scoped tests and build passed
+again. The main detector ran once and returned `[]`; it was not rerun.
+
+The browser report and captures in `.impeccable/review/counting-studios` cover
+1366px, 900px, and 390px, plus 683px CSS reflow; the deep OR call and 12-value
+tree boundary; linked-view frame preservation and pause; custom/invalid input;
+keyboard inspector continuity; same-tab navigation; and system/saved reduced
+motion. The report passed with an empty console and zero API writes. Native
+Windows computer-use was unavailable, so bundled Edge Playwright supplied this
+evidence. Native 200% browser zoom remains unverified.
+
+The fresh independent finish review found one material issue, F1: returned OR
+branch counts used the pending color. One fix batch and matching desktop/mobile
+recaptures established green returned counts and magenta null slots; the reviewer
+confirmed F1 resolved and disposition SHIP at F1-only scope. This verdict is not
+a whole-surface clean re-audit. The retained `or-branches-1366-canvas.png` and
+`or-branches-390-canvas.png` show the correction. The previously documented shared
+button 0.98 press scale versus DESIGN.md's “no scale” drift remains unrepaired
+and is not canonized as a global rule.
+
+The authorized existing-API additions used `record_initial_mistake: false` and
+created two Resolved records with exact canonical code, correct classification,
+12 note rows each, and zero mistake events. All 45 unrelated records were
+preserved; totals are 47 records and 36 Resolved. Source keys are
+`subarrays-distinct-element-sum-of-squares-ii` and
+`count-number-of-maximum-bitwise-or-subsets`; numeric keys are visualizer aliases.
+`.local/counting-studios-records.json` records canonical matches, title/code/note
+search, and Atlas inclusion. Atlas node selection was not checked. Independent
+read-only SQLite verification confirmed both persisted source identities and
+counts. Actual local-API/browser acceptance in
+`.local/counting-studios-acceptance.json` passed visible notes/status, same-tab
+specialized lessons, canonical reference matches, zero errors, and zero API
+writes during review. No schema, export, commit, push, or scheduler change applies.
+
+## Direction contract — Digit-Sum Swap Studio
+
+THESIS: Sorting keys define a unique target; the position map locates each required value. Make map preparation, atomic exchange, and counting separate, source-linked moments.
+
+OWN-WORLD: Inherit graphite surfaces, IBM Plex Sans language, DM Mono values, cyan active exchanges, violet targets, magenta displacement, and green confirmed prefixes. This is a Read-mode extension, not a new visual world.
+
+STORY: Extract digits right-to-left, compare tuple keys, inspect the working/target alignment, prepare both map entries, swap, and confirm the next position. Explain minimum swaps with a separately labeled derived cycle panel.
+
+FIRST VIEWPORT: Presets and playback precede a wide aligned working/target ribbon. A compact operation ledger and digit/value inspector sit beside it; position-map updates and swap history follow. Input, original-array detail, cycle proof, and source start collapsed. Mobile stacks panels and pans strips locally.
+
+FORM: Approved, precisely specified incumbent extension; no concept seed or comp applies. Signature: map writes visibly precede the two-card exchange, with count updating afterward. Clicking values inspects and pauses, never edits the algorithm.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## Digit-Sum Swap Studio completion
+
+The direction contract above is implemented by
+`lessons/minimum-swaps-digit-sum/`, with one source-scoped registry definition for
+`minimum-swaps-to-sort-by-digit-sum` and numeric alias 3551. The lesson owns its
+exact 35-line screenshot Python, pure typed immutable trace, ten diagnostic
+presets, derived cycle proof, renderer/styles, editor, and adapter. Saved Python
+is displayed and simulated, never executed. No dependency or shipping raster was
+added.
+
+The trace evaluates each digit-sum helper in input order, with modulo before
+floor division, and returns all keys before assigning the tuple-sorted target.
+It exposes partial map initialization and missing entries, source comparisons
+and lookup, both map writes before the atomic exchange, and the later counter
+update. The map's temporary disagreement with the array is explicit. Last
+assigned `j` remains source state; confirmed prefixes and original-to-target
+cycles are labeled derived annotations. The result removes the active pointer
+while retaining the last source `i` in the ledger.
+
+Inputs accept 1–12 distinct positive safe integers up to 1,000,000,000. Shared
+parser/editor options preserve existing 100,000/non-distinct defaults; the reused
+12,000-frame guard counts before cloning. Invalid builds retain the applied
+trace and editing pauses playback. Value/map inspection pauses at the same frame
+through generic `onInteract`. Presets, speed, Next swap/confirmed-position jumps,
+custom input, source inspection, and same-tab routing remain available.
+
+The incumbent graphite, IBM Plex Sans, DM Mono, cyan active/prepared state,
+violet target, magenta displacement, and green confirmation agree with the
+retained Wiggle Sort mobile calibration. Wide arrays sit beside the compact
+ledger; DOM order is primary arrays, ledger, then secondary map/history/proof.
+At 980px and below the ledger follows the arrays before the long sections.
+Local scrolling, text/symbol state cues, 12px labels, 44px controls, stable value
+identity, and system/saved reduced motion are retained. `PRODUCT.md`, `DESIGN.md`,
+and `.impeccable/design.json` are preserved.
+
+## Digit-Sum Swap Studio verification and record evidence
+
+Recorded completion: 2026-10-18, Asia/Calcutta. Final `npm run check` passed 96
+checks with one expected optional live-Atlas skip; all 75 visualizer tests, 71
+backend tests, production build, Ruff check, and Ruff formatting passed (57 files
+already formatted). The existing large-chunk warning and two incumbent backend
+deprecation warnings remain. Six new tests cover independent string digit sums
+and breadth-first minimum-swap answers, helper zeros/billion boundary, source
+order/map preparation/count timing, confirmed prefixes, independent snapshots,
+source focus, parser/default compatibility, frame cap, aliases/jumps, and SSR.
+
+Two bounded self-QA rounds corrected mobile ledger placement in one batch. The
+main detector ran once on the new Canvas/styles and shared editor, returning
+`[]`. The fresh independent finish reviewer returned full-surface SHIP with no
+material fixes, confirming canonical screenshot fidelity, Read mode, responsive
+reading order, and derived-state labeling. This is a full disposition, unlike
+the earlier counting-studio F1-only verdict.
+
+The Edge Playwright report and 15 retained captures in
+`.impeccable/review/digit-sum-studio` cover 1366px, 900px, and 390px, plus 683px
+CSS reflow: digit helpers, prepared map, exchange, result, billion/12-value/cycle
+boundaries, inspector, keyboard, 44px targets, inspection pause/frame continuity,
+invalid-input preservation, input synchronization, same-tab routing, and
+system/saved reduced motion. The report passed with an empty console and zero
+API writes. The native Windows computer-use entrypoint was unavailable; native
+200% browser zoom remains unverified. The 683px captures establish CSS reflow
+only.
+
+The authorized existing-API addition created Medium, Resolved record
+`36b926bd-cd93-4747-8f26-e540e41ed172`, source key
+`minimum-swaps-to-sort-by-digit-sum`, with Sorting under Search & Ordering as
+primary and Arrays secondary. Canonical code matches, 13 note bullets are saved,
+and `record_initial_mistake: false` produced zero mistake events. All 47 unrelated
+full API record hashes were preserved. Current totals are 48 records: 36 Resolved
+and 12 Open. `.local/digit-sum-record.json` records title/`minSwaps`/bijection
+search and Atlas inclusion; Atlas node selection was not checked. Independent
+read-only SQLite inspection verified the status, 13 note rows, and zero events.
+
+`.local/digit-sum-acceptance.json` records PASS against the actual local API on
+port 8000 and browser: visible notes/Resolved status, canonical reference match,
+specialized lesson, same-tab navigation, zero errors, and zero API writes during
+acceptance. No export, commit, push, schema, or scheduler change applies. The
+pre-existing shared button 0.98 press scale versus DESIGN.md's no-scale guidance
+remains reported, unrepaired, and not canonized as a global rule.

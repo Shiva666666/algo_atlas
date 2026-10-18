@@ -1,0 +1,97 @@
+.or-bits th,
+.or-bits td {
+  min-width: 30px;
+  text-align: center;
+}
+.or-bits th:first-child {
+  text-align: left;
+}
+.or-bits .bit-set {
+  color: var(--color-violet);
+}
+.or-bits .bit-added {
+  color: var(--color-success);
+  background: #10291f;
+}
+.or-bits .or-target {
+  color: var(--color-violet);
+}
+.or-choices {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+.or-choices > div {
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+}
+.or-choices > div.choice-current {
+  border-color: var(--color-cyan);
+  background: #112e38;
+}
+.or-choices h4 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+.or-choices code {
+  color: var(--color-violet);
+  font: 14px var(--font-code);
+}
+.or-choices p {
+  margin-top: 8px;
+}
+.or-choices strong {
+  display: block;
+  margin-top: 16px;
+  font: 14px var(--font-code);
+  color: var(--color-magenta);
+}
+.or-choices strong.branch-returned {
+  color: var(--color-success);
+}
+.or-plus {
+  align-self: center;
+  text-align: center;
+  color: var(--color-violet);
+  font-size: 24px;
+}
+.or-ancestry {
+  max-height: 340px;
+  scroll-padding-block: 14px;
+}
+.or-ancestry .frontier-ledger li {
+  overflow-wrap: anywhere;
+  display: grid;
+  gap: 6px;
+}
+.or-ancestry .frontier-ledger ol {
+  max-height: none;
+  overflow: visible;
+}
+.or-ancestry .frontier-ledger li span {
+  text-align: left;
+}
+.or-memo-scroll {
+  max-height: 360px;
+  margin-top: 12px;
+}
+.or-memo-scroll thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.or-studio p.or-lookup {
+  margin-top: 12px;
+  color: var(--color-cyan);
+}
+@media (max-width: 560px) {
+  .or-choices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .or-plus {
+    font-size: 20px;
+  }
+}

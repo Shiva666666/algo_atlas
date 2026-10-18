@@ -49,6 +49,9 @@ import { lesson as validParenthesisStringLesson } from './lessons/valid-parenthe
 import { lesson as floodFillLesson } from './lessons/flood-fill';
 import { lesson as wiggleSortLesson } from './lessons/wiggle-sort';
 import { lesson as removeInvalidParenthesesLesson } from './lessons/remove-invalid-parentheses';
+import { lesson as distinctSquaresLesson } from './lessons/distinct-squares-segment-tree';
+import { lesson as maximumOrLesson } from './lessons/maximum-or-subsets';
+import { lesson as digitSumSwapLesson } from './lessons/minimum-swaps-digit-sum';
 export const lessons: Lesson[] = [
   bipartiteLesson,
   kokoLesson,
@@ -96,6 +99,9 @@ export const lessons: Lesson[] = [
   floodFillLesson,
   wiggleSortLesson,
   removeInvalidParenthesesLesson,
+  distinctSquaresLesson,
+  maximumOrLesson,
+  digitSumSwapLesson,
 ];
 const byKey = new Map<string, Lesson>();
 for (const lesson of lessons)

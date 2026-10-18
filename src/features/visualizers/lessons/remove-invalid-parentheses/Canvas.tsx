@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
 import { LessonMotion, StateLegend } from '../../../../shared/ui/LessonPrimitives';
 import { IndexedStackRail } from '../../components/IndexedStackRail';
 import { SequenceStrip, OperationLedger } from '../../components/StudyPrimitives';
@@ -6,6 +7,17 @@ import type { RemovalData } from './types';
 import './styles.css';
 export function Canvas({ data: d }: { data: RemovalData }) {
   const current = d.calls.at(-1);
+  const ancestryRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const region = ancestryRef.current;
+    const active = region?.querySelector<HTMLElement>('.active-call');
+    if (!region || !active) return;
+    const viewport = region.getBoundingClientRect();
+    const card = active.getBoundingClientRect();
+    // Keep the active call readable without moving the surrounding page.
+    if (card.bottom > viewport.bottom - 14) region.scrollTop += card.bottom - viewport.bottom + 14;
+    else if (card.top < viewport.top + 4) region.scrollTop += card.top - viewport.top - 4;
+  }, [current?.id, d.calls.length]);
   const retained = new Set(d.tokens.map((t) => t.index));
   const activeId =
     d.phase === 'budget'
@@ -40,13 +52,26 @@ export function Canvas({ data: d }: { data: RemovalData }) {
         >
           <ol className="study-strip removal-origin">
             {[...d.s].map((char, i) => {
-              const deleted =
-                !retained.has(i) || (d.action === 'delete' && d.deletion?.originalIndex === i);
+              const chosen = d.action === 'delete' && d.deletion?.originalIndex === i;
+              const deleted = !retained.has(i);
               return (
-                <li key={i} className={deleted ? 'deleted' : i === activeId ? 'study-active' : ''}>
+                <li
+                  key={i}
+                  className={deleted || chosen ? 'deleted' : i === activeId ? 'study-active' : ''}
+                >
                   <span className="study-index">ID {i}</span>
                   <b>{char}</b>
-                  <span>{deleted ? 'Deleted' : i === activeId ? 'Current' : 'Kept'}</span>
+                  <span>
+                    {deleted
+                      ? 'Deleted'
+                      : chosen
+                        ? 'Chosen'
+                        : i === activeId
+                          ? 'Current'
+                          : d.phase === 'complete'
+                            ? 'Input'
+                            : 'Kept'}
+                  </span>
                 </li>
               );
             })}
@@ -61,6 +86,14 @@ export function Canvas({ data: d }: { data: RemovalData }) {
               <p>
                 Missing openings plus remaining unmatched openings give the minimum deletions.
                 Letters stay intact.
+              </p>
+            </>
+          ) : d.phase === 'complete' ? (
+            <>
+              <h3>Search complete</h3>
+              <p>
+                Every call has returned. The original input stays unchanged; the accepted answers
+                are listed below.
               </p>
             </>
           ) : (
@@ -107,6 +140,7 @@ export function Canvas({ data: d }: { data: RemovalData }) {
               )}
               <h3>Active call ancestry</h3>
               <div
+                ref={ancestryRef}
                 className="study-scroll removal-ancestry"
                 role="region"
                 tabIndex={0}
@@ -127,13 +161,7 @@ export function Canvas({ data: d }: { data: RemovalData }) {
                     </li>
                   ))}
                 </ol>
-                {!d.calls.length && (
-                  <p>
-                    {d.phase === 'complete'
-                      ? 'Search finished · every call has returned.'
-                      : 'Search has not entered its first call yet.'}
-                  </p>
-                )}
+                {!d.calls.length && <p>Search has not entered its first call yet.</p>}
               </div>
               <p>
                 backtrack returns control, not a boolean. Only check(s_loc) decides whether a leaf
@@ -204,7 +232,13 @@ export function Canvas({ data: d }: { data: RemovalData }) {
         </div>
       </div>
       <section className="removal-answers" aria-label="Unique minimal answers">
-        <h3>{d.result ? 'Returned answers' : 'Unique answers · stack now stores strings'}</h3>
+        <h3>
+          {d.result
+            ? 'Returned answers'
+            : d.phase === 'budget'
+              ? 'Answer collector · after stack.clear()'
+              : 'Unique answers · stack now stores strings'}
+        </h3>
         <LessonMotion>
           <motion.ul layout>
             {d.results.map((text) => (

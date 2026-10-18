@@ -24,7 +24,7 @@ export interface Lesson {
   adapter: VisualizerAdapter;
   aliases: string[];
   source?: string;
-  Canvas: ComponentType<{ frame: VisualFrame; problem: Problem }>;
+  Canvas: ComponentType<{ frame: VisualFrame; problem: Problem; onInteract?: () => void }>;
   InputEditor?: ComponentType<InputEditorProps>;
   playback?: PlaybackOptions;
 }
@@ -34,7 +34,7 @@ export function defineLesson<D>(options: {
   adapter: VisualizerAdapter<unknown, D>;
   aliases: string[];
   source?: string;
-  Canvas: ComponentType<{ data: D; problem: Problem }>;
+  Canvas: ComponentType<{ data: D; problem: Problem; onInteract?: () => void }>;
   InputEditor?: ComponentType<InputEditorProps>;
   playback?: PlaybackOptions;
   preservePresentation?: boolean;
@@ -43,7 +43,9 @@ export function defineLesson<D>(options: {
   return {
     ...rest,
     adapter: preservePresentation ? adapter : { ...adapter, presentation: 'diagram-first' },
-    Canvas: ({ frame, problem }) => <Canvas data={frame.data as D} problem={problem} />,
+    Canvas: ({ frame, problem, onInteract }) => (
+      <Canvas data={frame.data as D} problem={problem} onInteract={onInteract} />
+    ),
   };
 }
 

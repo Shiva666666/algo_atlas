@@ -1,0 +1,59 @@
+.squares-studio .study-sequence + .smooth-tabs {
+  justify-self: start;
+}
+.squares-studio > .smooth-tabs {
+  width: max-content;
+  max-width: 100%;
+}
+.squares-studio > .smooth-tabs button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding-inline: 14px;
+}
+.squares-studio .study-sequence {
+  margin-top: 14px;
+}
+.squares-tree {
+  display: block;
+  font: 12px var(--font-code);
+}
+.squares-tree .tree-node {
+  cursor: pointer;
+}
+.squares-tree rect {
+  fill: var(--color-surface);
+  stroke: var(--color-violet);
+  stroke-width: 1.25;
+}
+.squares-tree text {
+  fill: var(--color-text);
+  pointer-events: none;
+}
+.squares-tree .deferred .tree-tag {
+  fill: var(--color-magenta);
+}
+.squares-tree .inspected rect {
+  stroke-width: 2;
+}
+.squares-tree .current rect {
+  stroke: var(--color-cyan);
+  fill: #112e38;
+  stroke-width: 2;
+}
+.squares-tree .tree-node:focus-visible {
+  outline: none;
+}
+.squares-tree .tree-node:focus-visible rect {
+  stroke: var(--color-cyan);
+  stroke-width: 3;
+}
+.squares-tree .tree-node:hover rect {
+  fill: var(--color-surface-hover);
+}
+.studio-node-detail {
+  border-top: 1px solid var(--color-border);
+  padding: 16px 0;
+}
+.squares-studio .frontier-ledger {
+  margin-top: 20px;
+}

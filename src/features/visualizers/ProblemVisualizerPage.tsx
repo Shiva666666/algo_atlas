@@ -228,19 +228,21 @@ export function ProblemVisualizerPage() {
               </span>
               <small>Local simulation · Python never executed</small>
             </div>
-            {options?.stages && (
+            {(options?.stages || options?.hideTransitions) && (
               <div className="steiner-stage-nav">
-                <SmoothTabs
-                  id="steiner-stage"
-                  value={stage}
-                  onChange={(value) => {
-                    setPlaying(false);
-                    setFrameIndex(0);
-                    setStage(value);
-                  }}
-                  label={options.stageLabel}
-                  items={options.stages}
-                />
+                {options?.stages && (
+                  <SmoothTabs
+                    id="steiner-stage"
+                    value={stage}
+                    onChange={(value) => {
+                      setPlaying(false);
+                      setFrameIndex(0);
+                      setStage(value);
+                    }}
+                    label={options.stageLabel}
+                    items={options.stages}
+                  />
+                )}
                 <label className="trace-detail-toggle">
                   <input
                     type="checkbox"
@@ -329,7 +331,7 @@ export function ProblemVisualizerPage() {
                   <MistakeCheckpoint checkpoint={current.mistakeCheckpoint} />
                 )}
                 <div className="lesson-canvas">
-                  <Canvas frame={current} problem={problem} />
+                  <Canvas frame={current} problem={problem} onInteract={() => setPlaying(false)} />
                 </div>
               </>
             ) : (

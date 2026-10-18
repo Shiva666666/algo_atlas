@@ -444,3 +444,159 @@ Recorded verification, 2026-10-07:
   and the inspector reported “Reference code matches your saved text.” That
   check produced no API writes or page errors. No export, commit, or push was
   performed.
+
+## October 7 Remove Invalid Parentheses extension
+
+Remove Invalid Parentheses (301) adds `lessons/remove-invalid-parentheses/` and
+one registry definition with numeric and slug aliases. Its Minimal Removal Lab
+extends the incumbent study workbench: count the exact removal budget, follow
+substring deletions, validate leaf candidates, then collect unique answers.
+Presets and playback remain above the original-ID ribbon, wider candidate and
+ancestry workspace, compact budget/validator ledger, and answer collector.
+Custom input and the source inspector start collapsed.
+
+Source and presentation contracts:
+
+- Preserve the supplied `reference.py` exactly; it is displayed and simulated,
+  never executed. The Python's `stack.clear()` retains the same list while
+  switching its role from unmatched openings to accepted answer strings.
+- Count unmatched closers plus remaining openings before search. Delete only
+  parentheses from immutable substrings. Keep original character IDs stable
+  while current indexes shift; pass the removed current index as the child's
+  `ind`. Letters remain intact.
+- Each call owns its candidate. Returning restores the unchanged caller and
+  continues its remaining choices; there is no shared-string undo or successful
+  return that cancels siblings. `backtrack` returns control, not a boolean.
+- Check only at the exact budget. Accepted duplicates short-circuit validation;
+  otherwise compare total counts, then reject any closer without an earlier
+  opening. Equal counts alone do not establish validity. `seen` contains accepted
+  strings only, not visited search states; repeated deletion paths still run.
+- The active ancestry card follows entry and return by scrolling its own
+  keyboard-focusable region. Never scroll the surrounding page to expose it.
+  Empty strings, rejected prefixes, duplicates, resumed parents, and unique
+  answers retain explicit text or symbols alongside semantic colors.
+- Reuse `SequenceStrip`, `IndexedStackRail`, `OperationLedger`, Bklit
+  `StateLegend`, Kokonut `SmoothTabs`, and shared `LessonMotion`/`LessonButton`.
+  Preserve graphite surfaces, IBM Plex Sans language, DM Mono measurements,
+  cyan current state, violet ancestry/openings, magenta deletion/rejection, and
+  green answers. No dependency, raster, or global design-system change applies.
+
+Teaching inputs are 1–12 lowercase ASCII letters and parentheses. A pure
+counting pass rejects traces exceeding 12,000 frames before allocating copied
+snapshots; accepted traces are complete. Invalid input or an excessive trace
+preserves the previous applied trace, and editing pauses playback. String/JSON
+modes stay synchronized. Shared layout, 12px labels, 44px controls, same-tab
+navigation, and system/saved reduced motion remain in use.
+
+Recorded verification, 2026-10-07:
+
+- The final active-card fix passed all 62 visualizer tests, all 41 backend tests,
+  and the production build. The general check passed 83 checks with one expected
+  optional Atlas live-browser skip. Tests include an independent breadth-first
+  minimum-deletion oracle over presets and exhaustive short strings, stable IDs,
+  shifted child indexes, caller resumption, accepted-only deduplication,
+  independent snapshots, exact source focus, limits, and registry/jump wiring.
+- The main detector ran once on the changed UI files and returned `[]`.
+  `.impeccable/review/remove-invalid-parentheses/browser-report.json` records
+  bounded Edge checks at 1366px, 900px, and 390px: budget/deletion/validation/
+  return/result states, keyboard, 44px controls, playback and editing, invalid
+  rebuild preservation, same-tab navigation, and system/saved reduced motion.
+  The browser console was empty; intercepted API requests made no data writes.
+- The independent reviewer confirmed F1 active-call clipping resolved and
+  returned SHIP at F1-only accepted-fix scope; this is not full-surface approval.
+  The new
+  `prefix-rejection-390-canvas.png` and `deep-return-390-canvas.png` captures show
+  the complete active leaf and resumed parent. The Windows computer-use tool
+  was unavailable; native 200% zoom remains unverified. The 683px capture is CSS
+  reflow evidence only.
+- The authorized API addition created one Hard, Resolved record classified as
+  Constraint Search with DFS and Strings, exact canonical code, structured
+  notes, and zero fabricated mistake events. All 44 unrelated records were
+  preserved; the catalog now has 45 records and 34 Resolved. Title/code/notes
+  search and Atlas inclusion passed; `.local/remove-invalid-record.json`
+  records the result. Independent read-only SQLite verification found source
+  key `remove-invalid-parentheses`, 12 note bullets across six sections, and zero
+  mistake events. Numeric 301 is the registry alias.
+- `.local/remove-invalid-acceptance.json` records actual persisted-catalog
+  acceptance: Resolved status and notes visible, same-tab 2D navigation,
+  specialized lesson selected, canonical reference match, no page errors, and
+  no API writes during review. This workflow performed no export, commit, or
+  push and preserved existing user changes.
+
+## Distinct Squares and Maximum OR studios
+
+Distinct Squares (2916) and Maximum OR Subsets (2044) extend the incumbent
+study workbench through `lessons/distinct-squares-segment-tree/` and
+`lessons/maximum-or-subsets/`. Each owns its canonical raw Python, pure typed
+trace, presets, renderer, editor, and one registry definition with LeetCode
+numeric and slug aliases. Canonical Python is displayed and simulated, never
+executed. Keep these source-specific contracts:
+
+- Distinct Squares defaults to Canvas-local Subarray Counts; Lazy Tree State
+  shares the exact frame. Switching views or inspecting a source node calls the
+  generic `onInteract` pause callback, without problem-specific page branches.
+  Keep sealed logical counts separate from the labeled pending +1 preview.
+  The tree shows actual source indexes, stored S/Q/lazy values, and active
+  `update`/`push`/`apply` ancestry, including deferred children. Update Q with old
+  S before changing S; push left then right and clear the parent tag afterward.
+  Keep guided checkpoints, all transitions, and endpoint/push/contribution jumps.
+- Maximum OR accepts positive values only. Build the fixed target, explore take
+  before skip, check tuple memo before the terminal condition, and leave terminal
+  returns uncached. Sparse memo stores continuation counts, including zero;
+  equal values at different indexes remain different choices. Show active
+  ancestry and pending child slots; returned counts use green, while null pending
+  slots use magenta. Label derived take previews separately from evaluated OR.
+- `NumberArrayInputEditor` provides synchronized Array/JSON modes. Strict
+  `numericArray` parsing accepts 1–12 values for 2916 or 1–8 for 2044, each an
+  integer in 1…100,000. `completeTrace` counts the full simulation before cloning
+  snapshots, rejecting over 12,000 frames without applying a partial trace.
+  Editing pauses playback; failed builds preserve the last applied trace.
+- Reuse `SequenceStrip`, `OperationLedger`, `FrontierLedger`, Bklit legend,
+  Kokonut tabs, and shared Motion/reduced-motion controls. Preserve the wider
+  diagram and compact ledger, stacking below 980px, local keyboard scrolling,
+  readable 12px labels, 44px controls, and same-tab navigation. No new visual
+  world, dependency, raster asset, or global design-file change applies.
+
+Completion evidence is recorded in the existing visualizer surface brief and
+`.impeccable/review/counting-studios/browser-report.json`: 69 visualizer tests,
+90 general checks plus one expected optional live-Atlas skip, build, 71 backend
+tests, and Ruff passed. The detector ran once with `[]`; the independent verdict
+accepted the returned-count color fix at F1-only scope. Native 200% zoom remains
+unverified; 683px is CSS reflow evidence. The previously recorded button press
+scale drift remains unmodified and is not a new system rule.
+
+## Digit-Sum Swap Studio
+
+Minimum Swaps to Sort by Digit Sum (3551) extends the incumbent workbench through
+`lessons/minimum-swaps-digit-sum/`: one canonical raw Python reference, a pure
+typed trace, ten presets, derived annotations, renderer, editor, and one
+source-scoped registry definition with numeric and slug aliases. Saved Python
+remains reference text and is never executed.
+
+- Accept 1–12 distinct positive safe integers, at most 1,000,000,000 each.
+  `numericArray` and `NumberArrayInputEditor` accept optional `maximumValue` and
+  `distinct` settings; their existing 100,000/non-distinct defaults remain.
+  `completeTrace` counts the full simulation before cloning snapshots and rejects
+  over 12,000 frames without replacing the applied trace.
+- Evaluate `add_digits` in input order, extracting rightmost digits with modulo
+  before floor division. Each helper returns before the target is assigned;
+  sort by digit sum, then numeric value. Build `pos` in input order and label
+  missing entries explicitly. Compare, look up `j`, prepare both map writes,
+  exchange both values atomically, then increment `count`. The prepared map may
+  temporarily disagree with `nums`; retain the source's last assigned `j`.
+  Confirmed prefixes are derived only after processing each position.
+- Label cycle decomposition as a proof derived from the original-to-target
+  permutation, not an executed Python operation. Value/map inspection calls
+  generic `onInteract` to pause at the same frame without changing algorithm
+  state. Motion tracks stable value identity and honors system/saved preferences.
+- Keep the aligned arrays wider than the ledger. DOM order is arrays, ledger,
+  then map/history/proof; below 980px the ledger follows the arrays before the
+  longer sections. Preserve local keyboard scrolling, 12px labels, 44px targets,
+  synchronized Array/JSON input, same-tab navigation, and collapsed input/source
+  inspection. The result removes the active pointer but labels the last source
+  `i`. Graphite, IBM Plex Sans, DM Mono, cyan active/prepared state, violet target,
+  magenta displacement, and green confirmation remain incumbent.
+
+Completion and evidence are recorded in the visualizer surface brief and
+`.impeccable/review/digit-sum-studio/browser-report.json`. This extension adds no
+dependency, shipping raster, or global design-system change.

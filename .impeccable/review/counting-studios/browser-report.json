@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "report": [
+    {
+      "width": 1366,
+      "pageOverflow": false,
+      "targets44": true,
+      "linkedViewRetainsFrame": true,
+      "viewSwitchPauses": true
+    },
+    {
+      "width": 900,
+      "pageOverflow": false,
+      "targets44": true,
+      "linkedViewRetainsFrame": true,
+      "viewSwitchPauses": true
+    },
+    {
+      "width": 390,
+      "pageOverflow": false,
+      "targets44": true,
+      "linkedViewRetainsFrame": true,
+      "viewSwitchPauses": true
+    }
+  ],
+  "keyboard": true,
+  "inspectorContinuity": true,
+  "inputSync": true,
+  "invalidPreservesTrace": true,
+  "editingPauses": true,
+  "deepActiveCallVisible": true,
+  "sameTab": true,
+  "reducedMotion": "system and saved preference in isolated browser",
+  "zoom": "683px CSS reflow; native 200% zoom unverified",
+  "apiWrites": 0,
+  "console": []
+}

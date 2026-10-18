@@ -25,6 +25,11 @@ the user requests it.
 - `backend/algo_atlas/services/`: operations and transaction ownership.
 - `backend/algo_atlas/persistence/`: SQLAlchemy queries and search-index helpers.
 - `backend/algo_atlas/integrations/`: Git, export files and remote metadata.
+- The LeetCode watcher CLI delegates collection and queue planning to services,
+  reads catalog identities through read-only persistence, and keeps credentials,
+  submission snapshots and briefs in ignored `.local/leetcode-watch/` storage.
+  Never initialize the application database from a watcher command or execute
+  retrieved source code. See `docs/leetcode-watch.md` for scheduling and setup.
 - `tests/frontend/` and `tests/backend/`: corresponding regression tests.
 
 Use descriptive names, not numbered batches or miscellaneous utility collections.

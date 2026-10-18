@@ -135,6 +135,7 @@ backend/algo_atlas/
   db.py                   Engine/session creation, database initialization
   bootstrap.py            Existing first-run and reconciliation CLI
   launcher.py              Existing launch/stale-build support
+  leetcode_watch.py        Private submission watcher CLI (no app initialization)
 ```
 
 Routers import services, schemas and session dependencies, not integrations or
@@ -142,6 +143,18 @@ persistence directly. Services may use persistence and integrations but must not
 import FastAPI or routers. Persistence and integrations never depend on services,
 routers or application startup. Use SQLAlchemy directly; no generic repository
 framework. `ServiceError` is mapped centrally to the existing HTTP detail/status.
+
+The optional [LeetCode watcher](leetcode-watch.md) follows these ownership rules:
+`integrations/leetcode_submissions.py` owns authenticated read requests and source
+contracts; `integrations/leetcode_watch_files.py` owns private atomic file storage
+and process locking; `services/leetcode_watch.py` owns the queue, cadence and brief
+publication. `persistence/leetcode_watch.py` deliberately uses a separate SQLite
+read-only connection for catalog identities, without importing `db.py` or startup.
+The CLI composes these operations without new HTTP endpoints or schema changes.
+Watcher credentials, snapshots and generated plans stay in ignored `.local/`
+storage and never enter the normal export pipeline. The scheduled agent writes
+source-specific plan drafts; the CLI validates coverage and source identity before
+publishing them locally. No submitted code is executed.
 
 ### Adding an endpoint
 
