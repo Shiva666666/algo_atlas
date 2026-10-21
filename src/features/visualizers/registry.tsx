@@ -52,6 +52,10 @@ import { lesson as removeInvalidParenthesesLesson } from './lessons/remove-inval
 import { lesson as distinctSquaresLesson } from './lessons/distinct-squares-segment-tree';
 import { lesson as maximumOrLesson } from './lessons/maximum-or-subsets';
 import { lesson as digitSumSwapLesson } from './lessons/minimum-swaps-digit-sum';
+import { lesson as courseScheduleThreeLesson } from './lessons/course-schedule-three';
+import { lesson as decodeXoredArrayLesson } from './lessons/decode-xored-array';
+import { lesson as addTwoIntegersLesson } from './lessons/add-two-integers';
+import { lesson as divideTwoIntegersLesson } from './lessons/divide-two-integers';
 export const lessons: Lesson[] = [
   bipartiteLesson,
   kokoLesson,
@@ -102,6 +106,10 @@ export const lessons: Lesson[] = [
   distinctSquaresLesson,
   maximumOrLesson,
   digitSumSwapLesson,
+  courseScheduleThreeLesson,
+  decodeXoredArrayLesson,
+  addTwoIntegersLesson,
+  divideTwoIntegersLesson,
 ];
 const byKey = new Map<string, Lesson>();
 for (const lesson of lessons)

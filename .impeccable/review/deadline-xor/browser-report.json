@@ -1,0 +1,70 @@
+{
+  "result": "PASS",
+  "report": [
+    {
+      "lesson": "course",
+      "width": 1366,
+      "overflow": false,
+      "targets44": true
+    },
+    {
+      "lesson": "course",
+      "width": 900,
+      "overflow": false,
+      "targets44": true
+    },
+    {
+      "lesson": "course",
+      "width": 390,
+      "overflow": false,
+      "targets44": true
+    },
+    {
+      "lesson": "xor",
+      "width": 1366,
+      "overflow": false,
+      "targets44": true
+    },
+    {
+      "lesson": "xor",
+      "width": 900,
+      "overflow": false,
+      "targets44": true
+    },
+    {
+      "lesson": "xor",
+      "width": 390,
+      "overflow": false,
+      "targets44": true
+    }
+  ],
+  "captures": [
+    ".impeccable/review/deadline-xor/course-initial-desktop.png",
+    ".impeccable/review/deadline-xor/course-mechanism-1366.png",
+    ".impeccable/review/deadline-xor/course-mechanism-900.png",
+    ".impeccable/review/deadline-xor/course-mechanism-390.png",
+    ".impeccable/review/deadline-xor/course-result-mobile.png",
+    ".impeccable/review/deadline-xor/course-inspector-mobile.png",
+    ".impeccable/review/deadline-xor/course-fields-mobile.png",
+    ".impeccable/review/deadline-xor/course-boundary-mobile.png",
+    ".impeccable/review/deadline-xor/course-reduced-reflow-683.png",
+    ".impeccable/review/deadline-xor/xor-initial-desktop.png",
+    ".impeccable/review/deadline-xor/xor-mechanism-1366.png",
+    ".impeccable/review/deadline-xor/xor-mechanism-900.png",
+    ".impeccable/review/deadline-xor/xor-mechanism-390.png",
+    ".impeccable/review/deadline-xor/xor-result-mobile.png",
+    ".impeccable/review/deadline-xor/xor-fields-mobile.png",
+    ".impeccable/review/deadline-xor/xor-boundary-mobile.png",
+    ".impeccable/review/deadline-xor/xor-reduced-reflow-683.png"
+  ],
+  "keyboard": true,
+  "fieldsJsonSync": true,
+  "invalidPreservesTrace": true,
+  "editingPauses": true,
+  "sameTab": true,
+  "referenceMatched": true,
+  "reducedMotion": "system emulation and saved isolated preference",
+  "zoom": "683px CSS reflow; native 200% zoom unverified",
+  "apiWrites": 0,
+  "console": []
+}

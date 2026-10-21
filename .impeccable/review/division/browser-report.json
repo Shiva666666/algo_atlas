@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "captures": [
+    ".impeccable/review/division/initial-desktop.png",
+    ".impeccable/review/division/pending-write-1366.png",
+    ".impeccable/review/division/pending-write-900.png",
+    ".impeccable/review/division/pending-write-390.png",
+    ".impeccable/review/division/positive-result-mobile.png",
+    ".impeccable/review/division/inspector-mobile.png",
+    ".impeccable/review/division/fields-mobile.png",
+    ".impeccable/review/division/negative-result-mobile.png",
+    ".impeccable/review/division/overflow-mobile.png",
+    ".impeccable/review/division/exact-large-candidate-mobile.png",
+    ".impeccable/review/division/reduced-reflow-683.png",
+    ".impeccable/review/division/negative-loop-1366.png",
+    ".impeccable/review/division/negative-loop-900.png",
+    ".impeccable/review/division/negative-loop-end-390.png"
+  ],
+  "report": [
+    {
+      "width": 1366,
+      "overflow": false,
+      "inspectPauses": true,
+      "inspectKeepsFrame": true,
+      "followActive": true,
+      "targets44": true
+    },
+    {
+      "width": 900,
+      "overflow": false,
+      "inspectPauses": true,
+      "inspectKeepsFrame": true,
+      "followActive": true,
+      "targets44": true
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "inspectPauses": true,
+      "inspectKeepsFrame": true,
+      "followActive": true,
+      "targets44": true
+    }
+  ],
+  "keyboard": true,
+  "fieldsJsonSync": true,
+  "invalidPreservesTrace": true,
+  "editingPauses": true,
+  "sameTab": true,
+  "referenceMatched": true,
+  "reducedMotion": "system emulation and isolated saved preference",
+  "zoom": "683px CSS reflow only; native 200% zoom unverified",
+  "apiWrites": 0,
+  "console": []
+}

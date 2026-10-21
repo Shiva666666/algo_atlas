@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "captures": [
+    ".impeccable/review/bit-addition/initial-desktop.png",
+    ".impeccable/review/bit-addition/carry-in-1366.png",
+    ".impeccable/review/bit-addition/carry-in-900.png",
+    ".impeccable/review/bit-addition/carry-in-390.png",
+    ".impeccable/review/bit-addition/positive-result-mobile.png",
+    ".impeccable/review/bit-addition/inspector-mobile.png",
+    ".impeccable/review/bit-addition/fields-mobile.png",
+    ".impeccable/review/bit-addition/negative-result-mobile.png",
+    ".impeccable/review/bit-addition/cancelled-carry-mobile.png",
+    ".impeccable/review/bit-addition/reduced-reflow-683.png"
+  ],
+  "report": [
+    {
+      "width": 1366,
+      "overflow": false,
+      "inspectPauses": true,
+      "inspectKeepsFrame": true,
+      "followActive": true,
+      "targets44": true
+    },
+    {
+      "width": 900,
+      "overflow": false,
+      "inspectPauses": true,
+      "inspectKeepsFrame": true,
+      "followActive": true,
+      "targets44": true
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "inspectPauses": true,
+      "inspectKeepsFrame": true,
+      "followActive": true,
+      "targets44": true
+    }
+  ],
+  "keyboard": true,
+  "fieldsJsonSync": true,
+  "invalidPreservesTrace": true,
+  "editingPauses": true,
+  "sameTab": true,
+  "referenceMatched": true,
+  "reducedMotion": "system emulation and isolated saved preference",
+  "zoom": "683px CSS reflow only; native 200% zoom unverified",
+  "apiWrites": 0,
+  "console": []
+}

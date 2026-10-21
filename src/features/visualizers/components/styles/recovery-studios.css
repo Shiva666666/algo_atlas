@@ -1,0 +1,104 @@
+.recovery-studio {
+  min-width: 0;
+}
+.recovery-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr);
+  gap: 24px;
+}
+.recovery-layout > * {
+  min-width: 0;
+}
+.recovery-studio .study-strip .study-result {
+  border-color: var(--color-success);
+  background: #14221e;
+}
+.recovery-course-order .study-strip .study-pending {
+  border-color: #f06cae;
+}
+.recovery-secondary {
+  grid-column: 1/-1;
+}
+.recovery-studio p {
+  max-width: 72ch;
+  line-height: 1.65;
+}
+.recovery-studio code {
+  overflow-wrap: anywhere;
+}
+.recovery-studio .study-scroll {
+  max-width: 100%;
+}
+.recovery-studio .frontier-ledger {
+  margin-top: 24px;
+}
+.recovery-studio .frontier-ledger li {
+  display: grid;
+  gap: 6px;
+}
+.recovery-studio .frontier-ledger li span {
+  text-align: left;
+}
+.recovery-studio .operation-ledger {
+  overflow-wrap: anywhere;
+}
+.recovery-bit-table th,
+.recovery-bit-table td {
+  min-width: 28px;
+  text-align: center;
+}
+.recovery-bit-table th:first-child {
+  min-width: 180px;
+  text-align: left;
+}
+.recovery-bit-table .xor-one {
+  color: var(--color-success);
+  background: #10291f;
+}
+.recovery-bit-table .xor-result {
+  color: var(--color-cyan);
+}
+.recovery-rule {
+  font: 14px/1.8 var(--font-code);
+  color: var(--color-violet);
+  display: block;
+  margin: 16px 0;
+}
+.recovery-witness-bar {
+  display: flex;
+  height: 24px;
+  min-width: 0;
+  margin: 16px 0;
+  background: var(--color-canvas);
+}
+.recovery-witness-bar > span {
+  min-width: 0;
+  background: var(--color-success);
+  border: 1px solid var(--color-canvas);
+  box-sizing: border-box;
+}
+.recovery-fields {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+.recovery-course-fields {
+  display: grid;
+  grid-template-columns: minmax(110px, 1fr) minmax(110px, 1fr) 70px;
+  gap: 8px;
+  align-items: end;
+}
+.recovery-course-fields button {
+  min-height: 44px;
+  margin-top: 0;
+  padding-inline: 6px;
+}
+.recovery-studio .studio-formula-values dd {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 980px) {
+  .recovery-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

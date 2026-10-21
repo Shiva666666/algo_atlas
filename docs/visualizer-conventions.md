@@ -600,3 +600,139 @@ remains reference text and is never executed.
 Completion and evidence are recorded in the visualizer surface brief and
 `.impeccable/review/digit-sum-studio/browser-report.json`. This extension adds no
 dependency, shipping raster, or global design-system change.
+
+## Deadline Heap and XOR Recovery studios
+
+Course Schedule III (630) and Decode XORed Array (1720) extend the incumbent
+workbench through `lessons/course-schedule-three/` and
+`lessons/decode-xored-array/`. Each owns one canonical `reference.py`, pure typed
+trace, presets, renderer, and editor. Register each once with source-scoped
+LeetCode numeric and slug aliases (`course-schedule-iii`, `decode-xored-array`).
+Saved Python is displayed and simulated, never executed.
+
+- Course input accepts 1–12 duration/deadline pairs, each integer in 1–10,000;
+  duplicates are valid. Preserve stable deadline order, inclusive feasibility,
+  and strictly longer `-heap[0] > dur` replacement. Show the actual source total
+  before heap insertion, including separate removal and addition statements.
+  Negative durations form one valid simulated heap layout, not a trace of
+  `heapq` internals. Original course IDs and the feasible schedule are derived
+  annotations; the last committed witness stays unchanged during pending
+  acceptance or replacement. Equal-duration witness IDs are not unique.
+- XOR input accepts 1–16 encoded values plus `first`, all integers in
+  0–100,000. Keep future cells unknown. Separate calculating `real` from
+  appending it, and retain the pre-append operands on the bit board afterward.
+  Indexes are teaching annotations because the source iterates values. Decoded
+  outputs can exceed the input bound: support 131,071 and a 17-bit board.
+- Reuse `FieldsJsonInput` for synchronized Fields/JSON modes and
+  `components/styles/recovery-studios.css` for the shared layout. Preserve
+  `SequenceStrip`, `OperationLedger`, `FrontierLedger`, Bklit legend, Kokonut
+  tabs, and shared Motion/reduced-motion behavior. The primary ribbons precede
+  the compact ledger, then secondary witness/history or bit board; columns
+  stack at 980px and below. Keep local keyboard scrolling, 12px labels, 44px
+  controls, collapsed custom/source inspection, and same-tab navigation.
+- Both use `completeTrace`: count the full simulation before cloning snapshots
+  and reject over 12,000 frames without applying a partial trace. Keep exact
+  source focus, replacement/skip or XOR/append jumps, editing pause, and the
+  previous applied trace after an invalid build.
+
+The finish record below the incumbent direction contract in the visualizer
+surface brief links the 17-capture browser report, full lesson-review SHIP
+verdict, tests, and separate persisted-record acceptance. Native 200% browser
+zoom remains unverified; 683px establishes CSS reflow only. No global visual
+system change applies. The previously recorded button press-scale drift remains
+unrepaired and is not a new rule.
+
+## 32-Bit Carry Workbench
+
+Add Two Integers (2235) extends the incumbent Read-mode workbench through
+`lessons/add-two-integers/`, with one source-scoped LeetCode registry definition
+for `2235` and `add-two-integers`. Its canonical screenshot `reference.py` is
+displayed and simulated, never executed.
+
+- Accept two integers in −100…100. Eleven presets include both official
+  examples, zero inputs, carry chains, signed cancellation, two negatives, and
+  sums at −200 and 200. Keep all 32 low-to-high source iterations, including
+  zero columns: two initialization frames, six operations per column, the sign
+  check, and one return produce 196 frames.
+- Preserve reads of `a` and `b`, then `sum_bit` using old carry, then the carry
+  assignment, then the unsigned OR write. Capture each column's carry-in
+  separately from source carry-out; unevaluated column fields stay explicitly
+  pending. BigInt implements Python sign-extending shifts and word operations
+  internally; copied frame payloads contain ordinary numbers. Never apply
+  JavaScript signed-32-bit truncation to the working result.
+- Keep `res` in 0…2^32−1 and distinguish initialized zeros from committed writes.
+  After all columns, test bit 31 and return `res` or
+  `~(res ^ 0xFFFFFFFF)`. Python NOT means −x−1; the derived equivalence
+  `res − 2^32` explains the negative result without mutating source `res`.
+  Terminal carry is discarded, not appended as a 33rd bit. Fixed 32-column
+  time/space is O(1); generalized w-bit O(w) is a follow-up explanation only.
+- Place the focused full adder before its compact operation ledger, then the
+  complete semantic 32-bit table and signed-return explanation. Columns stack
+  at 980px and below; output boxes stack at 560px. The table scrolls locally,
+  retains row labels, and exposes inspection as a derived annotation. Inspection
+  calls generic `onInteract` to pause at the same frame; Follow active bit
+  restores the active-column viewport.
+- Reuse `FieldsJsonInput`, Bklit `StateLegend`, Kokonut `SmoothTabs`, and shared
+  Motion/reduced-motion controls. Preserve synchronized Fields/JSON, editing
+  pause, invalid-build trace preservation, exact source focus, bit/sign jumps,
+  collapsed custom/source inspection, 12px labels, 44px targets, and same-tab
+  navigation. Graphite surfaces, IBM Plex Sans language, DM Mono bits, cyan
+  current state, violet inputs, magenta captured carry, and green committed
+  writes remain incumbent; no dependency, raster, or global system change applies.
+
+The surface brief's finish record links full-surface SHIP, the ten-capture
+browser report, tests, and separate persisted-record acceptance. Native 200%
+browser zoom remains unverified; 683px establishes CSS reflow only. The existing
+shared button press-scale drift remains unrepaired and is not canonized.
+
+## Shift-and-Subtract Studio — 2026-10-21
+
+Divide Two Integers (29) extends the incumbent Read-mode workbench through
+`lessons/divide-two-integers/`, registered once for LeetCode numeric `29` and
+slug `divide-two-integers`. Its canonical raw `reference.py` is displayed and
+simulated, never executed. Twelve presets cover both official examples, signs,
+zero, exact division, many quotient bits, signed limits, and the overflow clamp.
+
+- Accept signed 32-bit integers and reject a zero divisor. Remember the sign
+  before converting negative arguments with Python `~x + 1`; internal magnitude
+  2147483648 is valid. Keep original signed inputs separate from the mutable
+  source dividend/remainder, positive divisor, and quotient magnitude `res`.
+- Unless INT_MIN divided by −1 returns INT_MAX immediately in two frames, retain
+  all 32 comparisons from shift 31 through 0, even after the remainder reaches
+  zero. BigInt preserves exact Python shifts internally; copied frame payloads
+  store candidates as decimal strings, including 2^62, and other values as
+  ordinary numbers. Comparison-bar geometry is a relative illustration; decimal
+  labels are authoritative. Never truncate candidates with JavaScript bitwise
+  operations.
+- Emit comparison, subtraction, `res` increment, and `i` decrement separately.
+  After subtraction, the quotient write remains pending. Only rejected checks
+  commit zero; fitting checks remain undecided until the `res` write commits one.
+  At completed writes, magnitude = divisor × res + remaining. Apply the sign
+  only at return, truncate toward zero, preserve unsigned `res`, and return zero
+  without a JavaScript negative-zero artifact.
+- Null `current` does not imply normalization: `loop` frames prepare the current
+  shift, while `loop-end` explains 32 completed checks and the pending signed
+  return. Preserve these distinct source states in headings and instructions.
+- Place the wide shift comparison before the compact ledger, then the 32-bit
+  quotient inspector, accepted chunks, and signed result. Stack columns at
+  980px; stack signs, writes, and input fields at 560px. Wide bit/table regions
+  scroll locally. Inspection pauses at the same frame through `onInteract`;
+  Follow active shift resumes viewport following without advancing the trace.
+- Reuse `FieldsJsonInput`, Bklit legend, Kokonut tabs, and shared Motion controls.
+  Preserve Fields/JSON synchronization, editing pause, invalid-build trace
+  preservation, collapsed input/source inspection, exact source focus, chunk
+  and result jumps, 12px labels, 44px targets, same-tab routing, and system/saved
+  reduced motion. `completeTrace` counts before copying and rejects over 12,000
+  frames without applying a partial trace.
+
+Graphite, IBM Plex Sans language, DM Mono measurements, cyan current comparison,
+violet structure/inspection, magenta rejection, and green committed bits reuse
+the incumbent system. No dependency, shipping raster, or global token is added.
+`PRODUCT.md`, `DESIGN.md`, and `.impeccable/design.json` are preserved. The existing
+shared button 0.98 press-scale drift remains unrepaired and is not canonized.
+
+The surface brief's finish record links the fourteen-capture browser report,
+the original full review's sole requested correction and its fix-only SHIP
+verdict, seven test groups covering 774 arithmetic cases, and separate persisted
+record acceptance. Native 200% browser zoom remains unverified; 683px establishes
+CSS reflow only. Atlas dataset inclusion was checked; Atlas node clicks were not.

@@ -1,0 +1,230 @@
+.division-studio {
+  min-width: 0;
+}
+.division-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+.division-layout > * {
+  min-width: 0;
+}
+.division-studio p {
+  max-width: 72ch;
+  line-height: 1.65;
+}
+.division-signs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.division-signs > div {
+  border-top: 1px solid var(--color-violet);
+  padding-top: 12px;
+}
+.division-signs dt {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+.division-signs dd {
+  margin: 8px 0 0;
+  font: 500 17px/1.4 var(--font-code);
+  overflow-wrap: anywhere;
+}
+.division-comparison {
+  display: grid;
+  gap: 20px;
+}
+.division-comparison > div {
+  display: grid;
+  gap: 8px;
+}
+.division-comparison span,
+.division-writes span,
+.division-writes small {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+.division-comparison strong {
+  font: 500 clamp(20px, 2.4vw, 30px)/1.4 var(--font-code);
+  overflow-wrap: anywhere;
+}
+.division-meter {
+  height: 8px;
+  background: var(--color-canvas);
+}
+.division-meter > div {
+  height: 100%;
+  background: var(--color-cyan);
+}
+.division-rejected strong {
+  color: var(--color-magenta);
+}
+.division-rejected .division-meter > div {
+  background: var(--color-magenta);
+}
+.division-studio .division-scale {
+  font-size: 12px;
+  margin-top: 12px;
+  color: var(--color-text-secondary);
+}
+.division-decision {
+  padding: 16px 0;
+  font: 500 15px/1.6 var(--font-code);
+  color: var(--color-cyan);
+  overflow-wrap: anywhere;
+}
+.division-flow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin: 4px 0 20px;
+}
+.division-flow svg {
+  flex-shrink: 0;
+  color: var(--color-cyan);
+}
+.division-writes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.division-writes > div {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  border-top: 1px solid var(--color-border);
+  padding: 16px 0;
+}
+.division-writes strong {
+  font: 500 24px/1.4 var(--font-code);
+  overflow-wrap: anywhere;
+}
+.division-writes small {
+  overflow-wrap: anywhere;
+}
+.division-committed strong {
+  color: var(--color-success);
+}
+.division-studio .study-operation {
+  overflow-wrap: anywhere;
+}
+.division-guard {
+  border-top: 1px solid var(--color-magenta);
+  padding-top: 20px;
+  margin-top: 24px;
+}
+.division-guard strong {
+  color: var(--color-magenta);
+}
+.division-inspect-controls {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.division-inspect-controls label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+.division-inspect-controls select {
+  min-height: 44px;
+}
+.division-inspect-controls button {
+  margin-top: 0;
+}
+.division-inspect-controls > span {
+  font-size: 12px;
+  align-self: center;
+  color: var(--color-text-secondary);
+}
+.division-bits-scroll {
+  position: relative;
+}
+.division-bits {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin: 0;
+  list-style: none;
+  width: max-content;
+}
+.division-bits button {
+  display: grid;
+  gap: 8px;
+  width: 60px;
+  min-height: 100px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-canvas);
+  color: var(--color-text-secondary);
+  padding: 10px 4px;
+  cursor: pointer;
+}
+.division-bits small {
+  font: 12px var(--font-code);
+}
+.division-bits strong {
+  font: 500 22px var(--font-code);
+}
+.division-bits span {
+  font: 12px var(--font-ui);
+}
+.division-bit-rejected button {
+  color: var(--color-magenta);
+}
+.division-bit-committed button {
+  color: var(--color-success);
+}
+.division-bit-inspected button {
+  border-color: var(--color-violet);
+}
+.division-bit-active button {
+  border-color: var(--color-cyan);
+}
+.division-bits button:hover {
+  background: var(--color-surface-raised);
+}
+.division-bits button:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+.division-studio .division-inspection {
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+}
+.division-chunks {
+  min-width: 650px;
+}
+.division-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.division-fields input {
+  min-width: 0;
+}
+@media (max-width: 980px) {
+  .division-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .division-signs {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .division-writes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .division-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

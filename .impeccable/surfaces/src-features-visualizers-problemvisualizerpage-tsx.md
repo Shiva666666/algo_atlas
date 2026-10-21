@@ -573,3 +573,309 @@ specialized lesson, same-tab navigation, zero errors, and zero API writes during
 acceptance. No export, commit, push, schema, or scheduler change applies. The
 pre-existing shared button 0.98 press scale versus DESIGN.md's no-scale guidance
 remains reported, unrepaired, and not canonized as a global rule.
+
+## Direction contract — Deadline Heap and XOR Recovery
+
+THESIS: Make exchanging a long course for a shorter one and recovering the next XOR value understandable without inventing source operations.
+
+OWN-WORLD: Inherit graphite, IBM Plex Sans language, DM Mono data, cyan current state, violet structure, magenta rejection/removal and green committed results. These are Read-mode additions to the incumbent lesson shell.
+
+STORY: Course Schedule III sorts by deadline, tests inclusive feasibility and exposes accept/replace/skip with actual negative heap keys; a separately labeled derived schedule stays committed during pending mutations. Decode XORed Array separates the computed next value from its later append.
+
+FIRST VIEWPORT: Presets/playback precede the deadline-ordered course ribbon and heap, or the encoded/output ribbons and bit board. Current-operation ledgers follow the primary diagram on mobile before longer history. Custom Fields/JSON input and source start collapsed; diagrams pan locally.
+
+FORM: Screenshot-grounded incumbent extension; no seed or comp applies. Signatures are removal/addition/heap replacement and bitwise XOR followed by a committed output cell. Duplicates retain course IDs only as teaching annotations; the heap stores durations, not IDs.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## Deadline Heap and XOR Recovery completion and finish record
+
+Recorded completion: 2026-10-19, Asia/Calcutta. The direction contract above is
+implemented by `lessons/course-schedule-three/` and
+`lessons/decode-xored-array/`, each with one canonical raw Python reference,
+pure typed immutable trace, diagnostic presets, renderer, editor, and one
+source-scoped LeetCode registry definition. Aliases are 630 /
+`course-schedule-iii` and 1720 / `decode-xored-array`. The supplied Python is
+displayed and simulated, never executed.
+
+Course Schedule III accepts 1–12 duration/deadline rows with integer values
+1–10,000, including duplicates. Stable deadline sorting, inclusive fit,
+empty-heap short circuit, and strict longest-duration replacement follow the
+source. Total changes precede heap pushes; replacement exposes removal, incoming
+duration addition, and insertion separately. The heap displays actual negative
+duration keys in one valid simulated layout, explicitly not `heapq` internals.
+Stable original IDs and the feasible schedule are derived teaching annotations;
+equal-duration ID choices are not unique. The previous committed witness remains
+visible throughout pending acceptance and replacement.
+
+Decode XORed Array accepts 1–16 encoded integers plus `first`, each in
+0–100,000. The seed is known, future output stays unknown, calculation precedes
+append, and the bit board retains the operands used before append. Its displayed
+index is derived from the source's value iteration. Decoded output may exceed
+100,000; the boundary example produces 131,071 on a 17-bit board.
+
+Both lessons reuse `FieldsJsonInput`, `recovery-studios.css`, shared sequence and
+operation primitives, Bklit legend, Kokonut tabs, and shared Motion controls.
+`completeTrace` counts the full simulation before cloning and enforces the
+12,000-frame cap without partial traces. Exact source focus and replacement/skip
+or XOR/append jumps are retained. Fields/JSON modes synchronize; editing pauses
+playback, invalid builds preserve the last applied trace, and opening the editor
+or source preserves the frame. Same-tab routing is retained.
+
+The shipped hierarchy agrees with the incumbent Read-mode world: graphite
+surfaces, IBM Plex Sans language, DM Mono measurements, cyan current/pending
+state, violet structure, magenta removal/rejection, and green committed results.
+The primary ribbons precede the compact ledger and secondary witness/history or
+bit board. Columns stack at 980px and below; wide diagrams and tables scroll in
+their own keyboard-focusable regions. Text/symbol cues, readable 12px labels,
+44px controls, collapsed custom/source inspection, and system/saved reduced
+motion remain in use. No dependency, shipping raster, or global visual-system
+change applies. `PRODUCT.md`, `DESIGN.md`, and `.impeccable/design.json` were
+preserved. The pre-existing shared button 0.98 press scale versus DESIGN.md's
+no-scale guidance remains reported, unrepaired, and not canonized.
+
+Final main verification passed 103 general checks with one expected optional
+live-Atlas skip, all 82 visualizer tests, 71 backend tests, production build,
+Ruff check, and Ruff formatting (57 files already formatted). The incumbent
+bundle-size warning remains. `tests/frontend/deadline-xor.test.mjs` checks an
+exhaustive subset-feasibility oracle and an independent bitwise XOR oracle,
+actual operation timing, intermediate invariants, independent snapshots,
+boundaries, exact source focus, registry scope, jumps, and semantic rendering.
+The main detector ran once and returned `[]` in
+`.impeccable/review/deadline-xor/detector.json`; it was not rerun.
+
+`.impeccable/review/deadline-xor/browser-report.json` records PASS and 17 retained
+captures at 1366px, 900px, and 390px, plus 683px CSS reflow. It covers initial,
+mechanism, result, boundary, editor, and inspector states; keyboard operation;
+44px targets; synchronized Fields/JSON input; editing pause; invalid-build trace
+preservation; reference matching; same-tab routing; and system-emulated/saved
+reduced motion. The console is empty and API writes are zero. Native Windows
+computer-use was unavailable, so Edge Playwright supplied the disclosed browser
+fallback. Native 200% browser zoom remains unverified; 683px is CSS reflow only.
+
+The fresh independent reviewer returned full lesson-surface SHIP with no material
+fixes in `.impeccable/review/deadline-xor/finish-review.md`, after inspecting all
+17 captures. That verdict explicitly excludes the subsequently created records
+and persisted notes; their separate acceptance is recorded below. Test results
+were supplied evidence for that review, not independently rerun by the reviewer.
+
+The authorized main workflow used the existing API with
+`record_initial_mistake: false` to create two Resolved records with canonical
+code and zero mistake events:
+
+- Course Schedule III: `ceb5e615-0d7e-4a75-8447-e5b622df07fc`, Hard, Scheduling
+  primary with Heaps and Sorting secondary; O(n log n) time and O(n) space;
+  16 note bullets, including five edge-case bullets.
+- Decode XORed Array: `c97e4f00-4f53-4e9f-8975-cb894c0b30bd`, Easy, Bit
+  Manipulation primary with Arrays secondary; O(n) time, O(n) output space and
+  O(1) beyond output; 13 note bullets, including four edge-case bullets.
+
+`.local/deadline-xor-records.json` records PASS for both, canonical code matches,
+title/code/notes search under Resolved, Atlas dataset inclusion, and preservation
+of all 48 unrelated full-record hashes. Atlas node selection was not checked.
+Totals are 50 records: 38 Resolved and 12 Open.
+`.local/deadline-xor-acceptance.json` records PASS against the actual API plus
+independent read-only SQLite persistence and browser checks: saved notes and
+Resolved status visible, canonical reference match, specialized lesson selected,
+same-tab navigation, zero API writes, and no errors. This workflow performed no
+export, commit, push, schema, or scheduler change.
+
+## Direction contract — 32-Bit Carry Workbench
+
+THESIS: Make the incoming carry, sum-bit calculation, outgoing carry, result write and signed interpretation distinct; never replace the user's full adder with a different addition algorithm.
+
+OWN-WORLD: Inherit the graphite Read-mode lesson shell, IBM Plex Sans explanation, DM Mono bits, cyan current column, violet input structure, magenta pending state and green committed writes.
+
+STORY: The reader follows all 32 low-to-high columns, inspects the full-adder operands, watches one bit commit, then understands why an unsigned working word becomes a negative Python result. Input and boundary examples stay within −100…100.
+
+FIRST VIEWPORT: Presets and shared playback precede the focused full-adder diagram and compact operation ledger. A locally scrolling 32-bit table follows; inspection pauses at the same frame. Mobile stacks the ledger and table, preserving source access and 44px controls.
+
+FORM: Screenshot-grounded incumbent extension, no seed, QUALITY BAR card or approved comp required. The signature is separate carry-in/carry-out state and one committed result column; inspection is derived and never changes execution.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## 32-Bit Carry Workbench completion and finish record
+
+Recorded completion: 2026-10-19, Asia/Calcutta. The final direction contract
+above is implemented by `lessons/add-two-integers/`: canonical raw screenshot
+Python, pure typed immutable trace, eleven presets, renderer/styles, editor,
+and adapter. One source-scoped LeetCode registry definition provides `2235` and
+`add-two-integers` aliases. The Python is displayed and simulated, never executed.
+This is an ordinary incumbent Read-mode extension; no seed, separate QUALITY
+BAR card, approved comp, or shipping raster applies.
+
+Inputs are integers in −100…100. The trace retains all 32 low-to-high columns
+and 196 frames: result/carry initialization, column entry, both bit reads,
+sum-bit calculation, carry update, unsigned OR write, then sign check and
+return. Captured carry-in remains separate from updated source carry-out;
+unknown column fields are explicitly pending. BigInt internally preserves
+Python sign-extending shifts and bitwise semantics without JavaScript signed
+32-bit truncation; frame payloads remain ordinary numbers. Working `res` stays
+in 0…2^32−1. The final return is `res` or `~(res ^ 0xFFFFFFFF)` and never mutates
+that word; carry beyond bit 31 is not appended. Fixed-width time and space are
+O(1); the generalized w-bit O(w) explanation is a follow-up only.
+
+The focused full adder precedes the compact operation ledger, followed by the
+inspectable semantic 32-bit table and signed-decode explanation. Columns stack
+at 980px and below, with output boxes stacked at 560px. Wide bit rows scroll
+locally with retained row labels. Derived inspection calls generic `onInteract`
+to pause at the same frame; Follow active bit restores the active-column
+viewport. Fields/JSON synchronize through `FieldsJsonInput`; editing pauses,
+invalid builds retain the applied trace, and source/input inspection preserves
+the frame. Exact source focus and bit/sign jumps remain available.
+
+The artifact agrees with the incumbent graphite world, IBM Plex Sans language,
+DM Mono bits and measurements, cyan current column, violet inputs, magenta
+captured carry, and green committed writes. Bklit legend, Kokonut tabs, shared
+Motion/reduced-motion behavior, 12px labels, 44px controls, collapsed input/source
+inspection, and same-tab routing remain in use. No dependency, shipping raster,
+or global style change applies. `PRODUCT.md`, `DESIGN.md`, and
+`.impeccable/design.json` are preserved. The pre-existing shared button's 0.98
+press scale conflicts with DESIGN.md's no-scale guidance; it remains reported,
+unrepaired, and not canonized as a global rule.
+
+Final main verification passed `npm run check` with 109 passes and one expected
+optional live-Atlas skip, all 88 visualizer tests, the production build, 71
+backend tests, Ruff check, and Ruff formatting (57 files already formatted).
+The incumbent chunk-size warning remains. Six groups in
+`tests/frontend/add-two-integers.test.mjs` cover 400 arithmetic cases (eleven
+presets, 289 small signed pairs, and 100 seeded pairs), all eight full-adder
+truth rows, source-assignment timing, unsigned/NOT semantics, carry chains,
+independent snapshots, limits, exact source focus, parser/SSR behavior, and
+source-scoped registry/jump wiring.
+
+One initial self-QA pass, one readability-fix batch, and one confirmation pass
+completed the bounded refinement. The main detector ran once and returned `[]`
+in `.impeccable/review/bit-addition/detector.json`; it was not rerun. The fresh
+independent reviewer returned full lesson-surface and registry SHIP with no
+material fixes in `.impeccable/review/bit-addition/finish-review.md`, with
+persistence, fidelity, ceiling, material_fixes, and keep sections, after opening
+all ten captures named by the browser report. That review preceded record
+creation and excludes saved records; its browser and test results were supplied
+evidence, not independently rerun by the reviewer.
+
+`.impeccable/review/bit-addition/browser-report.json` records PASS at 1366px,
+900px, and 390px, plus 683px CSS reflow. Ten retained captures cover pending
+carry, positive/negative/cancellation results, fields, inspector, and reduced
+reflow. Interaction checks cover same-frame inspection pause, Follow active bit,
+keyboard operation, 44px targets, input synchronization, invalid-build trace
+preservation, editing pause, same-tab routing, canonical reference matching,
+and system-emulated/saved reduced motion. The console is empty and API writes
+are zero. Native Windows computer-use's `node_repl` entrypoint was unavailable,
+so the disclosed Edge Playwright fallback supplied browser evidence. Native
+200% browser zoom remains unverified; 683px establishes CSS reflow only.
+
+After SHIP, the authorized main workflow used the existing API with
+`record_initial_mistake: false` to create Easy, Resolved record
+`ebbb8c71-96bc-4964-a4d8-98369b320a87`, source key `add-two-integers`, with
+Bit Manipulation under Math & Bitwise primary. Canonical code matches; sixteen
+note bullets include four edge cases. There are zero mistake events and
+`why_missed` is blank. Saved time and space complexity are O(1) for 32 columns.
+
+`.local/bit-addition-record.json` records PASS for title/code/note search under
+Resolved, Atlas dataset inclusion, and preservation of all 50 unrelated full
+API record hashes. Atlas node selection was not checked. Totals are 51 records:
+39 Resolved and 12 Open. `.local/bit-addition-acceptance.json` records PASS
+against the actual API, independent read-only SQLite persistence, and browser:
+core/edge-case notes and status visible, specialized lesson selected in the
+same tab, canonical reference match, returned result 17, no errors, and zero API
+writes during acceptance. This separate main acceptance covers the persisted
+record excluded from the finish-review verdict. No export, commit, push,
+schema, or scheduler change applies.
+
+## Direction contract — Divide Two Integers / Shift-and-Subtract Studio
+
+THESIS: Explain division as descending shifted chunks, not repeated unit subtraction.
+The saved Python remains the only source; separate subtraction and quotient writes.
+
+OWN-WORLD: Inherit graphite, IBM Plex Sans, DM Mono measurements, cyan current
+operations, violet bit structure, magenta rejected candidates, and green committed bits.
+
+STORY: Inspect signs, compare a shifted divisor with the remaining magnitude,
+subtract a fitting chunk, set its quotient bit, and apply the final sign.
+
+FIRST VIEWPORT: Existing lesson shell and shared playback lead directly into a
+wide shift-comparison diagram beside the compact source-state ledger. Below,
+an inspectable 32-bit quotient rail and accepted-chunk table explain the result.
+Inputs and code inspector retain their existing locations. Controls remain 44px;
+mobile stacks panels and scrolls only wide data locally. The signature interaction
+leaves the quotient unchanged after subtraction until its own source write occurs.
+
+FORM: Code-led, narrow Read-mode extension of the incumbent lesson composition;
+no seed or comp required. Signed 32-bit inputs, exact large shifted values,
+overflow early return, and all 32 checks are explicit. Saved Python is never executed.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## Finish record — Divide Two Integers / Shift-and-Subtract Studio — 2026-10-21
+
+The shipped `lessons/divide-two-integers/` and source-scoped `29` /
+`divide-two-integers` registry aliases implement this ordinary code-led Read
+extension. The comparison/ledger, inspectable quotient rail, accepted-chunk
+table, and signed return preserve the direction contract. Original signed
+inputs remain distinct from mutable source magnitudes; separate subtraction,
+quotient increment, and index decrement make pending writes explicit. BigInt
+internally preserves Python semantics, while exact shifted candidates are
+decimal strings in copied frame payloads. All 32 shifts remain present except
+the two-frame overflow return. Twelve official/diagnostic presets are included;
+saved Python is reference text and is never executed.
+
+Source-grounded conventions are appended to `docs/visualizer-conventions.md`.
+No new visual world, seed, comp, dependency, shipping raster, or system token
+applies. Graphite, IBM Plex Sans interface language, DM Mono measurements,
+cyan current comparison, violet bit structure/inspection, magenta rejection,
+green committed bits, 980px/560px reflow, local data scrolling, and shared
+reduced-motion controls remain incumbent. `PRODUCT.md`, `DESIGN.md`, and
+`.impeccable/design.json` are preserved. The pre-existing shared `LessonButton`
+0.98 press scale still conflicts with DESIGN.md's no-scale guidance; it is
+reported, unrepaired, and not adopted as a rule.
+
+Final main verification passed `npm run check` with 116 passes and one expected
+optional live-Atlas skip, all 95 visualizer tests, the production build, 71
+backend tests, Ruff check, and Ruff formatting (57 files already formatted).
+The incumbent approximately 508KB visualizer chunk warning and two existing
+backend deprecation warnings remain. Seven groups in
+`tests/frontend/divide-two-integers.test.mjs` cover 774 arithmetic cases (12
+presets, 600 small signed pairs, 42 boundary pairs, 120 seeded pairs), exact
+2^62 shifts, assignment timing, signs/overflow/zero, independent snapshots,
+source lines, counting before allocation, limits, parsing, SSR, registry/jumps,
+and regression checks at every loop boundary.
+
+Main QA completed two passes, followed by one reviewer-scoped correction and
+recapture. The detector ran once and returned `[]`; it was not rerun.
+`.impeccable/review/division/finish-review.md` records the independent full
+review's `fix` disposition: null-current loop states incorrectly repeated
+normalization instructions. Canvas now distinguishes loop preparation from
+normalization and completed checks. The targeted regression and all fourteen
+valid recaptures support the resolved finding in
+`.impeccable/review/division/verdict.md`. Its SHIP disposition covers the scored
+fix only; it is not a fresh full-surface SHIP verdict. Both reviews exclude
+persisted records; supplied tests/interactions were not independently rerun.
+
+`.impeccable/review/division/browser-report.json` records PASS at 1366px, 900px,
+and 390px plus 683px CSS reflow. Fourteen retained captures include the earlier
+eleven states and negative first/later loop entries and loop end. Checks cover
+same-frame inspection pause, Follow active shift, keyboard operation, 44px
+targets, Fields/JSON sync, invalid-build preservation, editing pause, same-tab
+routing, canonical reference match, and system-emulated/saved reduced motion.
+The console is empty; API writes are zero. Native computer-use's `node_repl`
+entrypoint was unavailable, so headless Edge Playwright supplied the disclosed
+fallback evidence. Native 200% browser zoom remains unverified; 683px is CSS
+reflow evidence only.
+
+After verification, the authorized main workflow used the existing API with
+`record_initial_mistake: false` to create Medium, Resolved record
+`90e892b3-efe2-481b-89a5-3423120f1be7`, source key `divide-two-integers`, with
+Bit Manipulation under Math & Bitwise primary. Canonical code matches; eighteen
+note bullets include six edge cases. Mistake events are zero and `why_missed`
+is blank. `.local/division-record.json` records PASS for title/code/note search
+under Resolved, Atlas dataset inclusion, and preservation of all 51 unrelated
+full-record hashes. Totals are 52 records: 40 Resolved and 12 Open. Atlas node
+clicks were not tested.
+
+`.local/division-acceptance.json` records separate PASS against the actual API,
+read-only SQLite persistence, and browser: status and notes visible, specialized
+lesson selected in the same tab, canonical reference match, returned result 3,
+no errors, and zero acceptance API writes. This acceptance covers the persisted
+record excluded from the review verdicts. No export, commit, push, schema, or
+scheduler change applies.
